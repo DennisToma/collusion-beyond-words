@@ -12,9 +12,9 @@ We put LLM sellers in four-seller repeated pricing markets, offer one pair a pri
 telling them to collude), and ask whether an auditor can tell — from prices, from public messages, or from
 both. In short:
 
-- **A private channel shows up as a higher price level.** Markup over the Nash price rose in 9/9 main sets
-  (7 seller models), and a simple max-pair markup screen had a higher AUROC than a conditional-dependence
-  detector in all 9 (0.75–0.99 vs 0.34–0.72; paired difference 95% CI > 0 in 8/9).
+- **Being offered a private channel shows up as a higher price level.** Markup over the Nash price rose in
+  all 9 of Q1.4's main sets (7 seller models; per-set CIs, uncorrected), and a simple max-pair markup screen
+  had a higher point-estimate AUROC than a conditional-dependence detector in all 9 (0.75–0.99 vs 0.34–0.72; paired difference 95% CI > 0 in 8/9).
 - **We detect no contemporaneous co-movement.** The dependence detector (pCMI), which finds every planted
   pair on scripted sellers, is at chance in a 192-game seven-factor grid (0.51 [0.43, 0.59]), in
   pre-registered 60-round games (0.34 [0.18, 0.52]) and on executed agreements only (0.42 [0.33, 0.53]).
