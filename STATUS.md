@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 15:28 UTC, merge iteration 45 — freeze hold)
+## Current state (2026-10-25 15:45 UTC, merge iteration 46 — freeze hold)
 - Experiments closed; production manuscript/science/PDFs/usage snapshot frozen (6 main/20 total report pages; 234-word abstract; 8 slides).
 - Source HEADs 77e8fc1 / 1ac4621 are clean; Q1.4 adds only STATUS I158/I159 since i44. No import/repin or new scope review needed.
 - i45 verifies all 179 protected release hashes, both committed PDF hashes and the saved i44 log checksum; no suites repeated.
@@ -15,6 +15,7 @@
 - Dennis must transfer artifacts or arrange access. Risks unchanged: synthetic/price-derived labels, exchangeability, narrow prompts/markets; checks use one VM.
 
 ## Log
+- 2026-10-25 15:45 UTC merge iter46: freeze hold. Sources advanced only to STATUS-only commits (Q1.4 13e8b09, Q2.2 a778ac2) that record our 7b44715 bytes as unchanged, with no asks. DIRECTION unchanged since 13:22. Read-only checks: SUBMISSION.md sha 96d0ed7b… (the reviewed bytes), PDFs 1.15 MB/0.64 MB, and SUBMISSION_FORM.md is present. No suites rerun, no edits, no model calls. Next: production finalize.py at 16:30.
 - 2026-10-25 15:05 UTC merge iter41: freeze hold. Sources unchanged since iter40 (Q1.4 e8cf411, Q2.2 5a012a0). finalize.py --no-export on 6101429: FINALIZE OK (8/8 commands, packaging test passes). Only diffs were usage counts (368→378) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:35 UTC merge iter37: freeze hold. Sources unchanged since iter36. finalize.py --no-export PASS 26/26 on 5164a05; the only diffs were usage counts (368→370) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:30 UTC merge iter36: freeze hold. Q2.2 I160 confirmed 0 P1 on the f82acb0 bytes (SUBMISSION sha 96d0ed7b…), Q1.4 8625743 0 P1. finalize.py --no-export PASS 26/26; it changed only the usage counts (368→369), which I reverted to keep the reviewed bytes stable (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
