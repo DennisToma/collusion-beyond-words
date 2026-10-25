@@ -41,6 +41,23 @@ This repo merges two sprint projects and runs **no new experiments**:
 
 ## Reproduce this submission (no sibling repos or model credentials needed)
 
+Obtain an authorized checkout or an archive from the author first. The anonymous HTTPS
+clone and GitHub pages returned an authentication failure / HTTP 404 in the iteration-33
+access check, including both source-repo pages. Repository access and model credentials
+are separate requirements: once these files are available, the commands below need no
+model credentials or sibling repos. GitHub links in the PDFs also require repository access.
+
+An author can prepare a complete archive, including both PDFs, the code and all pinned evidence:
+
+```bash
+git archive --format=tar.gz --prefix=beyond-words/ --output=/var/tmp/beyond-words-release.tar.gz HEAD
+sha256sum /var/tmp/beyond-words-release.tar.gz
+```
+
+A recipient can extract that archive and run the commands below inside `beyond-words/`;
+no `.git` directory is needed. Sharing the archive or granting repository access is a
+separate handoff step; this check did not change repository visibility.
+
 ```bash
 uv run python scripts/check_sources.py          # 111 source checks, 139 document bindings, 158 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
@@ -63,19 +80,24 @@ uv run --group export python tests/test_export.py   # deliberate export failure 
 uv run python scripts/finalize.py              # author machine only (reads runner logs): refresh LLM-usage counts, then all checks + export
 ```
 
-Latest distribution check: a fresh GitHub clone of `731de19` with a new locked virtualenv and
-Chromium download passed the scientific replay, figure, document and export commands available
-at that revision, including both test suites. All five replay outputs and all six figures were deleted and
-rebuilt byte-identically; both PDFs match apart from date metadata. See the
-[receipt](results/distribution_check.json) and [procedure](reviews/distribution_i29.md).
+Latest distribution check: an authorized fresh GitHub clone of `c1e7fdd` with a new locked
+virtualenv and Chromium download passed all six replay scripts, all six figure scripts,
+111 source assertions / 139 document bindings / 158 hashes, 26 reproduction tests and
+9 export tests. All six replay outputs and all six figures were deleted and rebuilt
+byte-identically; both PDFs match apart from date metadata. See the
+[receipt](results/distribution_check_i33.json), [procedure](reviews/distribution_i33.md),
+and [recorded verification driver](reviews/distribution_i33_driver.py).
+The earlier [iteration-29 receipt](results/distribution_check.json) is retained as a historical record.
 This used the same VM with nonexistent sibling-root overrides; it does not establish
-portability to a different operating system. The author-only log refresh was excluded. The pCMI shift-null replay added in iteration 30 is
-covered by the current independent-copy checks, not that historical remote-clone receipt.
+portability to a different operating system. The author-only log refresh was excluded.
+An extracted archive of the same release also passes all source/coverage checks, 26 reproduction
+tests, PDF export and 9 export tests without a `.git` directory; it reuses that fresh Python/browser
+installation. [Archive receipt](results/reviewer_archive_i33.json) records its hash and scope.
 
 The export receipt is [results/export_check.json](results/export_check.json): all 492 report text
 fragments and 55 slide text fragments are present (the latter on the correct slide), all 10 embedded
-figures match the source pixels, and PDF links use public URLs. Slide body, table and code text is at
-least 14 pt; Fig. 1 and 3 were re-rendered with larger chart text in iteration 12, but dense raster chart labels can still be smaller and are best inspected in the report or PNGs.
+figures match the source pixels, and PDF links use absolute GitHub URLs (repository access required).
+Slide body, table and code text is at least 14 pt; Fig. 1 and 3 were re-rendered with larger chart text in iteration 12, but dense raster chart labels can still be smaller and are best inspected in the report or PNGs.
 These checks establish text presence and the specified layout constraints, not scientific validity.
 `results/export_test.json` records the 9 export failure checks.
 

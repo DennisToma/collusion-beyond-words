@@ -1,0 +1,56 @@
+{
+  "revision": "c1e7fddaca131f0fefc8a7c5aa3cd7e27888db4a",
+  "archive": "/var/tmp/beyond-words-c1e7fdd.tar.gz",
+  "sha256": "e0b98aec5182d0bd504c9a67ed9f606c9ae90e7cc69411cb07cc4624e032687b",
+  "bytes": 6815414,
+  "tracked_files_verified": 244,
+  "no_git_directory": true,
+  "all_files_match_git_blobs": true,
+  "scope": "Author-generated archive; no transfer or reviewer-access grant performed.",
+  "verification_python": "/var/tmp/bw-iteration33-release/.venv/bin/python",
+  "environment": "Fresh-clone virtualenv/browser reused; absent sibling roots; no .git directory; unchanged HOME; model environment variables not passed.",
+  "commands": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/check_sources.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.745
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/number_coverage.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.095
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "tests/test_reproduction.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 76.702
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/export_pdf.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.524
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "tests/test_export.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.391
+    }
+  ],
+  "reproduction_tests": 26,
+  "export_tests": 9
+}

@@ -35,6 +35,16 @@ except the two PDFs and their export-receipt hashes reproduce byte-identically. 
 match after date-metadata normalisation. [Receipt](results/distribution_check.json) and
 [procedure](reviews/distribution_i29.md); no scientific-result or provenance re-pin.
 
+Iteration 33 source/access re-check (2026-10-25 13:22 UTC): Q1.4 `ab24b1d` / Q2.2 `6150a33`;
+changes since iteration 30 are source handoff metadata only, 0 open P1. Evidence pins remain
+`732f08c` / `91ffb2d`; no scientific result, manuscript, figure or PDF was changed. The full
+158-file release at merge `c1e7fdd` passes a new remote-clone distribution check, including
+all six replay scripts and 26 reproduction tests. [Receipt](results/distribution_check_i33.json),
+[procedure](reviews/distribution_i33.md). Anonymous HTTPS cloning failed and anonymous
+repository/API probes returned HTTP 404 (also both sibling repository pages); authorized
+access or an author-supplied archive is needed to acquire the files. This corrects earlier
+"public URL" wording, without changing repository visibility or any evidence provenance.
+
 | short | repo | commit synced | synced at (UTC) |
 |---|---|---|---|
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |

@@ -1,0 +1,368 @@
+{
+  "checked_at_utc": "2026-10-25T13:21:29Z",
+  "revision": "c1e7fddaca131f0fefc8a7c5aa3cd7e27888db4a",
+  "remote": "https://github.com/DennisToma/collusion-beyond-words",
+  "clone": "git clone --no-local gh-cbw:DennisToma/collusion-beyond-words.git /var/tmp/bw-iteration33-release",
+  "access_check": {
+    "anonymous_https_clone_exit_code": 128,
+    "anonymous_web_status": 404,
+    "anonymous_api_status": 404,
+    "source_repo_web_status": {
+      "Q1.4": 404,
+      "Q2.2": 404
+    },
+    "authenticated_ssh_clone_exit_code": 0,
+    "interpretation": "Anonymous access unavailable in this check; authorized repository access or an author-supplied archive is required. Repository visibility was not queried successfully or changed."
+  },
+  "dependency_install": "uv sync --locked --all-groups --no-cache",
+  "uv_lock_sha256": "be282df9e2a81aab83239a6f21ab8607c5af0235d7021161135bb698897dca73",
+  "environment": {
+    "fresh_virtualenv": true,
+    "python": "Python 3.12.15",
+    "fresh_browser_download": true,
+    "sibling_root_overrides": "nonexistent paths",
+    "model_environment_variables": "not passed",
+    "scope": "Same author VM; no OS/filesystem sandbox. HOME unchanged."
+  },
+  "commands": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_unrounded_q22.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.608
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_c21b_floor.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.713
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_locked_test_q22.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.284
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_grid_q14.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.363
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_gate_pcmi_q14.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 31.43
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_gate_q14.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.257
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig1_hard_negatives.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.496
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig2_level_vs_comovement.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.609
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig3_e70_grid.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.585
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig4_say_vs_do.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.653
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig5_placebo_premium.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.548
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig6_strong_framing.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.712
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/check_sources.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.696
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/number_coverage.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.065
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "tests/test_reproduction.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 76.835
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "playwright",
+        "install",
+        "chromium"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 17.5
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/export_pdf.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.938
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "tests/test_export.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.366
+    }
+  ],
+  "deleted_and_regenerated_byte_identical": {
+    "results/unrounded_q22.json": "44e6d6e004eae3773c8d61c4eea61594310017005c9e832a58804c3da76082ec",
+    "results/c21b_floor.json": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005",
+    "results/locked_test_q22.json": "840d771e90183c9a8b5b3a8a35dc3d4f4d8f8ff5ad471e28a7dacd6fa7132ee8",
+    "results/grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3",
+    "results/gate_pcmi_q14.json": "92a1570b1a3e2336c336248b589fa9803c371588d9e4b2343ffb89f9b8dc018a",
+    "results/gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90",
+    "figures/fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "figures/fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+    "figures/fig3_e70_grid.png": "0141e85564dac087b195673b3ba4a532a5822a83a8979d1eb0cfeac86fb8cd11",
+    "figures/fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+    "figures/fig5_placebo_premium.png": "1f081a0b2e1cb2b241d18812ce881fcf42ac43a30ca205ef926d716dccdc16fd",
+    "figures/fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
+  },
+  "checks": {
+    "n_checks": 111,
+    "n_document_checks": 139,
+    "n_evidence_files": 158,
+    "n_fail": 0,
+    "n_document_fail": 0
+  },
+  "unclassified_decimals": {
+    "SUBMISSION.md": 0,
+    "SLIDES.md": 0
+  },
+  "reproduction_tests": {
+    "n_tests": 26,
+    "n_fail": 0,
+    "n_errors": 0,
+    "tests": [
+      "test_c21b_per_run_parity_with_pinned_source_function",
+      "test_corrupt_evidence_is_rejected",
+      "test_edited_primary_endpoint_is_rejected",
+      "test_edited_slide_interval_is_rejected",
+      "test_every_unbound_decimal_is_a_non_result",
+      "test_figures_reproduce_without_source_repos",
+      "test_finalize_rewrites_exactly_one_usage_sentence",
+      "test_gate_pcmi_parity_with_original_null_and_loader",
+      "test_gate_pcmi_rejects_malformed_trajectories_and_cache",
+      "test_gate_pcmi_replay_reproduces_without_source_repos",
+      "test_gate_replay_parity_with_pinned_source_functions",
+      "test_gate_replay_rejects_malformed_cache_and_cohort",
+      "test_gate_replay_reproduces_without_source_repos",
+      "test_grid_parity_with_original_scores_cohort_and_bootstrap",
+      "test_grid_replay_rejects_malformed_completed_runs",
+      "test_grid_replay_reproduces_without_source_repos",
+      "test_half_up_boundary_rejects_alternative_rounding",
+      "test_live_mode_rejects_changed_source",
+      "test_llm_usage_counts_match_process_log_summary",
+      "test_locked_test_replay_parity_with_pinned_source_functions",
+      "test_locked_test_replay_rejects_missing_duplicate_or_invalid_inputs",
+      "test_missing_binding_is_rejected",
+      "test_q22_replays_reproduce_without_source_repos",
+      "test_reducing_precision_cannot_widen_tolerance",
+      "test_standalone_sources_and_documents",
+      "test_unbound_result_decimal_is_rejected"
+    ],
+    "evidence_manifest_sha256": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
+    "document_sha256": {
+      "SUBMISSION.md": "94639b2547bc618c2d2d775d885ffc84750562a264c8867e279024057e56cd01",
+      "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
+    },
+    "figure_sha256": {
+      "fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+      "fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+      "fig3_e70_grid.png": "0141e85564dac087b195673b3ba4a532a5822a83a8979d1eb0cfeac86fb8cd11",
+      "fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+      "fig5_placebo_premium.png": "1f081a0b2e1cb2b241d18812ce881fcf42ac43a30ca205ef926d716dccdc16fd",
+      "fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
+    },
+    "q22_replay_sha256": {
+      "unrounded_q22.json": "44e6d6e004eae3773c8d61c4eea61594310017005c9e832a58804c3da76082ec",
+      "c21b_floor.json": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005",
+      "locked_test_q22.json": "840d771e90183c9a8b5b3a8a35dc3d4f4d8f8ff5ad471e28a7dacd6fa7132ee8"
+    },
+    "q14_replay_sha256": {
+      "grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3",
+      "gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90",
+      "gate_pcmi_q14.json": "92a1570b1a3e2336c336248b589fa9803c371588d9e4b2343ffb89f9b8dc018a"
+    },
+    "gate_pcmi_original_function_parity": {
+      "group_representatives": 10,
+      "null_draws_per_run": 200,
+      "calculator_fixtures": 6,
+      "finite_draw_and_tie_tolerance_mutations_rejected": true,
+      "full_historical_replay_runs": 500,
+      "source": "q14/detectors/infotheory.py:load_runs, score_run"
+    },
+    "gate_original_function_parity": {
+      "games": 500,
+      "detectors": 9,
+      "cached_pair_rows": 27000,
+      "saved_numeric_fields": 666,
+      "calculator_fixture_runs": 44,
+      "source": "q14/experiments/scripted.py"
+    },
+    "grid_original_function_parity": {
+      "games": 192,
+      "pairs_per_game": 6,
+      "detectors": 4,
+      "grid_bootstraps": 2000,
+      "paired_bootstraps": 2000,
+      "source": "q14/detectors/infotheory.py, scripts/e70_grid.py, scripts/e74_paired_diff.py"
+    },
+    "locked_test_original_function_parity": {
+      "real_cohort_bootstraps": 31,
+      "tied_fixture_bootstraps": 73,
+      "full_saved_result_bootstraps": 2000,
+      "source": "q22/final_analysis.py"
+    },
+    "c21b_original_function_parity": {
+      "settings": 8,
+      "runs_per_setting": 30,
+      "source": "q22/p2_strong.py"
+    },
+    "standalone": {
+      "n_checks": 111,
+      "n_document_checks": 139,
+      "n_evidence_files": 158,
+      "n_fail": 0,
+      "n_document_fail": 0
+    },
+    "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All six figures and three Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; all pair scores, cohort loading and full bootstraps match original functions. The scripted gate reaggregates all nine archived detector caches with original-function parity and boundary/tie/leave-one-out calculator checks. A separate pCMI replay reconstructs all historical shift draws, scores and p-values from frozen trajectories, with original full-score-function parity on ten group representatives and constant/short fixtures; no markets are generated. Malformed completed trajectories and missing, duplicate and invalid audit/cache inputs are rejected."
+  },
+  "export_tests": {
+    "command": "uv run --group export python tests/test_export.py",
+    "n_tests": 9,
+    "n_fail": 0,
+    "n_errors": 0,
+    "tests": [
+      "test_deleted_body_and_wrong_slide_are_detected",
+      "test_excess_content_is_rejected_at_font_floor",
+      "test_figure_height_yields_before_font_floor",
+      "test_font_floor_includes_tables_and_code",
+      "test_markdown_formatting_preserves_meaningful_text",
+      "test_missing_or_broken_images_are_rejected",
+      "test_missing_or_substituted_pdf_figure_is_rejected",
+      "test_padding_and_horizontal_overflow_are_detected",
+      "test_repo_links_become_portable_and_file_links_fail"
+    ],
+    "sha256": {
+      "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0",
+      "tests/test_export.py": "9037700fa155c00253a7055a36eac693e565bf5b7b7b3c690b654e1983cdacc2",
+      "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
+    }
+  },
+  "export": {
+    "ok": true,
+    "submission_pages": 17,
+    "slides": 8,
+    "submission_text_fragments": 492,
+    "slide_text_fragments": [
+      9,
+      4,
+      3,
+      15,
+      5,
+      6,
+      5,
+      8
+    ],
+    "figure_counts": {
+      "SUBMISSION.pdf": 6,
+      "SLIDES.pdf": 4
+    }
+  },
+  "pdfs": {
+    "SUBMISSION.pdf": {
+      "pages": 17,
+      "page_text_identical": true,
+      "content_streams_identical": true,
+      "byte_identical_after_date_normalisation": true,
+      "committed_sha256": "c7f4c0164d7625396d227fc49051d06c58f547551f313e9cc113ddfffd59d8ac",
+      "rebuilt_sha256": "623cc6fcc08a87cc32443563cb3271269b3988981e5cd79837877f20a639da4d"
+    },
+    "SLIDES.pdf": {
+      "pages": 8,
+      "page_text_identical": true,
+      "content_streams_identical": true,
+      "byte_identical_after_date_normalisation": true,
+      "committed_sha256": "a198507e1303e58ac4f310187480d74e29d0ee96b59f3065ad1db83cd26db27b",
+      "rebuilt_sha256": "f03eed99121800fdc3a7878097192184d156bcbceec990af2ad5afd3eaf8be84"
+    }
+  },
+  "changed_tracked_paths": [
+    "SLIDES.pdf",
+    "SUBMISSION.pdf",
+    "results/export_check.json"
+  ],
+  "all_other_tracked_files_byte_identical": true,
+  "retained_production_pdfs": true,
+  "scope": "Distribution verification of frozen calculations, including the archived historical pCMI null replay. No new experiments, model calls, labels, settings or test evaluation; author-only runner-log refresh excluded."
+}
