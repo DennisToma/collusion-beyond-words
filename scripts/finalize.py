@@ -4,8 +4,10 @@
    after the evidence freeze, so the LLM-usage counts grow).
 2. Rewrite the LLM-usage sentence in SUBMISSION.md and the matching REPORT.md line to the
    refreshed counts (the release test binds the SUBMISSION sentence to the JSON).
-3. Run every release check: check_sources, number_coverage, test_reproduction, PDF export,
-   export failure tests. Stop at the first failure (exit 1).
+3. Run every release check: check_sources, number_coverage, reproduction and packaging
+   tests, PDF export, export/compliance failure tests. Stop at the first failure (exit 1).
+
+Commit the resulting outputs before running package_release.py for the final handoff.
 
 Usage: uv run python scripts/finalize.py [--no-export]
 """
@@ -56,6 +58,7 @@ def main():
     run(["uv", "run", "python", "scripts/check_sources.py"])
     run(["uv", "run", "python", "scripts/number_coverage.py"])
     run(["uv", "run", "python", "tests/test_reproduction.py"])
+    run(["uv", "run", "python", "tests/test_packaging.py"])
     if export:
         run(["uv", "run", "--group", "export", "python", "scripts/export_pdf.py"])
         run(["uv", "run", "--group", "export", "python", "tests/test_export.py"])

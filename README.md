@@ -52,6 +52,8 @@ the implementation, experiments, analysis and drafting under Dennis's direction 
 | `scripts/recompute_gate_q14.py` | reaggregates the scripted gate from 27,000 archived score/p-value rows (500 games, nine detectors): flags, Wilson intervals, localisation and AUROCs → `results/gate_q14.json`; no null draws or markets generated |
 | `scripts/recompute_gate_pcmi_q14.py` | reconstructs the scripted gate’s pCMI scores and original B=200 shift-null draws from archived trajectories; all 3000 scores/pair p-values and 500 run p-values match → `results/gate_pcmi_q14.json` |
 | `scripts/process_log_summary.py` | counts autonomous manager iterations per repo/backend from the machine-local runner logs for the LLM usage statement, with a snapshot timestamp (→ `results/process_log_summary.json`; not regenerable without those logs) |
+| `scripts/package_release.py` | checks a clean committed release from an extracted Git archive, then prepares the PDFs, form text, code/evidence archive, receipt, logs and checksums outside the repo |
+| `tests/test_packaging.py` | 9 handoff checks: exact/repeatable archives, dirty/concurrent changes, omitted/altered/unsafe members, failed checks and publication only after success |
 | `tests/test_reproduction.py` | 26 checks: independent-copy reproduction, figure and replay parity, original-function parity for the Q1.4 grid and gate, C21b and the locked test, malformed trajectory/audit rejection, LLM-usage counts, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
 | `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
@@ -66,16 +68,31 @@ access check, including both source-repo pages. Repository access and model cred
 are separate requirements: once these files are available, the commands below need no
 model credentials or sibling repos. GitHub links in the PDFs also require repository access.
 
-An author can prepare a complete archive, including both PDFs, the code and all pinned evidence:
+After the author-machine finalizer, commit its outputs before packaging. The packager
+refuses a dirty worktree, checks every archive file against Git, and runs source,
+decimal-coverage, compliance, reproduction, export-failure and packaging checks from
+an extraction without `.git`. It uses the existing export dependencies and Chromium;
+install those as below first. Choose an unused output directory outside the repository:
 
 ```bash
-git archive --format=tar.gz --prefix=beyond-words/ --output=/var/tmp/beyond-words-release.tar.gz HEAD
-sha256sum /var/tmp/beyond-words-release.tar.gz
+uv run --group export python scripts/package_release.py --output-dir /var/tmp/beyond-words-handoff
+cd /var/tmp/beyond-words-handoff
+sha256sum -c SHA256SUMS
 ```
 
-A recipient can extract that archive and run the commands below inside `beyond-words/`;
-no `.git` directory is needed. Sharing the archive or granting repository access is a
-separate handoff step; this check did not change repository visibility.
+The output contains `SUBMISSION.pdf`, `SLIDES.pdf`, `SUBMISSION_FORM.md`, an archive
+named with the committed revision, `HANDOFF.md`, `receipt.json`, check logs and
+`SHA256SUMS`. Its receipt lists the full Git revision and every tracked file hash.
+Only a fully passing package is published at the chosen path. The PDFs and dated
+usage snapshot are checked as committed; packaging does not rebuild or refresh them.
+If finalization changes files later, commit and package again into a new directory.
+The accompanying receipt/checksums stay outside the archive to avoid circular hashes.
+
+A recipient can extract the archive and run the commands below inside `beyond-words/`;
+no `.git` directory is needed. Packaging uses the same VM and existing Python/browser,
+with absent sibling-root overrides and no model environment variables passed; it is
+not a new install or access check. Sharing the archive or granting repository access
+is a separate handoff step; this command does not change repository visibility.
 
 ```bash
 uv run python scripts/check_sources.py          # 111 source checks, 144 document bindings, 158 evidence hashes
@@ -98,6 +115,7 @@ uv run --group export python scripts/export_pdf.py  # SUBMISSION.pdf + SLIDES.pd
 uv run --group export python tests/test_export.py   # deliberate export failure checks
 uv run --group export python scripts/check_submission_compliance.py # lengths, main pages, disclosures, references, PDF hashes
 uv run --group export python tests/test_submission_compliance.py     # 3 compliance boundary/failure checks
+uv run python tests/test_packaging.py          # 9 packaging failure/integrity checks in temporary Git repos
 uv run python scripts/finalize.py              # author machine only (reads runner logs): refresh LLM-usage counts, then all checks + export
 ```
 
