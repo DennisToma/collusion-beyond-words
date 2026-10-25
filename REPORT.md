@@ -3,11 +3,13 @@
 The primary submission is **[TEMPLATE_REPORT.md](TEMPLATE_REPORT.md) / [TEMPLATE_REPORT.pdf](TEMPLATE_REPORT.pdf)**;
 **[SUBMISSION.md](SUBMISSION.md)** is the extended report. Number provenance: [SOURCES.md](SOURCES.md).
 
-Iteration 14 closes the final handoff at the user's 18:00 UTC hard stop. The completed
-iteration-12 package for `248db6e` was reverified: **11 successful acceptance commands**,
-**308 Git-matching tracked files**, **20 valid sidecar checksums**, all recorded command-log
-and artifact hashes, and root ZIP identity. The iteration-13 package was never created;
-its previously listed location described intended work, not completed acceptance.
+Iteration 15 confirms that the iteration-14 handoff **completed at 18:05:05 UTC** for
+`df7c051616716b971c74d3cfe4f44a17345d26b6`: **11 successful acceptance commands**,
+**309 Git-matching tracked files**, **20 valid sidecar checksums**, all recorded command-log
+and artifact hashes, and root ZIP identity. The completed ZIP is **24,225,178 bytes**.
+[Completed acceptance receipt](results/release_package_i14.json), verified with the
+command in [iteration-15 handoff notes](reviews/handoff_i15.md). The iteration-13
+package was never created; iteration 14's package now supersedes iteration 12.
 A fresh provenance check passes **158 pinned evidence blobs**, **176 preserved scientific
 files** and **eight accepted manuscript/upload artifacts**. Scientific estimates,
 manuscripts, PDFs, figures and usage snapshot remain unchanged.
@@ -16,11 +18,11 @@ manuscripts, PDFs, figures and usage snapshot remain unchanged.
 handoff integrity; it is not a new scientific evaluation or independent review.
 
 After this closure-notes commit, package exact clean HEAD:
-`uv run --group export python scripts/package_release.py --output-dir /var/tmp/bw-final-i14`,
-then copy `/var/tmp/bw-final-i14/submission_code.zip` to root only after success.
-The external `/var/tmp/bw-final-i14/receipt.json` records the actual final revision and
+`uv run --group export python scripts/package_release.py --output-dir /var/tmp/bw-final-i15`,
+then copy `/var/tmp/bw-final-i15/submission_code.zip` to root only after success.
+The external `/var/tmp/bw-final-i15/receipt.json` records the actual final revision and
 acceptance; check its `ok` field and `SHA256SUMS`. Earlier receipts certify their own
-revisions only. [Final handoff procedure](reviews/handoff_i14.md).
+revisions only. [Final handoff procedure](reviews/handoff_i15.md).
 Dennis must upload `TEMPLATE_REPORT.pdf`, `IMAGE.png` and the final ZIP;
 form fields are in `SUBMISSION_FORM.md`. No upload has been performed here.
 
