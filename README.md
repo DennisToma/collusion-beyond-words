@@ -10,6 +10,9 @@ is a reason to audit, not evidence of an agreement.
 
 This repo merges two sprint projects and runs **no new experiments**:
 
+The repositories are private until the submission deadline; `submission_code.zip` (built by
+`scripts/build_code_zip.py`) contains this repo and both source repos at their pinned commits (`sources/`).
+
 | project | repo (code, data, per-claim JSON) |
 |---|---|
 | Q1.4 prices-only (information-theoretic detection) | [collusion-14-infotheory](https://github.com/DennisToma/collusion-14-infotheory) |

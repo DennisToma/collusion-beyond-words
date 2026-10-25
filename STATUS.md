@@ -1,6 +1,9 @@
 # STATUS
 
-## Current state (2026-10-25 ~16:45 UTC, merge iteration 50 — DIRECTION 16:40 "Apart template + judge readability")
+## Current state (2026-10-25 ~17:00 UTC, merge iteration 51 — DIRECTION 16:40 + addendum 16:45 done)
+- Addendum done: TEMPLATE_REPORT Code and Data now says code/data ship as a supplementary archive and the repo goes public after the deadline (no unopenable repo links; SUBMISSION Reproducibility + README + SUBMISSION_FORM aligned). TEMPLATE_REPORT.pdf rebuilt (147/147 fragments, 4 figures pixel-exact, 10 pp, main text pp. 1–6).
+- `submission_code.zip` (24.1 MB, gitignored) via `uv run python scripts/build_code_zip.py`: beyond-words/ = HEAD git archive; sources/*.tar.xz = filtered git archives at pins 732f08c / 91ffb2d. Excluded: 3 scripted positive-control trajectory files > 5 MB and rendered HTML. Built-in secret scan + manual grep: clean. Verified: extracted archive, `finalize.py --no-export` with absent siblings → FINALIZE OK.
+- Dennis: rebuild the zip after any further commit (README inside records the HEAD hash).
 - NEW primary deliverable: TEMPLATE_REPORT.md/.pdf (official Apart template, 10 pp total; main text pp. 1–6 incl. Code/Data + Author Contributions, science on pp. 1–5; abstract 243 words; Figure 1 on page 1).
 - New headline Figure 1 (figures/fig0_headline.png, scripts/fig0_headline.py, pinned data only): (a) median-premium channel vs no-channel game (Q2.2 llm_v3rep runs 0024/0017); (b) AUROC level vs pCMI vs text (9 sets median, grid, locked test, SALT). IMAGE.png 1600×900 = panel (a).
 - SLIDES: still 8; slide 1 = headline + Figure 1. All bindings pass (SLIDES 55/60 decimals bound, 0 unclassified).
@@ -13,6 +16,7 @@
 - Risks: TEMPLATE_REPORT numbers are not script-bound like SUBMISSION (checked by Opus review + manual cross-check); Dennis must upload TEMPLATE_REPORT.pdf + IMAGE.png.
 
 ## Log
+- 2026-10-25 17:00 UTC merge iter51: DIRECTION addendum 16:45. Rewrote Code and Data for the private repo, wrote scripts/build_code_zip.py. The first build was 38 MB, so the sources became filtered tar.xz (xz dedups the JSONL) and HTML renders were dropped → 24.1 MB. The script's secret regex matched its own source, so the literal is now split. finalize.py OK; regeneration verified in the extracted archive. No numbers changed, no model calls.
 - 2026-10-25 16:45 UTC merge iter50: followed DIRECTION 16:40. Wrote TEMPLATE_REPORT.md + scripts/export_template_pdf.py (reuses export_pdf checks: 149/149 fragments, 4 figures pixel-exact), headline Figure 1 + IMAGE.png (scripts/fig0_headline.py; median-premium game selection rule; removed misleading Nash lines after noticing per-round cost varies 5–8), slide 1 replaced with headline + Fig. 1. Opus review applied (all 18 items); Codex review applied (8 items). finalize.py OK. SUBMISSION_FORM/REPORT point to TEMPLATE_REPORT as primary.
 - 2026-10-25 15:45 UTC merge iter46: freeze hold. Sources advanced only to STATUS-only commits (Q1.4 13e8b09, Q2.2 a778ac2) that record our 7b44715 bytes as unchanged, with no asks. DIRECTION unchanged since 13:22. Read-only checks: SUBMISSION.md sha 96d0ed7b… (the reviewed bytes), PDFs 1.15 MB/0.64 MB, and SUBMISSION_FORM.md is present. No suites rerun, no edits, no model calls. Next: production finalize.py at 16:30.
 - 2026-10-25 15:05 UTC merge iter41: freeze hold. Sources unchanged since iter40 (Q1.4 e8cf411, Q2.2 5a012a0). finalize.py --no-export on 6101429: FINALIZE OK (8/8 commands, packaging test passes). Only diffs were usage counts (368→378) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
