@@ -1,4 +1,4 @@
-# A private channel between LLM sellers shows up as a price level — not in co-movement or public words
+# A private channel between LLM sellers is detectable from price levels — not from co-movement or public words
 
 **Dennis Toma — Independent** — with Apart Research · AI Collusion Research Sprint, 23–25 October 2026
 

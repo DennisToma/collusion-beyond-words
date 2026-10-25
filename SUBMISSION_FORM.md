@@ -20,7 +20,7 @@ Can an auditor detect a private channel between competing LLM sellers from price
 
 ## Files to upload
 
-- `TEMPLATE_REPORT.pdf` — **primary report in the official Apart template** (≈ 4.5 pp main text; Figure 1 on page 1; from `TEMPLATE_REPORT.md` via `scripts/export_template_pdf.py`). Same numbers as SUBMISSION.
+- `TEMPLATE_REPORT.pdf` — **primary report in the official Apart template** (≈ 5 pp main text; Figure 1 on page 1; from `TEMPLATE_REPORT.md` via `scripts/export_template_pdf.py`). Same numbers as SUBMISSION.
 - `IMAGE.png` — project image for the form (1600×900; Figure 1 panel a; `scripts/fig0_headline.py`).
 - `SUBMISSION.pdf` — extended report with all appendices (A–H) and per-number provenance; upload as supplementary material if the form permits, or keep in the repository.
 - `SLIDES.pdf` — optional presentation supplement, if the form permits it.

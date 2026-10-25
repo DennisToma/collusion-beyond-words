@@ -1,18 +1,19 @@
 # STATUS
 
 ## Current state (2026-10-25 ~16:45 UTC, merge iteration 50 — DIRECTION 16:40 "Apart template + judge readability")
-- NEW primary deliverable: TEMPLATE_REPORT.md/.pdf (official Apart template, 9 pp total; main text pp. 1–5; abstract 243 words; Figure 1 on page 1).
+- NEW primary deliverable: TEMPLATE_REPORT.md/.pdf (official Apart template, 10 pp total; main text pp. 1–6 incl. Code/Data + Author Contributions, science on pp. 1–5; abstract 243 words; Figure 1 on page 1).
 - New headline Figure 1 (figures/fig0_headline.png, scripts/fig0_headline.py, pinned data only): (a) median-premium channel vs no-channel game (Q2.2 llm_v3rep runs 0024/0017); (b) AUROC level vs pCMI vs text (9 sets median, grid, locked test, SALT). IMAGE.png 1600×900 = panel (a).
 - SLIDES: still 8; slide 1 = headline + Figure 1. All bindings pass (SLIDES 55/60 decimals bound, 0 unclassified).
 - Opus adversarial review (reviews/opus_template_i50.md): 6 P1 / 8 P2 / 4 P3, all qualifier/causal-wording issues, all applied; no wrong number found.
 - Deviation from DIRECTION (evidence-based): SALT 0.87 framed as "a different external task where the collusive act is verbal", not as a tested boundary/explanation (source App. F says it does not establish why text works there).
 - finalize.py: FINALIZE OK after changes (usage counts refreshed). SUBMISSION science unchanged.
 - Frozen headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43, 0.59]; locked-test Δ −0.01 [−0.09, +0.06].
-- Next (if time): optional codex read-only review of TEMPLATE_REPORT; package; hard stop 19:00 UTC for this repo (DIRECTION).
+- Codex gpt-6.1-sol read-only review (reviews/codex_template_i50.md): 6 P1 + 2 P2 (assignment vs collusion wording, registered contrast definition, CI methods, TE caveat) — all applied; title now "…Is Detectable from Price Levels…".
+- Next: package if needed; hard stop 19:00 UTC for this repo (DIRECTION).
 - Risks: TEMPLATE_REPORT numbers are not script-bound like SUBMISSION (checked by Opus review + manual cross-check); Dennis must upload TEMPLATE_REPORT.pdf + IMAGE.png.
 
 ## Log
-- 2026-10-25 16:45 UTC merge iter50: followed DIRECTION 16:40. Wrote TEMPLATE_REPORT.md + scripts/export_template_pdf.py (reuses export_pdf checks: 149/149 fragments, 4 figures pixel-exact), headline Figure 1 + IMAGE.png (scripts/fig0_headline.py; median-premium game selection rule; removed misleading Nash lines after noticing per-round cost varies 5–8), slide 1 replaced with headline + Fig. 1. Opus review applied (all 18 items). finalize.py OK. SUBMISSION_FORM/REPORT point to TEMPLATE_REPORT as primary.
+- 2026-10-25 16:45 UTC merge iter50: followed DIRECTION 16:40. Wrote TEMPLATE_REPORT.md + scripts/export_template_pdf.py (reuses export_pdf checks: 149/149 fragments, 4 figures pixel-exact), headline Figure 1 + IMAGE.png (scripts/fig0_headline.py; median-premium game selection rule; removed misleading Nash lines after noticing per-round cost varies 5–8), slide 1 replaced with headline + Fig. 1. Opus review applied (all 18 items); Codex review applied (8 items). finalize.py OK. SUBMISSION_FORM/REPORT point to TEMPLATE_REPORT as primary.
 - 2026-10-25 15:45 UTC merge iter46: freeze hold. Sources advanced only to STATUS-only commits (Q1.4 13e8b09, Q2.2 a778ac2) that record our 7b44715 bytes as unchanged, with no asks. DIRECTION unchanged since 13:22. Read-only checks: SUBMISSION.md sha 96d0ed7b… (the reviewed bytes), PDFs 1.15 MB/0.64 MB, and SUBMISSION_FORM.md is present. No suites rerun, no edits, no model calls. Next: production finalize.py at 16:30.
 - 2026-10-25 15:05 UTC merge iter41: freeze hold. Sources unchanged since iter40 (Q1.4 e8cf411, Q2.2 5a012a0). finalize.py --no-export on 6101429: FINALIZE OK (8/8 commands, packaging test passes). Only diffs were usage counts (368→378) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:35 UTC merge iter37: freeze hold. Sources unchanged since iter36. finalize.py --no-export PASS 26/26 on 5164a05; the only diffs were usage counts (368→370) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.

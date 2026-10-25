@@ -118,7 +118,7 @@ draw_a([a1, a2])
 b = fig.add_subplot(gs[2])
 draw_b(b)
 fig.text(.01, .97, "(a) Two real 12-round games (gpt-6-luna; median run per arm)", fontsize=14, weight="bold")
-fig.text(.47, .97, "(b) Which signal separates channel from no-channel games?", fontsize=14, weight="bold")
+fig.text(.47, .97, "(b) Detector AUROC in pricing markets and an external verdict task", fontsize=14, weight="bold")
 fig.subplots_adjust(left=.045, right=.985, top=.78, bottom=.2)
 fig.savefig(ROOT / "figures" / "fig0_headline.png", dpi=150)
 

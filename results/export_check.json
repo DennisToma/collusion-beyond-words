@@ -20,7 +20,7 @@
     {
       "font_pt": 14,
       "min_text_font_pt": 14.000024999999999,
-      "image_max_height_mm": 80,
+      "image_max_height_mm": 70,
       "overflow": false
     },
     {
@@ -111,10 +111,10 @@
     "SLIDES.pdf": []
   },
   "sha256": {
-    "SUBMISSION.md": "d473327e298ad54284b581870d6ba71fb689821517a271fe4c11b404e6b8941a",
-    "SLIDES.md": "e297f700723902b4c2d74691552d3101faf3e4841dec23dcc0cd51326b6d44fe",
-    "SUBMISSION.pdf": "85b06b54e9223e5eaf1198a31b13893a32227791beddf618b4ae1561a256334c",
-    "SLIDES.pdf": "303e6b315c2be9e57672ca1b8712d73bf244a582bac8dc711453e0252b6ca602",
+    "SUBMISSION.md": "b2db5b1bff304a7ee43c7dc41e251842b7ca0a0ea9dd99bb2f4ddb52393b6407",
+    "SLIDES.md": "e7f46fb3e2cd146ce181e16fc9385034d459589f9c8dbc2706644601a60ee91d",
+    "SUBMISSION.pdf": "c37d59f418cf4935eedec50edc70f5bc4bd87a3f169fa4016ffa0d2ffcd45bb5",
+    "SLIDES.pdf": "a8f794d515dc97c5e57e2da1188dc77399edbadc4e0407fa5c18edb51b0692bf",
     "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."
