@@ -558,6 +558,94 @@
           "stored_path": "q14/data/llm_grid_p2_c15/trajectories.jsonl.gz",
           "stored_bytes": 25265,
           "stored_sha256": "89472d8752ada87562bac7d52b416655cd8231b6862abc2ea7be565ea9c43ea8"
+        },
+        "experiments/scripted.py": {
+          "sha256": "7db7ba14f988b1ef52ae996b411ac92c5fbd64c414989d5babf03a1d5cec445a",
+          "bytes": 7284,
+          "compression": "none",
+          "stored_path": "q14/experiments/scripted.py",
+          "stored_bytes": 7284,
+          "stored_sha256": "7db7ba14f988b1ef52ae996b411ac92c5fbd64c414989d5babf03a1d5cec445a"
+        },
+        "data/gate_test/ground_truth.jsonl": {
+          "sha256": "677e1878fdfd8418d54f7cca8e117264ad9b14e6e7918998fed6cd96513eb753",
+          "bytes": 241300,
+          "compression": "gzip",
+          "stored_path": "q14/data/gate_test/ground_truth.jsonl.gz",
+          "stored_bytes": 5089,
+          "stored_sha256": "44a340a98c9b97493bcda4062771c1ce8c5fd8749610f03490c9067c681220ba"
+        },
+        "results/pearson/gate_test.jsonl": {
+          "sha256": "5dd13c9a7dc0b52807808765c6718ac5db6a2db4fc91dabab247c1f03f740b8c",
+          "bytes": 387607,
+          "compression": "gzip",
+          "stored_path": "q14/results/pearson/gate_test.jsonl.gz",
+          "stored_bytes": 51761,
+          "stored_sha256": "98bd77cfae1ec5a18b0802225ca653dbc6c78ed496d24034d00cd9f60ab2276f"
+        },
+        "results/pearson_diff/gate_test.jsonl": {
+          "sha256": "ba128bd44166414df7b3e9d9990fa9f9d549e80341381aeea84a8d460a994f94",
+          "bytes": 389011,
+          "compression": "gzip",
+          "stored_path": "q14/results/pearson_diff/gate_test.jsonl.gz",
+          "stored_bytes": 52574,
+          "stored_sha256": "3a8f2051f3de1bb7f5e68451c31ad5fb818422c26c44525cd944080d710da714"
+        },
+        "results/mi/gate_test.jsonl": {
+          "sha256": "22e8a1b0b01bb598bcef1cf3e1c036e9335bd983097f7b76e8023e913bc69cfd",
+          "bytes": 390612,
+          "compression": "gzip",
+          "stored_path": "q14/results/mi/gate_test.jsonl.gz",
+          "stored_bytes": 50618,
+          "stored_sha256": "3edb93a34f0b7cc6ade0475c95cc075c65f5c2a0b69341dc848ae25d7ae86970"
+        },
+        "results/cmi_state/gate_test.jsonl": {
+          "sha256": "668d87052da43b2d2745e60bf488151b686536cb9d4d47017c102fa84a211908",
+          "bytes": 388421,
+          "compression": "gzip",
+          "stored_path": "q14/results/cmi_state/gate_test.jsonl.gz",
+          "stored_bytes": 53263,
+          "stored_sha256": "7d50f7f37364980e5d565ed201b7abf344de19437d3668d84ec89a3901947469"
+        },
+        "results/pcmi/gate_test.jsonl": {
+          "sha256": "45490c04a580c14b1f52850024751d8ad9bae846c1892f1d1aa8e13057a74438",
+          "bytes": 391752,
+          "compression": "gzip",
+          "stored_path": "q14/results/pcmi/gate_test.jsonl.gz",
+          "stored_bytes": 54605,
+          "stored_sha256": "3bd71d8c0dccc708516a41aaac91b44598ea8fbf0e04da0bd33db058fabc56de"
+        },
+        "results/te/gate_test.jsonl": {
+          "sha256": "90b664027f85d67ba94657a1e977b6bb772b7092f991a276a11125e00dd7aea6",
+          "bytes": 390865,
+          "compression": "gzip",
+          "stored_path": "q14/results/te/gate_test.jsonl.gz",
+          "stored_bytes": 53852,
+          "stored_sha256": "9064a8ab67d92d96deee5178c8c573140ea0a630421abf2be4f785d8569852bc"
+        },
+        "results/ni_mi/gate_test.jsonl": {
+          "sha256": "3f32351c7088ebd4e7475c6def6c27891f0f1e310c9947be3f36b84b1f33e9b2",
+          "bytes": 302962,
+          "compression": "gzip",
+          "stored_path": "q14/results/ni_mi/gate_test.jsonl.gz",
+          "stored_bytes": 41276,
+          "stored_sha256": "4383a3edbaecb012a47a6303fcb736bf97b263891ad9b117373b456e7dca64a2"
+        },
+        "results/ni_cmi_state/gate_test.jsonl": {
+          "sha256": "125e4bbd99cfc2b82fe37c5174d9c053dfd072eb6f098159272fa6d446c5927d",
+          "bytes": 303086,
+          "compression": "gzip",
+          "stored_path": "q14/results/ni_cmi_state/gate_test.jsonl.gz",
+          "stored_bytes": 41261,
+          "stored_sha256": "9cf682d91cdb7edc07c0acf8d64083fd1e50be8e759a4570e475638fe3c6db84"
+        },
+        "results/ni_pcmi/gate_test.jsonl": {
+          "sha256": "1abf21e103732144d50f35b8deb355b824c92ae1eb492d7562dfb8ade3f1946e",
+          "bytes": 304463,
+          "compression": "gzip",
+          "stored_path": "q14/results/ni_pcmi/gate_test.jsonl.gz",
+          "stored_bytes": 41393,
+          "stored_sha256": "35556df49bbd1d5a4d34c369d20f6706194726fc6b96960b739aee423ab95ddf"
         }
       }
     },

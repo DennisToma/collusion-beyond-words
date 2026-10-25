@@ -1,8 +1,8 @@
 # Pinned source evidence
 
 This bundle makes the merged submission's saved-value checks, all six figures and the Q2.2 rounding,
-C21b sensitivity, historical locked-test and Q1.4 raw-grid replays independent of the source checkouts. It contains
-146 exact git blobs from:
+C21b sensitivity, historical locked-test and Q1.4 raw-grid/scripted-gate replays independent of the source checkouts. It contains
+157 exact git blobs from:
 
 - [Q1.4 @ 732f08c11a765cd8500f4ef3c29fb630b309d5b2](https://github.com/DennisToma/collusion-14-infotheory/tree/732f08c11a765cd8500f4ef3c29fb630b309d5b2)
 - [Q2.2 @ 91ffb2d4737a7537cdf9afe239a98e0d1061090b](https://github.com/DennisToma/collusion-22-say-vs-do/tree/91ffb2d4737a7537cdf9afe239a98e0d1061090b)
@@ -28,6 +28,16 @@ with the original cell-by-arm bootstrap. Tests compare the loader, all 4608 per-
 and full B=2000 bootstrap against original source functions. No null draws, flags or
 judge/executed-label validation; no simulation or new evaluation.
 
+Iteration 28 adds eleven exact Q1.4 blobs (157 total; previous 146 unchanged): original
+`experiments/scripted.py`, gate ground truth and all nine detector score/p-value caches.
+The gate replay reaggregates 27,000 pair rows for 500 games: all 666 saved summary values
+reproduce to floating-point precision, including rates, Wilson intervals and localisation.
+It reuses archived max-statistic shift p-values and recomputes same-shock-family surrogate
+ranks with leave-one-out clean controls. Three release checks add standalone byte parity,
+original-function parity on all data and a 44-run calculator fixture, and malformed-input
+rejection. This does not regenerate scores, trajectories or shift-null draws, validate ground
+truth, or conduct another locked-test evaluation.
+
 Run from the repo root:
 
 ```bash
@@ -36,6 +46,7 @@ uv run python scripts/recompute_unrounded_q22.py
 uv run python scripts/recompute_c21b_floor.py
 uv run python scripts/recompute_locked_test_q22.py
 uv run python scripts/recompute_grid_q14.py
+uv run python scripts/recompute_gate_q14.py
 uv run python tests/test_reproduction.py
 ```
 
@@ -63,7 +74,7 @@ model calls, new metrics, refitting or experiment runs are involved.
 
 The bundle supports **checking saved results**, not rebuilding every experimental result from raw
 trajectories. Full generators, caches, labels and registration history remain in the source repos.
-The Q1.4 grid and all three Q2.2 replays reproduce their committed outputs byte-identically, and the release tests compare
+The Q1.4 grid/gate and all three Q2.2 replays reproduce their committed outputs byte-identically, and the release tests compare
 C21b's per-run fields with the original pinned source function in all eight floor/window settings.
 Source modules are retained for inspection; the replay scripts never import their model-calling
 terms loader. All six figures can be regenerated from this bundle (Fig. 1/2/3/5 re-rendered with larger text only; Fig. 5 reads the pinned Q2.2 `llm_v3plc`/`llm_v3rep` ground truth + trajectories and asserts its per-round means equal the saved `placebo_llm_v3plc.json`). The reports retained

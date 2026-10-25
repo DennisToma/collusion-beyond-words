@@ -12,13 +12,13 @@
     "last_end": "Sat Oct 24 06:00:17 UTC 2026"
    },
    "phase2": {
-    "completed_iterations": 138,
+    "completed_iterations": 141,
     "by_backend": {
-     "codex-sol": 57,
-     "opus": 81
+     "codex-sol": 59,
+     "opus": 82
     },
     "first_start": "Sat Oct 24 06:27:45 AM UTC 2026",
-    "last_end": "Sun Oct 25 12:24:56 PM UTC 2026"
+    "last_end": "Sun Oct 25 12:44:39 PM UTC 2026"
    }
   },
   "collusion-22-say-vs-do": {
@@ -44,20 +44,20 @@
   "collusion-beyond-words": {
    "phase1": null,
    "phase2": {
-    "completed_iterations": 26,
+    "completed_iterations": 27,
     "by_backend": {
      "codex-sol": 6,
-     "opus": 20
+     "opus": 21
     },
     "first_start": "Sun Oct 25 08:00:00 AM UTC 2026",
-    "last_end": "Sun Oct 25 12:38:52 PM UTC 2026"
+    "last_end": "Sun Oct 25 12:40:12 PM UTC 2026"
    }
   }
  },
  "source_repos_total_by_backend": {
-  "codex-sol": 120,
-  "opus": 223
+  "codex-sol": 122,
+  "opus": 224
  },
- "source_repos_total": 343,
- "source_repos_snapshot_utc": "2026-10-25 12:24 UTC"
+ "source_repos_total": 346,
+ "source_repos_snapshot_utc": "2026-10-25 12:44 UTC"
 }

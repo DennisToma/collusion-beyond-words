@@ -70,7 +70,7 @@ class ReproductionChecks(unittest.TestCase):
 
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
-        self.assertEqual(self.receipt["n_evidence_files"], 146)
+        self.assertEqual(self.receipt["n_evidence_files"], 157)
         self.assertEqual(self.receipt["n_checks"], 111)
         self.assertEqual(self.receipt["n_document_checks"], 139)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
@@ -417,6 +417,125 @@ class ReproductionChecks(unittest.TestCase):
                 with self.assertRaises(AssertionError):
                     portable.load_cell(ev, cell)
 
+    def test_gate_replay_reproduces_without_source_repos(self):
+        path = self.copy / "results/gate_q14.json"
+        path.unlink()
+        result = subprocess.run([sys.executable, str(self.copy / "scripts/recompute_gate_q14.py")],
+                                cwd=self.scratch, env=self.env, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(path.read_bytes(), (ROOT / "results/gate_q14.json").read_bytes())
+
+    def test_gate_replay_parity_with_pinned_source_functions(self):
+        import itertools
+        import numpy as np
+        from scipy.stats import rankdata
+        import recompute_gate_q14 as portable
+
+        ev = evidence.Evidence()
+        tree = ast.parse(ev.read_bytes("q14", "experiments/scripted.py"))
+        constants = [n for n in tree.body if isinstance(n, ast.Assign)
+                     and any(isinstance(t, ast.Name) and t.id in ("DETS", "P_DETS") for t in n.targets)]
+        functions = [n for n in tree.body if isinstance(n, ast.FunctionDef)
+                     and n.name in ("wilson", "pairname", "surrogate_p", "evaluate")]
+        self.assertEqual({n.name for n in functions}, {"wilson", "pairname", "surrogate_p", "evaluate"})
+        detector_tree = ast.parse(ev.read_bytes("q14", "detectors/infotheory.py"))
+        pair_constants = [n for n in detector_tree.body if isinstance(n, ast.Assign)
+                          and any(isinstance(t, ast.Name) and t.id in ("AGENTS", "PAIRS", "PAIR_NAMES") for t in n.targets)]
+
+        def rank_auc(y, s):
+            y = np.asarray(y, bool)
+            p, n = int(y.sum()), int((~y).sum())
+            return float((rankdata(s)[y].sum() - p * (p + 1) / 2) / (p * n))
+
+        ns = {"np": np, "itertools": itertools, "roc_auc_score": rank_auc}
+        exec(compile(ast.Module(body=pair_constants + constants + functions, type_ignores=[]),
+                     "pinned/experiments/scripted.py", "exec"), ns)
+        self.assertEqual(portable.DETS, tuple(ns["DETS"]))
+        self.assertEqual(portable.P_DETS, tuple(ns["P_DETS"]))
+        self.assertEqual(portable.PAIRS, tuple(ns["PAIR_NAMES"]))
+        # Reconstruct cached inputs independently, without the portable loader.
+        gt = {g["run_id"]: g for g in map(json.loads, ev.lines("q14", "data/gate_test/ground_truth.jsonl"))}
+        source_res = {r: {p: {"score": {}, "p": {}} for p in ns["PAIR_NAMES"]} | {"_run_p": {}} for r in gt}
+        for det in ns["DETS"]:
+            for row in map(json.loads, ev.lines("q14", f"results/{det}/gate_test.jsonl")):
+                r, p = row["run_id"], row["pair"]
+                source_res[r][p]["score"][det] = row["score"]
+                source_res[r][p]["p"][det] = row["p"]
+                source_res[r]["_run_p"][det] = row["run_p"]
+        self.assertEqual(portable.load_inputs(ev), (gt, source_res))
+
+        def compare(res, ground_truth):
+            actual, counts = portable.summarize(res, ground_truth)
+            expected = ns["evaluate"](res, ground_truth)
+            for det in ns["DETS"]:
+                self.assertEqual(portable.surrogate_p(res, ground_truth, det),
+                                 ns["surrogate_p"](res, ground_truth, det))
+            n, error = portable.compare_saved(actual, expected)
+            self.assertGreater(n, 0)
+            self.assertLessEqual(error, 1e-14)
+            # Every exported numerator is bound to the reported rate and n.
+            for det, groups in counts.items():
+                for key, fields in groups.items():
+                    for field, k in fields.items():
+                        rate_key = field + "_rate" if field in ("flag", "surrogate_flag") else field
+                        self.assertEqual(actual[det][key][rate_key], k / actual[det][key]["n"])
+            return actual, counts
+
+        actual, _ = compare(source_res, gt)
+        self.assertEqual(portable.compare_saved(actual, ev.json("q14", "results/eval/gate_test.json")["metrics"])[0], 666)
+        # Calculator fixture, not research data: exact alpha boundary, near-ties
+        # across the 1e-12 comparison tolerance, score ties, shock-family matching,
+        # leave-one-out and pair p-values that must never replace the run test.
+        fixture_gt, fixture_res = {}, {}
+        rows = [(f"{c}{i}", c, None, float(i + (100 if c == "B" else 0))) for c in "AB" for i in range(20)]
+        rows += [("near", "C", None, 19 + 5e-13), ("clear", "C", None, 19 + 2e-12),
+                 ("d", "D", None, 30.0), ("hn", "A", "shared_policy", 40.0)]
+        for rid, condition, hn, score in rows:
+            fixture_gt[rid] = {"condition": condition, "hard_negative": hn,
+                               "assigned_pair": ["A", "C"] if condition in "CD" else None,
+                               "hn_pair": ["A", "B"] if hn else None}
+            fixture_res[rid] = {p: {"score": dict.fromkeys(ns["DETS"], score if p in ("AB", "AC") else -1),
+                                   "p": dict.fromkeys(ns["P_DETS"], 0.001)} for p in ns["PAIR_NAMES"]}
+            fixture_res[rid]["_run_p"] = dict.fromkeys(ns["P_DETS"], 0.04 if rid == "clear" else 0.05)
+        _, counts = compare(fixture_res, fixture_gt)
+        sp = portable.surrogate_p(fixture_res, fixture_gt, "pcmi")
+        self.assertEqual(sp["A19"], 0.05)  # leave-one-out: 1/20, not 1/21
+        self.assertEqual(sp["near"], 2 / 21)
+        self.assertEqual(sp["clear"], 1 / 21)
+        self.assertEqual(sp["d"], 1.0)  # D uses B's higher-scoring controls, not A's.
+        self.assertEqual(counts["pcmi"]["A"]["surrogate_flag"], 0)  # strict < alpha
+        self.assertEqual(counts["pcmi"]["C"], {"surrogate_flag": 1, "flag": 1, "top1": 0})
+
+    def test_gate_replay_rejects_malformed_cache_and_cohort(self):
+        import recompute_gate_q14 as portable
+
+        ev = evidence.Evidence()
+        gt_path = "data/gate_test/ground_truth.jsonl"
+        score_path = "results/pcmi/gate_test.jsonl"
+        gt = [json.loads(s) for s in ev.lines("q14", gt_path)]
+        rows = [json.loads(s) for s in ev.lines("q14", score_path)]
+        original_lines = ev.lines
+        cases = [(gt_path, gt[:-1]), (gt_path, gt + gt[:1]),
+                 (gt_path, [dict(gt[0], seed=0)] + gt[1:]),
+                 (gt_path, [dict(gt[0], assigned_pair=["A", "B"])] + gt[1:]),
+                 (score_path, rows[:-1]), (score_path, rows + rows[:1])]
+        for field, value in (("score", float("nan")), ("score", float("inf")),
+                             ("run_p", 0.0), ("run_p", 1.1), ("p", None),
+                             ("run_p", 0.123), ("pair", "ZZ"), ("run_id", "unknown")):
+            cases.append((score_path, [dict(rows[0], **{field: value})] + rows[1:]))
+        inconsistent = [dict(r) for r in rows]
+        inconsistent[1]["run_p"] = 1 / 201
+        cases.append((score_path, inconsistent))
+        ni_path = "results/ni_pcmi/gate_test.jsonl"
+        ni = [json.loads(s) for s in ev.lines("q14", ni_path)]
+        cases.append((ni_path, [dict(ni[0], run_p=0.1)] + ni[1:]))
+        for path, changed in cases:
+            with self.subTest(path=path, n_rows=len(changed), first=changed[0]):
+                with patch.object(ev, "lines", side_effect=lambda project, p: (
+                        [json.dumps(r) for r in changed] if p == path else original_lines(project, p))):
+                    with self.assertRaises(AssertionError):
+                        portable.load_inputs(ev)
+
     def test_llm_usage_counts_match_process_log_summary(self):
         # the LLM-usage statement prints runner-log counts; they must equal the committed snapshot
         summary = json.loads((ROOT / "results/process_log_summary.json").read_text())
@@ -448,7 +567,10 @@ if __name__ == "__main__":
                                       "fig6_strong_framing_tacit.png")},
                    "q22_replay_sha256": {p: sha(ROOT / "results" / p) for p in
                                          ("unrounded_q22.json", "c21b_floor.json", "locked_test_q22.json")},
-                   "q14_replay_sha256": {"grid_q14.json": sha(ROOT / "results/grid_q14.json")},
+                   "q14_replay_sha256": {p: sha(ROOT / "results" / p) for p in ("grid_q14.json", "gate_q14.json")},
+                   "gate_original_function_parity": {"games": 500, "detectors": 9, "cached_pair_rows": 27000,
+                                                     "saved_numeric_fields": 666, "calculator_fixture_runs": 44,
+                                                     "source": "q14/experiments/scripted.py"},
                    "grid_original_function_parity": {"games": 192, "pairs_per_game": 6, "detectors": 4,
                                                      "grid_bootstraps": 2000, "paired_bootstraps": 2000,
                                                      "source": "q14/detectors/infotheory.py, scripts/e70_grid.py, scripts/e74_paired_diff.py"},
@@ -467,6 +589,8 @@ if __name__ == "__main__":
                             "pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay "
                             "matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; "
                             "all pair scores, cohort loading and full bootstraps match original functions. "
-                            "Malformed completed trajectories and missing, duplicate and invalid audit inputs are rejected."}
+                            "The scripted gate reaggregates all nine archived detector caches with original-function parity "
+                            "and boundary/tie/leave-one-out calculator checks; no null draws or markets are generated. "
+                            "Malformed completed trajectories and missing, duplicate and invalid audit/cache inputs are rejected."}
         (ROOT / "results/reproduction_check.json").write_text(json.dumps(receipt, indent=2) + "\n")
     raise SystemExit(0 if result.wasSuccessful() else 1)
