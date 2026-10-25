@@ -25,10 +25,13 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   overflow into page padding, horizontal overflow, and text below the font floor are rejected.
   Receipt: `results/export_test.json`. Existing scientific estimates are unchanged. Iteration 10 fixed a Markdown
   line wrap: `+ public facts` no longer accidentally starts a list in Methods.
-- Saved-value/document check: `uv run python scripts/check_sources.py` passes **59/59 source assertions,
-  68/68 document bindings, and 70 evidence-file hash checks**. The document bindings extract selected
+- Saved-value/document check: `uv run python scripts/check_sources.py` passes **94/94 source assertions,
+  132/132 document bindings, and 70 evidence-file hash checks**. The document bindings extract
   printed numbers from SUBMISSION.md and SLIDES.md and compare them directly with saved source values,
-  using half-up rounding. They do not cover every number or verify qualitative scope. Receipt:
+  using half-up rounding. Iteration 14 extended them to Tables 1–2 and §5.2–5.4: `scripts/number_coverage.py` reports 208/254
+  decimals in the report main text and 55/61 in the slides bound (was 58/254, 36/61). Most unbound tokens are
+  chance levels, α, thresholds and model/section numbers. The listed exceptions are in `results/number_coverage.json`: paraphrase
+  arms, weather notepad and deepseek TE CI (source files not pinned), and E65 +2.13 (double-rounding edge, source-checked only). Bindings do not verify qualitative scope. Receipt:
   `results/source_check.json`. The earlier 44-check script compared only saved JSON with hard-coded
   expected values; iteration 9 corrects its overstated description and adds actual document checks.
 - Standalone reproduction: [evidence/](evidence/README.md) bundles 70 exact source files at Q1.4 `732f08c`

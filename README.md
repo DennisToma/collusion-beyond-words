@@ -24,7 +24,8 @@ This repo merges two sprint projects and runs **no new experiments**:
 | `SOURCES.md` | every number in the report → source repo, JSON file/key, commit |
 | `figures/` | Fig. 1–6; Fig. 1, 2 and 3 re-rendered from pinned Q1.4 JSON by `scripts/fig1_hard_negatives.py`, `scripts/fig2_level_vs_comovement.py`, `scripts/fig3_e70_grid.py`, Fig. 5 from pinned Q2.2 trajectories by `scripts/fig5_placebo_premium.py` (larger text only; same data and encodings), Fig. 4 and 6 by `scripts/fig4_say_vs_do.py`, `scripts/fig6_strong_framing.py` (label fixes) |
 | `evidence/` | 70 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
-| `scripts/check_sources.py` | 59 saved-source assertions, 68 bindings that extract selected numbers from the report/slides, and 70 evidence-file hash checks (→ `results/source_check.json`) |
+| `scripts/check_sources.py` | 94 saved-source assertions, 132 bindings that extract printed numbers from the report/slides, and 70 evidence-file hash checks (→ `results/source_check.json`) |
+| `scripts/number_coverage.py` | lists every decimal in the report main text and slides and whether a binding checks it (→ `results/number_coverage.json`; 208/254 and 55/61) |
 | `tests/test_reproduction.py` | 9 checks: independent-copy reproduction, figure parity, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
 | `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
@@ -34,7 +35,8 @@ This repo merges two sprint projects and runs **no new experiments**:
 ## Reproduce this submission (no sibling repos or model credentials needed)
 
 ```bash
-uv run python scripts/check_sources.py          # 59 source checks, 68 document bindings, 70 evidence hashes
+uv run python scripts/check_sources.py          # 94 source checks, 132 document bindings, 70 evidence hashes
+uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
 uv run python scripts/fig1_hard_negatives.py     # byte-identical figures/fig1_*.png
 uv run python scripts/fig3_e70_grid.py           # byte-identical figures/fig3_*.png
 uv run python scripts/fig4_say_vs_do.py          # byte-identical figures/fig4_*.png

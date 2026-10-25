@@ -403,9 +403,10 @@ from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and 
 provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
 credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
 Fig. 5's per-round means are asserted equal to the saved source JSON.
-`scripts/check_sources.py` passes 59 saved-source assertions and 68 bindings that extract selected printed
-numbers from this report and the slides, plus all bundle-file hashes. It does not certify unbound numbers
-or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
+`scripts/check_sources.py` passes 94 saved-source assertions and 132 bindings that extract printed
+numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
+decimals are bound (208/254 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
+and model names). It does not certify unbound numbers or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
 `uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,

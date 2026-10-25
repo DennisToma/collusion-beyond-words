@@ -1,0 +1,222 @@
+{
+ "SUBMISSION.md": {
+  "decimal_tokens": 254,
+  "bound": 208,
+  "unbound": [
+   {
+    "token": "0.5",
+    "context": "blic messages, or from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = i"
+   },
+   {
+    "token": "0.5",
+    "context": "r from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = inverted); per-se"
+   },
+   {
+    "token": "0.5",
+    "context": "tive control. With LLM sellers it is at chance (all three CIs include 0.5) in a 192-game seve"
+   },
+   {
+    "token": "5.2",
+    "context": "ropy) is weakly above chance in the grid but below the level screen (§5.2). 3. Public message"
+   },
+   {
+    "token": "0.5",
+    "context": "en3.8 arms 0.15-0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42]; CIs below 0.5). Text did work on "
+   },
+   {
+    "token": "5.3",
+    "context": " from preceding messages (different task; no action-view comparison, §5.3). 4. Neither signal"
+   },
+   {
+    "token": "0.5",
+    "context": "e positive class (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = i"
+   },
+   {
+    "token": "0.5",
+    "context": " (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = inverted). Nash p"
+   },
+   {
+    "token": "5.6",
+    "context": "Q1.4's nine main sets use seven seller models: gpt-6-luna (main), gpt-5.6-luna, deepseek-v4.1"
+   },
+   {
+    "token": "6.1",
+    "context": "s family arms (Claude Sonnet, deepseek, Qwen3.8 base/abliterated, gpt-6.1-sol, mimo). Profit-"
+   },
+   {
+    "token": "6.1",
+    "context": "ation / economics-lab framing after Fish et al. (2024). Labels. A gpt-6.1-sol judge reads onl"
+   },
+   {
+    "token": "5.5",
+    "context": "es) → explicit agreement / information exchange / none. Claude Sonnet 5.5 re-judged Q2.2's 11"
+   },
+   {
+    "token": "6.1",
+    "context": "ells to < 1e-9 on the v1 datasets. Auditors (Q2.2). One zero-shot gpt-6.1-sol auditor, same t"
+   },
+   {
+    "token": "5.1",
+    "context": "set and uncorrected for multiplicity unless stated. ## 5. Results ### 5.1 On scripted sellers"
+   },
+   {
+    "token": "4.1",
+    "context": "igures/fig1_scripted_hard_negatives.png) Figure 1 (prices-only, Q1.4 §4.1; scripted sellers, "
+   },
+   {
+    "token": "0.05",
+    "context": "r group; Wilson 95% CIs). Fraction of runs each detector flags at α = 0.05 (dashed line). The "
+   },
+   {
+    "token": "5.2",
+    "context": "-flagged in 30/30 scripted markets (pCMI 4/30; locked seed 2003). ### 5.2 With LLM sellers, t"
+   },
+   {
+    "token": "5.6",
+    "context": "y point estimate; the paired difference CI excludes 0 in 8/9 (not gpt-5.6-luna). Scores targe"
+   },
+   {
+    "token": "0.5",
+    "context": ".99 (point est. > pCMI in 9/9); C - A CI > 0 in 9/9 | 0.34-0.72; CI ∋ 0.5 in 8/9 | N1-N4 | | "
+   },
+   {
+    "token": "5.6",
+    "context": " 8/9 | N1-N4 | | paired Δ level - pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [-0.27, "
+   },
+   {
+    "token": "0.1",
+    "context": ", whereas pCMI detects a planted shared ±1 move at per-round rate q = 0.1 with AUROC 0.79 [0."
+   },
+   {
+    "token": "0.62",
+    "context": "secondary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3."
+   },
+   {
+    "token": "0.96",
+    "context": "ary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3.8 0.91"
+   },
+   {
+    "token": "5.3",
+    "context": "lls; pCMI scatters around chance. Cell estimates are descriptive. ### 5.3 A zero-shot auditor"
+   },
+   {
+    "token": "0.5",
+    "context": " | - | Table 2 (Q2.2 P2.0, results/analysis/p2_say_vs_do.md). AUROC < 0.5 = the view ranks co"
+   },
+   {
+    "token": "0.5",
+    "context": "UROC < 0.5 = the view ranks controls higher; bold = CI entirely below 0.5. The registered con"
+   },
+   {
+    "token": "0.15",
+    "context": "gains above +0.06 / +0.02 are excluded at 95%. Inversion. An AUROC of 0.15 means the text carr"
+   },
+   {
+    "token": "6.1",
+    "context": "e rates do not differ. Inversion need not involve an agreement: a gpt-6.1-sol seller arm with"
+   },
+   {
+    "token": "5.4",
+    "context": "d there is no evidence that public messages add predictive value. ### 5.4 Neither signal is s"
+   },
+   {
+    "token": "+1.79",
+    "context": "esolved. Two paraphrases of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and "
+   },
+   {
+    "token": "+1.20",
+    "context": ". Two paraphrases of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 ["
+   },
+   {
+    "token": "+2.43",
+    "context": "araphrases of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, "
+   },
+   {
+    "token": "+0.24",
+    "context": "of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, +0.81]. Fig"
+   },
+   {
+    "token": "-0.32",
+    "context": "instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, +0.81]. Figure 5 s"
+   },
+   {
+    "token": "+0.81",
+    "context": "tions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, +0.81]. Figure 5 shows th"
+   },
+   {
+    "token": "5.2",
+    "context": "g (Q1.4). Wording alone moves no-channel markup from -0.19 to +2.56 (§5.2). - Legitimate asym"
+   },
+   {
+    "token": "0.25",
+    "context": "ne of the frozen, tested price flags reaches point-estimate precision 0.25 (Q1.4; maximum 0.20"
+   },
+   {
+    "token": "0.05",
+    "context": "ipted MI/pCMI rows, ≤ 0.19 on LLM sets; this largely follows from α = 0.05; this is not a boun"
+   },
+   {
+    "token": "0.5",
+    "context": "e views show no resolved separation (AUROC 0.43-0.58, all CIs include 0.5; exploratory), whic"
+   },
+   {
+    "token": "+0.22",
+    "context": "e notepad, but entries must be invented weather - the pair premium is +0.22 [+0.05, +0.40] vs +"
+   },
+   {
+    "token": "+0.05",
+    "context": "ad, but entries must be invented weather - the pair premium is +0.22 [+0.05, +0.40] vs +1.04 fo"
+   },
+   {
+    "token": "+0.40",
+    "context": " entries must be invented weather - the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the p"
+   },
+   {
+    "token": "+2.13",
+    "context": "eing ground truth; abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 "
+   },
+   {
+    "token": "1.28",
+    "context": "ound truth; abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 execut"
+   },
+   {
+    "token": "3.00",
+    "context": "ruth; abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 executed und"
+   },
+   {
+    "token": "6.1",
+    "context": "ions - Ground truth. Agreement labels come from one judge family (gpt-6.1-sol, also the audit"
+   }
+  ]
+ },
+ "SLIDES.md": {
+  "decimal_tokens": 61,
+  "bound": 55,
+  "unbound": [
+   {
+    "token": "0.5",
+    "context": "d gain, so a price flag is an audit trigger, not proof. Terms. AUROC: 0.5 = chance, 1 = perfe"
+   },
+   {
+    "token": "0.5",
+    "context": " audit trigger, not proof. Terms. AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup:"
+   },
+   {
+    "token": "0.5",
+    "context": "ooled post hoc). - Qwen3.8 text view is inverted (0.15-0.21, CI below 0.5); in the base arm, "
+   },
+   {
+    "token": "0.25",
+    "context": " - At an assumed 1% prevalence no tested flag reaches point precision 0.25 (max 0.20 [0.07, 0."
+   },
+   {
+    "token": "0.05",
+    "context": "eaches point precision 0.25 (max 0.20 [0.07, 0.54]; set mainly by α = 0.05). --- ## 6. Implica"
+   },
+   {
+    "token": "6.1",
+    "context": "itations and next steps Limitations: one judge family for labels (gpt-6.1-sol); small samples"
+   }
+  ]
+ }
+}

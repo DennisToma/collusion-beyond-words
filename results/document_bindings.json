@@ -629,5 +629,647 @@
     "digits": [
       0
     ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M4:Qwen3.8 text arms min/max",
+    "template": "(Qwen3.8 arms {}-{}; Qwen3.6",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:E113 Qwen text",
+    "template": "Qwen3.6 grid cells {} [{}, {}]; CIs below",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:notepad / channel ratio",
+    "template": "(point ratio {}, CI [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N2:markup AUROC range",
+    "template": "| 9 main sets, 7 models | AUROC {}-{} (point est.",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N2:pCMI AUROC range",
+    "template": "9/9 | {}-{}; CI ∋ 0.5 in",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N8:grid market_level",
+    "template": "board on (Figure 3) | {} [{}, {}]; level > pCMI in",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N8:grid pcmi",
+    "template": "(point est.) | {} [{}, {}] | N8",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N5:T60 max-pair markup",
+    "template": "T = 60 (pre-registered) | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N5:T60 pCMI",
+    "template": "[0.86, 1.00] | {} [{}, {}] | N5",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N7:executed pCMI",
+    "template": "(not inflated) | {} [{}, {}] | N7",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N11:E70 copula pCMI / sign CMI",
+    "template": "CMI, E70 | | {} [{}, {}] / {} [{}, {}] | N11",
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N6:T60 observed co-move excess",
+    "template": "co-move excess is {} [{}, {}], whereas",
+    "digits": [
+      3,
+      3,
+      3
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N6:T60 planted q=0.1 pCMI",
+    "template": "q = 0.1 with AUROC {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N6:T20 planted q=0.1 pCMI",
+    "template": "planting gives only {} [{}, {}],",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N4:base Qwen3.6 pCMI",
+    "template": "(base Qwen3.6, {} [{}, {}]) did not",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N20:deepseek TE",
+    "template": "(deepseek {} [0.62, 0.96]; base Qwen3.8 0.91)",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N20:base Qwen3.8 TE",
+    "template": "base Qwen3.8 {});",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N16:wording no-channel markup min/max",
+    "template": "markup ranges from {} to {} (P2.7)",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N16:wording no-channel markup min/max",
+    "template": "no-channel markup from {} to {} (§5.2)",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M4:Claude text / action",
+    "template": "(talks publicly) | private vs none | 5 + 5 | {} [{}, {}] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M4:deepseek text / action",
+    "template": "(talks publicly) | private vs none | 30 runs | {} [{}, {}] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M4:Qwen3.8 base text / action",
+    "template": "| Qwen3.8 base | private vs none | 15 + 15 | {} [{}, {}] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M4:Qwen3.8 abliterated text / action",
+    "template": "| Qwen3.8 abliterated | private vs none | 15 + 15 | {} [{}, {}] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M7:SALT text auditor",
+    "template": "| 240 episodes | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "combined - better single view {} [{}, {}] (locked test,",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M2:pooled fresh combined - better single",
+    "template": "(locked test, n = 95), {} [{}, {}] on pooled",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "gains above {} / +0.02 are excluded",
+    "digits": [
+      2
+    ],
+    "indices": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M2:pooled fresh combined - better single",
+    "template": "+0.06 / {} are excluded",
+    "digits": [
+      2
+    ],
+    "indices": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M33:Spearman text vs invite pooled",
+    "template": "Spearman {} [{}, {}] with both Qwen3.8-base arms pooled (n = {})",
+    "digits": [
+      2,
+      2,
+      2,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M33:Spearman within no-channel",
+    "template": "(n = 30) but {} [{}, {}] within the no-channel arm",
+    "digits": [
+      2,
+      2,
+      2
+    ],
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M30:sol seller arm text",
+    "template": "also scores {} [{}, {}] (7 + 7",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:E113 Qwen LLM action",
+    "template": "is at chance ({} [{}, {}]) - although",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N21:E70 Qwen cells max-pair markup",
+    "template": "is not ({}) - text is inverted",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:E113 Qwen text",
+    "template": "text is inverted ({} [{}, {}]), and adding",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:Qwen combined - action",
+    "template": "(combined - action {} [{}, {}]; ",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:Qwen executed combined - action",
+    "template": "[-0.37, -0.09]; {} [{}, {}] on games",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:luna combined - action",
+    "template": "combined - action is {} [{}, {}] overall",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M6:luna executed combined - action",
+    "template": "overall and {} [{}, {}] on executed games",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M31:luna silent executed",
+    "template": "on executed games (registered secondary), but a similar {} [{}, {}] appears in the 3 gpt-6-luna cells with no public posts",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M7:SALT text auditor",
+    "template": "It reaches {} [{}, {}] (240",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M7:SALT P(said | executed)",
+    "template": "(P(said | executed) = {})",
+    "digits": [
+      3
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M12:say-do gap / pair SD",
+    "template": "forecasts kept agreements (AUROC {})",
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:notepad - none r2-12",
+    "template": "raises the pair premium {} [{}, {}] vs",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:channel - none r2-12",
+    "template": "vs {} [{}, {}] for the real channel",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:notepad / channel ratio",
+    "template": "for the real channel (ratio {} [{}, {}];",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:placebo - none r2-12",
+    "template": "placebo gives {} [{}, {}];",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:private - placebo r2-12",
+    "template": "(private - placebo, {} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:private - placebo r2-12",
+    "template": "(private - placebo {} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N29:max scripted precision@0.01",
+    "template": "maximum {} [{}, {}] on scripted",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N29:max LLM precision@0.01",
+    "template": "≤ {} on LLM sets",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M13:premium precision@0.05",
+    "template": "point precision is {} at 5% prevalence",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M34:Fig.6 price views strict vs tacit-high: min/max point",
+    "template": "(AUROC {}-{}, all CIs include 0.5",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N18:E68 ask effect",
+    "template": "chat raises asks only {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N5:T60 max-pair markup",
+    "template": "(pre-registered) | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N5:T60 pCMI",
+    "template": "[0.86, 1.00] | {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N6:T60 planted q=0.1 pCMI",
+    "template": "pCMI reaches {} [{}, {}] in 60-round",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M4:Qwen3.8 text arms min/max",
+    "template": "text view is inverted ({}-{}, CI below 0.5)",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M7:SALT text auditor",
+    "template": "verdicts ({} [{}, {}]);",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M9:notepad / channel ratio",
+    "template": "rounds 2-12 ({} [{}, {}]).",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N16:wording no-channel markup min/max",
+    "template": "no-channel markup {} → {};",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N29:max scripted precision@0.01",
+    "template": "(max {} [{}, {}];",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M15:3-class kappa llm_v3 / llm_v3rep",
+    "template": "3-class κ was only {}-{}, and",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N7:executed max-pair markup (inflated)",
+    "template": "| max-pair {} (inflated by construction)",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:notepad - none r2-12",
+    "template": "+0.40] vs {} for the pricing",
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
   }
 ]

@@ -83,10 +83,12 @@ table below records the original claim provenance; later review-only commits did
 | M35 | SALT messages without accept/reject substrings: episode AUROC 0.75 [0.66, 0.84], n = 117; selected subset, not causal ablation | Q2.2 | `analysis/salt_d1.json : E105_audit.auroc_no_verdict_words.{est,ci,n}`; code `salt_d1.py : render, cluster_boot, report` at evidence pin `91ffb2d` | P2.12 | ✔ check_sources; iter11 Opus + Codex |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |
 
-`✔ check_sources` = a saved-source assertion in `uv run python scripts/check_sources.py` (now 59/59
+`✔ check_sources` = a saved-source assertion in `uv run python scripts/check_sources.py` (now 94/94
 assertions; output `results/source_check.json`). The original 44 checks compared source JSON with frozen
 expected values, without reading the report. Iteration 9 introduced separate document bindings; iteration
-11 adds four for M35, bringing the total to 68. They extract selected numbers from SUBMISSION.md/SLIDES.md
+11 adds four for M35 (68). Iteration 14 adds 35 source assertions (N5–N7, N11, N16, N21, N23, N29, M4, M6, M7, M9, M13,
+M15, M30, M31, M33) and 64 bindings covering Tables 1–2 and §5.2–5.4, for 132 in total; `scripts/number_coverage.py`
+lists the remaining unbound decimals. They extract selected numbers from SUBMISSION.md/SLIDES.md
 and compare them directly with saved source values using half-up rounding; `results/document_bindings.json`
 lists their exact coverage. Some source assertions
 refer only to this provenance table. Neither check certifies every report number or qualitative scope.

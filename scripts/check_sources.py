@@ -166,6 +166,87 @@ classes = load(Q22, "analysis/p2_strong_classes_llm_p2strongF.json")
 check("M10", "strong tacit-high count", classes["n_tacit_high_none"], [19, 20], tol=0)
 check("M10", "strong strict-executed count", classes["n_strict_executed"], [13, 20], tol=0)
 
+# Iteration 14: remaining headline decimals in tables 1-2 and sections 5.2-5.4.
+lp = load(Q14, "eval/long_power_llm_long_p2_T60.json")
+m60 = lp["prefix"]["60"]["pair_markup"]
+check("N5", "T60 max-pair markup", [m60[0], *m60[1]], [0.94, 0.86, 1.00])
+obs = lp["mde"]["60"]["observed_C_comove_excess"]
+check("N6", "T60 observed co-move excess", [obs["comove_excess_mean"], *obs["ci"]], [0.004, -0.007, 0.015],
+      tol=0.0005)
+for T, want in [("60", [0.79, 0.70, 0.88]), ("20", [0.62, 0.52, 0.71])]:
+    q = lp["mde"][T]["by_q"]["0.1"]
+    check("N6", f"T{T} planted q=0.1 pCMI", [q["auroc"], *q["ci"]], want)
+e73 = load(Q14, "eval/e73_nonlinear.json")["E70"]
+check("N11", "E70 copula pCMI / sign CMI", [e73["copula_pcmi"]["auroc"], *e73["copula_pcmi"]["ci"],
+                                            e73["sign_mi"]["auroc"], *e73["sign_mi"]["ci"]],
+      [0.53, 0.44, 0.61, 0.44, 0.36, 0.52])
+var = load(Q14, "eval/p2_variants.json")["arms"]
+check("N16", "wording no-channel markup min/max", [min(a["A_markup"] for a in var.values()),
+                                                   max(a["A_markup"] for a in var.values())], [-0.19, 2.56])
+check("N21", "E70 Qwen cells max-pair markup", grid["amend2_by_model"]["qwen"]["market_level"], 0.76)
+prev = load(Q14, "eval/prevalence.json")
+scripted = [r for r in prev if r["setting"].startswith("scripted")]
+llm_rows = [r for r in prev if r["setting"].startswith("LLM") and r["precision@0.01"] == r["precision@0.01"]]
+best = max(scripted, key=lambda r: r["precision@0.01"])
+check("N29", "max scripted precision@0.01", [best["precision@0.01"], *best["precision@0.01_ci"]], [0.20, 0.07, 0.54])
+check("N29", "max LLM precision@0.01", max(r["precision@0.01"] for r in llm_rows), 0.19)
+
+f3 = load(Q22, "analysis/p2_family3way.json")
+for key, name, want in [("llm_p2claude", "Claude", [0.22, 0.00, 0.52, 0.52, 0.20, 0.88]),
+                        ("llm_p2ds", "deepseek", [0.36, 0.20, 0.52, 0.53, 0.30, 0.74])]:
+    v = f3[key]["views"]
+    check("M4", f"{name} text / action", [*v["text"]["auroc_private_vs_none"], *v["action"]["auroc_private_vs_none"]],
+          want)
+qw = {}
+for s, name, want in [("b", "Qwen3.8 base", [0.21, 0.12, 0.33, 0.86, 0.69, 0.98]),
+                      ("a", "Qwen3.8 abliterated", [0.15, 0.05, 0.25, 0.57, 0.36, 0.78])]:
+    det = load(Q22, f"analysis/p2_strong_eval_llm_p2qwen{s}.json")["detectors"]
+    qw[s] = det["text"]["auroc_private_vs_none"][0]
+    check("M4", f"{name} text / action", [*det["text"]["auroc_private_vs_none"],
+                                          *det["action"]["auroc_private_vs_none"]], want)
+check("M4", "Qwen3.8 text arms min/max", [min(qw.values()), max(qw.values())], [0.15, 0.21])
+check("M30", "sol seller arm text", f3["llm_p2sol"]["views"]["text"]["auroc_private_vs_none"], [0.17, 0.01, 0.41])
+e1 = load(Q22, "analysis/p2_e1_audit.json")
+pooled = e1["pooled_auroc_channel_vs_none_descriptive"]
+check("M6", "E113 Qwen text", pooled["text_qwen"], [0.32, 0.24, 0.42])
+check("M6", "E113 Qwen LLM action", pooled["action_qwen"], [0.52, 0.41, 0.64])
+a3 = e1["amend3"]
+for key, name, want in [("qwen_stratified_combined_minus_action", "Qwen combined - action", [-0.24, -0.37, -0.09]),
+                        ("luna_stratified_combined_minus_action_noise", "luna combined - action", [0.07, -0.02, 0.17])]:
+    check("M6", name, [a3[key]["delta"], *a3[key]["ci"]], want)
+sec = load(Q22, "analysis/e113_secondary.json")["stratified"]["executed_vs_A"]
+for key, name, want in [("qwen_combined_minus_action", "Qwen executed combined - action", [-0.30, -0.44, -0.17]),
+                        ("luna_combined_minus_action", "luna executed combined - action", [0.16, 0.05, 0.28]),
+                        ("luna_silent_combined_minus_action_posthoc", "luna silent executed", [0.12, -0.08, 0.32])]:
+    check("M6" if "silent" not in key else "M31", name, [sec[key]["delta"], *sec[key]["ci"]], want)
+sd = load(Q22, "analysis/salt_d1.json")
+check("M7", "SALT text auditor", [sd["E105_audit"]["auroc"]["est"], *sd["E105_audit"]["auroc"]["ci"]],
+      [0.87, 0.83, 0.91])
+check("M7", "SALT P(said | executed)", sd["E104_sayvsdo"]["P_said_given_exec"]["est"], 0.385, tol=0.0005)
+cue = load(Q22, "analysis/p2_cue_llm_p2cue.json")
+pc = cue["paired"]
+check("M9", "notepad - none r2-12", pc["notes-none"]["prem_r2_12"], [1.04, 0.65, 1.42])
+check("M9", "channel - none r2-12", pc["private-none"]["prem_r2_12"], [1.61, 0.92, 2.35])
+check("M9", "notepad / channel ratio", cue["H3_notes_over_private_r2_12"], [0.65, 0.34, 1.32])
+check("M9", "placebo - none r2-12", pc["placebo-none"]["prem_r2_12"], [1.23, 0.76, 1.85])
+pp = pc["placebo-private"]["prem_r2_12"]
+check("M9", "private - placebo r2-12", [-pp[0], -pp[2], -pp[1]], [0.38, -0.41, 1.18])
+check("M13", "premium precision@0.05", load(Q22, "analysis/p2_prevalence.json")["llm_v3_test"]["detectors"]["premium"]
+      ["precision@0.05"][0], 0.24)
+sp = load(Q22, "analysis/e132_inversion.json")["sets"]["Qwen3.8 base"]
+check("M33", "Spearman text vs invite pooled", sp["spearman_text_vs_invite_rate_pooled"], [0.49, 0.17, 0.71, 30])
+check("M33", "Spearman within no-channel", sp["spearman_text_vs_invite_rate_within_no_channel"],
+      [-0.41, -0.83, 0.18, 15])
+
+lx = load(Q22, "label_xfam.json")["datasets"]
+check("M15", "3-class kappa llm_v3 / llm_v3rep", [lx["llm_v3"]["kappa_3class"], lx["llm_v3rep"]["kappa_3class"]],
+      [0.33, 0.38])
+check("N7", "executed max-pair markup (inflated)", ex["market_level"]["executed"]["auroc"], 0.99)
+# Source JSON stores 2.135 [1.285, 3.005] (3 dp); the reports print 2.13 [1.28, 3.00]. Half-up on the
+# stored value would give 2.14 [1.29, 3.01], so this is source-checked within rounding but left unbound.
+sq = cd["llm_strong_qa"]
+check("N23", "E65 abliterated+memory C - A", [sq["d"], *sq["d_ci"]], [2.13, 1.28, 3.00], tol=0.0051)
+
 document_checks = check_documents(checks, {"SUBMISSION.md": args.submission, "SLIDES.md": args.slides})
 n_files = evidence.verify()
 bad = [c for c in checks if not c["ok"]]
