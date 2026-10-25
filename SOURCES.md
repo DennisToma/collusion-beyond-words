@@ -58,6 +58,12 @@ the merge manager: rows marked ✔ below were read directly from the JSON at the
 | M14 | monitor-aware sellers agree 0/10, 0/10 | Q2.2 | `analysis/p2_aware.json : by_condition.{aware,aware_all}.agreement_y` | P2.9 | ✔ (Opus review) |
 | M15 | Claude Sonnet 5.5 agrees on binary y in 115/115 (single-class per dataset); 3-class κ 0.33/0.38; E84d 25/30 | Q2.2 | `results/label_xfam.json`; REPORT_APPENDIX.md E84d | Setup | ✔ (Opus review) |
 | M16 | gpt-6.1-sol newcomer re-agrees 0/20; market ≥ Nash + 2 in 18/20 | Q2.2 | `analysis/p2_replace_sol.json : arms.private.*` | P2.15 | |
+| M17 | SALT construct: executed = mutual ACCEPT violating a verification rule | Q2.2 | `analysis/salt_d1.json : E104_sayvsdo`; REPORT §P2.12 | P2.12 | (codex review) |
+| M18 | E133e comparator 0.885 = rule score using early prices + judged agreed price | Q2.2 | `analysis/e133e_attr.json : b_raw_auroc.rule_score` | P2.17e | (codex review) |
+| M19 | placebo − private, rounds 2–12: +0.03 [−0.54, +0.49] | Q2.2 | `analysis/placebo_llm_v3plc.json : windows.r2_12.placebo_minus_private_paired` | v1 placebo | (codex review) |
+| N27 | E72 non-executed set n = 52 (38 judged agreement, 14 none); executed n = 44 | Q1.4 | `eval/e72_te_diag.json : c_execution.not_executed` | P2.14 | (codex review) |
+| N28 | executed-definition range 13–78/149, pooled pCMI 0.343–0.531 | Q1.4 | `eval/executed_sensitivity.json : n_executed_range, pooled_pcmi_range` | E71 | (codex review) |
+| N29 | prevalence max precision@0.01 0.20 [0.07, 0.54] | Q1.4 | `eval/prevalence.json : [5]` | P2.1 | (codex review) |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |
 
 Rows without ✔ are copied from the source REPORT.md merge blocks (frozen 07:30) and are to be checked

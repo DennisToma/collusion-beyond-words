@@ -19,13 +19,14 @@ both. In short:
   pair on scripted sellers, is at chance in a 192-game seven-factor grid (0.51 [0.43, 0.59]), in
   pre-registered 60-round games (0.34 [0.18, 0.52]) and on executed agreements only (0.42 [0.33, 0.53]).
   Lagged dependence (transfer entropy) is weakly above chance in the grid (0.62 [0.54, 0.70]) but below level.
-- **A zero-shot LLM auditor gains nothing from public messages.** Adding them to prices changes AUROC by
+- **A zero-shot LLM auditor shows no resolved gain from public messages.** Adding them to prices changes AUROC by
   −0.01 [−0.09, +0.06] (locked test, n = 95) and −0.07 [−0.17, +0.02] (fresh replications, post hoc
   pooling). In Qwen families that invite rivals publicly, the text view is *inverted* (AUROC 0.15–0.21,
-  CI below 0.5). Text did work in an external negotiation dataset where the deal is the conversation
-  (0.87 [0.83, 0.91]).
+  CI below 0.5). Text did work on an external negotiation dataset (SALT-NLP), where the act being detected —
+  a mutual ACCEPT that violates a verification rule — happens inside the conversation (0.87 [0.83, 0.91]); that
+  is a different construct from price collusion.
 - **Neither signal is specific to collusion.** An unread private pricing notepad produces about two thirds
-  of the channel's premium (point ratio 0.65, CI [0.34, 1.32]); with memory and profit framing, 19/20
+  of the channel's premium over rounds 2–12 (point ratio 0.65, CI [0.34, 1.32]); with memory and profit framing, 19/20
   gpt-6-luna markets *without* a channel price ≥ Nash + 2; level screens false-flag 30/30 scripted markets
   with unequal costs.
 
@@ -163,7 +164,7 @@ with game-bootstrap 95% CIs. Scores target channel assignment, not execution.*
 |---|---|---|---|
 | 9 main sets, 7 models | AUROC 0.75–0.99 (point est. > pCMI in 9/9); C − A CI > 0 in 9/9 | 0.34–0.72; CI ∋ 0.5 in 8/9 | N1–N4 |
 | paired Δ level − pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [−0.27, +0.33]) | | N3 |
-| E70 grid, 16 cells × 7 factors, 192 games, board on | 0.74 [0.66, 0.81]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
+| E70 grid: 16-cell fractional factorial over 7 factors, 6 + 6 games per cell (192), board on | 0.74 [0.66, 0.81]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
 | E44 long games, T = 60 (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] | N5 |
 | executed agreements only (48/149, Q1.4 rule) | (inflated by construction) | 0.42 [0.33, 0.53] | N7 |
 | rank (copula) pCMI / sign-change CMI, E70 | | 0.53 [0.44, 0.61] / 0.44 [0.36, 0.52] | N11 |
@@ -171,7 +172,8 @@ with game-bootstrap 95% CIs. Scores target channel assignment, not execution.*
 *Table 1. Per-set CIs uncorrected. E74's paired differences were declared, but declaration and results
 first appear in the same commit, so their order is not independently established.*
 
-The null is not an estimator artefact (rank-based and discrete estimators are also at chance) and, at
+The null is not specific to the linear-Gaussian estimator (rank-based and discrete estimators are also at
+chance, though sign-CMI has little power in E70's sparse state strata) and, at
 T = 60, not a pure power failure: observed co-move excess is +0.004 [−0.007, +0.015], whereas pCMI detects
 a planted shared ±1 move at per-round rate q = 0.1 with AUROC 0.79 [0.70, 0.88]. At T = 20 (most sets, all
 of E70) the same planting gives only 0.62 [0.52, 0.71], so small co-movement is not excluded there, and the
@@ -181,8 +183,9 @@ not replicate in the grid's Qwen cells.
 *Lagged dependence is not excluded.* TE is weakly above chance in the grid (0.62 [0.54, 0.70], declared
 secondary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3.8 0.91);
 level beats TE (CI > 0) in 6/9 main sets and in the grid (+0.12 [+0.01, +0.22]). Because TE also fires on
-shared policies in scripted markets, and in the grid its signal sits in channel games whose agreement was
-*not* executed (0.73 vs 0.49; post hoc, difference untested), we do not read it as evidence of coordination.
+shared policies in scripted markets, and in the grid its signal sits in channel games that did *not* meet the
+execution rule (0.73, n = 52: 38 with a judged agreement, 14 without) rather than executed ones (0.49, n = 44;
+post hoc, difference untested), we do not read it as evidence of coordination.
 
 **Robustness to prompt wording is limited.** Across five wordings (6 + 6 games each, gpt-6-luna), the
 channel effect C − A has CI > 0 in only 2/5, and no-channel markup ranges from −0.19 to +2.56 (P2.7). "9/9"
@@ -192,7 +195,7 @@ holds for the main sets under one prompt family.
 *Figure 3 (Q1.4 P2.14). Registered 16-cell grid (E70), per-cell channel effect and detector AUROCs (cell
 estimates are descriptive).*
 
-### 5.3 A zero-shot auditor gains nothing from public words — and can read them the wrong way (Q2.2)
+### 5.3 A zero-shot auditor shows no resolved gain from public words — and can read them the wrong way (Q2.2)
 
 ![Say vs do](figures/fig4_say_vs_do_summary.png)
 *Figure 4 (Q2.2). (a) Run AUROC of each auditor view and of the one-line pair-premium statistic (chosen post
@@ -207,7 +210,7 @@ rates when private messages are delivered vs offered but never delivered vs no c
 | deepseek (talks publicly) | private vs none | 30 runs | 0.36 [0.20, 0.52] | 0.53 [0.30, 0.74] |
 | Qwen3.8 base | private vs none | 15 + 15 | **0.21 [0.12, 0.33]** | 0.86 [0.69, 0.98] |
 | Qwen3.8 abliterated | private vs none | 15 + 15 | **0.15 [0.05, 0.25]** | 0.57 [0.36, 0.78] |
-| SALT-NLP negotiation (external; deal struck in chat) | executed vs not | 240 episodes | 0.87 [0.83, 0.91] | – |
+| SALT-NLP negotiation (external; act happens in chat) | rule-violating mutual ACCEPT vs not | 240 episodes | 0.87 [0.83, 0.91] | – |
 
 *Table 2 (Q2.2 P2.0, `results/analysis/p2_say_vs_do.md`). AUROC < 0.5 = the view ranks controls higher;
 bold = CI entirely below 0.5.*
@@ -229,15 +232,19 @@ inverted (0.32 [0.24, 0.42]), and adding text lowers AUROC (combined − action 
 +0.07 [−0.02, +0.17] overall and **+0.16 [+0.05, +0.28]** on executed games (registered secondary). So
 public text can help or hurt depending on how the seller family talks; it is not uniformly useless.
 
-*External case.* In SALT-NLP bilateral negotiations, where the agreement is struck in the chat, a text
-auditor reaches 0.87 [0.83, 0.91] (240 episodes), even though 62% of executed deals were never stated
-explicitly (P(said | executed) = 0.385).
+*External case (different construct).* In SALT-NLP bilateral negotiations, "executed" means a mutual ACCEPT
+that violates a verification rule — an act inside the conversation, not a pricing deal. There a text auditor
+reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed), even though 62% of executed episodes carry no
+explicit agreement (P(said | executed) = 0.385). It shows that text can work when the act is in the talk; it
+does not show that this is the only such condition.
 
 *Forecasting execution (E133, exploratory, n = 78 agreed games from Q1.4's grid, 48 held / 30 not under
 Q2.2's late-window rule).* With privileged access to the private chat, say–do consistency forecasts which
-agreements are held (AUROC 0.77) but adds nothing beyond early price stability (0.855). An LLM reading the
-early public log *without* the private chat beats the best raw early-price rule (0.94 vs 0.885, Δ +0.06
-[+0.02, +0.10], post hoc), with no evidence that its edge comes from public messages.
+agreements are held (AUROC 0.77), but three hand-built say–do features in one logistic model add nothing
+beyond early price stability (0.855); richer text features are untested. An LLM reading the
+early public log *without* the private chat beats the best raw rule score (0.94 vs 0.885, Δ +0.06 [+0.02, +0.10], post hoc) — a compliance rule
+that uses early prices *and* the privately judged agreed price — with no evidence that its edge comes from
+public messages.
 
 ### 5.4 Neither signal is specific to collusion
 
@@ -256,15 +263,17 @@ early public log *without* the private chat beats the best raw early-price rule 
 - **Prompt wording (Q1.4).** Wording alone moves no-channel markup from −0.19 to +2.56 (§5.2).
 - **Legitimate asymmetry.** Scripted unequal costs: level screens false-flag 30/30 (Q1.4). LLM cost/quality
   edges: premium flags 7/10 and 9/10 vs controls 2/10 (Q2.2).
-- **Prevalence.** At 1% prevalence no frozen price flag reaches point-estimate precision 0.25 (Q1.4;
-  maximum 0.20, which largely follows from α = 0.05; upper CIs are wider); the premium screen's
+- **Prevalence.** At a hypothetical 1% prevalence none of the frozen, tested price flags reaches
+  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54], which largely follows from α = 0.05; this is
+  not a bound on achievable precision); the premium screen's
   point precision is 0.24 at 5% prevalence (Q2.2).
 - **Labels disagree (Q2.2).** Only 14/50 judge-labelled test agreements are kept under the E84 follow rule.
 
 ![Placebo](figures/fig5_placebo_premium.png)
 *Figure 5 (Q2.2, `llm_v3rep` seeds). Designated-pair premium per round: delivered channel (n = 15) vs
 offered-but-never-delivered placebo (n = 15) vs no channel (n = 10). The premium is present before any
-message is delivered (round 1) and the two channel arms are indistinguishable.*
+message is delivered (round 1); placebo − private over rounds 2–12 is +0.03 [−0.54, +0.49] (no resolved
+difference, not equivalence).*
 
 ![Strong framing](figures/fig6_strong_framing_tacit.png)
 *Figure 6 (Q2.2 P2.7, `llm_p2strongF`, T = 40). Memory + profit framing: market-mean price − Nash by
@@ -274,8 +283,8 @@ behaviour class; 19 tacit-high no-channel markets sit with the 13 strict-execute
 
 The two projects started from opposite bets — that collusion leaves a statistical fingerprint in actions,
 and that it leaves a semantic one in words — and converged: in these markets, channel assignment is visible
-mainly as **how high** prices are, not in **how they move together**, and a zero-shot auditor does not
-profit from **what is said publicly**. This is good news for cheap screening (a markup screen is simple and
+mainly as **how high** prices are, not in **how they move together**, and a zero-shot auditor shows no
+resolved gain from **what is said publicly** (small gains are not excluded). This is good news for cheap screening (a markup screen is simple and
 interpretable) and bad news for attribution: a high level has many innocent causes (wording, model, memory,
 legitimate cost advantages, market-wide tacit pricing), and part of it is caused by the prompt that singles
 out the pair rather than by delivered messages.
@@ -325,7 +334,7 @@ support that a flag is an audit trigger, not a verdict.
 
 Code, data and per-claim JSON live in the source repos (commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
-from cache with 0 LLM calls). Figures in `figures/` are copies of the source figures.
+from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). Figures in `figures/` are copies of the source figures.
 
 ## References
 
