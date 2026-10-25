@@ -101,6 +101,18 @@ uv run --group export python tests/test_submission_compliance.py     # 3 complia
 uv run python scripts/finalize.py              # author machine only (reads runner logs): refresh LLM-usage counts, then all checks + export
 ```
 
+Post-compliance archive check: release `2add728` passes the reproduction, figure,
+export and compliance commands listed above from an extracted archive without `.git`, with absent
+sibling-root overrides and no model environment variables passed. All 257 extracted
+files match Git; all six deleted calculation outputs and six figures rebuild
+byte-identically. Source checks pass (111/144/158), as do 26 reproduction, 9 export
+and 3 compliance tests. Both rebuilt PDFs match the committed page text, content
+streams and full bytes after normalising only date metadata (20 report pages,
+6 main; 8 slides). This reuses iteration 33's Python environment/browser with an
+identical lockfile on the same VM; it does not repeat the remote acquisition check.
+[Receipt](results/reviewer_archive_i38.json), [procedure/driver](reviews/distribution_i38.md).
+The archive predates this verification note; package the final committed HEAD for handoff.
+
 Historical distribution check (before the compliance revision): an authorized fresh GitHub clone of `c1e7fdd` with a new locked
 virtualenv and Chromium download passed all six replay scripts, all six figure scripts,
 111 source assertions / 139 document bindings / 158 hashes, 26 reproduction tests and

@@ -1,0 +1,308 @@
+{
+  "checked_at_utc": "2026-10-25T14:27:01Z",
+  "revision": "2add72837dc6752a0d026d0fef748fbdde11aee6",
+  "archive": "/var/tmp/beyond-words-2add728.tar.gz",
+  "archive_sha256": "496139fc3894d9908e0f4c5e1ecf613bd9ffbbf1e9569990e0392e6643e29651",
+  "archive_bytes": 6864329,
+  "tracked_files_verified": 257,
+  "no_git_directory": true,
+  "all_extracted_files_match_git_blobs": true,
+  "environment": {
+    "python": "/var/tmp/bw-iteration33-release/.venv/bin/python",
+    "python_version": "Python 3.12.15",
+    "uv_lock_sha256": "be282df9e2a81aab83239a6f21ab8607c5af0235d7021161135bb698897dca73",
+    "fresh_dependencies": false,
+    "browser": "/var/tmp/bw-i33-browser",
+    "fresh_browser": false,
+    "sibling_root_overrides": "nonexistent paths",
+    "model_environment_variables": "not passed",
+    "scope": "Same author VM; HOME unchanged; no OS/filesystem sandbox."
+  },
+  "commands": [
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/check_submission_compliance.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.206,
+      "log_sha256": "8ac42f43e2715fc67b5a2042cb1f7907cd320308cf0510eb1810b3e2eed3f171"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/recompute_unrounded_q22.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.327,
+      "log_sha256": "44e6d6e004eae3773c8d61c4eea61594310017005c9e832a58804c3da76082ec"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/recompute_c21b_floor.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.686,
+      "log_sha256": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/recompute_locked_test_q22.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.285,
+      "log_sha256": "673035297ec863356794b31a6a570468ede238435f517da57afeaf155c965ddc"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/recompute_grid_q14.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.392,
+      "log_sha256": "9895dfe5e26e5a7cc9d5c82d86dd71bf388b070fb0a70ac6b76813ce320c07e2"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/recompute_gate_pcmi_q14.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 31.766,
+      "log_sha256": "57151efc048b79ec40e88705f3cd129570b608acd3b928bb55920ea76cb4ec0e"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/recompute_gate_q14.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.313,
+      "log_sha256": "5bc7b5edee8c1ad139f0dd7b9001f8a91cec3f0ecf45efb009b6157db02b007e"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/fig1_hard_negatives.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.803,
+      "log_sha256": "8188e9b6992851b1f98666d3fc086e58491effc1fc96f085182d7f7b7877739f"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/fig2_level_vs_comovement.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.719,
+      "log_sha256": "bdd496491c1d341b1e831bd212327832b7de1ab32b99098aac7e0f6b4930777a"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/fig3_e70_grid.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.672,
+      "log_sha256": "6b70c5f782d4b87b044a658291ebb64690a4b3dfb1cb903c45706b76b8971e66"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/fig4_say_vs_do.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.692,
+      "log_sha256": "9cf8a94c90568dac2cf8c6de29eb88d3f9ec86e9459769ddb3453ccacce08088"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/fig5_placebo_premium.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.603,
+      "log_sha256": "36fe8337e7e49a6e9be6ad78aae9791bb3d0f707e1893157517418591fa928f6"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/fig6_strong_framing.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.732,
+      "log_sha256": "31a6392202a82ad5e4e3f15bf3663a6e7606dfdd2a08e91d68e263497f57bcc9"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/check_sources.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.723,
+      "log_sha256": "f2cd42dc9a8f5ba5a50a29797083bde5c7c01f1dce3ae143c40bf9f0c3daa556"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/number_coverage.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.063,
+      "log_sha256": "016bf7de680538749c973cf7d2dd3169b0e3b688187200dbf6aa1a90f37a1aa6"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "tests/test_reproduction.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 76.82,
+      "log_sha256": "9fb4a4b47cbbe81ea7f23ec9c13d32cfd05576eb56a463d9a582f8ae9c650ab3"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/export_pdf.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.204,
+      "log_sha256": "75ff3dde89ebdb7a6ab5f0f0e38df996a83cfe26bdf5f683b44fbe2770e7ff19"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "tests/test_export.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.482,
+      "log_sha256": "9aa975f62115bc00e09c6a86478ea6443af9a72c601b6423799512b33827d01d"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "scripts/check_submission_compliance.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.189,
+      "log_sha256": "4a24e319262579e3dab9411ffe8637efd0f537bf46d79ad28287c247ed90aee9"
+    },
+    {
+      "command": [
+        "/var/tmp/bw-iteration33-release/.venv/bin/python",
+        "tests/test_submission_compliance.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.105,
+      "log_sha256": "199ba496f288116d36c62f29346d4fbf0bd75745a1c893abfcbdaa4c6d5b1033"
+    }
+  ],
+  "deleted_and_regenerated_byte_identical": {
+    "results/unrounded_q22.json": "44e6d6e004eae3773c8d61c4eea61594310017005c9e832a58804c3da76082ec",
+    "results/c21b_floor.json": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005",
+    "results/locked_test_q22.json": "840d771e90183c9a8b5b3a8a35dc3d4f4d8f8ff5ad471e28a7dacd6fa7132ee8",
+    "results/grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3",
+    "results/gate_pcmi_q14.json": "92a1570b1a3e2336c336248b589fa9803c371588d9e4b2343ffb89f9b8dc018a",
+    "results/gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90",
+    "figures/fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "figures/fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+    "figures/fig3_e70_grid.png": "0141e85564dac087b195673b3ba4a532a5822a83a8979d1eb0cfeac86fb8cd11",
+    "figures/fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+    "figures/fig5_placebo_premium.png": "1f081a0b2e1cb2b241d18812ce881fcf42ac43a30ca205ef926d716dccdc16fd",
+    "figures/fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
+  },
+  "checks": {
+    "n_checks": 111,
+    "n_document_checks": 144,
+    "n_evidence_files": 158,
+    "n_fail": 0,
+    "n_document_fail": 0
+  },
+  "unclassified_decimals": {
+    "SUBMISSION.md": 0,
+    "SLIDES.md": 0
+  },
+  "reproduction_tests": {
+    "n_tests": 26,
+    "n_fail": 0,
+    "n_errors": 0
+  },
+  "export_tests": {
+    "n_tests": 9,
+    "n_fail": 0,
+    "n_errors": 0
+  },
+  "compliance_tests": {
+    "n_tests": 3,
+    "exit_code": 0
+  },
+  "export": {
+    "ok": true,
+    "submission_pages": 20,
+    "slides": 8,
+    "submission_text_fragments": 504,
+    "slide_text_fragments": [
+      9,
+      4,
+      3,
+      15,
+      5,
+      6,
+      5,
+      8
+    ],
+    "figure_counts": {
+      "SUBMISSION.pdf": 6,
+      "SLIDES.pdf": 4
+    }
+  },
+  "compliance": {
+    "abstract_words": 234,
+    "form_summary_words": 117,
+    "verified_reference_entries": 15,
+    "main_text_pages": 6,
+    "total_report_pages": 20,
+    "slides": 8,
+    "submission_pdf_bytes": 1153269,
+    "ok": true,
+    "scope": "Director's file/length/layout/disclosure checks and recorded reference identity concordance; not scientific validity.",
+    "sha256": {
+      "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
+      "SUBMISSION_FORM.md": "c0f0220f94c7a29e695d8a66a66f2c22627b3e2e11f748e09a7fe0ca48b78cbc",
+      "SUBMISSION.pdf": "22b909a0fc3704c6ac9b2b1002f447f9d2edefdb910f31f9979e6e565a38cf44",
+      "SLIDES.pdf": "1bdb8fd0f2d3dffb057b8cc1d8f6ee5f171cace1e2f1fb807e8a008ada9de5e9",
+      "results/reference_metadata_i33.json": "e01db712e197d8fd717dc1a685b28e23194c5ae00a1073bc8f20a458906e2fa1",
+      "scripts/check_submission_compliance.py": "3912b99b438d2ed85601302d96d657b11b86cfa8905b5f789729c3497db32e54"
+    }
+  },
+  "pdfs": {
+    "SUBMISSION.pdf": {
+      "pages": 20,
+      "page_text_identical": true,
+      "content_streams_identical": true,
+      "byte_identical_after_date_normalisation": true,
+      "committed_sha256": "b4fd492fb336928b9b294bf13130196179bda96cdd12c74f029c9292f8cf19f9",
+      "rebuilt_sha256": "22b909a0fc3704c6ac9b2b1002f447f9d2edefdb910f31f9979e6e565a38cf44"
+    },
+    "SLIDES.pdf": {
+      "pages": 8,
+      "page_text_identical": true,
+      "content_streams_identical": true,
+      "byte_identical_after_date_normalisation": true,
+      "committed_sha256": "415d34a945bf1c3cdc3b6ab91ba4848bbe9bd6259168f23887456f9a79ff8f74",
+      "rebuilt_sha256": "1bdb8fd0f2d3dffb057b8cc1d8f6ee5f171cace1e2f1fb807e8a008ada9de5e9"
+    }
+  },
+  "changed_archive_paths": [
+    "SLIDES.pdf",
+    "SUBMISSION.pdf",
+    "results/export_check.json",
+    "results/submission_compliance.json"
+  ],
+  "all_other_archived_files_byte_identical": true,
+  "production_files_unchanged": true,
+  "scope": "Verification of the post-compliance frozen release; no experiments, model calls, labels, settings or held-out evaluation. Runner-log refresh excluded. Archive not transferred; reader access not granted."
+}

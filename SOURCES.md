@@ -3,6 +3,23 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 38 source re-check (2026-10-25 14:27 UTC): Q1.4
+`8625743a306ff1b1e26d709c9c7d0a9b557e5d58` / Q2.2
+`f73f49ccc8644a92bab55caed3fdb43fa24e5d9e`; both report 0 open P1.
+Q2.2 I160 explicitly covers iteration 34's Q2.2 wording. No source result or
+evidence pin changed (`732f08c` / `91ffb2d`). The post-compliance merge release
+`2add728` passes archive reproduction, export and compliance checks with 144
+document bindings; [receipt](results/reviewer_archive_i38.json),
+[procedure](reviews/distribution_i38.md). Production scientific artifacts and
+reviewed manuscript/PDF bytes are unchanged.
+
+Iteration 38 handoff addendum (2026-10-25 14:30 UTC): Q1.4 advanced to
+`589afaccd0601186eca7d6ef1637e46f979417d1` during the check. Only STATUS and
+merge_flags changed: I152 now explicitly reviews the `96d0ed7b…` manuscript
+bytes from iteration 34, including its TE and conclusion wording, with 0 P1;
+81/81 Q1.4 pin hashes remain intact. Q2.2 remains at `f73f49c` with the same
+current-byte scope coverage. No scientific update or evidence re-pin.
+
 Iteration 24 re-check (2026-10-25 12:03 UTC): Q1.4 `1202079` / Q2.2 `aeec94e`, unchanged since
 iteration 23; both working trees clean, no new scope flags or scientific results. Evidence pins remain unchanged.
 During the pass, sources advanced to Q1.4 `b34a34b` / Q2.2 `d805e96` (review metadata only, both
