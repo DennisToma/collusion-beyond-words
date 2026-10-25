@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 18:29 UTC, iteration 18: final receipt integrity verified; handoff closed)
+## Current state (2026-10-25 18:45 UTC, iteration 19: final receipt integrity re-verified; handoff closed)
 - Research stopped at the user's explicit 18:00 UTC deadline; no research work remains.
 - Final accepted release: 7ba00f1; package completed 18:10:47 UTC in /var/tmp/bw-final-i15.
 - Verified 11 successful command logs, 311 Git-matching tracked files and 20 checksums.
@@ -16,6 +16,7 @@
 - Dennis uploads TEMPLATE_REPORT.pdf + IMAGE.png + root submission_code.zip; optional report/slides.
 
 ## Log
+- 2026-10-25 18:45 UTC iteration 19: after hard stop; no research or document work. Re-ran the reviews/handoff_i16.md verification command: FINAL UPLOAD VERIFIED for 7ba00f1 (311 files, 20 checksums). STATUS only; no repackaging, model calls or DIRECTION deviation. Dennis's upload remains pending.
 - 2026-10-25 18:29 UTC iteration 18: honored the user's explicit 18:00 UTC hard stop over DIRECTION's local 19:00 extension; no research chunk started. Ran the exact verification command in reviews/handoff_i16.md: PASS for release 7ba00f1, 311 Git-matching archived files/modes, 11 successful acceptance-log hashes, all artifact hashes, 20 checksums, root upload identity, 158 stored evidence blobs, 176 preserved scientific files and eight accepted artifacts. This verifies existing acceptance, not a rerun of its 57 tests. Updated STATUS/REPORT only; no repackaging, experiments, model calls, exports or usage refresh. Dennis's submission remains pending.
 - 2026-10-25 18:28 UTC iteration 17: this run started after the 18:00 hard stop, so I did no research or document work. Read-only check: root submission_code.zip (24,246,215 B, sha 4380a077…), TEMPLATE_REPORT.pdf and IMAGE.png are byte-identical to /var/tmp/bw-final-i15, and SHA256SUMS there pass. No edits other than this entry, no model calls, no deviation from DIRECTION.
 - 2026-10-25 17:47 UTC iteration 10: release verification hold. DIRECTION items all done. I skipped finalize.py this time because it only churns the usage counts. Root submission_code.zip, TEMPLATE_REPORT.pdf, IMAGE.png and SLIDES.pdf are byte-identical to /var/tmp/bw-fallback-i7-final, and SHA256SUMS all pass. No edits, no model calls, no deviation from DIRECTION.
