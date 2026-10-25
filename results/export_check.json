@@ -103,18 +103,16 @@
       "https://github.com/poseidon-research/collusion_hackathon",
       "https://github.com/DennisToma/collusion-beyond-words/blob/main/SOURCES.md",
       "https://github.com/DennisToma/collusion-beyond-words/blob/main/evidence/README.md",
-      "https://github.com/DennisToma/collusion-14-infotheory",
-      "https://github.com/DennisToma/collusion-22-say-vs-do",
       "https://github.com/DennisToma/collusion-beyond-words/blob/main/SOURCES.md",
       "https://github.com/DennisToma/collusion-beyond-words/blob/main/evidence/README.md"
     ],
     "SLIDES.pdf": []
   },
   "sha256": {
-    "SUBMISSION.md": "b2db5b1bff304a7ee43c7dc41e251842b7ca0a0ea9dd99bb2f4ddb52393b6407",
+    "SUBMISSION.md": "9980985dc757e3334b135af6079bef5fa12ef9b1121b7d6e4f6e9eb509a4c7a5",
     "SLIDES.md": "e7f46fb3e2cd146ce181e16fc9385034d459589f9c8dbc2706644601a60ee91d",
-    "SUBMISSION.pdf": "c37d59f418cf4935eedec50edc70f5bc4bd87a3f169fa4016ffa0d2ffcd45bb5",
-    "SLIDES.pdf": "a8f794d515dc97c5e57e2da1188dc77399edbadc4e0407fa5c18edb51b0692bf",
+    "SUBMISSION.pdf": "1978b6c27adc7ebb03cc8113fbbd0694ebb9b24b67ff606c70ba7b14b72b6e95",
+    "SLIDES.pdf": "2784eb7aa7989c320c4b08066284d8ec6fc166a8f29064b4012f84ccf2373dd1",
     "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."

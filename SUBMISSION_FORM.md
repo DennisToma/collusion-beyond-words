@@ -24,8 +24,8 @@ Can an auditor detect a private channel between competing LLM sellers from price
 - `IMAGE.png` — project image for the form (1600×900; Figure 1 panel a; `scripts/fig0_headline.py`).
 - `SUBMISSION.pdf` — extended report with all appendices (A–H) and per-number provenance; upload as supplementary material if the form permits, or keep in the repository.
 - `SLIDES.pdf` — optional presentation supplement, if the form permits it.
-- Code/evidence supplement, if permitted: create an archive of the final committed release with the README command. It includes the code, frozen evidence, provenance and reproduction instructions. Do not use the older `c1e7fdd` archive: its manuscript predates the compliance revision.
-- Repository URL: `https://github.com/DennisToma/collusion-beyond-words`. Anonymous access failed in the recorded check; provide the archive or arrange reader access before relying on this URL for judging.
+- `submission_code.zip` — "Project code" field: this repo at the final commit plus both source repos at their pinned commits (`sources/`), README with the one regeneration command; built by `uv run python scripts/build_code_zip.py` (≤ 25 MB, secret scan). Not committed (gitignored); rebuild after the last commit.
+- Repository URL: stays PRIVATE until the submission deadline, then public at `https://github.com/DennisToma/collusion-beyond-words`. The report says so and links no repo judges cannot open.
 
 ## Disclosures to retain
 

@@ -536,8 +536,8 @@ The primary pricing environments, analysis and research writing were developed d
 
 #### Reproducibility
 
-Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.com/DennisToma/collusion-14-infotheory),
-[Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
+Code, data and per-claim JSON live in the two source repos, included at their pinned commits under `sources/` in the
+submission code archive (commits in [SOURCES.md](SOURCES.md); the repositories become public after the deadline); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
 from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
 [evidence bundle](evidence/README.md) contains 158 exact files from the pinned source commits, with SHA256

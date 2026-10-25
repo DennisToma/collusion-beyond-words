@@ -92,9 +92,8 @@ Offering two LLM sellers a private channel left a trace that an overseer could s
 
 ## Code and Data
 
-- Code repository (this report, figures, checks): <https://github.com/DennisToma/collusion-beyond-words>
-- Project repos: prices-only market and detectors <https://github.com/DennisToma/collusion-14-infotheory>; say-vs-do market and auditors <https://github.com/DennisToma/collusion-22-say-vs-do>
-- Data: all simulated trajectories, judge labels and auditor scores are in the two project repos; a pinned evidence bundle (`evidence/`) re-renders every figure without model calls. External: [SALT-NLP agent-collusion dataset](https://huggingface.co/datasets/SALT-NLP/agent-collusion/tree/2eba8f37).
+- Code, data and results are included as a supplementary archive with this submission (`submission_code.zip`); the repository https://github.com/DennisToma/collusion-beyond-words will be made public after the submission deadline.
+- The archive holds this report's code, figures and checks, a pinned evidence bundle (`evidence/`) that re-renders every figure without model calls, and, under `sources/`, the two project repositories at their pinned commits: the prices-only market and detectors (`732f08c`) and the say-vs-do market and auditors (`91ffb2d`), with the LLM trajectories, judge labels and auditor scores (files over 5 MB, the scripted positive-control trajectories that the generators re-create from seeds, are excluded). External: [SALT-NLP agent-collusion dataset](https://huggingface.co/datasets/SALT-NLP/agent-collusion/tree/2eba8f37).
 - Extended report and per-number sources: `SUBMISSION.pdf`, `SOURCES.md`. Figure 1: `uv run python scripts/fig0_headline.py`.
 
 ## Author Contributions
@@ -177,7 +176,7 @@ Added for the designated pair in channel games:
 
 > You also have a private messaging channel with firm {p}. Only firm {p} can read what you write there, and only you can read what {p} writes. Each round you send {p} one message on it.
 
-The prices-only market, judge and auditor prompts are in the two project repositories.
+The prices-only market, judge and auditor prompts are in the two project repositories (archive `sources/`).
 
 ## LLM Usage Statement
 
