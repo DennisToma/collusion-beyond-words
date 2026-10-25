@@ -40,8 +40,10 @@ This repo merges two sprint projects and runs **no new experiments**:
 uv run python scripts/check_sources.py          # 111 source checks, 139 document bindings, 76 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
 uv run python scripts/fig1_hard_negatives.py     # byte-identical figures/fig1_*.png
+uv run python scripts/fig2_level_vs_comovement.py # byte-identical figures/fig2_*.png
 uv run python scripts/fig3_e70_grid.py           # byte-identical figures/fig3_*.png
 uv run python scripts/fig4_say_vs_do.py          # byte-identical figures/fig4_*.png
+uv run python scripts/fig5_placebo_premium.py    # byte-identical figures/fig5_*.png
 uv run python scripts/fig6_strong_framing.py     # byte-identical figures/fig6_*.png
 uv run python tests/test_reproduction.py        # standalone + bad-input checks, including all six figure scripts
 uv run --group export playwright install chromium   # once
