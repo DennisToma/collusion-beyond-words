@@ -3,6 +3,13 @@
 The primary submission is **[TEMPLATE_REPORT.md](TEMPLATE_REPORT.md) / [TEMPLATE_REPORT.pdf](TEMPLATE_REPORT.pdf)**;
 **[SUBMISSION.md](SUBMISSION.md)** is the extended report. Number provenance: [SOURCES.md](SOURCES.md).
 
+Iteration 18 (2026-10-25 18:29 UTC) reran the exact integrity-verification command in
+[final handoff notes](reviews/handoff_i16.md): all recorded archive, log, artifact,
+checksum, root-upload and scientific-payload checks pass. This verifies the existing
+acceptance described below; its 57 tests were not rerun. Only STATUS/REPORT closure
+notes change, outside the fixed accepted ZIP. The user's explicit 18:00 UTC hard stop
+takes precedence over DIRECTION's local extension; research remains stopped.
+
 Iteration 16 confirms that the final iteration-15 upload package **completed at
 18:10:47 UTC** for release revision `7ba00f1afeb08489e53587b91241fa218c48e8e3`.
 All **11 successful acceptance-command logs**, **311 Git-matching tracked files**,
