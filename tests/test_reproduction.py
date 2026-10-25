@@ -118,7 +118,9 @@ class ReproductionChecks(unittest.TestCase):
                 evidence.Evidence(live=True).json("q14", "results/eval/e74_paired_diff.json")
 
     def test_figures_reproduce_without_source_repos(self):
-        for script, figure in [("fig4_say_vs_do.py", "fig4_say_vs_do_summary.png"),
+        for script, figure in [("fig1_hard_negatives.py", "fig1_scripted_hard_negatives.png"),
+                               ("fig3_e70_grid.py", "fig3_e70_grid.png"),
+                               ("fig4_say_vs_do.py", "fig4_say_vs_do_summary.png"),
                                ("fig6_strong_framing.py", "fig6_strong_framing_tacit.png")]:
             expected = sha(ROOT / "figures" / figure)
             (self.copy / "figures" / figure).unlink()
@@ -137,10 +139,11 @@ if __name__ == "__main__":
                    "evidence_manifest_sha256": sha(ROOT / "evidence/manifest.json"),
                    "document_sha256": {p: sha(ROOT / p) for p in ("SUBMISSION.md", "SLIDES.md")},
                    "figure_sha256": {p: sha(ROOT / "figures" / p) for p in
-                                     ("fig4_say_vs_do_summary.png", "fig6_strong_framing_tacit.png")},
+                                     ("fig1_scripted_hard_negatives.png", "fig3_e70_grid.png",
+                                      "fig4_say_vs_do_summary.png", "fig6_strong_framing_tacit.png")},
                    "standalone": {k: ReproductionChecks.receipt[k] for k in
                                   ("n_checks", "n_document_checks", "n_evidence_files", "n_fail", "n_document_fail")},
                    "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, "
-                            "rounding edge, corrupt snapshot and changed live source rejected. Both figures byte-identical."}
+                            "rounding edge, corrupt snapshot and changed live source rejected. All four regenerated figures byte-identical."}
         (ROOT / "results/reproduction_check.json").write_text(json.dumps(receipt, indent=2) + "\n")
     raise SystemExit(0 if result.wasSuccessful() else 1)

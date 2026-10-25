@@ -20,7 +20,7 @@ the merge manager: rows marked ✔ below were read directly from the JSON at the
 **Portable evidence (iteration 9).** [evidence/manifest.json](evidence/manifest.json) pins 66 exact source
 files to full commits Q1.4 `732f08c11a765cd8500f4ef3c29fb630b309d5b2` and Q2.2
 `91ffb2d4737a7537cdf9afe239a98e0d1061090b`, with original paths and SHA256 hashes. This snapshot includes
-saved results and Fig. 4/6 inputs; full experiment regeneration uses the source repos. The historical
+saved results and Fig. 1/3/4/6 inputs; full experiment regeneration uses the source repos. The historical
 table below records the original claim provenance; later review-only commits did not change the science.
 
 ## Number → source map

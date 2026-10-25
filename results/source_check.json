@@ -760,7 +760,7 @@
  "n_document_checks": 68,
  "n_document_fail": 0,
  "document_sha256": {
-  "SUBMISSION.md": "202a53688cd4f521dcf1122b14a003816bef2eca0f88ccdd6073d24cdc052840",
+  "SUBMISSION.md": "a2f2a3298a84f6c39809dbf924098ef9a33887e345c78aa91705d2946e2acc37",
   "SLIDES.md": "02d59787f68c00302fc5de3d0f9321d9cdff1864e1fcbfd63b7d3af4fc5cc5d2"
  },
  "document_checks": [

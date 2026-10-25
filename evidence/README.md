@@ -1,6 +1,6 @@
 # Pinned source evidence
 
-This bundle makes the merged submission's saved-value checks and Fig. 4/6 rendering independent of
+This bundle makes the merged submission's saved-value checks and Fig. 1/3/4/6 rendering independent of
 the source checkouts. It contains 66 exact git blobs from:
 
 - [Q1.4 @ 732f08c11a765cd8500f4ef3c29fb630b309d5b2](https://github.com/DennisToma/collusion-14-infotheory/tree/732f08c11a765cd8500f4ef3c29fb630b309d5b2)
@@ -43,5 +43,5 @@ model calls, new metrics, refitting or experiment runs are involved.
 
 The bundle supports **checking saved results**, not rebuilding every experimental result from raw
 trajectories. Full generators, caches, labels and registration history remain in the source repos.
-Fig. 1/2/3/5 are committed copies; Fig. 4/6 can be regenerated from this bundle. The reports retained
+Fig. 2/5 are committed copies; Fig. 1/3/4/6 can be regenerated from this bundle (Fig. 1/3 re-rendered with larger text only). The reports retained
 here preserve their original source-relative paths.
