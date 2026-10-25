@@ -32,6 +32,15 @@ Footnote on the title: "Research conducted at the AI Collusion Research Sprint, 
 7. Adversarial review by an Opus subagent focused on: does page 1 land for a non-specialist judge; any overclaim; template
    compliance. Apply, rebuild, commit, push. Deadline 18:30 UTC (extend the hard stop to 19:00 UTC for this repo only).
 
+**Addendum 16:45 UTC (Dennis):** the GitHub repo stays PRIVATE until the submission deadline; it goes public afterwards.
+- In "Code and Data": "Code, data and results are included as a supplementary archive with this submission; the repository
+  https://github.com/DennisToma/collusion-beyond-words will be made public after the submission deadline." No other repo links
+  that judges cannot open (source repos: describe as included in the archive).
+- Build `submission_code.zip` (≤ 25 MB, for the form's "Project code" field) from the final committed HEAD of this repo
+  (git archive), plus a `sources/` folder with git archives of the two source repos at their pinned commits, excluding raw
+  caches and anything > 5 MB; README at the top explains the layout and the one regeneration command. Verify the zip
+  opens and contains no secrets (grep for sk-, API_KEY=, PRIVATE KEY).
+
 # DIRECTION — SUBMISSION COMPLIANCE (set by Dennis 13:35 UTC) — OVERRIDES the freeze hold. Top priority.
 Apart's official rules (sprint page Guidelines) that the current SUBMISSION violates:
 1. **Main text ≤ 8 pages**, not counting references and appendices (strong projects 4–8). Current main text ≈ 10 pp → cut.
