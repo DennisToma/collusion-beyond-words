@@ -170,6 +170,13 @@ class ReproductionChecks(unittest.TestCase):
         self.assertIn(expected, text)
         self.assertEqual(summary["source_repos_total"], sum(by.values()))
 
+    def test_finalize_rewrites_exactly_one_usage_sentence(self):
+        # scripts/finalize.py must find exactly one LLM-usage sentence to refresh in each document
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import finalize
+        self.assertEqual(len(finalize.SUB_RE.findall((ROOT / "SUBMISSION.md").read_text())), 1)
+        self.assertEqual(len(finalize.REP_RE.findall((ROOT / "REPORT.md").read_text())), 1)
+
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ReproductionChecks)
     result = unittest.TextTestRunner(verbosity=2).run(suite)

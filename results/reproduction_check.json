@@ -1,5 +1,5 @@
 {
-  "n_tests": 12,
+  "n_tests": 13,
   "n_fail": 0,
   "n_errors": 0,
   "tests": [
@@ -8,6 +8,7 @@
     "test_edited_slide_interval_is_rejected",
     "test_every_unbound_decimal_is_a_non_result",
     "test_figures_reproduce_without_source_repos",
+    "test_finalize_rewrites_exactly_one_usage_sentence",
     "test_half_up_boundary_rejects_alternative_rounding",
     "test_live_mode_rejects_changed_source",
     "test_llm_usage_counts_match_process_log_summary",
@@ -18,7 +19,7 @@
   ],
   "evidence_manifest_sha256": "155529253402366acaef7627d5ad3a0f597fdd4195105b7b51d93f38b08f4125",
   "document_sha256": {
-    "SUBMISSION.md": "a8d605b5621a5f8d00ee839086806b65443a8de616561118d607ad1db5f523b5",
+    "SUBMISSION.md": "f289e83a63960dd505a86d24c250c21a45878f915f872c84df76355955f5d015",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
   },
   "figure_sha256": {

@@ -40,10 +40,11 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   / Q2.2 `91ffb2d`, with full commit IDs and SHA256 provenance. No sibling clones or model credentials
   are needed for the checks and the rendering of all six figures. This verifies saved evidence; full experimental
   regeneration still requires the source repos and their caches.
-- Release checks: `uv run python tests/test_reproduction.py` passes **12/12** in an independent copy with
+- Release checks: `uv run python tests/test_reproduction.py` passes **13/13** in an independent copy with
   nonexistent source paths. All six regenerated figures reproduce byte-identically; edited report/slide values, a
   missing binding, incorrect rounding or reduced precision, a corrupt bundle file, and a changed live source are
   rejected. Receipt: `results/reproduction_check.json`.
+- Finalize: `uv run python scripts/finalize.py` (author machine; reads runner logs) refreshes the LLM-usage counts in SUBMISSION/REPORT and runs every check above plus the PDF export, stopping at the first failure. Iter22: FINALIZE OK.
 - Reviews (`reviews/`): codex v0–v3, i11, i14, i16, i17, i18 and Opus v0–v2, i11, i18 adversarial reviews, plus a judge-style presentation review (`judge_v0.md`, applied in v1.4) and a codex + Opus scope review of the v1.4 diff (`codex_v3.md`, applied in v1.5).
 - Reproduction implementation review: [codex_reproduction_i9.md](reviews/codex_reproduction_i9.md), one
   precision bug fixed; no open P1/P2. All 66 source blobs then in the bundle (now 76) independently checked against the pinned commits.
