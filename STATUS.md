@@ -1,18 +1,19 @@
 # STATUS
 
-## Current state (2026-10-25 17:48 UTC, iteration 11: final committed-revision handoff)
-- FINALIZE-only; stop by user's 18:00 UTC deadline. No experiments or model calls.
+## Current state (2026-10-25 17:54 UTC, iteration 12: final upload handoff)
+- FINALIZE-only; user's 18:00 UTC hard stop bounds this iteration. No experiments or model calls.
 - Primary TEMPLATE_REPORT.pdf 10 pages / 6 main; abstract 246 words; IMAGE 1600×900; slides 8.
 - Fresh provenance PASS: 158 pinned source blobs, 176 preserved scientific files, eight accepted artifacts.
-- Sources f6e6b79 / d4f9b62 advance only status/review notes; both declare 0 open P1 on current primary bytes.
-- Evidence pins remain 732f08c / 91ffb2d; manuscript, estimates, PDFs, figures and usage snapshot unchanged.
-- Existing full acceptance: 11 commands / 57 tests; 120 assertions / 144 extended +65 primary bindings /158 hashes.
+- Sources 6bf9e65 / b1d550a advance only allowed status/review notes; both declare 0 open P1.
+- Evidence pins remain 732f08c / 91ffb2d; accepted manuscript/PDF/figure/usage bytes unchanged.
+- Completed i11 handoff verified: revision 2fe0265; 11 successful commands; 307 Git-matching files; 20 checksums.
+- Root i11 ZIP matches its receipt; after this notes commit, replace it with the clean-HEAD i12 package.
 - Headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
-- This iteration freshness receipt: results/release_hold_i11.json; command: uv run python reviews/verify_hold_i11.py.
-- After notes commit, package clean HEAD to /var/tmp/bw-final-i11; its external receipt records exact revision/checks.
-- Copy that ZIP to root submission_code.zip; procedure: reviews/handoff_i11.md. Prior package receipts are historical.
-- Risks: integer/qualitative coverage is limited; screen→audit pipeline unevaluated; same-VM reproduction only.
-- Dennis must upload TEMPLATE_REPORT.pdf + IMAGE.png + final ZIP; optional extended report/slides.
+- Refreshed freshness receipt: results/release_hold_i11.json; command: uv run python reviews/verify_hold_i11.py.
+- Final package procedure: reviews/handoff_i12.md; /var/tmp/bw-final-i12/receipt.json is authoritative for completion/revision.
+- Prior full acceptance: 57 tests; 120 source assertions /144 extended +65 primary bindings /158 evidence hashes.
+- Risks: integer/qualitative coverage limited; pipeline unevaluated; same-VM reproduction; author upload pending.
+- Dennis uploads TEMPLATE_REPORT.pdf + IMAGE.png + root submission_code.zip; optional extended report/slides.
 
 ## Log
 - 2026-10-25 17:47 UTC iteration 10: release verification hold. DIRECTION items all done. I skipped finalize.py this time because it only churns the usage counts. Root submission_code.zip, TEMPLATE_REPORT.pdf, IMAGE.png and SLIDES.pdf are byte-identical to /var/tmp/bw-fallback-i7-final, and SHA256SUMS all pass. No edits, no model calls, no deviation from DIRECTION.
@@ -120,3 +121,5 @@
 - 2026-10-25 17:35 UTC fallback iteration 7 acceptance: implementation77ab10d pushed. Clean-HEAD package /var/tmp/bw-fallback-i7-verified passes11 commands/57 tests, all302 tracked Git bytes/modes and20 checksums. ZIP24,181,531bytes,301 merged+550/1387 source members verified; frozen sourcepins match evidence. Saved receipt and handoff procedure; only notes/receipt/ledger change after tested commit. Commit/push these notes, then package their exact clean HEAD into /var/tmp/bw-fallback-i7-final and copy ZIP to root; final receipt remains external to avoid self-reference. No additional analysis or model call.
 
 - 2026-10-25 17:48 UTC iteration 11 (fallback manager): read CLAUDE/PLAN/STATUS/DIRECTION and ledger; selected final source freshness and exact committed-revision handoff. Source changes from 0708b80/f15abfd to f6e6b79/d4f9b62 are STATUS plus Q2.2 I183 review notes only (read in full); both source managers accept current primary bytes with 0 open P1. New read-only driver checks 158 pinned Git/evidence blobs, all 176 earlier preservation hashes and eight accepted artifacts against 77ab10d; PASS. REPORT/SOURCES updated with current provenance and historical-receipt scope. No manuscript/estimate/PDF/figure/usage change, experiment, held-out evaluation, model call or sibling write. Final clean-HEAD packaging runs after these notes; its external receipt at /var/tmp/bw-final-i11 records the exact notes revision and acceptance. Work is bounded by the user's explicit 18:00 hard stop rather than a new 45–60-minute chunk; DIRECTION's later extension is not used.
+
+- 2026-10-25 17:54 UTC iteration 12: verified that the iteration-11 clean-HEAD handoff actually completed for 2fe0265 (11 successful commands, 307 Git-matching tracked files, all 20 sidecar checksums and root ZIP match). Re-ran the source/payload freshness checker: 158 evidence pins, 176 preserved files and eight accepted artifacts pass; source heads 6bf9e65/b1d550a differ only in allowed status/review notes and declare 0 open P1. Updated the final handoff procedure and report; package this notes commit into /var/tmp/bw-final-i12 and replace root ZIP after commit/push. Its external receipt records actual acceptance/completion; earlier package receipts certify their own revisions only. No science, manuscript, PDF, figure, model call or usage refresh. Bounded below 45–60 minutes by the user's explicit 18:00 hard stop; no DIRECTION deviation.

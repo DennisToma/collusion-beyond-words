@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "checked_at_utc": "2026-10-25T17:48:15.276361+00:00",
-  "merge_input_head": "7a00d49bd8d1a7f1fb83a1cefa5b4b89fa0af1f7",
+  "checked_at_utc": "2026-10-25T17:52:33.005931+00:00",
+  "merge_input_head": "2fe026524028b7c9a267e957609c3b8e3262ad6a",
   "accepted_artifact_revision": "77ab10d38861d4b5434923f3b2abcb898f793dc6",
   "projects": {
     "q14": {
-      "head": "4824f96cd87e23a851b6eb1ba6ed0de220ad9fce",
+      "head": "6bf9e65677649695c9727212184bb5c55e3ae9f0",
       "previous_handoff": "0708b800d6ec8168860e6f92a60c43f304733776",
       "changed_paths": [
         "STATUS.md"
@@ -94,10 +94,10 @@
         "results/ni_pcmi/gate_test.jsonl": "1abf21e103732144d50f35b8deb355b824c92ae1eb492d7562dfb8ade3f1946e",
         "data/gate_test/trajectories.jsonl.gz": "66a5c20b992a4796f19542a16b7580f55d03fe5d4bc1d1a5cd37881e0259e245"
       },
-      "status_sha256": "bd0ede927c749ed2065edc53daf80a3848d14ea9b35dfdb396416cc8d8741112"
+      "status_sha256": "01677759c788f2cf0013f0f9641cf4ed3857287662b82ce88c85bdf53deaed45"
     },
     "q22": {
-      "head": "d4f9b62744641ac1380e4dbd67b8042f149cdaa5",
+      "head": "b1d550a8363935a1d9f41dc092a54d774de3c20d",
       "previous_handoff": "f15abfd6503a33850f3e32d3751f7e998f1c4133",
       "changed_paths": [
         "STATUS.md",
@@ -183,7 +183,7 @@
         "results/llm_auditor/llm_v3/gpt-6.1-sol/combined_stats_orig.jsonl": "d09855f456e0e5bade6ff4778c574683811a4f925c96fdea90b152ece4d61ab9",
         "results/llm_auditor/llm_v3/gpt-6.1-sol/structured_orig.jsonl": "e9eb4ed5da0117d8b68ea988fba033c9f3645425793c2e3602473f72905bd885"
       },
-      "status_sha256": "969759e043ae1c6d057ca5e3f84b8b0006500ac2c741713abcb97fb9d6456a7c"
+      "status_sha256": "7ae433dcd62b75c5cb3146ff57f32d0e363c2b5837ccf608602622f33da76914"
     }
   },
   "preserved_files": {
