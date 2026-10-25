@@ -15,7 +15,7 @@
   ],
   "evidence_manifest_sha256": "155529253402366acaef7627d5ad3a0f597fdd4195105b7b51d93f38b08f4125",
   "document_sha256": {
-    "SUBMISSION.md": "7b781112924119d8e931e5462a274254adf3d82d036d8d72b0d2921ba754b27b",
+    "SUBMISSION.md": "0c0b701229a052b5fcdac7bb18faa367cbb29ab60ce125ea74b07760ebab1cfc",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
   },
   "figure_sha256": {
@@ -28,7 +28,7 @@
   },
   "standalone": {
     "n_checks": 111,
-    "n_document_checks": 138,
+    "n_document_checks": 139,
     "n_evidence_files": 76,
     "n_fail": 0,
     "n_document_fail": 0

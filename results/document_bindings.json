@@ -1330,5 +1330,15 @@
       2,
       2
     ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N8:grid market_level",
+    "template": "pooled AUROC level {} [{}, {}], pCMI",
+    "digits": [
+      2,
+      2,
+      2
+    ]
   }
 ]

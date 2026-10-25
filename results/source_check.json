@@ -4,7 +4,7 @@
  "source_mode": "snapshot",
  "n_evidence_files": 76,
  "evidence_manifest_sha256": "155529253402366acaef7627d5ad3a0f597fdd4195105b7b51d93f38b08f4125",
- "document_bindings_sha256": "20279e7fa1c15011d7786802bbc71659582b3af89a7899050649e534c930d271",
+ "document_bindings_sha256": "8bbded9df4cdd85000c079b618c6effd5ecaff587fe23d57714bf5cef1f7ef92",
  "n_checks": 111,
  "n_fail": 0,
  "checks": [
@@ -1555,10 +1555,10 @@
    "ok": true
   }
  ],
- "n_document_checks": 138,
+ "n_document_checks": 139,
  "n_document_fail": 0,
  "document_sha256": {
-  "SUBMISSION.md": "7b781112924119d8e931e5462a274254adf3d82d036d8d72b0d2921ba754b27b",
+  "SUBMISSION.md": "0c0b701229a052b5fcdac7bb18faa367cbb29ab60ce125ea74b07760ebab1cfc",
   "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
  },
  "document_checks": [
@@ -4661,6 +4661,30 @@
      "+2.14",
      "1.29",
      "3.00"
+    ]
+   ],
+   "matches": 1,
+   "ok": true
+  },
+  {
+   "document": "SUBMISSION.md",
+   "source_check": "N8:grid market_level",
+   "template": "pooled AUROC level {} [{}, {}], pCMI",
+   "digits": [
+    2,
+    2,
+    2
+   ],
+   "source_values": [
+    "0.7369791666666666",
+    "0.6614583333333334",
+    "0.8047092013888888"
+   ],
+   "printed_values": [
+    [
+     "0.74",
+     "0.66",
+     "0.80"
     ]
    ],
    "matches": 1,
