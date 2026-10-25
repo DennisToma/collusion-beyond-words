@@ -1,13 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 ~10:10 UTC, merge iteration 4)
-- Sources: Q1.4 `499c500`, Q2.2 `badcd8d` — both 0 open flags; no research changes since the 07:30 freeze.
-- Deliverables: SUBMISSION.md v1.3 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (18/18 headings, 378/378 cells, 8/8 slides).
-- Reviews done: codex v0/v1/v2 + Opus v0/v1/v2. Opus v2 (final claims, fresh): 0 P1; 3 P2 + 5 P3 wording applied (Qwen3.6 inversion in abstract, C − A defined, logbook control explained, mechanism hedged, TE recall 8–22%, SALT 62% scoped).
-- Next: (1) re-check source flags each iteration until 15:00 (only apply P1s); (2) finalize 16:30 = one export pass + push; hard stop 18:00. No further content changes planned unless a source posts a P1.
+## Current state (2026-10-25 ~10:15 UTC, merge iteration 5)
+- Sources: Q1.4 `499c500`, Q2.2 `badcd8d` (unchanged since iter4; 0 open flags in both; no research changes since the 07:30 freeze).
+- Deliverables: SUBMISSION.md v1.3 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (18/18 headings, 378/378 cells, 8/8 slides). No content change this iteration.
+- New: `scripts/check_sources.py` machine-checks 42 SUBMISSION numbers vs source JSON (every previously unticked numeric SOURCES row + sample) → 42/42 pass, `results/source_check.json`. SOURCES rows ticked `✔ check_sources`; only non-numeric M17/M18/J1 remain unticked.
+- Reviews done: codex v0/v1/v2 + Opus v0/v1/v2 (last: 0 P1).
+- Next: (1) each iteration until 15:00: check source repos for new commits / merge_flags; apply P1s only; re-run check_sources.py; (2) 16:30 finalize = one export pass + push; hard stop 18:00.
 - Risks: abstract ~300 words (bullets; acceptable). Q1.4 judge labels lack cross-family check (stated). Never `pkill -f "codex exec"` broadly.
 
 ## Log
+- 2026-10-25 10:15 UTC merge iter5: sources unchanged (499c500/badcd8d). Wrote scripts/check_sources.py: 42 assertions over all previously unticked numeric SOURCES rows (N1–N4, N9, N12–N14, N18–N20, N24, N25, N27, N28, M2, M5, M12, M16, M19) → 42/42 pass (one initial FAIL was a half-up rounding edge, 0.325 → 0.33, same as source report; tolerance fixed). SOURCES/REPORT updated; no SUBMISSION change.
 - 2026-10-25 10:10 UTC merge iter4: Opus final-claims review (reviews/opus_v2.md): 0 P1, 3 P2 + 5 P3 wording — all applied after own JSON check; ~45 numbers independently re-verified. PDFs rebuilt (18/18, 378/378, 8/8; 15 pp).
 - 2026-10-25 09:55 UTC merge iter4: synced Q1.4 `499c500` / Q2.2 `badcd8d` — both 0 open flags, both verified codex_v2 replacements correct; no science change. Repo 7 MB tracked (.venv ignored). Launched fresh Opus final-claims review (reviews/opus_v2.md).
 - 2026-10-25 09:45 UTC merge iter3: synced sources (Q1.4 0124252, Q2.2 71a0365); applied Q2.2 P1 flags 121-2, 123-1, 123-2; regenerated Fig. 4 with fixed axis label; trimmed slide 5; SOURCES M30/M31; rebuilt PDFs; launched codex_v2 review of v1.2 diff.

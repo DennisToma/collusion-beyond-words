@@ -1,0 +1,474 @@
+{
+ "q14_commit": "499c500",
+ "q22_commit": "badcd8d",
+ "n_checks": 42,
+ "n_fail": 0,
+ "checks": [
+  {
+   "row": "N1",
+   "what": "main sets",
+   "got": 9,
+   "want": 9,
+   "ok": true
+  },
+  {
+   "row": "N1",
+   "what": "main sets with C-A CI > 0",
+   "got": 9,
+   "want": 9,
+   "ok": true
+  },
+  {
+   "row": "N2",
+   "what": "markup AUROC range",
+   "got": [
+    0.75,
+    0.991
+   ],
+   "want": [
+    0.75,
+    0.99
+   ],
+   "ok": true
+  },
+  {
+   "row": "N2",
+   "what": "pCMI AUROC range",
+   "got": [
+    0.338,
+    0.72
+   ],
+   "want": [
+    0.34,
+    0.72
+   ],
+   "ok": true
+  },
+  {
+   "row": "N2",
+   "what": "point level > pCMI",
+   "got": 9,
+   "want": 9,
+   "ok": true
+  },
+  {
+   "row": "N3",
+   "what": "level-pCMI CI > 0",
+   "got": 8,
+   "want": 8,
+   "ok": true
+  },
+  {
+   "row": "N3",
+   "what": "gpt-5.6-luna level-pCMI",
+   "got": [
+    0.03,
+    -0.27,
+    0.33
+   ],
+   "want": [
+    0.03,
+    -0.27,
+    0.33
+   ],
+   "ok": true
+  },
+  {
+   "row": "N3",
+   "what": "base Qwen3.6 level-pCMI",
+   "got": [
+    0.218,
+    0.027,
+    0.436
+   ],
+   "want": [
+    0.22,
+    0.03,
+    0.44
+   ],
+   "ok": true
+  },
+  {
+   "row": "N4",
+   "what": "pCMI CI contains 0.5",
+   "got": 8,
+   "want": 8,
+   "ok": true
+  },
+  {
+   "row": "N4",
+   "what": "base Qwen3.6 pCMI",
+   "got": [
+    0.7111111111111111,
+    0.5066666666666667,
+    0.8844444444444444
+   ],
+   "want": [
+    0.71,
+    0.51,
+    0.88
+   ],
+   "ok": true
+  },
+  {
+   "row": "N9",
+   "what": "E70 level-pCMI",
+   "got": [
+    0.227,
+    0.117,
+    0.325
+   ],
+   "want": [
+    0.23,
+    0.12,
+    0.33
+   ],
+   "ok": true
+  },
+  {
+   "row": "N9",
+   "what": "E70 level-TE",
+   "got": [
+    0.118,
+    0.013,
+    0.219
+   ],
+   "want": [
+    0.12,
+    0.01,
+    0.22
+   ],
+   "ok": true
+  },
+  {
+   "row": "N20",
+   "what": "level-TE CI > 0",
+   "got": 6,
+   "want": 6,
+   "ok": true
+  },
+  {
+   "row": "N20",
+   "what": "deepseek TE",
+   "got": 0.809,
+   "want": 0.81,
+   "ok": true
+  },
+  {
+   "row": "N20",
+   "what": "base Qwen3.8 TE",
+   "got": 0.907,
+   "want": 0.91,
+   "ok": true
+  },
+  {
+   "row": "N13",
+   "what": "MI flags common shock (B)",
+   "got": 1.0,
+   "want": 1.0,
+   "ok": true
+  },
+  {
+   "row": "N13",
+   "what": "pCMI common shock, shift null",
+   "got": 0.14,
+   "want": 0.14,
+   "ok": true
+  },
+  {
+   "row": "N13",
+   "what": "pCMI shared policy + shock, surrogate",
+   "got": [
+    0.04,
+    0.011038652660826577,
+    0.13460337877954667
+   ],
+   "want": [
+    0.04,
+    0.01,
+    0.13
+   ],
+   "ok": true
+  },
+  {
+   "row": "N24",
+   "what": "TE shared policy (A, B)",
+   "got": [
+    0.9,
+    0.98
+   ],
+   "want": [
+    0.9,
+    0.98
+   ],
+   "ok": true
+  },
+  {
+   "row": "N24",
+   "what": "TE independent high price",
+   "got": 0.62,
+   "want": 0.62,
+   "ok": true
+  },
+  {
+   "row": "N13",
+   "what": "TE legit leader-follower",
+   "got": 1.0,
+   "want": 1.0,
+   "ok": true
+  },
+  {
+   "row": "N14",
+   "what": "level false flags /30",
+   "got": 30,
+   "want": 30,
+   "ok": true
+  },
+  {
+   "row": "N14",
+   "what": "pCMI flags /30",
+   "got": 4,
+   "want": 4,
+   "ok": true
+  },
+  {
+   "row": "N18",
+   "what": "E68 ask effect",
+   "got": [
+    0.394,
+    0.058,
+    0.693
+   ],
+   "want": [
+    0.39,
+    0.06,
+    0.69
+   ],
+   "ok": true
+  },
+  {
+   "row": "N18",
+   "what": "E68 verdict",
+   "got": "inconclusive",
+   "want": "inconclusive",
+   "ok": true
+  },
+  {
+   "row": "N19",
+   "what": "reimpl cells agreeing < 1e-9",
+   "got": [
+    422,
+    424
+   ],
+   "want": [
+    422,
+    424
+   ],
+   "ok": true
+  },
+  {
+   "row": "N25",
+   "what": "pair_level range (spillover sets)",
+   "got": [
+    0.7485119047619048,
+    0.80375
+   ],
+   "want": [
+    0.75,
+    0.8
+   ],
+   "ok": true
+  },
+  {
+   "row": "N25",
+   "what": "market level range (spillover sets)",
+   "got": [
+    0.84875,
+    0.9434523809523809
+   ],
+   "want": [
+    0.85,
+    0.94
+   ],
+   "ok": true
+  },
+  {
+   "row": "N27",
+   "what": "E72 non-executed n / judged yes / no",
+   "got": [
+    52,
+    38,
+    14
+   ],
+   "want": [
+    52,
+    38,
+    14
+   ],
+   "ok": true
+  },
+  {
+   "row": "N27",
+   "what": "E72 executed n",
+   "got": 44,
+   "want": 44,
+   "ok": true
+  },
+  {
+   "row": "N12",
+   "what": "E72 TE non-exec vs exec",
+   "got": [
+    0.728,
+    0.491
+   ],
+   "want": [
+    0.73,
+    0.49
+   ],
+   "ok": true
+  },
+  {
+   "row": "N28",
+   "what": "executed n range",
+   "got": [
+    13,
+    78
+   ],
+   "want": [
+    13,
+    78
+   ],
+   "ok": true
+  },
+  {
+   "row": "N28",
+   "what": "pooled pCMI range",
+   "got": [
+    0.343,
+    0.531
+   ],
+   "want": [
+    0.343,
+    0.531
+   ],
+   "ok": true
+  },
+  {
+   "row": "M2",
+   "what": "pooled fresh combined - better single",
+   "got": [
+    -0.0738,
+    -0.1704,
+    0.0153
+   ],
+   "want": [
+    -0.07,
+    -0.17,
+    0.02
+   ],
+   "ok": true
+  },
+  {
+   "row": "M2",
+   "what": "pooled n",
+   "got": 90,
+   "want": 90,
+   "ok": true
+  },
+  {
+   "row": "M5",
+   "what": "invite rate channel / control",
+   "got": [
+    0.403,
+    0.883
+   ],
+   "want": [
+    0.4,
+    0.88
+   ],
+   "ok": true
+  },
+  {
+   "row": "M12",
+   "what": "no-chat LLM vs rule score",
+   "got": [
+    0.942,
+    0.885
+   ],
+   "want": [
+    0.94,
+    0.885
+   ],
+   "ok": true
+  },
+  {
+   "row": "M12",
+   "what": "LLM - rule score",
+   "got": [
+    0.057,
+    0.019,
+    0.103
+   ],
+   "want": [
+    0.06,
+    0.02,
+    0.1
+   ],
+   "ok": true
+  },
+  {
+   "row": "M12",
+   "what": "say-do gap / pair SD",
+   "got": [
+    0.77,
+    0.855
+   ],
+   "want": [
+    0.77,
+    0.855
+   ],
+   "ok": true
+  },
+  {
+   "row": "M16",
+   "what": "sol newcomer re-agrees",
+   "got": [
+    0,
+    20
+   ],
+   "want": [
+    0,
+    20
+   ],
+   "ok": true
+  },
+  {
+   "row": "M16",
+   "what": "market >= Nash+2",
+   "got": [
+    18,
+    20
+   ],
+   "want": [
+    18,
+    20
+   ],
+   "ok": true
+  },
+  {
+   "row": "M19",
+   "what": "placebo - private r2-12",
+   "got": [
+    0.03,
+    -0.542,
+    0.488
+   ],
+   "want": [
+    0.03,
+    -0.54,
+    0.49
+   ],
+   "ok": true
+  }
+ ]
+}

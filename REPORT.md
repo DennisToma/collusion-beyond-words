@@ -8,3 +8,7 @@ Figures: `figures/fig1–fig6` (copies of source-repo figures; Fig. 4 regenerate
 - Rebuild: `uv run --group export playwright install chromium` (once), then
   `uv run --group export python scripts/export_pdf.py` (renders, then checks every heading, table cell and
   slide title is present in the PDF text, and that no slide overflows).
+- Number check: `uv run python scripts/check_sources.py` re-reads 42 SUBMISSION.md values (every SOURCES.md
+  numeric row that was not yet ticked, plus a sample of ticked ones) from the source repos' JSON and asserts each
+  matches to within half a unit of its last printed digit (42/42 pass at Q1.4 `499c500` / Q2.2 `badcd8d`;
+  output `results/source_check.json`).
