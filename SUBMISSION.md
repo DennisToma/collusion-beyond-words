@@ -6,9 +6,9 @@
 
 Can an auditor detect a private channel between LLM sellers from prices, public messages, or both? We study two separate repeated-pricing markets without instructing agents to collude, distinguishing channel assignment, judged agreements and price-based execution.
 
-Channel assignment, including its prompt cue, raised markup in all nine main prices-only sets (seven seller models, one prompt family); only two of five wordings resolved an effect. A level screen beat Gaussian conditional mutual information (pCMI) by point estimate in those nine sets; paired CIs resolved in eight. pCMI passed a scripted shared-signal positive control but scored 0.51 [0.43, 0.59] in a 192-game factorial grid. One model-specific separation did not replicate there; transfer entropy was weakly above chance but also flagged legitimate shared policies.
+Channel assignment, including its prompt cue, raised markup in all nine main prices-only sets (seven seller models, one prompt family); only two of five wordings resolved an effect. A level screen beat Gaussian conditional mutual information (pCMI) by point estimate in those nine sets; paired CIs resolved in eight. pCMI passed a scripted shared-signal positive control but scored 0.51 [0.43, 0.59] in a 192-game factorial grid. One model-specific separation did not replicate there; transfer entropy was weakly above chance in the grid and stronger in two main sets, but also flagged legitimate shared policies.
 
-For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, adding public messages to prices changes AUROC by −0.01 [−0.09, +0.06] on the locked test. Some Qwen text views inverted rankings; a different external peer-verification task showed useful text signals. An unread pricing notepad produced much of the channel premium (point ratio 0.65, CI [0.34, 1.32]); memory plus profit framing yielded high no-channel gpt-6-luna prices.
+For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, the registered gain from adding public messages (combined minus better single view, AUROC) was −0.01 [−0.09, +0.06] on the locked test. Some Qwen text views inverted rankings; a different external peer-verification task showed useful text signals. An unread pricing notepad produced much of the channel premium (point ratio 0.65, CI [0.34, 1.32]); memory plus profit framing yielded high no-channel gpt-6-luna prices.
 
 Price-level screens are possible audit triggers, not evidence of an agreement. Model/prompt dependence, imperfect labels, small samples and disclosed test exposures limit attribution and generalisation. A proposed two-stage audit was not evaluated end to end.
 
@@ -156,7 +156,7 @@ An unread pricing notepad produces a premium-to-channel ratio 0.65 [0.34, 1.32];
 
 ## 6. Discussion and implications
 
-Channel assignment, including its prompt cue, shows up mainly in price level in these markets. Neither robust contemporaneous dependence nor additional public text provides the expected monitoring advantage. This is a result about the tested monitors and environments, not evidence that dependence or messages are universally uninformative. Inversion means that a zero-shot auditor reads a signal with the wrong sign.
+Channel assignment, including its prompt cue, shows up mainly in price level in these markets. We detected no robust contemporaneous dependence and resolved no benefit from additional public text; small gains remain possible. This is a result about the tested monitors and environments, not evidence that dependence or messages are universally uninformative. Inversion means that a zero-shot auditor reads a signal with the wrong sign.
 
 Price level offers a simple ranking signal but weak attribution: prompt wording, private deliberation, market-wide high pricing and legitimate advantages can all raise it. We therefore propose an audit trigger against a model- and prompt-matched reference, followed by private-log, dependence and provenance checks. This pipeline was not evaluated end to end, and these results do not establish which architecture to deploy. Appendix F retains the post-hoc synthesis and spillover comparisons.
 
@@ -517,7 +517,7 @@ agents' rule files and an LLM-call helper with rate limiting and call logging. T
 scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
 were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
 beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
-possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 361 manager iterations had completed by 2026-10-25 13:45 UTC (233 Opus, 128
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 368 manager iterations had completed by 2026-10-25 14:13 UTC (236 Opus, 132
 gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
 A separate director loop
 (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,

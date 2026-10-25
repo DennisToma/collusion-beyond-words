@@ -1404,7 +1404,7 @@
   {
     "document": "SUBMISSION.md",
     "source_check": "M1:locked combined - better single",
-    "template": "For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, adding public messages to prices changes AUROC by {} [{}, {}] on the locked test.",
+    "template": "For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, the registered gain from adding public messages (combined minus better single view, AUROC) was {} [{}, {}] on the locked test.",
     "indices": [
       0,
       1,

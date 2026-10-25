@@ -15,7 +15,7 @@ This repo merges two sprint projects and runs **no new experiments**:
 | Q1.4 prices-only (information-theoretic detection) | [collusion-14-infotheory](https://github.com/DennisToma/collusion-14-infotheory) |
 | Q2.2 say-vs-do (text + action auditing) | [collusion-22-say-vs-do](https://github.com/DennisToma/collusion-22-say-vs-do) |
 
-The submission-compliance revision has **6 main-text pages**, a **219-word abstract**,
+The submission-compliance revision has **6 main-text pages**, a **234-word abstract**,
 and the required limitations/dual-use appendix; references and appendices bring the PDF to 20 pages.
 [SUBMISSION_FORM.md](SUBMISSION_FORM.md) supplies the form summary and upload list.
 The [compliance receipt](results/submission_compliance.json) checks these limits, affiliation,

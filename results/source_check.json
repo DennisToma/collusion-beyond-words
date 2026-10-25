@@ -4,7 +4,7 @@
  "source_mode": "snapshot",
  "n_evidence_files": 158,
  "evidence_manifest_sha256": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
- "document_bindings_sha256": "a9e43164fb8cda69d331c6cba88388b6cb0394029f17f320d4824bd9bd3c725e",
+ "document_bindings_sha256": "70c1562ba921029fffb8b702b23ada33403474f711591591b021cd0f7de3fa3d",
  "n_checks": 111,
  "n_fail": 0,
  "checks": [
@@ -1558,7 +1558,7 @@
  "n_document_checks": 144,
  "n_document_fail": 0,
  "document_sha256": {
-  "SUBMISSION.md": "4ff83a2b22302b647a3ac4ff4325160e51b54aeb30a4e8ed898e06d08c25ef61",
+  "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
   "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b"
  },
  "document_checks": [
@@ -2247,14 +2247,9 @@
      "-0.01",
      "-0.09",
      "+0.06"
-    ],
-    [
-     "-0.01",
-     "-0.09",
-     "+0.06"
     ]
    ],
-   "matches": 2,
+   "matches": 1,
    "ok": true
   },
   {
@@ -4838,7 +4833,7 @@
   {
    "document": "SUBMISSION.md",
    "source_check": "M1:locked combined - better single",
-   "template": "For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, adding public messages to prices changes AUROC by {} [{}, {}] on the locked test.",
+   "template": "For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, the registered gain from adding public messages (combined minus better single view, AUROC) was {} [{}, {}] on the locked test.",
    "indices": [
     0,
     1,

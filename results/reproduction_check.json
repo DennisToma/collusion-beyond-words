@@ -32,7 +32,7 @@
   ],
   "evidence_manifest_sha256": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
   "document_sha256": {
-    "SUBMISSION.md": "4ff83a2b22302b647a3ac4ff4325160e51b54aeb30a4e8ed898e06d08c25ef61",
+    "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
     "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b"
   },
   "figure_sha256": {
