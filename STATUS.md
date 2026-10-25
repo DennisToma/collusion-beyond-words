@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 17:35 UTC, fallback manager iteration 7)
+## Current state (2026-10-25 17:45 UTC, iteration 8: release verification hold, no edits)
 - FINALIZE-only. Primary TEMPLATE_REPORT.pdf: 10 pages / 6 main, 246-word abstract; IMAGE.png 1600×900; slides 8.
 - Closed primary numeric-context gap: 65 section/table-scoped bindings check 135 slots directly against frozen evidence; exact occurrence and precision enforced.
 - Inventory covers 142 tokens in scientific main text and appendices A–B; 0 unclassified. Global 160 tokens / 26 CI triples still match extended report.
@@ -15,6 +15,7 @@
 - Risks: integer-only/qualitative claims still need review; deployer pipeline unevaluated. Dennis must upload primary PDF + image + ZIP; optional extended report/slides.
 
 ## Log
+- 2026-10-25 17:45 UTC iteration 8: release verification hold. Everything in DIRECTION was already done. finalize.py --no-export → FINALIZE OK. It again changed only the usage counts (414→418) and check timestamps, which I reverted so the committed bytes match the PDFs and the zip. The root submission_code.zip (24,201,594 B, sha 9a15c238…) is identical to /var/tmp/bw-fallback-i7-final, which was built from HEAD cce6aed; SHA256SUMS all pass. TEMPLATE_REPORT.pdf (10 pp), IMAGE.png and SLIDES.pdf (8 pp) are identical to the handoff copies. Secret scan of the zip (including inner tar.xz): the only hit is DIRECTION.md's instruction text. No document edits, no model calls, no deviation from DIRECTION.
 - 2026-10-25 17:00 UTC merge iter54: release verification hold. DIRECTION unchanged since 16:29 (addendum). finalize.py --no-export → FINALIZE OK. It again changed only the usage counts (404→407), which I reverted so the committed bytes match the PDFs and the zip. Artefacts checked: TEMPLATE_REPORT.pdf 10 pp, SLIDES.pdf 8 pp, IMAGE.png 1600×900, submission_code.zip 24.1 MB, built 16:54 from 557715f (later commits touch only STATUS/ledger, so no rebuild needed). No edits to documents, no model calls.
 - 2026-10-25 16:58 UTC merge iter53: all DIRECTION items done. I read the main text of TEMPLATE_REPORT.md (no experiment IDs; 3 numbered contributions; deployer recommendation present) and rendered PDF page 1, where the abstract and Figure 1 both fit. finalize.py --no-export → FINALIZE OK. Its only diff was the usage counts (404→406), which I reverted so the bytes match the committed PDFs. The zip was not rebuilt because commits since 557715f touch only STATUS/ledger. No edits to documents, no model calls.
 - 2026-10-25 17:10 UTC merge iter52: added scripts/check_template_numbers.py + finalize hook; finalize.py --no-export → FINALIZE OK. Reverted the usage-count refresh in process_log_summary.json (SUBMISSION unchanged). No document numbers changed, no model calls, no DIRECTION deviation. submission_code.zip rebuilt from 557715f (24.1 MB); later commits are STATUS-only.
