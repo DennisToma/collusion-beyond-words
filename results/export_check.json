@@ -104,10 +104,10 @@
     "SLIDES.pdf": []
   },
   "sha256": {
-    "SUBMISSION.md": "9735c50871fd14a6f48dc6369c08caee07417b3e9ba3311ada5a8f46331e41eb",
-    "SLIDES.md": "02d59787f68c00302fc5de3d0f9321d9cdff1864e1fcbfd63b7d3af4fc5cc5d2",
-    "SUBMISSION.pdf": "e378d12baee3dca961507186d1a8e0dd4b6e6809d00edc614c03db3012f2c694",
-    "SLIDES.pdf": "4e9fd2d226aa2219298457cd0539fbbad2962c1108486807d0e59d8b19ad4045",
+    "SUBMISSION.md": "7b781112924119d8e931e5462a274254adf3d82d036d8d72b0d2921ba754b27b",
+    "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e",
+    "SUBMISSION.pdf": "11cbb215ecb08c7f42bf8cdf881dc002f506d671b5078171fca230ebd2c620b9",
+    "SLIDES.pdf": "4a0eefc5a22d38707b4565ccdb1e6fc77259e27b0d3b8682d0914c81725f9a73",
     "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."

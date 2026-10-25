@@ -26,6 +26,7 @@ This repo merges two sprint projects and runs **no new experiments**:
 | `evidence/` | 76 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
 | `scripts/check_sources.py` | 111 saved-source assertions, 138 bindings that extract printed numbers from the report/slides, and 76 evidence-file hash checks (→ `results/source_check.json`) |
 | `scripts/number_coverage.py` | lists every decimal in the report main text and slides and whether a binding checks it (→ `results/number_coverage.json`; 222/260 and 55/61) |
+| `scripts/recompute_unrounded_q22.py` | recomputes 3 Q2.2 values saved as 3-dp ties with Q2.2's own code (needs the Q2.2 checkout; run with its `.venv/bin/python`) → `results/unrounded_q22.json`, which `check_sources.py` checks against the pinned values |
 | `scripts/process_log_summary.py` | counts autonomous manager iterations per repo/backend from the machine-local runner logs for the LLM usage statement (→ `results/process_log_summary.json`; not regenerable without those logs) |
 | `tests/test_reproduction.py` | 9 checks: independent-copy reproduction, figure parity, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
