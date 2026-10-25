@@ -57,6 +57,7 @@ def main():
           f"SUBMISSION {'updated' if changed else 'unchanged'}")
     run(["uv", "run", "python", "scripts/check_sources.py"])
     run(["uv", "run", "python", "scripts/number_coverage.py"])
+    run(["uv", "run", "python", "scripts/check_template_numbers.py"])
     run(["uv", "run", "python", "tests/test_reproduction.py"])
     run(["uv", "run", "python", "tests/test_packaging.py"])
     if export:

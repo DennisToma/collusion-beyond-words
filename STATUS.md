@@ -1,6 +1,7 @@
 # STATUS
 
-## Current state (2026-10-25 ~17:00 UTC, merge iteration 51 — DIRECTION 16:40 + addendum 16:45 done)
+## Current state (2026-10-25 ~17:10 UTC, merge iteration 52 — DIRECTION 16:40 + addendum 16:45 done)
+- iter52: closed the open risk 'TEMPLATE_REPORT numbers not script-bound'. New scripts/check_template_numbers.py (wired into finalize.py) checks all 161 decimals/percentages/fractions in TEMPLATE_REPORT.md occur in the script-bound SUBMISSION.md, and all 26 'estimate [lo, hi]' triples occur verbatim → 0 unmatched. A mutation test (0.51→0.57 in the grid pCMI) is caught by the triple check. Token membership alone did not catch it, because 0.57 occurs elsewhere.
 - Addendum done: TEMPLATE_REPORT Code and Data now says code/data ship as a supplementary archive and the repo goes public after the deadline (no unopenable repo links; SUBMISSION Reproducibility + README + SUBMISSION_FORM aligned). TEMPLATE_REPORT.pdf rebuilt (147/147 fragments, 4 figures pixel-exact, 10 pp, main text pp. 1–6).
 - `submission_code.zip` (24.1 MB, gitignored) via `uv run python scripts/build_code_zip.py`: beyond-words/ = HEAD git archive; sources/*.tar.xz = filtered git archives at pins 732f08c / 91ffb2d. Excluded: 3 scripted positive-control trajectory files > 5 MB and rendered HTML. Built-in secret scan + manual grep: clean. Verified: extracted archive, `finalize.py --no-export` with absent siblings → FINALIZE OK.
 - Dennis: rebuild the zip after any further commit (README inside records the HEAD hash).
@@ -13,9 +14,10 @@
 - Frozen headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43, 0.59]; locked-test Δ −0.01 [−0.09, +0.06].
 - Codex gpt-6.1-sol read-only review (reviews/codex_template_i50.md): 6 P1 + 2 P2 (assignment vs collusion wording, registered contrast definition, CI methods, TE caveat) — all applied; title now "…Is Detectable from Price Levels…".
 - Next: package if needed; hard stop 19:00 UTC for this repo (DIRECTION).
-- Risks: TEMPLATE_REPORT numbers are not script-bound like SUBMISSION (checked by Opus review + manual cross-check); Dennis must upload TEMPLATE_REPORT.pdf + IMAGE.png.
+- Risks: TEMPLATE_REPORT numbers are now cross-checked against SUBMISSION (bare tokens and CI triples; a swapped bare number that occurs elsewhere in SUBMISSION would still pass); Dennis must upload TEMPLATE_REPORT.pdf + IMAGE.png.
 
 ## Log
+- 2026-10-25 17:10 UTC merge iter52: added scripts/check_template_numbers.py + finalize hook; finalize.py --no-export → FINALIZE OK. Reverted the usage-count refresh in process_log_summary.json (SUBMISSION unchanged). No document numbers changed, no model calls, no DIRECTION deviation. Dennis: rebuild submission_code.zip from this HEAD.
 - 2026-10-25 17:00 UTC merge iter51: DIRECTION addendum 16:45. Rewrote Code and Data for the private repo, wrote scripts/build_code_zip.py. The first build was 38 MB, so the sources became filtered tar.xz (xz dedups the JSONL) and HTML renders were dropped → 24.1 MB. The script's secret regex matched its own source, so the literal is now split. finalize.py OK; regeneration verified in the extracted archive. No numbers changed, no model calls.
 - 2026-10-25 16:45 UTC merge iter50: followed DIRECTION 16:40. Wrote TEMPLATE_REPORT.md + scripts/export_template_pdf.py (reuses export_pdf checks: 149/149 fragments, 4 figures pixel-exact), headline Figure 1 + IMAGE.png (scripts/fig0_headline.py; median-premium game selection rule; removed misleading Nash lines after noticing per-round cost varies 5–8), slide 1 replaced with headline + Fig. 1. Opus review applied (all 18 items); Codex review applied (8 items). finalize.py OK. SUBMISSION_FORM/REPORT point to TEMPLATE_REPORT as primary.
 - 2026-10-25 15:45 UTC merge iter46: freeze hold. Sources advanced only to STATUS-only commits (Q1.4 13e8b09, Q2.2 a778ac2) that record our 7b44715 bytes as unchanged, with no asks. DIRECTION unchanged since 13:22. Read-only checks: SUBMISSION.md sha 96d0ed7b… (the reviewed bytes), PDFs 1.15 MB/0.64 MB, and SUBMISSION_FORM.md is present. No suites rerun, no edits, no model calls. Next: production finalize.py at 16:30.

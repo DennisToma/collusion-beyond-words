@@ -48,6 +48,7 @@ the implementation, experiments, analysis and drafting under Dennis's direction 
 | `evidence/` | 158 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
 | `scripts/check_sources.py` | 111 saved-source assertions, 144 bindings that extract printed numbers from the report/slides, and 158 evidence-file hash checks (→ `results/source_check.json`) |
 | `scripts/number_coverage.py` | lists every decimal in the report main text, relocated scientific appendices D–G and slides and whether a binding checks it; fails if an unbound decimal is not a declared non-result (→ `results/number_coverage.json`; 248/281 and 55/61, 0 unclassified) |
+| `scripts/check_template_numbers.py` | checks that every decimal, percentage and fraction in TEMPLATE_REPORT.md occurs in the script-bound SUBMISSION.md, and that every `estimate [lo, hi]` triple occurs there verbatim (→ `results/template_number_check.json`; 161 tokens, 26 triples, 0 unmatched) |
 | `scripts/recompute_unrounded_q22.py` | replays 3 Q2.2 rounding corrections from pinned inputs with the source estimators/seeds → `results/unrounded_q22.json`; no sibling checkout needed |
 | `scripts/recompute_c21b_floor.py` | replays C21b with two agreed-floor thresholds and two descriptive windows from pinned trajectories/cached terms → `results/c21b_floor.json`; no sibling checkout needed |
 | `scripts/recompute_locked_test_q22.py` | replays the historical 95-run locked test from cached judge labels and six original LLM score views; eight run-AUROC contrasts match the saved B=2000 analysis, with no fitting or calls → `results/locked_test_q22.json` |
@@ -107,6 +108,7 @@ That receipt predates its own notes; package clean HEAD for the actual handoff.
 ```bash
 uv run python scripts/check_sources.py          # 111 source checks, 144 document bindings, 158 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
+uv run python scripts/check_template_numbers.py # TEMPLATE_REPORT numbers = SUBMISSION numbers
 uv run python scripts/recompute_unrounded_q22.py # exact saved rounding-correction replay
 uv run python scripts/recompute_c21b_floor.py    # C21b floor/window sensitivity replay
 uv run python scripts/recompute_locked_test_q22.py # historical locked-test run-AUROC replay

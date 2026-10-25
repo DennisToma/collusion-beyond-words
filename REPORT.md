@@ -256,6 +256,7 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   overflow into page padding, horizontal overflow, and text below the font floor are rejected.
   Receipt: `results/export_test.json`. Existing scientific estimates are unchanged. Iteration 10 fixed a Markdown
   line wrap: `+ public facts` no longer accidentally starts a list in Methods.
+- TEMPLATE_REPORT check: `uv run python scripts/check_template_numbers.py` confirms that all 161 numeric tokens and all 26 estimate+CI triples in TEMPLATE_REPORT.md occur in SUBMISSION.md, whose numbers are bound to source data (0 unmatched; finalize.py runs it).
 - Saved-value/document check: `uv run python scripts/check_sources.py` passes **111/111 source assertions,
   144/144 document bindings, and 158 evidence-file hash checks**. The document bindings extract
   printed numbers from SUBMISSION.md and SLIDES.md and compare them directly with saved source values,
