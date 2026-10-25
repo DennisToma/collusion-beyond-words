@@ -3,6 +3,20 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 40 full source reconciliation (2026-10-25 14:58 UTC; before the 15:00
+cutoff): Q1.4 `e8cf411460358ab14ffdb4769ada846406fd9497` / Q2.2
+`5a012a0bba87dbfbd5bbbfcb16c810ab91483bc9`. Both managers declare research final.
+All changes since the pins are accounted for across the complete tracked trees:
+544/552 Q1.4 and 1380/1392 Q2.2 entries unchanged; remaining paths are enumerated
+review/director metadata, export artifacts and the already-applied rounds-11–40
+figure-label correction. No changed saved estimate, dataset, split, auditor cache
+or scientific analysis code. All 158 bundled raw hashes match the source Git pins;
+live drift remains only Q2.2 REPORT.md's I133 line. Source zero-P1 coverage remains
+I152 / I160 on the current `96d0ed7b…` manuscript bytes. Q1.4's source receipt has
+two known 0.81 quote misses, documented rather than described as passing quotes;
+the merge's independent 0.80 replay/binding passes. No evidence re-pin.
+[Receipt](results/source_freeze_i40.json), [procedure/limitations](reviews/source_freeze_i40.md).
+
 Iteration 39 source re-check (2026-10-25 14:45 UTC): Q1.4
 `e67993aad5495e7d0f1ce1a2d954cee2229fd7e3` / Q2.2
 `e0e0772968e941eed794cb27c7232a6ce492c54e`. Changes since iteration 38
