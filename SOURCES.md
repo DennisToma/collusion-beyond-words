@@ -71,6 +71,7 @@ the merge manager: rows marked ✔ below were read directly from the JSON at the
 | N29 | prevalence max precision@0.01 0.20 [0.07, 0.54] (scripted rows 5,6,10,15–17,19); LLM rows max 0.185 (row 26) | Q1.4 | `eval/prevalence.json : [5], [26]` | P2.1 | ✔ (iter3, JSON) |
 | M30 | gpt-6.1-sol seller arm text AUROC 0.17 [0.01, 0.41], 0/7 private agreements (post hoc) | Q2.2 | `analysis/p2_family3way.json : llm_p2sol.views.text.auroc_private_vs_none` | P2.6 | ✔ (iter3, JSON) |
 | M31 | luna E113 executed combined−action posting cells +0.19 [+0.06, +0.33], silent +0.12 [−0.08, +0.32] (post hoc) | Q2.2 | `analysis/e113_secondary.json : stratified.executed_vs_A.luna_{posting,silent}_combined_minus_action_posthoc` | P2.16 | ✔ (iter3, JSON) |
+| M32 | Fig. 6 tacit-high window = rounds 11–40 (source figure label said "2nd half") | Q2.2 | `p2_strong_eval.py : --late 11 (frozen, line 145)`; data `data/llm_p2strongF/trajectories.jsonl` + `analysis/p2_strong_classes_llm_p2strongF.json` | P2.7 | ✔ (iter6, code) |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |
 
 `✔ check_sources` = machine-checked by `uv run python scripts/check_sources.py` (42/42 assertions pass at
