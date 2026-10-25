@@ -41,7 +41,8 @@ class PackagingChecks(unittest.TestCase):
         self.temp.cleanup()
 
     def git(self, *args):
-        return subprocess.check_output(["git", *args], cwd=self.repo, stderr=subprocess.STDOUT)
+        return subprocess.check_output(["git", *args], cwd=self.repo, stderr=subprocess.STDOUT,
+                                       env=release.local_environment())
 
     def commit(self):
         self.git("add", "-A")
@@ -158,6 +159,27 @@ class PackagingChecks(unittest.TestCase):
         self.assertNotIn("OPENAI_API_KEY", env)
         self.assertFalse(Path(env["BW_Q14_ROOT"]).exists())
         self.assertFalse(Path(env["BW_Q22_ROOT"]).exists())
+        foreign = self.scratch / "foreign"
+        foreign.mkdir()
+        def foreign_git(*args):
+            return subprocess.check_output(["git", *args], cwd=foreign, env=release.local_environment(),
+                                           stderr=subprocess.STDOUT)
+        foreign_git("init", "-q")
+        (foreign / "marker").write_text("foreign worktree must remain unchanged\n")
+        foreign_git("add", "marker")
+        foreign_git("-c", "user.name=Foreign fixture", "-c", "user.email=fixture@example.invalid",
+                    "-c", "commit.gpgsign=false", "commit", "-qm", "foreign")
+        paths = (".git/HEAD", ".git/index", ".git/config", "marker")
+        before = {p: (foreign / p).read_bytes() for p in paths}
+        foreign_head = foreign_git("rev-parse", "HEAD")
+        with patch.dict(os.environ, dict(GIT_DIR=str(foreign / ".git"), GIT_WORK_TREE=str(foreign),
+                                        GIT_INDEX_FILE=str(foreign / ".git/index"))):
+            self.git("init", "-q")
+            self.git("config", "fixture.guard", "isolated")
+            self.git("reset", "--hard", "HEAD")
+            self.git("commit", "--allow-empty", "-qm", "must be local")
+        self.assertEqual({p: (foreign / p).read_bytes() for p in paths}, before)
+        self.assertEqual(foreign_git("rev-parse", "HEAD"), foreign_head)
 
 
 if __name__ == "__main__":

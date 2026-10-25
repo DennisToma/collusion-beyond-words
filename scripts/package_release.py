@@ -25,6 +25,7 @@ CHECKS = (
     "scripts/check_sources.py",
     "scripts/number_coverage.py",
     "scripts/check_submission_compliance.py",
+    "scripts/check_committed_export.py",
     "tests/test_reproduction.py",
     "tests/test_export.py",
     "tests/test_submission_compliance.py",

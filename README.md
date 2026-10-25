@@ -56,6 +56,7 @@ the implementation, experiments, analysis and drafting under Dennis's direction 
 | `tests/test_packaging.py` | 9 handoff checks: exact/repeatable archives, dirty/concurrent changes, omitted/altered/unsafe members, failed checks and publication only after success |
 | `tests/test_reproduction.py` | 26 checks: independent-copy reproduction, figure and replay parity, original-function parity for the Q1.4 grid and gate, C21b and the locked test, malformed trajectory/audit rejection, LLM-usage counts, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
+| `scripts/check_committed_export.py` | checks committed PDF text, slide placement/page count, actual figure pixels and portable links without rebuilding; catches changed PNGs with unchanged PDFs |
 | `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
 | `reviews/` | adversarial claim reviews (codex gpt-6.1-sol, Opus), presentation review, and a primary-literature/construct audit; dispositions recorded |
 | `EXPERIMENTS.tsv`, `STATUS.md` | ledger of merge passes and iteration log |
@@ -70,7 +71,7 @@ model credentials or sibling repos. GitHub links in the PDFs also require reposi
 
 After the author-machine finalizer, commit its outputs before packaging. The packager
 refuses a dirty worktree, checks every archive file against Git, and runs source,
-decimal-coverage, compliance, reproduction, export-failure and packaging checks from
+decimal-coverage, compliance, committed-PDF, reproduction, export-failure and packaging checks from
 an extraction without `.git`. It uses the existing export dependencies and Chromium;
 install those as below first. Choose an unused output directory outside the repository:
 
@@ -112,6 +113,7 @@ uv run python scripts/fig6_strong_framing.py     # byte-identical figures/fig6_*
 uv run python tests/test_reproduction.py        # standalone + bad-input checks, including all six figure scripts
 uv run --group export playwright install chromium   # once
 uv run --group export python scripts/export_pdf.py  # SUBMISSION.pdf + SLIDES.pdf
+uv run --group export python scripts/check_committed_export.py # current text/PNG pixels vs committed PDFs, without rebuilding
 uv run --group export python tests/test_export.py   # deliberate export failure checks
 uv run --group export python scripts/check_submission_compliance.py # lengths, main pages, disclosures, references, PDF hashes
 uv run --group export python tests/test_submission_compliance.py     # 3 compliance boundary/failure checks

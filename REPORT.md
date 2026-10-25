@@ -10,8 +10,10 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   exact committed archive without `.git` and prepares both PDFs, form text, the
   code/evidence archive, logs and checksums outside the repository. Nine packaging
   tests cover corruption/omissions, dirty or concurrent edits and failed checks;
-  the finalizer now runs them. This preserves the reviewed manuscript and all
-  scientific artifacts. Full-release acceptance is recorded after the committed
+  the finalizer now runs them. A direct committed-PDF check also compares text,
+  slide placement, embedded figure pixels and links against the current sources.
+  This preserves the reviewed manuscript and all scientific artifacts.
+  Full-release acceptance is recorded after the committed
   packager is exercised; no new experiment or scientific analysis.
 - Iteration 38 verifies the **post-compliance release `2add728`** from an extracted
   archive without `.git`, with nonexistent sibling-root overrides and no model

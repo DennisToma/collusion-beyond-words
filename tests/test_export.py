@@ -10,12 +10,14 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import export_pdf as export
+import check_committed_export as committed
 
 
 class ExportChecks(unittest.TestCase):
@@ -51,6 +53,14 @@ class ExportChecks(unittest.TestCase):
             self.assertEqual(export.check_pdf(pdf, ["Absent result."], "missing"), ["Absent result."])
             self.assertEqual(export.check_pdf(pdf, ["Second result."], "wrong page", 0), ["Second result."])
             self.assertEqual(export.check_pdf(pdf, ["Second result."], "right page", 1), [])
+            source = "# First\n\nFirst result.\n\n---\n\n# Second\n\nSecond result."
+            committed.check_document(pdf, source, slides=True)
+            with self.assertRaisesRegex(ValueError, "text differs"):
+                committed.check_document(pdf, source.replace("First result.", "Absent result."), slides=True)
+            with self.assertRaisesRegex(ValueError, "page count"):
+                committed.check_document(pdf, "# First\n\nFirst result.", slides=True)
+            with self.assertRaisesRegex(ValueError, "text differs"):
+                committed.check_document(pdf, "Missing report text.")
 
     def test_markdown_formatting_preserves_meaningful_text(self):
         source = "## Test\n\n**Result:** `pCMI` [link](https://example.com) −0.01.\n\n- Claim *one*.\n"
@@ -78,6 +88,17 @@ class ExportChecks(unittest.TestCase):
             export.check_figures(pdf, source)
         with contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(export.check_figures(pdf, other), 1)
+        # A regenerated PNG with an unchanged PDF must also fail the packaging
+        # checker, even though the older export receipt never hashed PNG inputs.
+        with patch.object(export, "ROOT", self.scratch), contextlib.redirect_stdout(io.StringIO()):
+            image = self.scratch / "fixture.png"
+            source = "![Figure](fixture.png)"
+            export.Image.new("RGB", (12, 12), "red").save(image)
+            pdf = self.render("<section>" + export.embed_images(export.md().render(source)) + "</section>")
+            self.assertEqual(committed.check_document(pdf, source)["figures"], 1)
+            export.Image.new("RGB", (12, 12), "blue").save(image)
+            with self.assertRaisesRegex(ValueError, "figure pixels/count mismatch"):
+                committed.check_document(pdf, source)
 
     def test_repo_links_become_portable_and_file_links_fail(self):
         body = export.portable_links('<a href="SOURCES.md">Sources</a>')

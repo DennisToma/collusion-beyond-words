@@ -16,7 +16,7 @@
   ],
   "sha256": {
     "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb",
-    "tests/test_export.py": "9037700fa155c00253a7055a36eac693e565bf5b7b7b3c690b654e1983cdacc2",
+    "tests/test_export.py": "155151ec9f2ba9865bd88fb95c0355d6f8743196230666e71cf4245c642613bc",
     "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b"
   }
 }
