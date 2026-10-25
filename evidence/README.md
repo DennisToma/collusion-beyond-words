@@ -1,7 +1,7 @@
 # Pinned source evidence
 
 This bundle makes the merged submission's saved-value checks and Fig. 1/3/4/6 rendering independent of
-the source checkouts. It contains 70 exact git blobs from:
+the source checkouts. It contains 74 exact git blobs from:
 
 - [Q1.4 @ 732f08c11a765cd8500f4ef3c29fb630b309d5b2](https://github.com/DennisToma/collusion-14-infotheory/tree/732f08c11a765cd8500f4ef3c29fb630b309d5b2)
 - [Q2.2 @ 91ffb2d4737a7537cdf9afe239a98e0d1061090b](https://github.com/DennisToma/collusion-22-say-vs-do/tree/91ffb2d4737a7537cdf9afe239a98e0d1061090b)

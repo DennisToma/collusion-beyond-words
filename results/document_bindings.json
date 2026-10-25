@@ -1271,5 +1271,54 @@
     "indices": [
       0
     ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N20:deepseek TE C vs A with CI",
+    "template": "clearly above chance in some main sets (deepseek {} [{}, {}]; base Qwen3.8",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:paraphrase 1 n private/none",
+    "template": "Two paraphrases of the instructions ({} + {} runs each)",
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:paraphrase 1 private - none r2-12",
+    "template": "runs each) give {} [{}, {}] and",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:paraphrase 2 private - none r2-12",
+    "template": "] and {} [{}, {}]. Figure 5 shows the earlier placebo",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M9:logbook (weather) - none r2-12",
+    "template": "entries must be invented weather - the pair premium is {} [{}, {}] vs",
+    "digits": [
+      2,
+      2,
+      2
+    ]
   }
 ]

@@ -242,6 +242,16 @@ lx = load(Q22, "label_xfam.json")["datasets"]
 check("M15", "3-class kappa llm_v3 / llm_v3rep", [lx["llm_v3"]["kappa_3class"], lx["llm_v3rep"]["kappa_3class"]],
       [0.33, 0.38])
 check("N7", "executed max-pair markup (inflated)", ex["market_level"]["executed"]["auroc"], 0.99)
+ds_te = load(Q14, "eval/llm_ds_p2.json")["by_T"]["20"]["te"]
+check("N20", "deepseek TE C vs A with CI", [ds_te["auroc_C_vs_A"], *ds_te["auroc_ci_C_vs_A"]], [0.81, 0.62, 0.96])
+for i in (1, 2):
+    para = load(Q22, f"analysis/p2_cue_llm_p2para{i}.json")
+    check("M9", f"paraphrase {i} n private/none", [para["n"]["private"], para["n"]["none"]], [10, 10])
+    check("M9", f"paraphrase {i} private - none r2-12", para["paired"]["private-none"]["prem_r2_12"],
+          [[1.79, 1.20, 2.43], [0.24, -0.32, 0.81]][i - 1])
+lb = load(Q22, "analysis/p2_logbook.json")
+check("M9", "logbook (weather) - none r2-12", lb["paired"]["logbook-none"]["prem_r2_12"], [0.22, 0.05, 0.40])
+check("M9", "logbook matched seeds", lb["paired"]["logbook-none"]["n"], 15)
 # Source JSON stores 2.135 [1.285, 3.005] (3 dp); the reports print 2.13 [1.28, 3.00]. Half-up on the
 # stored value would give 2.14 [1.29, 3.01], so this is source-checked within rounding but left unbound.
 sq = cd["llm_strong_qa"]

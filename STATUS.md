@@ -1,13 +1,14 @@
 # STATUS
 
-## Current state (2026-10-25 11:25 UTC, merge iteration 14)
-- Sources unchanged: Q1.4 `4ff7e65` / Q2.2 `7247c6c`, both 0 open P1; evidence pins `732f08c` / `91ffb2d`; no saved result changed.
+## Current state (2026-10-25 11:20 UTC, merge iteration 15)
+- Sources unchanged in science: Q1.4 `060e5a4` / Q2.2 `85b78e8` (both review metadata only, 0 open P1); evidence pins `732f08c` / `91ffb2d`.
 - Headlines unchanged: markup rises in 9/9 main sets; grid pCMI 0.51 [0.43, 0.59]; text+action Δ −0.01 [−0.09, +0.06] on locked test.
-- Iter14 chunk: the previous checks bound only 58/254 decimals in the report main text, so they were selective. Added 35 source assertions and 64 bindings covering Tables 1–2 and §5.2–5.4 plus slide numbers. The report is now 208/254 bound and the slides 55/61 (`scripts/number_coverage.py` → `results/number_coverage.json`). Most of what remains is chance levels, α and model names.
-- Unbound real claims: paraphrase arms, weather notepad and deepseek TE CI, whose source files are not pinned. E65 +2.13 [1.28, 3.00] is source-checked only, because the JSON stores 2.135 and half-up would give 2.14 (double rounding).
-- Verification: 94/94 source, 132/132 bindings, 70 hashes; 3 deliberate mutations rejected; 9/9 reproduction, 9/9 export, PDF 16 pp rebuilt. Codex review (reviews/codex_i14.md): 0 P1; 2 P2 template-anchor fixes + 1 duplicate removed; its scope mutations now fail.
+- Iter15 chunk: pinned the 4 cited source files that were still missing (Q1.4 `eval/llm_ds_p2.json`; Q2.2 `p2_cue_llm_p2para{1,2}.json`, `p2_logbook.json`; the 70 existing blobs are unchanged) and bound the paraphrase arms, weather notepad and deepseek TE CI. All matched the printed numbers, so no text changed.
+- Checks: 101/101 source assertions, 137/137 bindings, 74 hashes; the report main text is now 219/254 bound, the slides 55/61. 5/5 new mutations rejected; 9/9 reproduction, 9/9 export; PDFs rebuilt (16 pp).
+- The only real claim left unbound is E65 +2.13 (double-rounding edge, source-checked). The rest are chance levels, α, model names and section numbers.
+- `--live` fails by design: Q2.2 REPORT.md changed after the pin (review metadata only), as documented.
 - Next: 14:00–15:00 final source/flag scope read; 16:30 export + push; hard stop 18:00. No DIRECTION deviation.
-- Risks: bindings check numbers, not qualitative scope; literature audit is not an independent methods replication; full experiment regeneration still needs source raw caches.
+- Risks: bindings check numbers, not qualitative scope; full experiment regeneration still needs source raw caches.
 
 ## Log
 - 2026-10-25 10:09 UTC merge iter8: sources unchanged (732f08c/91ffb2d). Fresh-clone reproduction in /var/tmp/repro_bw: 44/44, fig4/fig6 + source_check.json byte-identical. README rewritten; SUBMISSION Reproducibility notes the two regenerated figures + fresh-clone check; REPORT 42→44 count fix. PDFs rebuilt (checks pass). EXPERIMENTS M9 (iter7) + M10 added.
@@ -37,3 +38,5 @@
 
 - 2026-10-25 11:25 UTC merge iter14: sources unchanged. An inventory showed the document bindings covered only 58/254 decimals in the report main text (36/61 in the slides). Mapped each Table 1/2 and §5.2–5.4 number to its pinned JSON key and added 35 source assertions (N5 markup, N6 mde, N11 copula, N16 wording, N21, N23, N29 prevalence, M4 family table, M6 E113, M7 SALT, M9 cue/placebo, M13, M15 κ, M30, M31, M33). Added 64 bindings and scripts/number_coverage.py. Now 208/254 and 55/61 are bound. All passed on the first run, so no printed number needed changing. Mutation test: 3 edited numbers were all rejected. The bindings file was rewritten insert-only, in the original formatting. Updated README/REPORT/SOURCES and SUBMISSION Reproducibility (counts only); PDFs rebuilt, export + reproduction tests pass. No model calls apart from one codex reviewer.
 - 2026-10-25 11:40 UTC iter14 review: codex gpt-6.1-sol semantic check of all new key↔claim mappings found 0 P1. Sign handling was correct. It raised 2 P2s, both templates not anchoring population words (luna silent cells, no-channel arm); both were extended, and its mutations now fail. It also found 1 duplicate binding, now removed, so there are 132 bindings.
+
+- 2026-10-25 11:20 UTC merge iter15: sources unchanged (Q1.4 060e5a4 / Q2.2 85b78e8 = merge-review metadata, 0 P1). Closed the last unpinned-source gap: added 4 blobs (74 total) via snapshot_evidence.py, with the existing 70 unchanged; 7 assertions (N20 deepseek TE 0.809 [0.622, 0.964] from llm_ds_p2 by_T.20.te; M9 para1 +1.786 [1.195, 2.427], para2 +0.236 [−0.318, 0.814], n 10+10; logbook−none +0.218 [0.052, 0.400], n 15); 5 insert-only bindings. All passed first time. 5 mutations (+1.79, +0.40, 0.62, 10+10, +0.81) are rejected. Coverage is 219/254. Counts were updated in README/REPORT/SOURCES/evidence README/SUBMISSION Reproducibility and the tests. PDFs rebuilt; 9/9 + 9/9 tests pass. No model calls.

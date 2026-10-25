@@ -222,6 +222,14 @@
           "stored_path": "q14/sim/market.py",
           "stored_bytes": 13336,
           "stored_sha256": "71fb07564e9b1e39318cb0938da2d29a2392ac281c9bf9c4908da01e4cb94fd0"
+        },
+        "results/eval/llm_ds_p2.json": {
+          "sha256": "4776b999eaa05c30835915b6f252a15a8c79b636d623cfa0f643e822768f689c",
+          "bytes": 43593,
+          "compression": "gzip",
+          "stored_path": "q14/results/eval/llm_ds_p2.json.gz",
+          "stored_bytes": 5343,
+          "stored_sha256": "c643a4063fd88f2e0a7ffdb95ce9fe6f9a2f9106e570c67f48fe4bb2647ba951"
         }
       }
     },
@@ -573,6 +581,30 @@
           "stored_path": "q22/data/llm_v3rep/trajectories.jsonl.gz",
           "stored_bytes": 31209,
           "stored_sha256": "5e5b8817a53e05eb0b964f886234887458463294235ea5063a1a42a93196c3b7"
+        },
+        "results/analysis/p2_cue_llm_p2para1.json": {
+          "sha256": "b9070ca2c41e540edda25cee18bed13dd81048dfbffc7c494ce06dc791955f60",
+          "bytes": 10019,
+          "compression": "gzip",
+          "stored_path": "q22/results/analysis/p2_cue_llm_p2para1.json.gz",
+          "stored_bytes": 1596,
+          "stored_sha256": "a132c086bbe5e3d96a83c8c91bfcd27920b27f15b6653118dd13da16f19917b3"
+        },
+        "results/analysis/p2_cue_llm_p2para2.json": {
+          "sha256": "55876b509af113cadf9dc966e5a01aea9c4245fba98980c1616b782cf2a03e56",
+          "bytes": 10070,
+          "compression": "gzip",
+          "stored_path": "q22/results/analysis/p2_cue_llm_p2para2.json.gz",
+          "stored_bytes": 1527,
+          "stored_sha256": "dcd90990fe6a5f3f7d18cb0f7c99d11d7ec2353c3acf47f992d4543637a4184f"
+        },
+        "results/analysis/p2_logbook.json": {
+          "sha256": "d0dbd06133386b5e9c4899117284224bf1d8645814aaaa06ecf74e03ecceb49b",
+          "bytes": 3157,
+          "compression": "gzip",
+          "stored_path": "q22/results/analysis/p2_logbook.json.gz",
+          "stored_bytes": 902,
+          "stored_sha256": "95af9f4688f262d33e6ea5311d200fdf9a0793693b3b242db1f738d4ef6c3b3d"
         }
       }
     }

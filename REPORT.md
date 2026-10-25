@@ -25,16 +25,15 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   overflow into page padding, horizontal overflow, and text below the font floor are rejected.
   Receipt: `results/export_test.json`. Existing scientific estimates are unchanged. Iteration 10 fixed a Markdown
   line wrap: `+ public facts` no longer accidentally starts a list in Methods.
-- Saved-value/document check: `uv run python scripts/check_sources.py` passes **94/94 source assertions,
-  132/132 document bindings, and 70 evidence-file hash checks**. The document bindings extract
+- Saved-value/document check: `uv run python scripts/check_sources.py` passes **101/101 source assertions,
+  137/137 document bindings, and 74 evidence-file hash checks**. The document bindings extract
   printed numbers from SUBMISSION.md and SLIDES.md and compare them directly with saved source values,
-  using half-up rounding. Iteration 14 extended them to Tables 1–2 and §5.2–5.4: `scripts/number_coverage.py` reports 208/254
-  decimals in the report main text and 55/61 in the slides bound (was 58/254, 36/61). Most unbound tokens are
-  chance levels, α, thresholds and model/section numbers. The listed exceptions are in `results/number_coverage.json`: paraphrase
-  arms, weather notepad and deepseek TE CI (source files not pinned), and E65 +2.13 (double-rounding edge, source-checked only). Bindings do not verify qualitative scope. Receipt:
+  using half-up rounding. Iteration 14 extended them to Tables 1–2 and §5.2–5.4: `scripts/number_coverage.py` reports 219/254
+  decimals in the report main text and 55/61 in the slides bound (was 58/254, 36/61; 208/254 after iteration 14). Most unbound tokens are
+  chance levels, α, thresholds and model/section numbers. Iteration 15 pinned the last cited source files (Q1.4 `eval/llm_ds_p2.json`; Q2.2 `p2_cue_llm_p2para{1,2}.json`, `p2_logbook.json`) and bound the paraphrase arms, weather notepad and deepseek TE CI. The one real claim left unbound is E65 +2.13 (double-rounding edge, source-checked only; listed in `results/number_coverage.json`). Bindings do not verify qualitative scope. Receipt:
   `results/source_check.json`. The earlier 44-check script compared only saved JSON with hard-coded
   expected values; iteration 9 corrects its overstated description and adds actual document checks.
-- Standalone reproduction: [evidence/](evidence/README.md) bundles 70 exact source files at Q1.4 `732f08c`
+- Standalone reproduction: [evidence/](evidence/README.md) bundles 74 exact source files at Q1.4 `732f08c`
   / Q2.2 `91ffb2d`, with full commit IDs and SHA256 provenance. No sibling clones or model credentials
   are needed for the checks and Fig. 1/3/4/6 rendering. This verifies saved evidence; full experimental
   regeneration still requires the source repos and their caches.

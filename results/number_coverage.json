@@ -1,7 +1,7 @@
 {
  "SUBMISSION.md": {
   "decimal_tokens": 254,
-  "bound": 208,
+  "bound": 219,
   "unbound": [
    {
     "token": "0.5",
@@ -88,14 +88,6 @@
     "context": ", whereas pCMI detects a planted shared ±1 move at per-round rate q = 0.1 with AUROC 0.79 [0."
    },
    {
-    "token": "0.62",
-    "context": "secondary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3."
-   },
-   {
-    "token": "0.96",
-    "context": "ary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3.8 0.91"
-   },
-   {
     "token": "5.3",
     "context": "lls; pCMI scatters around chance. Cell estimates are descriptive. ### 5.3 A zero-shot auditor"
    },
@@ -120,30 +112,6 @@
     "context": "d there is no evidence that public messages add predictive value. ### 5.4 Neither signal is s"
    },
    {
-    "token": "+1.79",
-    "context": "esolved. Two paraphrases of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and "
-   },
-   {
-    "token": "+1.20",
-    "context": ". Two paraphrases of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 ["
-   },
-   {
-    "token": "+2.43",
-    "context": "araphrases of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, "
-   },
-   {
-    "token": "+0.24",
-    "context": "of the instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, +0.81]. Fig"
-   },
-   {
-    "token": "-0.32",
-    "context": "instructions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, +0.81]. Figure 5 s"
-   },
-   {
-    "token": "+0.81",
-    "context": "tions (10 + 10 runs each) give +1.79 [+1.20, +2.43] and +0.24 [-0.32, +0.81]. Figure 5 shows th"
-   },
-   {
     "token": "5.2",
     "context": "g (Q1.4). Wording alone moves no-channel markup from -0.19 to +2.56 (§5.2). - Legitimate asym"
    },
@@ -158,18 +126,6 @@
    {
     "token": "0.5",
     "context": "e views show no resolved separation (AUROC 0.43-0.58, all CIs include 0.5; exploratory), whic"
-   },
-   {
-    "token": "+0.22",
-    "context": "e notepad, but entries must be invented weather - the pair premium is +0.22 [+0.05, +0.40] vs +"
-   },
-   {
-    "token": "+0.05",
-    "context": "ad, but entries must be invented weather - the pair premium is +0.22 [+0.05, +0.40] vs +1.04 fo"
-   },
-   {
-    "token": "+0.40",
-    "context": " entries must be invented weather - the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the p"
    },
    {
     "token": "+2.13",

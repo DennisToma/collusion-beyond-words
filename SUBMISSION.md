@@ -399,13 +399,13 @@ Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.co
 [Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
 from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
-[evidence bundle](evidence/README.md) contains 70 exact files from the pinned source commits, with SHA256
+[evidence bundle](evidence/README.md) contains 74 exact files from the pinned source commits, with SHA256
 provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
 credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
 Fig. 5's per-round means are asserted equal to the saved source JSON.
-`scripts/check_sources.py` passes 94 saved-source assertions and 132 bindings that extract printed
+`scripts/check_sources.py` passes 101 saved-source assertions and 137 bindings that extract printed
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
-decimals are bound (208/254 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
+decimals are bound (219/254 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
 and model names). It does not certify unbound numbers or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
