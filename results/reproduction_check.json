@@ -13,23 +13,25 @@
     "test_reducing_precision_cannot_widen_tolerance",
     "test_standalone_sources_and_documents"
   ],
-  "evidence_manifest_sha256": "dcbe52672276708b83792c225212051748a6218e9d60e83f6e7673f1868ed7d4",
+  "evidence_manifest_sha256": "a57567bece6e09f5572dfe3ebe6924d57f660e11af25268c85be498d0d993466",
   "document_sha256": {
-    "SUBMISSION.md": "a2f2a3298a84f6c39809dbf924098ef9a33887e345c78aa91705d2946e2acc37",
+    "SUBMISSION.md": "e3a6ade5093af37f3b1b7eb905e13e42db7820817be38287f79a3052386f8850",
     "SLIDES.md": "02d59787f68c00302fc5de3d0f9321d9cdff1864e1fcbfd63b7d3af4fc5cc5d2"
   },
   "figure_sha256": {
     "fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
     "fig3_e70_grid.png": "0141e85564dac087b195673b3ba4a532a5822a83a8979d1eb0cfeac86fb8cd11",
     "fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+    "fig5_placebo_premium.png": "1f081a0b2e1cb2b241d18812ce881fcf42ac43a30ca205ef926d716dccdc16fd",
     "fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
   },
   "standalone": {
     "n_checks": 59,
     "n_document_checks": 68,
-    "n_evidence_files": 66,
+    "n_evidence_files": 70,
     "n_fail": 0,
     "n_document_fail": 0
   },
-  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All four regenerated figures byte-identical."
+  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All six regenerated figures byte-identical."
 }

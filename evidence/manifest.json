@@ -541,6 +541,38 @@
           "stored_path": "q22/results/label_xfam.json.gz",
           "stored_bytes": 362,
           "stored_sha256": "94edba1cf5f5656b957dc8b9e4349d32d2b9c6c25c10fe4a72d38d4223d4ed5d"
+        },
+        "data/llm_v3plc/ground_truth.jsonl": {
+          "sha256": "250f78aa985d333bc2e2e0cd86a1fbdcfd29d286e17c30e204f8ec1d091efc82",
+          "bytes": 6015,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_v3plc/ground_truth.jsonl.gz",
+          "stored_bytes": 403,
+          "stored_sha256": "231e35210b720c8f48a621da91c1f074ce89381425d423c7021a3b01b8cb36a6"
+        },
+        "data/llm_v3plc/trajectories.jsonl": {
+          "sha256": "421958192a16141b652c8f0973adfada2a23ace0c2bae41f9eef1977427676cf",
+          "bytes": 199107,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_v3plc/trajectories.jsonl.gz",
+          "stored_bytes": 17564,
+          "stored_sha256": "7fb311f265df31ef2694bfeb43d41cb1448c4ac131a75e8f834fcdf2955d9a72"
+        },
+        "data/llm_v3rep/ground_truth.jsonl": {
+          "sha256": "4a949c9d37ac5a0fc840d62d7f3b1207b2dd84fbe1f6eb499f031f298038a98a",
+          "bytes": 11180,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_v3rep/ground_truth.jsonl.gz",
+          "stored_bytes": 560,
+          "stored_sha256": "5f2a1a392b502d447abfafdc60f293f305c3e1a9276c91670ed71684759abe7e"
+        },
+        "data/llm_v3rep/trajectories.jsonl": {
+          "sha256": "720ac70b06fb37ab06f2c4272804bd176d83b93c121ee870cea58e8af78ef4d7",
+          "bytes": 396576,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_v3rep/trajectories.jsonl.gz",
+          "stored_bytes": 31209,
+          "stored_sha256": "5e5b8817a53e05eb0b964f886234887458463294235ea5063a1a42a93196c3b7"
         }
       }
     }
