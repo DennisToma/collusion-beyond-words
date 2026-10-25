@@ -5,14 +5,14 @@
   "main_text_pages": 6,
   "total_report_pages": 20,
   "slides": 8,
-  "submission_pdf_bytes": 1153269,
+  "submission_pdf_bytes": 1153273,
   "ok": true,
   "scope": "Director's file/length/layout/disclosure checks and recorded reference identity concordance; not scientific validity.",
   "sha256": {
-    "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
-    "SUBMISSION_FORM.md": "c0f0220f94c7a29e695d8a66a66f2c22627b3e2e11f748e09a7fe0ca48b78cbc",
-    "SUBMISSION.pdf": "b4fd492fb336928b9b294bf13130196179bda96cdd12c74f029c9292f8cf19f9",
-    "SLIDES.pdf": "415d34a945bf1c3cdc3b6ab91ba4848bbe9bd6259168f23887456f9a79ff8f74",
+    "SUBMISSION.md": "d473327e298ad54284b581870d6ba71fb689821517a271fe4c11b404e6b8941a",
+    "SUBMISSION_FORM.md": "1a8960f08f0ade77d5d58b23d8e7eaada381b886227360496d58656556708c95",
+    "SUBMISSION.pdf": "85b06b54e9223e5eaf1198a31b13893a32227791beddf618b4ae1561a256334c",
+    "SLIDES.pdf": "303e6b315c2be9e57672ca1b8712d73bf244a582bac8dc711453e0252b6ca602",
     "results/reference_metadata_i33.json": "e01db712e197d8fd717dc1a685b28e23194c5ae00a1073bc8f20a458906e2fa1",
     "scripts/check_submission_compliance.py": "3912b99b438d2ed85601302d96d657b11b86cfa8905b5f789729c3497db32e54"
   }

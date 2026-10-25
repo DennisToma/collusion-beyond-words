@@ -32,8 +32,8 @@
   ],
   "evidence_manifest_sha256": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
   "document_sha256": {
-    "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
-    "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b"
+    "SUBMISSION.md": "d473327e298ad54284b581870d6ba71fb689821517a271fe4c11b404e6b8941a",
+    "SLIDES.md": "e297f700723902b4c2d74691552d3101faf3e4841dec23dcc0cd51326b6d44fe"
   },
   "figure_sha256": {
     "fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",

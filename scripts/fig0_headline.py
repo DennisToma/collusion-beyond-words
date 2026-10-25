@@ -80,10 +80,10 @@ groups.append(("Prices only:\n9 seller sets,\n7 models\n(median, dots = sets)",
 groups.append(("Prices + public\nboard: 192-game\nfactorial grid",
                [("level", grid["market_level"]["auroc"], *grid["market_level"]["ci"], None),
                 ("pcmi", grid["pcmi"]["auroc"], *grid["pcmi"]["ci"], None)]))
-groups.append(("Say-vs-do market:\nlocked test,\n95 runs",
+groups.append(("Say-vs-do market:\nlocked test, 95 runs\n(blue = pair premium,\nchosen post hoc)",
                [("level", test["premium"]["run_auroc"][0], *test["premium"]["run_auroc"][1:], None),
                 ("text", *test["text"]["run_auroc"], None)]))
-groups.append(("External:\nSALT-NLP peer\nverification\n(act is verbal)", [("text", *SALT, None)]))
+groups.append(("External task\n(different):\nSALT-NLP peer\nverification", [("text", *SALT, None)]))
 color = {"level": BLUE, "pcmi": ORANGE, "text": RED}
 name = {"level": "price-level screen", "pcmi": "co-movement (pCMI)", "text": "LLM text auditor"}
 
@@ -119,7 +119,7 @@ b = fig.add_subplot(gs[2])
 draw_b(b)
 fig.text(.01, .97, "(a) Two real 12-round games (gpt-6-luna; median run per arm)", fontsize=14, weight="bold")
 fig.text(.47, .97, "(b) Which signal separates channel from no-channel games?", fontsize=14, weight="bold")
-fig.subplots_adjust(left=.045, right=.995, top=.78, bottom=.2)
+fig.subplots_adjust(left=.045, right=.985, top=.78, bottom=.2)
 fig.savefig(ROOT / "figures" / "fig0_headline.png", dpi=150)
 
 img = plt.figure(figsize=(16, 9), dpi=100)

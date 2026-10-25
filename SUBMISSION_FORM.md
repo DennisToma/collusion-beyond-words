@@ -20,7 +20,9 @@ Can an auditor detect a private channel between competing LLM sellers from price
 
 ## Files to upload
 
-- `SUBMISSION.pdf` — primary research report; references and appendices follow the main text.
+- `TEMPLATE_REPORT.pdf` — **primary report in the official Apart template** (≈ 4.5 pp main text; Figure 1 on page 1; from `TEMPLATE_REPORT.md` via `scripts/export_template_pdf.py`). Same numbers as SUBMISSION.
+- `IMAGE.png` — project image for the form (1600×900; Figure 1 panel a; `scripts/fig0_headline.py`).
+- `SUBMISSION.pdf` — extended report with all appendices (A–H) and per-number provenance; upload as supplementary material if the form permits, or keep in the repository.
 - `SLIDES.pdf` — optional presentation supplement, if the form permits it.
 - Code/evidence supplement, if permitted: create an archive of the final committed release with the README command. It includes the code, frozen evidence, provenance and reproduction instructions. Do not use the older `c1e7fdd` archive: its manuscript predates the compliance revision.
 - Repository URL: `https://github.com/DennisToma/collusion-beyond-words`. Anonymous access failed in the recorded check; provide the archive or arrange reader access before relying on this URL for judging.
