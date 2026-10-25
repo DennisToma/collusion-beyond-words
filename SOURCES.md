@@ -68,7 +68,7 @@ the merge manager: rows marked ✔ below were read directly from the JSON at the
 | M19 | placebo − private, rounds 2–12: +0.03 [−0.54, +0.49] | Q2.2 | `analysis/placebo_llm_v3plc.json : windows.r2_12.placebo_minus_private_paired` | v1 placebo | (codex review) |
 | N27 | E72 non-executed set n = 52 (38 judged agreement, 14 none); executed n = 44 | Q1.4 | `eval/e72_te_diag.json : c_execution.not_executed` | P2.14 | (codex review) |
 | N28 | executed-definition range 13–78/149, pooled pCMI 0.343–0.531 | Q1.4 | `eval/executed_sensitivity.json : n_executed_range, pooled_pcmi_range` | E71 | (codex review) |
-| N29 | prevalence max precision@0.01 0.20 [0.07, 0.54] | Q1.4 | `eval/prevalence.json : [5]` | P2.1 | (codex review) |
+| N29 | prevalence max precision@0.01 0.20 [0.07, 0.54] (scripted rows 5,6,10,15–17,19); LLM rows max 0.185 (row 26) | Q1.4 | `eval/prevalence.json : [5], [26]` | P2.1 | ✔ (iter3, JSON) |
 | M30 | gpt-6.1-sol seller arm text AUROC 0.17 [0.01, 0.41], 0/7 private agreements (post hoc) | Q2.2 | `analysis/p2_family3way.json : llm_p2sol.views.text.auroc_private_vs_none` | P2.6 | ✔ (iter3, JSON) |
 | M31 | luna E113 executed combined−action posting cells +0.19 [+0.06, +0.33], silent +0.12 [−0.08, +0.32] (post hoc) | Q2.2 | `analysis/e113_secondary.json : stratified.executed_vs_A.luna_{posting,silent}_combined_minus_action_posthoc` | P2.16 | ✔ (iter3, JSON) |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |

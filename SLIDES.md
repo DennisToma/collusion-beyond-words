@@ -61,11 +61,11 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ![Placebo](figures/fig5_placebo_premium.png)
 
-- Unread private notepad: ≈ two thirds of the channel's premium, rounds 2–12 (ratio 0.65 [0.34, 1.32]).
-- Placebo run (figure): offered-but-never-delivered channels carry the same premium (placebo − private +0.03 [−0.54, +0.49]).
-- Memory + profit framing: 19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40).
-- Prompt wording alone moves no-channel markup from −0.19 to +2.56; channel effect resolved in only 2/5 wordings.
-- At an assumed 1% prevalence, no frozen price flag reaches precision 0.25 (max 0.20; largely set by α = 0.05).
+- Unread notepad: ≈ ⅔ of the channel's pair-premium effect vs no channel, rounds 2–12 (0.65 [0.34, 1.32]).
+- Offered-but-undelivered channel (figure): no resolved difference from delivered (+0.03 [−0.54, +0.49]; not equivalence).
+- Memory + profit framing: 19/20 luna markets *without* a channel ≥ Nash + 2 (rounds 11–40).
+- Wording alone moves no-channel markup −0.19 → +2.56; channel effect resolved in 2/5 wordings.
+- At an assumed 1% prevalence no tested flag reaches point precision 0.25 (max 0.20 [0.07, 0.54]; set mainly by α = 0.05).
 
 ---
 

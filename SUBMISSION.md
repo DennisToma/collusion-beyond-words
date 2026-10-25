@@ -15,7 +15,7 @@ both. In short:
 - **Being offered a private channel shows up as a higher price level.** Markup over the Nash price rose in
   all 9 of Q1.4's main sets (7 seller models; per-set CIs, uncorrected), and a simple max-pair markup screen
   had a higher point-estimate AUROC than a conditional-dependence detector in all 9 (0.75–0.99 vs 0.34–0.72; paired difference 95% CI > 0 in 8/9).
-- **We detect no contemporaneous co-movement.** The dependence detector (pCMI), which flags and localises every
+- **We find no robust contemporaneous co-movement.** (One base-Qwen3.6 set separates, 0.71 [0.51, 0.88], uncorrected; not replicated in the grid.) The dependence detector (pCMI), which flags and localises every
   pair in the scripted shared-signal positive control, is at chance in a 192-game seven-factor grid (0.51 [0.43, 0.59]), in
   pre-registered 60-round games (0.34 [0.18, 0.52]) and on agreements whose prices were kept ("executed", 48/149; 0.42 [0.33, 0.53]).
   Lagged dependence (transfer entropy) is weakly above chance in the grid but below level (§5.2).
@@ -25,7 +25,7 @@ both. In short:
   CI below 0.5). (Text did work on an external negotiation dataset where the detected act happens in the chat; §5.3.)
 - **Neither signal is specific to collusion.** An unread private pricing notepad produces about two thirds
   of the channel's premium over rounds 2–12 (point ratio 0.65, CI [0.34, 1.32]); with memory and profit framing, 19/20
-  gpt-6-luna markets *without* a channel price ≥ Nash + 2; level screens also flag legitimate cost asymmetry.
+  gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40); level screens also flag legitimate cost asymmetry.
 
 Price-level screens could therefore serve as a cheap first-stage audit trigger (not evaluated end to end) whose reference must be matched to the
 seller model and prompt — not evidence of an agreement.
@@ -107,7 +107,7 @@ agreed on agreed-yes/no in 25/30. Q1.4's judge labels have no cross-family check
 | term | rule | used for |
 |---|---|---|
 | executed (Q1.4) | judge-labelled agreement AND both pair firms ≥ agreed − 1 in ≥ ½ of post-agreement rounds AND second-half pair mean ≥ Nash + 2 | 48/149 executed games; E70 executed subsets. 27 variants give 13–78/149 (E71) |
-| strict-executed (Q2.2) | registered strict rule (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
+| strict-executed (Q2.2) | registered strict rule for the strong-framing arm (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
 | kept / followed (Q2.2) | E84 follow rule on the locked test | 14/50 communication-positive runs |
 | tacit-high (Q2.2) | strong-framing no-channel market whose mean price minus cost-adjusted Nash over rounds 11–40 is ≥ 2 (a price threshold, not verified coordination) | 19/20 strong-framing markets |
 
@@ -270,7 +270,7 @@ extracted the agreed price.
 - **Legitimate asymmetry.** Scripted unequal costs: level screens false-flag 30/30 (Q1.4). LLM cost/quality
   edges: premium flags 7/10 and 9/10 vs controls 2/10 (Q2.2).
 - **Prevalence.** At a hypothetical 1% prevalence none of the frozen, tested price flags reaches
-  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54], which largely follows from α = 0.05; this is
+  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54] on scripted MI/pCMI rows, ≤ 0.19 on LLM sets; this largely follows from α = 0.05; this is
   not a bound on achievable precision); the premium screen's
   point precision is 0.24 at 5% prevalence (Q2.2).
 - **Labels disagree (Q2.2).** Only 14/50 communication-positive private test runs meet the E84 follow rule.
