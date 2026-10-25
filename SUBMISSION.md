@@ -166,16 +166,16 @@ with game-bootstrap 95% CIs. Scores target channel assignment, not execution.*
 | paired Δ level − pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [−0.27, +0.33]) | | N3 |
 | E70 grid: 16-cell fractional factorial over 7 factors, 6 + 6 games per cell (192), board on | 0.74 [0.66, 0.81]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
 | E44 long games, T = 60 (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] | N5 |
-| executed agreements only (48/149, Q1.4 rule) | (inflated by construction) | 0.42 [0.33, 0.53] | N7 |
+| executed agreements only (48/149, Q1.4 rule) | max-pair 0.99 (inflated by construction); pair-level 0.87 [0.80, 0.94] (not inflated) | 0.42 [0.33, 0.53] | N7 |
 | rank (copula) pCMI / sign-change CMI, E70 | | 0.53 [0.44, 0.61] / 0.44 [0.36, 0.52] | N11 |
 
 *Table 1. Per-set CIs uncorrected. E74's paired differences were declared, but declaration and results
 first appear in the same commit, so their order is not independently established.*
 
-The null is not specific to the linear-Gaussian estimator (rank-based and discrete estimators are also at
-chance, though sign-CMI has little power in E70's sparse state strata) and, at
-T = 60, not a pure power failure: observed co-move excess is +0.004 [−0.007, +0.015], whereas pCMI detects
-a planted shared ±1 move at per-round rate q = 0.1 with AUROC 0.79 [0.70, 0.88]. At T = 20 (most sets, all
+Neither rank-based nor discrete estimators detect co-movement that linear pCMI missed (both at chance,
+though sign-CMI has little power in E70's sparse state strata). At T = 60 the observed co-move excess is
++0.004 [−0.007, +0.015], whereas pCMI detects a planted shared ±1 move at per-round rate q = 0.1 with
+AUROC 0.79 [0.70, 0.88] — this is injection-specific sensitivity, not a general power bound. At T = 20 (most sets, all
 of E70) the same planting gives only 0.62 [0.52, 0.71], so small co-movement is not excluded there, and the
 check bounds sensitivity only to that planting. The one pCMI exception (base Qwen3.6, 0.71 [0.51, 0.88]) did
 not replicate in the grid's Qwen cells.
@@ -244,7 +244,9 @@ agreements are held (AUROC 0.77), but three hand-built say–do features in one 
 beyond early price stability (0.855); richer text features are untested. An LLM reading the
 early public log *without* the private chat beats the best raw rule score (0.94 vs 0.885, Δ +0.06 [+0.02, +0.10], post hoc) — a compliance rule
 that uses early prices *and* the privately judged agreed price — with no evidence that its edge comes from
-public messages.
+public messages. This is the third analysis of the same 78 games; the rule score was fixed after E133c/d
+were seen, the LLM prompt states the label rule, and the same model (gpt-6.1-sol) is Q1.4's label judge and
+extracted the agreed price.
 
 ### 5.4 Neither signal is specific to collusion
 
@@ -320,7 +322,7 @@ support that a flag is an audit trigger, not a verdict.
   split) are post hoc or secondary.
 - **Narrow markets.** Four sellers, logit demand, short horizons; one external double auction (E68) is
   inconclusive (chat raises asks only +0.39 [+0.06, +0.69]); SALT is a different construct.
-- **Placebo.** Q1.4's own market has no placebo arm; Q2.2's placebo cannot separate delivery from offer.
+- **Placebo.** Q1.4's own market has no placebo arm; Q2.2's placebo leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18]).
 
 ## 8. Future work
 
@@ -334,7 +336,8 @@ support that a flag is an audit trigger, not a verdict.
 
 Code, data and per-claim JSON live in the source repos (commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
-from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). Figures in `figures/` are copies of the source figures.
+from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). Figures in `figures/` are copies of the source figures. `SUBMISSION.pdf` and `SLIDES.pdf` are built by
+`uv run --group export python scripts/export_pdf.py`.
 
 ## References
 
@@ -395,7 +398,7 @@ markup differences. "Precision 0.25" in the shared row is a point-estimate thres
 | C09 | text-view run AUROC range across those control-flagging families (private vs none) | 0.15-0.36 | OK | run AUROC private vs none, text view: Claude n=10, deepseek n=30, Qwen-base n=30, Qwen-abl n=30 runs; TL;DR claim (not in abstract text) | `results/analysis/p2_family3way.json + results/analysis/p2_strong_eval_llm_p2qwen{a,b}.json` : `views.text.auroc_private_vs_none[0] (min,max over 4)` |
 | C10 | SALT-NLP episodes | 8000 | OK | episodes = 7998 with valid judge label + 2 invalid-judge episodes; 800 runs; external data (SALT-NLP) | `results/analysis/salt_d1.json` : `E104_sayvsdo.n_episodes + n_invalid_judge; crosstab sum` |
 | C11 | SALT distinct models | 10 | OK | distinct model names parsed from per_condition ids (main__X and cross_model__A__B); 16 conditions x 500 episodes | `results/analysis/salt_d1.json` : `E104_sayvsdo.per_condition[*].condition (parsed)` |
-| C12 | share of executed SALT episodes with no explicit agreement (1 - P(said|exec)) | 62% (P(said|exec)=0.385) | OK | executed episodes n=5169 (1989 said + 3180 not said), 7998 judged; Qwen judge label for 'said'; episodes are clustered in 800 runs (check CI method in salt script) | `results/analysis/salt_d1.json` : `E104_sayvsdo.P_said_given_exec.est; crosstab.exec1_*` |
+| C12 | share of executed SALT episodes with no explicit agreement (1 - P(said\|exec)) | 62% (P(said\|exec)=0.385) | OK | executed episodes n=5169 (1989 said + 3180 not said), 7998 judged; Qwen judge label for 'said'; episodes are clustered in 800 runs (check CI method in salt script) | `results/analysis/salt_d1.json` : `E104_sayvsdo.P_said_given_exec.est; crosstab.exec1_*` |
 | C13 | test 'colluders' that keep their agreement | 14/50 | OK | n=50 judged-agreement private runs among the 95 llm_v3 test runs (14 followed + 36 not followed); behaviour labels registered (E84) | `results/analysis/p2_behaviour.json` : `datasets.llm_v3.class_counts.{followed,not_followed}; n` |
 | C14 | strict-executed channel pairs (memory + profit objective) | 13/20 | OK | 20 channel markets (llm_p2strongF, seeds 9800000-9800019); strict rule fixed in registered amendment E99-amend; Jeffreys [0.43, 0.83] | `results/analysis/p2_strong_classes_llm_p2strongF.json` : `n_strict_executed` |
 | C15 | no-channel markets that price >= Nash + 2 (tacit-high) | 19/20 | OK | 20 no-channel markets (paired seeds with C14); tacit-high rate >= 0.5 registered (E99amend); Jeffreys [0.79, 0.99] | `results/analysis/p2_strong_classes_llm_p2strongF.json` : `n_tacit_high_none` |
