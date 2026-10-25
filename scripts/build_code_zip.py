@@ -48,7 +48,7 @@ The repository https://github.com/DennisToma/collusion-beyond-words will be made
 submission deadline.
 
 Excluded: tracked files over 5 MB (scripted positive-control trajectories that the generators
-re-create from their seeds) and the source repos' rendered HTML reports (their REPORT.md/.pdf are included):
+re-create from their seeds) and rendered HTML reports (the .md sources and PDFs are included; the exporters re-create HTML):
 {excluded}
 """
 
@@ -63,7 +63,7 @@ def add_archive(zf, repo, rev, prefix, excluded):
     for m in tar.getmembers():
         if not m.isfile():
             continue
-        if m.size > MAX_FILE:
+        if m.size > MAX_FILE or m.name.endswith(".html"):
             excluded.append(f"- `{prefix}{m.name}` ({m.size / 1e6:.1f} MB)")
             continue
         data = tar.extractfile(m).read()
