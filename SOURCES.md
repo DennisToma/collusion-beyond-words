@@ -3,6 +3,15 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 47 source re-check (2026-10-25 15:45 UTC): Q1.4
+`13e8b09485dc8656a0e26010401f92e8f26f7667` / Q2.2
+`8a725af3180f87a5e10a4c6b603fa85010563df8`, both clean. Complete tracked diffs from
+`77e8fc1` / `1ac4621` add two / three STATUS lines only, respectively;
+source scope flags and all scientific files are unchanged. All 179 protected
+merged release hashes, five export hashes and the saved i44 log checksum pass
+read-only assertions. DIRECTION unchanged; no scientific import or evidence repin.
+Production finalization and clean-HEAD packaging remain scheduled for 16:30 UTC.
+
 Iteration 45 source re-check (2026-10-25 15:28 UTC): Q1.4 `77e8fc1` /
 Q2.2 `1ac4621`, both clean. Complete Q1.4 diff from `372f375` adds only
 STATUS I158/I159 lines; Q2.2 is unchanged. No new scope flag, scientific import
