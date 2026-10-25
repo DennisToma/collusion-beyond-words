@@ -3,7 +3,7 @@
 The primary submission is **[TEMPLATE_REPORT.md](TEMPLATE_REPORT.md) / [TEMPLATE_REPORT.pdf](TEMPLATE_REPORT.pdf)**;
 **[SUBMISSION.md](SUBMISSION.md)** is the extended report. Number provenance: [SOURCES.md](SOURCES.md).
 
-Iteration 18 (2026-10-25 18:29 UTC) reran the exact integrity-verification command in
+Iteration 20 (2026-10-25 18:45 UTC) reran the integrity-verification Python block in
 [final handoff notes](reviews/handoff_i16.md): all recorded archive, log, artifact,
 checksum, root-upload and scientific-payload checks pass. This verifies the existing
 acceptance described below; its 57 tests were not rerun. Only STATUS/REPORT closure
