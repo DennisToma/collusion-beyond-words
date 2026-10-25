@@ -13,10 +13,10 @@
     "test_reducing_precision_cannot_widen_tolerance",
     "test_standalone_sources_and_documents"
   ],
-  "evidence_manifest_sha256": "23215939c986396e66d454f88b673651f13dd97d2917051db2c0b1d7f137c696",
+  "evidence_manifest_sha256": "155529253402366acaef7627d5ad3a0f597fdd4195105b7b51d93f38b08f4125",
   "document_sha256": {
-    "SUBMISSION.md": "d2962e1bd7b3c8c7d28b8bb4bba703c69fe721d7132e09f6f12a305530c0b8ff",
-    "SLIDES.md": "02d59787f68c00302fc5de3d0f9321d9cdff1864e1fcbfd63b7d3af4fc5cc5d2"
+    "SUBMISSION.md": "1d36fff12cd71283c8805d023b2aeafc7293e6020459be28eadd401ae588f00e",
+    "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
   },
   "figure_sha256": {
     "fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
@@ -27,9 +27,9 @@
     "fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
   },
   "standalone": {
-    "n_checks": 101,
-    "n_document_checks": 137,
-    "n_evidence_files": 74,
+    "n_checks": 107,
+    "n_document_checks": 138,
+    "n_evidence_files": 76,
     "n_fail": 0,
     "n_document_fail": 0
   },

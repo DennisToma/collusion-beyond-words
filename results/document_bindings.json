@@ -482,7 +482,7 @@
   {
     "document": "SLIDES.md",
     "source_check": "N8:grid pcmi",
-    "template": "(192 games, 7 design factors) | 0.74 [0.66, 0.81] | {} [{}, {}] |",
+    "template": "(192 games, 7 design factors) | 0.74 [0.66, 0.80] | {} [{}, {}] |",
     "digits": [
       2,
       2,
@@ -1315,6 +1315,16 @@
     "document": "SUBMISSION.md",
     "source_check": "M9:logbook (weather) - none r2-12",
     "template": "entries must be invented weather - the pair premium is {} [{}, {}] vs",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N23:E65 abliterated+memory C - A",
+    "template": "abliterated Qwen with memory differs (channel adds {} [{}, {}]; 5/20 executed",
     "digits": [
       2,
       2,

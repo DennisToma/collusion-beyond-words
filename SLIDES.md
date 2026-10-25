@@ -40,7 +40,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 | evidence | markup (level) | pCMI (co-movement) |
 |---|---|---|
-| 16-cell factorial grid (192 games, 7 design factors) | 0.74 [0.66, 0.81] | 0.51 [0.43, 0.59] |
+| 16-cell factorial grid (192 games, 7 design factors) | 0.74 [0.66, 0.80] | 0.51 [0.43, 0.59] |
 | 60-round long games (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] |
 | executed channel games vs controls (48 of 149) | pair-level 0.87 [0.80, 0.94] | 0.42 [0.33, 0.53] |
 

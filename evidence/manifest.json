@@ -230,6 +230,22 @@
           "stored_path": "q14/results/eval/llm_ds_p2.json.gz",
           "stored_bytes": 5343,
           "stored_sha256": "c643a4063fd88f2e0a7ffdb95ce9fe6f9a2f9106e570c67f48fe4bb2647ba951"
+        },
+        "data/llm_strong_qa/ground_truth.jsonl": {
+          "sha256": "c5fafe55e675789278db17572aef109a1f831e31c908167360605235d845c27a",
+          "bytes": 1828720,
+          "compression": "gzip",
+          "stored_path": "q14/data/llm_strong_qa/ground_truth.jsonl.gz",
+          "stored_bytes": 348561,
+          "stored_sha256": "97c80fca682ed4d0ad8778601f5dd7205c71fd8720b7246790ac16e0d7651e08"
+        },
+        "data/llm_strong_qa/trajectories.jsonl": {
+          "sha256": "6033145fbbdeecbea4312a3d996650ec56391568e41fd5731166c4f179912112",
+          "bytes": 819665,
+          "compression": "gzip",
+          "stored_path": "q14/data/llm_strong_qa/trajectories.jsonl.gz",
+          "stored_bytes": 67459,
+          "stored_sha256": "865e693d0feead4415d0665ff59216d97259fa2580e5ef4c9a25bd6398fa9d60"
         }
       }
     },

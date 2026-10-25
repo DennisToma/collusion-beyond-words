@@ -1,7 +1,7 @@
 {
  "SUBMISSION.md": {
   "decimal_tokens": 260,
-  "bound": 219,
+  "bound": 222,
   "unbound": [
    {
     "token": "0.5",
@@ -126,18 +126,6 @@
    {
     "token": "0.5",
     "context": "e views show no resolved separation (AUROC 0.43-0.58, all CIs include 0.5; exploratory), whic"
-   },
-   {
-    "token": "+2.13",
-    "context": "eing ground truth; abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 "
-   },
-   {
-    "token": "1.28",
-    "context": "ound truth; abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 execut"
-   },
-   {
-    "token": "3.00",
-    "context": "ruth; abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 executed und"
    },
    {
     "token": "6.1",

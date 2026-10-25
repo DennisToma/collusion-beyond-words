@@ -209,7 +209,7 @@ designs and models, so they are not nine independent replications.*
 |---|---|---|---|
 | 9 main sets, 7 models | AUROC 0.75–0.99 (point est. > pCMI in 9/9); C − A CI > 0 in 9/9 | 0.34–0.72; CI ∋ 0.5 in 8/9 | N1–N4 |
 | paired Δ level − pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [−0.27, +0.33]) | | N3 |
-| E70 grid: 16-cell fractional factorial over 7 factors, 6 + 6 games per cell (192), board on (Figure 3) | 0.74 [0.66, 0.81]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
+| E70 grid: 16-cell fractional factorial over 7 factors, 6 + 6 games per cell (192), board on (Figure 3) | 0.74 [0.66, 0.80]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
 | E44 long games, T = 60 (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] | N5 |
 | executed channel games vs no-channel controls (48 executed of 149 labelled channel games, Q1.4 rule) | max-pair 0.99 (inflated by construction); pair-level 0.87 [0.80, 0.94] (not inflated) | 0.42 [0.33, 0.53] | N7 |
 | rank (copula) pCMI / sign-change CMI, E70 | | 0.53 [0.44, 0.61] / 0.44 [0.36, 0.52] | N11 |
@@ -355,7 +355,7 @@ the (seller model × prompt) pair**: relative screens (pair vs rivals) survive a
 under market-wide spillover (in Q1.4's spillover sets pair_level 0.75–0.80 vs market level 0.85–0.94), and
 absolute screens need model- and prompt-matched references. With memory and a profit objective gpt-6-luna
 sellers raise prices market-wide without any channel (19/20; Q2.2 arm, re-scored by Q1.4 as E66), so
-channel labels stop being ground truth; abliterated Qwen with memory differs (channel adds +2.13 [1.28,
+channel labels stop being ground truth; abliterated Qwen with memory differs (channel adds +2.14 [1.29,
 3.00]; 5/20 executed under Q1.4's rule; Q1.4 E65, T = 40). The joint statement is a post-hoc synthesis, not
 a tested prediction.
 
@@ -425,13 +425,13 @@ Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.co
 [Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
 from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
-[evidence bundle](evidence/README.md) contains 74 exact files from the pinned source commits, with SHA256
+[evidence bundle](evidence/README.md) contains 76 exact files from the pinned source commits, with SHA256
 provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
 credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
 Fig. 5's per-round means are asserted equal to the saved source JSON.
-`scripts/check_sources.py` passes 101 saved-source assertions and 137 bindings that extract printed
+`scripts/check_sources.py` passes 107 saved-source assertions and 138 bindings that extract printed
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
-decimals are bound (219/260 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
+decimals are bound (222/260 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
 and model names). It does not certify unbound numbers or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by

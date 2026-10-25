@@ -153,9 +153,37 @@ check("N7", "executed pCMI", [ex["pcmi"]["executed"]["auroc"], *ex["pcmi"]["exec
 check("N7", "executed counts", [ex["n_executed"], ex["n_executed"] + ex["n_not_executed"]], [48, 149], tol=0)
 check("N7", "executed pair-level", [ex["pair_level"]["executed"]["auroc"], *ex["pair_level"]["executed"]["ci"]], [0.87, 0.80, 0.94])
 grid = load(Q14, "eval/e70_grid.json")
-for key, want in [("market_level", [0.74, 0.66, 0.81]), ("pcmi", [0.51, 0.43, 0.59]), ("te", [0.62, 0.54, 0.70])]:
+# e70_grid.json stores AUROCs/CIs rounded to 3 dp (market-level upper CI 0.805), so printing them at 2 dp could
+# double-round. Replay Q1.4's pooled stratified AUROC and game-cluster bootstrap (scripts/e70_grid.py: rng
+# default_rng(0), B = 2000, resample within cell x arm) from the saved per-game scores, require it to reproduce
+# every stored 3-dp value, and check the unrounded values (market-level upper CI 0.8047 -> 0.80, not 0.81).
+import numpy as np  # noqa: E402
+g_by = {c: {k: [x for x in grid["games"] if x["cell"] == c and x["channel"] == k] for k in (True, False)}
+        for c in grid["per_cell"]}
+
+
+def grid_auroc(byc, det):
+    num = den = 0.0
+    for v in byc.values():
+        p = np.array([x["scores"][det] for x in v[True]], float)
+        q = np.array([x["scores"][det] for x in v[False]], float)
+        num += (p[:, None] > q[None]).sum() + .5 * (p[:, None] == q[None]).sum()
+        den += len(p) * len(q)
+    return float(num / den)
+
+
+g_rng = np.random.default_rng(0)
+g_boot = {det: [] for det in grid["pooled_auroc"]}
+for _ in range(2000):
+    bb = {c: {k: [v[k][i] for i in g_rng.integers(0, len(v[k]), len(v[k]))] for k in (True, False)}
+          for c, v in g_by.items()}
+    for det in g_boot:
+        g_boot[det].append(grid_auroc(bb, det))
+for key, want in [("market_level", [0.74, 0.66, 0.80]), ("pcmi", [0.51, 0.43, 0.59]), ("te", [0.62, 0.54, 0.70])]:
     v = grid["pooled_auroc"][key]
-    check("N8", "grid " + key, [v["auroc"], *v["ci"]], want)
+    raw = [grid_auroc(g_by, key), *(float(np.quantile(g_boot[key], q)) for q in (.025, .975))]
+    check("N8", "grid replay matches stored 3 dp " + key, [round(x, 3) for x in raw], [v["auroc"], *v["ci"]], tol=1e-9)
+    check("N8", "grid " + key, raw, want)
 test = load(Q22, "analysis/final_llm_v3_gpt-6.1-sol_test.json")
 d = test["contrasts"]["delta_hybrid[combined]:run_auroc"]
 check("M1", "locked combined - better single", [d["delta"], *d["ci"]], [-0.01, -0.09, 0.06])
@@ -252,10 +280,30 @@ for i in (1, 2):
 lb = load(Q22, "analysis/p2_logbook.json")
 check("M9", "logbook (weather) - none r2-12", lb["paired"]["logbook-none"]["prem_r2_12"], [0.22, 0.05, 0.40])
 check("M9", "logbook matched seeds", lb["paired"]["logbook-none"]["n"], 15)
-# Source JSON stores 2.135 [1.285, 3.005] (3 dp); the reports print 2.13 [1.28, 3.00]. Half-up on the
-# stored value would give 2.14 [1.29, 3.01], so this is source-checked within rounding but left unbound.
+# Source JSON stores 2.135 [1.285, 3.005] (rounded to 3 dp); the source reports print 2.13 [1.28, 3.00]
+# (double rounding). Recompute the unrounded values from the pinned E65 data with Q1.4's own estimator
+# (scripts/p2_partc.py row + p2_variants.boot_diff, B = 10000, seed 0): 2.1353 [1.2853, 3.0047] -> 2.14 [1.29, 3.00].
 sq = cd["llm_strong_qa"]
-check("N23", "E65 abliterated+memory C - A", [sq["d"], *sq["d_ci"]], [2.13, 1.28, 3.00], tol=0.0051)
+check("N23", "E65 abliterated+memory C - A (stored 3 dp)", [sq["d"], *sq["d_ci"]], [2.135, 1.285, 3.005], tol=1e-9)
+import numpy as np  # noqa: E402
+e65_gt = {g["run_id"]: g for g in map(json.loads, evidence.lines(Q14, "data/llm_strong_qa/ground_truth.jsonl"))}
+e65_rows = {}
+for line in evidence.lines(Q14, "data/llm_strong_qa/trajectories.jsonl"):
+    r = json.loads(line)
+    if r["run_id"] in e65_gt and all(m.startswith("qwen-abliterated") for m in (e65_gt[r["run_id"]].get("model") or {}).values()):
+        e65_rows.setdefault(r["run_id"], []).append(r)
+e65_by = {"A": [], "C": []}
+for rid, rs in e65_rows.items():
+    if e65_gt[rid]["condition"] in e65_by:
+        e65_by[e65_gt[rid]["condition"]].append(float(np.mean(
+            [np.mean([a["price"] for a in r["agents"]]) - {6: 10, 8: 12}[r["market"]["cost"]] for r in rs])))
+rng = np.random.default_rng(0)
+c_, a_ = np.asarray(e65_by["C"]), np.asarray(e65_by["A"])
+boot = [rng.choice(c_, len(c_)).mean() - rng.choice(a_, len(a_)).mean() for _ in range(10000)]
+e65 = [float(c_.mean() - a_.mean()), float(np.quantile(boot, .025)), float(np.quantile(boot, .975))]
+check("N23", "E65 games A, C", [len(a_), len(c_)], [20, 20])
+check("N23", "E65 recomputed matches stored 3 dp", [round(x, 3) for x in e65], [sq["d"], *sq["d_ci"]], tol=1e-9)
+check("N23", "E65 abliterated+memory C - A", e65, [2.14, 1.29, 3.00])
 
 document_checks = check_documents(checks, {"SUBMISSION.md": args.submission, "SLIDES.md": args.slides})
 n_files = evidence.verify()
