@@ -5,7 +5,7 @@
  "n_evidence_files": 76,
  "evidence_manifest_sha256": "155529253402366acaef7627d5ad3a0f597fdd4195105b7b51d93f38b08f4125",
  "document_bindings_sha256": "20279e7fa1c15011d7786802bbc71659582b3af89a7899050649e534c930d271",
- "n_checks": 107,
+ "n_checks": 111,
  "n_fail": 0,
  "checks": [
   {
@@ -518,14 +518,36 @@
   },
   {
    "row": "M34",
+   "what": "action view unrounded matches stored 3 dp",
+   "got": 0.575,
+   "want": 0.575,
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "row": "M34",
+   "what": "action view strict n, tacit-high n",
+   "got": [
+    13,
+    19
+   ],
+   "want": [
+    13,
+    19
+   ],
+   "tol": 0.005,
+   "ok": true
+  },
+  {
+   "row": "M34",
    "what": "Fig.6 price views strict vs tacit-high: min/max point",
    "got": [
     0.429,
-    0.575
+    0.5748987854251012
    ],
    "want": [
     0.43,
-    0.58
+    0.57
    ],
    "tol": 0.005,
    "ok": true
@@ -1120,16 +1142,32 @@
   },
   {
    "row": "M6",
-   "what": "Qwen executed combined - action",
+   "what": "Qwen executed combined - action unrounded matches stored 3 dp",
    "got": [
     -0.304,
     -0.443,
     -0.165
    ],
    "want": [
+    -0.304,
+    -0.443,
+    -0.165
+   ],
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "row": "M6",
+   "what": "Qwen executed combined - action",
+   "got": [
+    -0.30357142857142855,
+    -0.44349702380952377,
+    -0.16486607142857154
+   ],
+   "want": [
     -0.3,
     -0.44,
-    -0.17
+    -0.16
    ],
    "tol": 0.005,
    "ok": true
@@ -1298,7 +1336,7 @@
   },
   {
    "row": "M33",
-   "what": "Spearman within no-channel",
+   "what": "Spearman within no-channel unrounded matches stored 3 dp",
    "got": [
     -0.405,
     -0.833,
@@ -1306,7 +1344,25 @@
     15
    ],
    "want": [
-    -0.41,
+    -0.405,
+    -0.833,
+    0.178,
+    15
+   ],
+   "tol": 1e-09,
+   "ok": true
+  },
+  {
+   "row": "M33",
+   "what": "Spearman within no-channel",
+   "got": [
+    -0.4046200510212668,
+    -0.8325820617903426,
+    0.17776393551121933,
+    15
+   ],
+   "want": [
+    -0.4,
     -0.83,
     0.18,
     15
@@ -1502,7 +1558,7 @@
  "n_document_checks": 138,
  "n_document_fail": 0,
  "document_sha256": {
-  "SUBMISSION.md": "696f12363c63568579f81b307cce699d5c6618c8b360664a41e022d114b9d485",
+  "SUBMISSION.md": "7b781112924119d8e931e5462a274254adf3d82d036d8d72b0d2921ba754b27b",
   "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
  },
  "document_checks": [
@@ -2467,12 +2523,12 @@
    ],
    "source_values": [
     "0.429",
-    "0.575"
+    "0.5748987854251012"
    ],
    "printed_values": [
     [
      "0.43",
-     "0.58"
+     "0.57"
     ]
    ],
    "matches": 1,
@@ -3687,13 +3743,13 @@
     2
    ],
    "source_values": [
-    "-0.405",
-    "-0.833",
-    "0.178"
+    "-0.4046200510212668",
+    "-0.8325820617903426",
+    "0.17776393551121933"
    ],
    "printed_values": [
     [
-     "-0.41",
+     "-0.40",
      "-0.83",
      "+0.18"
     ]
@@ -3825,15 +3881,15 @@
     2
    ],
    "source_values": [
-    "-0.304",
-    "-0.443",
-    "-0.165"
+    "-0.30357142857142855",
+    "-0.44349702380952377",
+    "-0.16486607142857154"
    ],
    "printed_values": [
     [
      "-0.30",
      "-0.44",
-     "-0.17"
+     "-0.16"
     ]
    ],
    "matches": 1,
@@ -4188,12 +4244,12 @@
    ],
    "source_values": [
     "0.429",
-    "0.575"
+    "0.5748987854251012"
    ],
    "printed_values": [
     [
      "0.43",
-     "0.58"
+     "0.57"
     ]
    ],
    "matches": 1,

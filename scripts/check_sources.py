@@ -137,8 +137,17 @@ check("M19", "placebo - private r2-12", pl, [0.03, -0.54, 0.49])
 
 se = load(Q22, "analysis/p2_strong_eval_llm_p2strongF.json")["detectors"]
 pv = [se[k]["auroc_strict_vs_tacit_high"] for k in ("premium", "market_excess_nash", "action", "action_stats")]
-check("M34", "Fig.6 price views strict vs tacit-high: min/max point", [min(v[0] for v in pv), max(v[0] for v in pv)],
-      [0.43, 0.58])
+# Three Q2.2 values are stored at 3 dp on a tie (action 0.575, -0.165, -0.405). Their unrounded values come from
+# scripts/recompute_unrounded_q22.py (Q2.2's own code; needs the Q2.2 checkout) -> results/unrounded_q22.json;
+# each must round to the pinned stored value, and the printed numbers are checked against the unrounded ones.
+unr = json.loads((ROOT / "results/unrounded_q22.json").read_text())
+act = unr["M34_action_strict_vs_tacit_high"]
+check("M34", "action view unrounded matches stored 3 dp", round(act["value"], 3), se["action"]["auroc_strict_vs_tacit_high"][0], tol=1e-9)
+check("M34", "action view strict n, tacit-high n", [act["n_strict"], act["n_tacit_high"]], [13, 19])
+pv_raw = [v[0] for v in pv]
+pv_raw[2] = act["value"]
+check("M34", "Fig.6 price views strict vs tacit-high: min/max point", [min(pv_raw), max(pv_raw)],
+      [0.43, 0.57])
 check("M34", "all price-view CIs include 0.5", all(v[1] < 0.5 < v[2] for v in pv), True)
 
 salt = load(Q22, "analysis/salt_d1.json")["E105_audit"]["auroc_no_verdict_words"]
@@ -246,7 +255,12 @@ sec = load(Q22, "analysis/e113_secondary.json")["stratified"]["executed_vs_A"]
 for key, name, want in [("qwen_combined_minus_action", "Qwen executed combined - action", [-0.30, -0.44, -0.17]),
                         ("luna_combined_minus_action", "luna executed combined - action", [0.16, 0.05, 0.28]),
                         ("luna_silent_combined_minus_action_posthoc", "luna silent executed", [0.12, -0.08, 0.32])]:
-    check("M6" if "silent" not in key else "M31", name, [sec[key]["delta"], *sec[key]["ci"]], want)
+    got = [sec[key]["delta"], *sec[key]["ci"]]
+    if key == "qwen_combined_minus_action":
+        raw = unr["M6_qwen_executed_combined_minus_action"]
+        check("M6", name + " unrounded matches stored 3 dp", [round(x, 3) for x in raw["value"]], got, tol=1e-9)
+        got, want = raw["value"], [-0.30, -0.44, -0.16]
+    check("M6" if "silent" not in key else "M31", name, got, want)
 sd = load(Q22, "analysis/salt_d1.json")
 check("M7", "SALT text auditor", [sd["E105_audit"]["auroc"]["est"], *sd["E105_audit"]["auroc"]["ci"]],
       [0.87, 0.83, 0.91])
@@ -263,8 +277,10 @@ check("M13", "premium precision@0.05", load(Q22, "analysis/p2_prevalence.json")[
       ["precision@0.05"][0], 0.24)
 sp = load(Q22, "analysis/e132_inversion.json")["sets"]["Qwen3.8 base"]
 check("M33", "Spearman text vs invite pooled", sp["spearman_text_vs_invite_rate_pooled"], [0.49, 0.17, 0.71, 30])
-check("M33", "Spearman within no-channel", sp["spearman_text_vs_invite_rate_within_no_channel"],
-      [-0.41, -0.83, 0.18, 15])
+raw = unr["M33_qwen38_base_within_no_channel"]["value"]
+check("M33", "Spearman within no-channel unrounded matches stored 3 dp", [round(x, 3) for x in raw[:3]] + raw[3:],
+      sp["spearman_text_vs_invite_rate_within_no_channel"], tol=1e-9)
+check("M33", "Spearman within no-channel", raw, [-0.40, -0.83, 0.18, 15])
 
 lx = load(Q22, "label_xfam.json")["datasets"]
 check("M15", "3-class kappa llm_v3 / llm_v3rep", [lx["llm_v3"]["kappa_3class"], lx["llm_v3rep"]["kappa_3class"]],

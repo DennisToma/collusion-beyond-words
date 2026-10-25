@@ -1,0 +1,25 @@
+{
+ "q22_commit": "94f078e088a5d6d3138198e2b5725a331ca8d0da",
+ "M6_qwen_executed_combined_minus_action": {
+  "value": [
+   -0.30357142857142855,
+   -0.44349702380952377,
+   -0.16486607142857154
+  ],
+  "n_cells": 7
+ },
+ "M33_qwen38_base_within_no_channel": {
+  "value": [
+   -0.4046200510212668,
+   -0.8325820617903426,
+   0.17776393551121933,
+   15
+  ]
+ },
+ "M34_action_strict_vs_tacit_high": {
+  "value": 0.5748987854251012,
+  "fraction": "142/247",
+  "n_strict": 13,
+  "n_tacit_high": 19
+ }
+}

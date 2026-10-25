@@ -15,7 +15,7 @@
   ],
   "evidence_manifest_sha256": "155529253402366acaef7627d5ad3a0f597fdd4195105b7b51d93f38b08f4125",
   "document_sha256": {
-    "SUBMISSION.md": "1d36fff12cd71283c8805d023b2aeafc7293e6020459be28eadd401ae588f00e",
+    "SUBMISSION.md": "7b781112924119d8e931e5462a274254adf3d82d036d8d72b0d2921ba754b27b",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
   },
   "figure_sha256": {
@@ -27,7 +27,7 @@
     "fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
   },
   "standalone": {
-    "n_checks": 107,
+    "n_checks": 111,
     "n_document_checks": 138,
     "n_evidence_files": 76,
     "n_fail": 0,

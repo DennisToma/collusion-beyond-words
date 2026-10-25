@@ -70,7 +70,7 @@ class ReproductionChecks(unittest.TestCase):
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
         self.assertEqual(self.receipt["n_evidence_files"], 76)
-        self.assertEqual(self.receipt["n_checks"], 107)
+        self.assertEqual(self.receipt["n_checks"], 111)
         self.assertEqual(self.receipt["n_document_checks"], 138)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
 
@@ -81,13 +81,15 @@ class ReproductionChecks(unittest.TestCase):
         self.mutation("SLIDES.md", "−0.01 [−0.09, +0.06]", "−0.01 [−0.09, +0.60]")
 
     def test_half_up_boundary_rejects_alternative_rounding(self):
-        # Saved value 0.575 must print 0.58 under our declared half-up policy.
-        # The earlier tolerance-only checker accepted both 0.57 and 0.58.
-        self.mutation("SUBMISSION.md", "no resolved separation (AUROC 0.43–0.58,",
-                      "no resolved separation (AUROC 0.43–0.57,")
+        # Saved value 0.575 is a 3-dp tie; the exact value is 142/247 = 0.5749, so the report prints 0.57.
+        # Half-up on the stored value (0.58, the double-rounded source print) must be rejected, as must
+        # the earlier tolerance-only acceptance of either. Same for the grid CI (stored 0.805, exact 0.8047).
+        self.mutation("SUBMISSION.md", "no resolved separation (AUROC 0.43–0.57,",
+                      "no resolved separation (AUROC 0.43–0.58,")
+        self.mutation("SLIDES.md", "| 0.74 [0.66, 0.80] |", "| 0.74 [0.66, 0.81] |")
 
     def test_reducing_precision_cannot_widen_tolerance(self):
-        self.mutation("SUBMISSION.md", "no resolved separation (AUROC 0.43–0.58,",
+        self.mutation("SUBMISSION.md", "no resolved separation (AUROC 0.43–0.57,",
                       "no resolved separation (AUROC 0–1,")
         self.mutation("SLIDES.md", "−0.01 [−0.09, +0.06]", "0 [0, 0]")
 

@@ -26,7 +26,7 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   overflow into page padding, horizontal overflow, and text below the font floor are rejected.
   Receipt: `results/export_test.json`. Existing scientific estimates are unchanged. Iteration 10 fixed a Markdown
   line wrap: `+ public facts` no longer accidentally starts a list in Methods.
-- Saved-value/document check: `uv run python scripts/check_sources.py` passes **107/107 source assertions,
+- Saved-value/document check: `uv run python scripts/check_sources.py` passes **111/111 source assertions,
   138/138 document bindings, and 76 evidence-file hash checks**. The document bindings extract
   printed numbers from SUBMISSION.md and SLIDES.md and compare them directly with saved source values,
   using half-up rounding. Iteration 14 extended them to Tables 1–2 and §5.2–5.4: `scripts/number_coverage.py` reports 222/260
