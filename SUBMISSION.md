@@ -412,7 +412,7 @@ agents' rule files and an LLM-call helper with rate limiting and call logging. T
 scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
 were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
 beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
-possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 346 manager iterations had completed by 2026-10-25 12:44 UTC (224 Opus, 122
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 353 manager iterations had completed by 2026-10-25 13:07 UTC (228 Opus, 125
 gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
 A separate director loop
 (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,

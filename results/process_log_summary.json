@@ -12,13 +12,13 @@
     "last_end": "Sat Oct 24 06:00:17 UTC 2026"
    },
    "phase2": {
-    "completed_iterations": 141,
+    "completed_iterations": 143,
     "by_backend": {
-     "codex-sol": 59,
-     "opus": 82
+     "codex-sol": 60,
+     "opus": 83
     },
     "first_start": "Sat Oct 24 06:27:45 AM UTC 2026",
-    "last_end": "Sun Oct 25 12:44:39 PM UTC 2026"
+    "last_end": "Sun Oct 25 01:02:20 PM UTC 2026"
    }
   },
   "collusion-22-say-vs-do": {
@@ -32,32 +32,32 @@
     "last_end": "Sat Oct 24 06:19:56 UTC 2026"
    },
    "phase2": {
-    "completed_iterations": 147,
+    "completed_iterations": 152,
     "by_backend": {
-     "codex-sol": 55,
-     "opus": 92
+     "codex-sol": 57,
+     "opus": 95
     },
     "first_start": "Sat Oct 24 06:27:45 AM UTC 2026",
-    "last_end": "Sun Oct 25 12:23:51 PM UTC 2026"
+    "last_end": "Sun Oct 25 01:07:44 PM UTC 2026"
    }
   },
   "collusion-beyond-words": {
    "phase1": null,
    "phase2": {
-    "completed_iterations": 27,
+    "completed_iterations": 30,
     "by_backend": {
-     "codex-sol": 6,
+     "codex-sol": 9,
      "opus": 21
     },
     "first_start": "Sun Oct 25 08:00:00 AM UTC 2026",
-    "last_end": "Sun Oct 25 12:40:12 PM UTC 2026"
+    "last_end": "Sun Oct 25 01:11:12 PM UTC 2026"
    }
   }
  },
  "source_repos_total_by_backend": {
-  "codex-sol": 122,
-  "opus": 224
+  "codex-sol": 125,
+  "opus": 228
  },
- "source_repos_total": 346,
- "source_repos_snapshot_utc": "2026-10-25 12:44 UTC"
+ "source_repos_total": 353,
+ "source_repos_snapshot_utc": "2026-10-25 13:07 UTC"
 }
