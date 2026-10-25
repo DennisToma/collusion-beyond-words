@@ -1,0 +1,33 @@
+{
+  "n_tests": 9,
+  "n_fail": 0,
+  "n_errors": 0,
+  "tests": [
+    "test_corrupt_evidence_is_rejected",
+    "test_edited_primary_endpoint_is_rejected",
+    "test_edited_slide_interval_is_rejected",
+    "test_figures_reproduce_without_source_repos",
+    "test_half_up_boundary_rejects_alternative_rounding",
+    "test_live_mode_rejects_changed_source",
+    "test_missing_binding_is_rejected",
+    "test_reducing_precision_cannot_widen_tolerance",
+    "test_standalone_sources_and_documents"
+  ],
+  "evidence_manifest_sha256": "dcbe52672276708b83792c225212051748a6218e9d60e83f6e7673f1868ed7d4",
+  "document_sha256": {
+    "SUBMISSION.md": "c6dc4e8ae151778a01651fc348bfb17e5472770b51bd8c97c0ab734ef6f546c9",
+    "SLIDES.md": "bda209b126b95516987dde775efac6b9e9adfa06a6d8a8c5b31c79dac04b1517"
+  },
+  "figure_sha256": {
+    "fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+    "fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
+  },
+  "standalone": {
+    "n_checks": 57,
+    "n_document_checks": 64,
+    "n_evidence_files": 66,
+    "n_fail": 0,
+    "n_document_fail": 0
+  },
+  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. Both figures byte-identical."
+}

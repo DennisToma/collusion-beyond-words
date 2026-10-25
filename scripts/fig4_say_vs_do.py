@@ -1,12 +1,11 @@
-"""Copied from collusion-22-say-vs-do/fig_summary.py (read-only source); only the x-axis label and paths changed.
+"""Adapted from collusion-22-say-vs-do/fig_summary.py; label fix and bundled input loading.
 Abstract-level summary figure, built only from existing results JSON (no LLM calls, no refitting).
 
 Left: run AUROC [95% bootstrap CI] per scorer on the locked test split (n=95) and the fresh replication
 (llm_v3rep, n=30). Right: flag rate at frozen dev thresholds in the placebo-channel stratum (exploration).
 
-uv run python fig_summary.py  ->  figures/fig4_say_vs_do_summary.png
+uv run python scripts/fig4_say_vs_do.py  ->  figures/fig4_say_vs_do_summary.png
 """
-import json
 import math
 
 import matplotlib
@@ -14,14 +13,15 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-import os
-Q22 = os.path.expanduser("~/collusion/collusion-22-say-vs-do")
-A = Q22 + "/results/analysis/"
-test = json.load(open(A + "final_llm_v3_gpt-6.1-sol_test.json"))["point_ci"]
-rep = json.load(open(A + "replication_llm_v3rep.json"))["point_ci"]
-ed_test = json.load(open(A + "early_detection_llm_v3.json"))["results"]["test"]["r1-1"]["run_auroc"]
-ed_rep = json.load(open(A + "early_detection_llm_v3rep.json"))["results"]["all"]["r1-1"]["run_auroc"]
-plc = json.load(open(A + "placebo_llm_v3plc.json"))
+from evidence import Evidence, ROOT
+evidence = Evidence()
+def load(name):
+    return evidence.json("q22", "results/analysis/" + name)
+test = load("final_llm_v3_gpt-6.1-sol_test.json")["point_ci"]
+rep = load("replication_llm_v3rep.json")["point_ci"]
+ed_test = load("early_detection_llm_v3.json")["results"]["test"]["r1-1"]["run_auroc"]
+ed_rep = load("early_detection_llm_v3rep.json")["results"]["all"]["r1-1"]["run_auroc"]
+plc = load("placebo_llm_v3plc.json")
 
 # (label, test [pt, lo, hi], rep [pt, lo, hi], kind)
 rows = [
@@ -88,5 +88,5 @@ bx.legend(fontsize=8, loc="upper left")
 bx.set_title("(b) Placebo stratum (exploration, 15 matched seeds; 10 none):\nfrequent flags without delivered private messages",
              fontsize=10)
 fig.tight_layout()
-fig.savefig("figures/fig4_say_vs_do_summary.png", dpi=140)
+fig.savefig(ROOT / "figures/fig4_say_vs_do_summary.png", dpi=140)
 print("wrote figures/fig4_say_vs_do_summary.png")

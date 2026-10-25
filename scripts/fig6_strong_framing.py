@@ -1,22 +1,22 @@
-"""Copied from collusion-22-say-vs-do/p2_strongF_fig.py (read-only source); only the threshold label and paths changed
+"""Adapted from collusion-22-say-vs-do/p2_strongF_fig.py; label fix and bundled input loading
 (source label said "2nd half"; the registered window is rounds 11-40, p2_strong_eval.py --late 11).
 uv run python scripts/fig6_strong_framing.py  ->  figures/fig6_strong_framing_tacit.png
 Part C figure (P2.7): market-mean price minus Nash per round, by E99-amend behaviour class.
 Reads data/<ds>/trajectories.jsonl + results/analysis/p2_strong_classes_<ds>.json (written by p2_strong_eval.py; no LLM calls).
 Left: every run (thin). Right: class mean with 95% bootstrap band over runs. Nash = cost + 5 per round (as p2_strong.py).
-Usage: uv run python p2_strongF_fig.py --ds llm_p2strongF  ->  figures/p2_strong_<ds>.png"""
-import argparse, json, os
-Q22 = os.path.expanduser("~/collusion/collusion-22-say-vs-do") + "/"
+The portable bundle contains llm_p2strongF only."""
+import argparse, json
+from evidence import Evidence, ROOT
 from collections import defaultdict
-from pathlib import Path
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 ap = argparse.ArgumentParser(); ap.add_argument("--ds", default="llm_p2strongF"); a = ap.parse_args()
-C = json.load(open(Q22 + f"results/analysis/p2_strong_classes_{a.ds}.json"))["runs"]
+evidence = Evidence()
+C = evidence.json("q22", f"results/analysis/p2_strong_classes_{a.ds}.json")["runs"]
 X = defaultdict(dict)  # run -> round -> market mean excess over Nash
-for r in map(json.loads, open(Q22 + f"data/{a.ds}/trajectories.jsonl")):
+for r in map(json.loads, evidence.lines("q22", f"data/{a.ds}/trajectories.jsonl")):
     if r["run_id"] in C:
         X[r["run_id"]][r["round"]] = np.mean([g["price"] for g in r["agents"]]) - (r["market"]["cost"] + 5)
 # categorical slots 1-4 (validated light palette); line style = secondary encoding (contrast WARN on aqua/yellow)
@@ -52,4 +52,4 @@ fig.legend(h, l, fontsize=8, frameon=False, loc="lower center", ncol=4)
 ax[1].set_xlim(right=ax[1].get_xlim()[1] * 1.18)
 fig.suptitle(f"Strong framing ({a.ds}): price paths by behaviour class", fontsize=11)
 fig.tight_layout(rect=(0, 0.07, 1, 1))
-out = Path("figures/fig6_strong_framing_tacit.png"); fig.savefig(out, dpi=130); print("wrote", out)
+out = ROOT / "figures/fig6_strong_framing_tacit.png"; fig.savefig(out, dpi=130); print("wrote", out)

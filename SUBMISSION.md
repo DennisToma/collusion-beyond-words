@@ -382,9 +382,18 @@ need validation against matched no-collusion references before a flag is read as
 
 ## Reproducibility
 
-Code, data and per-claim JSON live in the source repos (commits in [SOURCES.md](SOURCES.md)); each has a
+Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.com/DennisToma/collusion-14-infotheory),
+[Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
-from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). Figures in `figures/` are copies of the source figures, except Fig. 4 and Fig. 6, which `scripts/fig4_say_vs_do.py` and `scripts/fig6_strong_framing.py` regenerate from source JSON (label fixes only). `scripts/check_sources.py` re-checks 44 report values against the source JSON; from a fresh clone it passes 44/44 and reproduces both figures byte-identically. `SUBMISSION.pdf` and `SLIDES.pdf` are built by
+from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
+[evidence bundle](evidence/README.md) contains 66 exact files from the pinned source commits, with SHA256
+provenance. It supports checking saved results and rendering Fig. 4/6 without sibling checkouts or model
+credentials; it does not regenerate the experiments. The other figures are committed copies.
+`scripts/check_sources.py` passes 57 saved-source assertions and 64 bindings that extract selected printed
+numbers from this report and the slides, plus all bundle-file hashes. It does not certify unbound numbers
+or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
+independent-copy reproduction of both figures byte-identically and rejection of deliberately bad inputs.
+`SUBMISSION.pdf` and `SLIDES.pdf` are built by
 `uv run --group export python scripts/export_pdf.py`.
 
 ## References

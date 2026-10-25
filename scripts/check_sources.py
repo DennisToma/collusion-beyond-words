@@ -1,28 +1,37 @@
-"""Re-check SOURCES.md rows against the source repos' result JSON (read-only).
+"""Check saved source values AND numbers extracted from the report and slides.
 
-Covers the rows that were not yet machine-checked plus a sample of ticked ones. Each check reads a value
-from the sibling repo's results/ and compares it (within half a unit of the printed last digit, i.e. half-up rounding) with the number in
-SUBMISSION.md. Writes results/source_check.json and exits non-zero on any mismatch.
+The portable evidence bundle is the default; --live reads sibling checkouts and
+requires their files to match the pinned evidence hashes. Document bindings cover
+selected numeric claims, not every number or the meaning of surrounding prose.
+Writes results/source_check.json and exits non-zero on any mismatch.
 
     uv run python scripts/check_sources.py
 """
 import json
-import subprocess
+import argparse
+import hashlib
 import sys
 from pathlib import Path
+from evidence import Evidence, ROOT, MANIFEST
+from document_checks import check_documents
 
-HOME = Path.home() / "collusion"
-Q14 = HOME / "collusion-14-infotheory"
-Q22 = HOME / "collusion-22-say-vs-do"
-OUT = Path(__file__).resolve().parent.parent / "results" / "source_check.json"
+ap = argparse.ArgumentParser(description=__doc__)
+ap.add_argument("--live", action="store_true", help="Read pinned files from the sibling checkouts")
+ap.add_argument("--submission", type=Path, default=ROOT / "SUBMISSION.md")
+ap.add_argument("--slides", type=Path, default=ROOT / "SLIDES.md")
+ap.add_argument("--output", type=Path, default=ROOT / "results/source_check.json")
+args = ap.parse_args()
+evidence = Evidence(live=args.live)
+Q14, Q22 = "q14", "q22"
+OUT = args.output
 
 _cache = {}
 
 
 def load(repo, rel):
-    p = repo / "results" / rel
+    p = (repo, rel)
     if p not in _cache:
-        _cache[p] = json.loads(p.read_text())
+        _cache[p] = evidence.json(repo, "results/" + rel)
     return _cache[p]
 
 
@@ -36,7 +45,7 @@ def check(row, what, got, want, tol=0.005):
         ok = abs(got - want) <= tol + 1e-9
     else:
         ok = got == want
-    checks.append({"row": row, "what": what, "got": got, "want": want, "ok": bool(ok)})
+    checks.append({"row": row, "what": what, "got": got, "want": want, "tol": tol, "ok": bool(ok)})
 
 
 # ---------------- Q1.4 ----------------
@@ -132,16 +141,46 @@ check("M34", "Fig.6 price views strict vs tacit-high: min/max point", [min(v[0] 
       [0.43, 0.58])
 check("M34", "all price-view CIs include 0.5", all(v[1] < 0.5 < v[2] for v in pv), True)
 
+# Further headline quantities, formerly checked only by the human/source reviews.
+lc = cd["llm_long_p2_T60"]
+check("N5", "T60 pCMI", [lc["pcmi"], *lc["pcmi_ci"]], [0.34, 0.18, 0.52])
+ex = load(Q14, "eval/p2_partc.json")["E64_pooled"]["all sets"]
+check("N7", "executed pCMI", [ex["pcmi"]["executed"]["auroc"], *ex["pcmi"]["executed"]["ci"]], [0.42, 0.33, 0.53])
+check("N7", "executed counts", [ex["n_executed"], ex["n_executed"] + ex["n_not_executed"]], [48, 149], tol=0)
+check("N7", "executed pair-level", [ex["pair_level"]["executed"]["auroc"], *ex["pair_level"]["executed"]["ci"]], [0.87, 0.80, 0.94])
+grid = load(Q14, "eval/e70_grid.json")
+for key, want in [("market_level", [0.74, 0.66, 0.81]), ("pcmi", [0.51, 0.43, 0.59]), ("te", [0.62, 0.54, 0.70])]:
+    v = grid["pooled_auroc"][key]
+    check("N8", "grid " + key, [v["auroc"], *v["ci"]], want)
+test = load(Q22, "analysis/final_llm_v3_gpt-6.1-sol_test.json")
+d = test["contrasts"]["delta_hybrid[combined]:run_auroc"]
+check("M1", "locked combined - better single", [d["delta"], *d["ci"]], [-0.01, -0.09, 0.06])
+check("M1", "locked n", test["n_runs"], 95, tol=0)
+for key, want in [("text", [0.47, 0.36, 0.58]), ("action", [0.75, 0.65, 0.85])]:
+    check("M3", "locked " + key, test["point_ci"][key]["run_auroc"], want)
+classes = load(Q22, "analysis/p2_strong_classes_llm_p2strongF.json")
+check("M10", "strong tacit-high count", classes["n_tacit_high_none"], [19, 20], tol=0)
+check("M10", "strong strict-executed count", classes["n_strict_executed"], [13, 20], tol=0)
 
-def head(repo):
-    return subprocess.run(["git", "-C", str(repo), "rev-parse", "--short", "HEAD"],
-                          capture_output=True, text=True).stdout.strip()
-
-
+document_checks = check_documents(checks, {"SUBMISSION.md": args.submission, "SLIDES.md": args.slides})
+n_files = evidence.verify()
 bad = [c for c in checks if not c["ok"]]
-OUT.write_text(json.dumps({"q14_commit": head(Q14), "q22_commit": head(Q22), "n_checks": len(checks),
-                           "n_fail": len(bad), "checks": checks}, indent=1))
+doc_bad = [c for c in document_checks if not c["ok"]]
+commits = {p + "_commit": c["commit"] for p, c in evidence.manifest["projects"].items()}
+receipt = {**commits, "source_mode": "live" if args.live else "snapshot", "n_evidence_files": n_files,
+           "evidence_manifest_sha256": hashlib.sha256(MANIFEST.read_bytes()).hexdigest(),
+           "document_bindings_sha256": hashlib.sha256((ROOT / "results/document_bindings.json").read_bytes()).hexdigest(),
+           "n_checks": len(checks), "n_fail": len(bad), "checks": checks,
+           "n_document_checks": len(document_checks), "n_document_fail": len(doc_bad),
+           "document_sha256": {name: hashlib.sha256(path.read_bytes()).hexdigest()
+                               for name, path in {"SUBMISSION.md": args.submission, "SLIDES.md": args.slides}.items()},
+           "document_checks": document_checks}
+OUT.write_text(json.dumps(receipt, indent=1) + "\n")
 for c in checks:
     print(("OK  " if c["ok"] else "FAIL"), c["row"], c["what"], c["got"], "want", c["want"])
-print(f"{len(checks) - len(bad)}/{len(checks)} checks pass (Q1.4 {head(Q14)}, Q2.2 {head(Q22)}) -> {OUT}")
-sys.exit(1 if bad else 0)
+for c in doc_bad:
+    print("FAIL document", c)
+print(f"{len(checks) - len(bad)}/{len(checks)} source checks; "
+      f"{len(document_checks) - len(doc_bad)}/{len(document_checks)} document bindings; "
+      f"{n_files} evidence hashes ({receipt['source_mode']}) -> {OUT}")
+sys.exit(1 if bad or doc_bad else 0)

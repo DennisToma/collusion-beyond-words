@@ -1,0 +1,597 @@
+[
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N1:main sets",
+    "template": "with the channel in all {} main sets",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N1:main sets with C-A CI > 0",
+    "template": "C - A CI > 0 in {}/9",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N2:point level > pCMI",
+    "template": "all {} (0.75-0.99 vs 0.34-0.72;",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N2:markup AUROC range",
+    "template": "all 9 ({}-{} vs 0.34-0.72;",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N2:pCMI AUROC range",
+    "template": "all 9 (0.75-0.99 vs {}-{};",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N3:level-pCMI CI > 0",
+    "template": "paired-difference CI > 0 in {}/9",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N3:gpt-5.6-luna level-pCMI",
+    "template": "exception gpt-5.6-luna {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N4:pCMI CI contains 0.5",
+    "template": "CI ∋ 0.5 in {}/9",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N4:base Qwen3.6 pCMI",
+    "template": "One base-Qwen3.6 set separates ({} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N20:level-TE CI > 0",
+    "template": "level beats TE (CI > 0) in {}/9",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N20:deepseek TE",
+    "template": "some main sets (deepseek {} [0.62, 0.96]",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N20:base Qwen3.8 TE",
+    "template": "base Qwen3.8 {}); level beats TE",
+    "digits": [
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N9:E70 level-TE",
+    "template": "and in the grid ({} [{}, {}]).",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N13:MI flags common shock (B)",
+    "template": "Raw MI flags {}% of common-shock controls",
+    "scale": 100,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N13:pCMI common shock, shift null",
+    "template": "(pCMI) cuts this to {}% under the",
+    "scale": 100,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N13:pCMI shared policy + shock, surrogate",
+    "template": "hard negative, {}% [{}, {}] under the same-model surrogate null.",
+    "scale": 100,
+    "digits": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N14:level false flags /30",
+    "template": "unequal private costs are false-flagged in {}/30",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N14:pCMI flags /30",
+    "template": "scripted markets (pCMI {}/30;",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N19:reimpl cells agreeing < 1e-9",
+    "template": "on {}/{} run × statistic cells",
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N25:pair_level range (spillover sets)",
+    "template": "in Q1.4's spillover sets pair_level {}-{} vs",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N25:market level range (spillover sets)",
+    "template": "vs market level {}-{}),",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N27:E72 non-executed n / judged yes / no",
+    "template": "n = {}: {} with a judged agreement, {} without",
+    "digits": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N27:E72 executed n",
+    "template": "rather than executed ones (0.49, n = {};",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N12:E72 TE non-exec vs exec",
+    "template": "execution rule ({}, n = 52: 38 with a judged agreement, 14 without) rather than executed ones ({},",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N28:executed n range",
+    "template": "27 variants give {}-{}/149",
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N5:T60 pCMI",
+    "template": "in pre-registered 60-round games ({} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N7:executed pCMI",
+    "template": "(\"executed\", 48/149; {} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N7:executed counts",
+    "template": "(\"executed\", {}/149;",
+    "indices": [
+      0
+    ],
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N7:executed counts",
+    "template": "(\"executed\", 48/{};",
+    "indices": [
+      1
+    ],
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N7:executed pair-level",
+    "template": "pair-level {} [{}, {}] (not inflated)",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N8:grid pcmi",
+    "template": "seven-factor grid ({} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "N8:grid te",
+    "template": "TE is weakly above chance in the grid ({} [{}, {}],",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "prices changes AUROC by {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M1:locked n",
+    "template": "(locked test split, n = {}) and",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M2:pooled fresh combined - better single",
+    "template": "and {} [{}, {}] (fresh replications, pooled post hoc)",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M2:pooled n",
+    "template": "on pooled fresh replications (n = {},",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M5:invite rate channel / control",
+    "template": "{} vs {} in controls, Qwen3.8 base;",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M3:locked text",
+    "template": "95 runs | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M3:locked action",
+    "template": "95 runs | 0.47 [0.36, 0.58] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M12:no-chat LLM vs rule score",
+    "template": "the private chat beats the best raw rule score ({} vs {},",
+    "digits": [
+      2,
+      3
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M12:LLM - rule score",
+    "template": "0.94 vs 0.885, Δ {} [{}, {}], post hoc)",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M12:say-do gap / pair SD",
+    "template": "agreements are held (AUROC {}), but three hand-built say-do features in one logistic model add nothing beyond early price stability ({});",
+    "digits": [
+      2,
+      3
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M16:sol newcomer re-agrees",
+    "template": "private arm: re-agreement replaced; markets >= Nash + 2 replaced | {}/20; 18/20 |",
+    "indices": [
+      0
+    ],
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M16:market >= Nash+2",
+    "template": "private arm: re-agreement replaced; markets >= Nash + 2 replaced | 0/20; {}/20 |",
+    "indices": [
+      0
+    ],
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M19:placebo - private r2-12",
+    "template": "placebo - private over rounds 2-12 is {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M34:Fig.6 price views strict vs tacit-high: min/max point",
+    "template": "no resolved separation (AUROC {}-{},",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M10:strong tacit-high count",
+    "template": "{}/{} gpt-6-luna markets without a channel price ≥ Nash + 2",
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M10:strong strict-executed count",
+    "template": "price ≥ Nash + 2; {}/{} channel pairs strict-execute",
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N2:markup AUROC range",
+    "template": "Max-pair markup AUROC {}-{} vs pCMI",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N2:pCMI AUROC range",
+    "template": "vs pCMI {}-{}; paired difference",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N3:level-pCMI CI > 0",
+    "template": "paired difference CI > 0 in {}/9.",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N8:grid market_level",
+    "template": "(192 games, 7 design factors) | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N8:grid pcmi",
+    "template": "(192 games, 7 design factors) | 0.74 [0.66, 0.81] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N5:T60 pCMI",
+    "template": "60-round long games (pre-registered) | 0.94 [0.86, 1.00] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N7:executed pCMI",
+    "template": "pair-level 0.87 [0.80, 0.94] | {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N7:executed pair-level",
+    "template": "| pair-level {} [{}, {}] |",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N7:executed counts",
+    "template": "executed channel games vs controls ({} of {})",
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "N8:grid te",
+    "template": "Lagged TE weakly above chance in the grid ({} [{}, {}])",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "Combined - better single view: {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M1:locked n",
+    "template": "(locked test, n = {});",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M2:pooled fresh combined - better single",
+    "template": "(locked test, n = 95); {} [{}, {}]",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M5:invite rate channel / control",
+    "template": "less ({} vs {}, post hoc)",
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M19:placebo - private r2-12",
+    "template": "no resolved difference from delivered ({} [{}, {}];",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M10:strong tacit-high count",
+    "template": "{}/{} gpt-6-luna markets without a channel ≥ Nash + 2",
+    "digits": [
+      0,
+      0
+    ]
+  }
+]

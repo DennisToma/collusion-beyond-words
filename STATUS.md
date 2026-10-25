@@ -1,12 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 ~10:09 UTC by `date -u`, merge iteration 8)
-- Sources: Q1.4 `732f08c` (0 open), Q2.2 `91ffb2d` (131-1 applied in v1.5). No new source commits since iter7; no research changes since the 07:30 freeze.
-- Deliverables: SUBMISSION.md v1.5 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (19/19 headings, 378/378 cells, 8/8 slides).
-- Reproducibility verified from a fresh clone (/var/tmp): check_sources.py 44/44; fig4/fig6 scripts and results/source_check.json byte-identical to committed files.
-- README.md rewritten (was a stub): what to read, file map, reproduce commands.
-- Next: (1) until 15:00 check source repos for new flags (they have not yet checked v1.5), apply P1s only; (2) 16:30 finalize = one export pass + push; hard stop 18:00.
-- Risks: safety framing is interpretive (scoped "in these markets", "not adversarial"). Q1.4 judge labels lack cross-family check (stated). Never `pkill -f "codex exec"` broadly (other managers run codex).
+## Current state (2026-10-25 10:21 UTC, merge iteration 9)
+- Latest source HEADs: Q1.4 `732f08c` / Q2.2 `94018c8` (I133 confirms 0 open); evidence stays pinned at `732f08c` / `91ffb2d`, with identical science.
+- SUBMISSION v1.6 changes Reproducibility only; PDF 15 pp, slides 8. Scientific text, tables, slide source and figures unchanged.
+- Fixed verification gap: old 44 checks never read the report. Now 57 saved-source assertions + 64 actual report/slide numeric bindings + 66 file hashes pass.
+- Portable evidence: 66 exact blobs from pinned full commits, deterministic compressed storage; checks and Fig.4/6 no longer need sibling clones.
+- Release: 9/9 checks pass in an independent copy; Fig.4/6 byte-identical to previous HEAD; bad claims, rounding/precision, missing context and corrupt evidence rejected.
+- Independent codex review: one P2 precision bug fixed and rechecked; all 66 source hashes matched to git blobs; no open P1/P2.
+- Export checks pass: 19/19 headings, 378/378 cells, 8/8 slides. Snapshot rebuild byte-identical; all live scientific inputs match (Q2.2 REPORT has one newer review line).
+- Next: check new source HEADs/flags until 15:00 and apply P1s; 16:30 export pass + push; hard stop 18:00.
+- Risks: numeric bindings cover selected claims, not every number or qualitative scope; full experiment regeneration still needs source caches. No broad codex process kills.
 
 ## Log
 - 2026-10-25 10:09 UTC merge iter8: sources unchanged (732f08c/91ffb2d). Fresh-clone reproduction in /var/tmp/repro_bw: 44/44, fig4/fig6 + source_check.json byte-identical. README rewritten; SUBMISSION Reproducibility notes the two regenerated figures + fresh-clone check; REPORT 42→44 count fix. PDFs rebuilt (checks pass). EXPERIMENTS M9 (iter7) + M10 added.
@@ -21,3 +24,7 @@
 - 2026-10-25 08:45 UTC merge iter1: applied Opus review (P1: TE-only-above-chance false, board not in every Q1.4 arm, 'prices at chance' = LLM view not markup, Claude n 5+5, E133 framing; P2: level = assignment+cue, luna E113 gain +0.16 reported, inversion resolved only Qwen3.8, definitions box, label-check caveats, wording 2/5) and codex review (SALT construct, E72 n=52 composition, E133e comparator uses agreed price, soften 'nothing', prevalence scope, placebo not equivalence). SOURCES +13 rows.
 - 2026-10-25 09:00 UTC merge iter2: applied source merge flags (Q1.4 F1/F3, Q2.2 114-4/114-3); added scripts/export_pdf.py (adapted from Q1.4), SLIDES.md, SUBMISSION.pdf, SLIDES.pdf; fixed appendix C12 table row; launched round-2 codex + Opus reviews.
 - 2026-10-25 09:30 UTC merge iter2: applied Opus + codex round-2 reviews of v1.1 + slides, all items. Spot-checked the evidence for luna silent cells, sol inversion, info_exchange labels, late=11 window, E70 factor levels and the logbook control. Trimmed the abstract; rebuilt the PDFs.
+
+- 2026-10-25 10:21 UTC merge iter9 (Codex fallback): chose standalone evidence + real document verification after finding check_sources.py only compared JSON to hard-coded expectations despite its documentation. Added 66 exact, SHA256-pinned source blobs (git show full commits; JSON/JSONL deterministic gzip), source resolver and reconstruction command. Expanded source assertions 44→57 and added 64 per-context numeric bindings for SUBMISSION/SLIDES with fixed per-slot half-up precision; portable Fig.4/6 loaders. Added 9 integration/mutation checks and receipts. Independent fresh-context gpt-6.1-sol high review found one P2: edited integer precision widened tolerance; fixed via declared digits, reviewer reproduced rejection, zero open P1/P2. Reviewer independently matched all 66 raw hashes to pinned source git blobs. Updated README, SOURCES, REPORT and SUBMISSION Reproducibility; scientific text/tables, SLIDES.md and figures unchanged. Snapshot rebuild byte-identical; live mode passes; standalone figures match previous HEAD byte-for-byte; export checks pass (19 headings/378 cells/8 slides; 15 pp). No experiments or auditor calls, only one implementation reviewer. No DIRECTION deviation.
+
+- 2026-10-25 10:23 UTC iter9 source resync: Q2.2 advanced to `94018c8` (I133); it confirms 131-1 applied, 0 open. Diff is REPORT one review line, STATUS and merge_flags only; science unchanged. Kept evidence pin `91ffb2d` rather than chasing review metadata. 65/66 live blobs match exactly; only REPORT metadata differs. Default snapshot check is stable; --live intentionally requires byte-identical pinned checkouts, now documented.
