@@ -142,7 +142,7 @@ agreed on agreed-yes/no in 25/30. Q1.4's judge labels have no cross-family check
 |---|---|---|
 | executed (Q1.4) | judge-labelled agreement AND both pair firms ≥ agreed − 1 in ≥ ½ of post-agreement rounds AND second-half pair mean ≥ Nash + 2 | 48/149 executed games; E70 executed subsets. 27 variants give 13–78/149 (E71) |
 | strict-executed (Q2.2) | registered strict rule for the strong-framing arm (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
-| kept / followed (Q2.2) | E84 follow rule on the locked test: both pair firms price ≥ the judged agreed floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
+| kept / followed (Q2.2) | E84 follow rule on the locked test: judged agreed floor ≥ 12 (lower floors count as trivially kept and are excluded); both pair firms price ≥ that floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
 | tacit-high (Q2.2) | strong-framing no-channel market whose mean price minus cost-adjusted Nash over rounds 11–40 is ≥ 2 (a price threshold, not verified coordination) | 19/20 strong-framing markets |
 
 **Splits and discipline.** Q1.4 detector settings were tuned only on scripted dev seeds and evaluated once
@@ -433,9 +433,10 @@ credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-
 Fig. 5's per-round means are asserted equal to the saved source JSON.
 `scripts/check_sources.py` passes 111 saved-source assertions and 139 bindings that extract printed
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
-decimals are bound (222/260 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
-and model names). It does not certify unbound numbers or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `uv run python tests/test_reproduction.py` passes 9 release checks, including
-independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs.
+decimals are bound (222/260 in the main text, 55/61 in the slides). Each of the other 38 + 6 falls in a declared
+non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
+the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `uv run python tests/test_reproduction.py` passes 11 release checks, including
+independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
 `uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,
 per-slide placement and figure pixels; repository links work in downloaded PDFs.

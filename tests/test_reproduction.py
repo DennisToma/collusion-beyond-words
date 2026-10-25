@@ -74,6 +74,32 @@ class ReproductionChecks(unittest.TestCase):
         self.assertEqual(self.receipt["n_document_checks"], 139)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
 
+    def run_coverage(self):
+        return subprocess.run([sys.executable, str(self.copy / "scripts/number_coverage.py")],
+                              cwd=self.scratch, env=self.env, capture_output=True, text=True, timeout=30)
+
+    def test_every_unbound_decimal_is_a_non_result(self):
+        result = self.run_coverage()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        data = json.loads((self.copy / "results/number_coverage.json").read_text())
+        self.assertEqual([data[d]["unbound_unclassified"] for d in ("SUBMISSION.md", "SLIDES.md")], [0, 0])
+
+    def test_unbound_result_decimal_is_rejected(self):
+        path = self.copy / "SUBMISSION.md"
+        original = path.read_text()
+        try:
+            path.write_text(original.replace("### 5.3", "A new AUROC is 0.73 [0.61, 0.85].\n\n### 5.3", 1))
+            result = self.run_coverage()
+            self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+            self.assertIn("UNCLASSIFIED 0.73", result.stdout)
+            # Review i19: a result placed next to "0.5 = chance" must not inherit that category.
+            path.write_text(original.replace("(0.5 = chance;", "(0.5 = chance; AUROC 0.73 [0.61, 0.85];", 1))
+            result = self.run_coverage()
+            self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+            self.assertIn("UNCLASSIFIED 0.61", result.stdout)
+        finally:
+            path.write_text(original)
+
     def test_edited_primary_endpoint_is_rejected(self):
         self.mutation("SUBMISSION.md", "prices changes AUROC by −0.01", "prices changes AUROC by +0.09")
 
