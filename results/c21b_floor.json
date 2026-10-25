@@ -1,0 +1,37 @@
+{
+ "strict_executed": {
+  "llm_p2qwena|F>=12|late=2": [
+   5,
+   15
+  ],
+  "llm_p2qwena|F>=12|late=11": [
+   5,
+   15
+  ],
+  "llm_p2qwena|F>=13|late=2": [
+   5,
+   15
+  ],
+  "llm_p2qwena|F>=13|late=11": [
+   5,
+   15
+  ],
+  "llm_p2qwenb|F>=12|late=2": [
+   5,
+   15
+  ],
+  "llm_p2qwenb|F>=12|late=11": [
+   5,
+   15
+  ],
+  "llm_p2qwenb|F>=13|late=2": [
+   5,
+   15
+  ],
+  "llm_p2qwenb|F>=13|late=11": [
+   5,
+   15
+  ]
+ },
+ "conclusion": "5/15 in every setting"
+}

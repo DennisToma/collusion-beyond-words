@@ -2,7 +2,7 @@
 
 Apart Research AI Collusion Sprint (23–25 Oct 2026) — Dennis Toma.
 
-**Read first:** [SUBMISSION.pdf](SUBMISSION.pdf) (16 pp; source [SUBMISSION.md](SUBMISSION.md)) and
+**Read first:** [SUBMISSION.pdf](SUBMISSION.pdf) (17 pp; source [SUBMISSION.md](SUBMISSION.md)) and
 [SLIDES.pdf](SLIDES.pdf) (8 slides). One-line result: in our LLM pricing markets a private chat channel
 shows up mainly as *higher prices*; we find no robust contemporaneous price co-movement, public messages give a
 zero-shot LLM auditor no resolved gain, and high prices also arise without any channel — so a price flag
@@ -43,13 +43,13 @@ uv run python scripts/fig1_hard_negatives.py     # byte-identical figures/fig1_*
 uv run python scripts/fig3_e70_grid.py           # byte-identical figures/fig3_*.png
 uv run python scripts/fig4_say_vs_do.py          # byte-identical figures/fig4_*.png
 uv run python scripts/fig6_strong_framing.py     # byte-identical figures/fig6_*.png
-uv run python tests/test_reproduction.py        # standalone + bad-input checks, including all four figure scripts
+uv run python tests/test_reproduction.py        # standalone + bad-input checks, including all six figure scripts
 uv run --group export playwright install chromium   # once
 uv run --group export python scripts/export_pdf.py  # SUBMISSION.pdf + SLIDES.pdf
 uv run --group export python tests/test_export.py   # deliberate export failure checks
 ```
 
-The export receipt is [results/export_check.json](results/export_check.json): all 487 report text
+The export receipt is [results/export_check.json](results/export_check.json): all 492 report text
 fragments and 55 slide text fragments are present (the latter on the correct slide), all 10 embedded
 figures match the source pixels, and PDF links use public URLs. Slide body, table and code text is at
 least 14 pt; Fig. 1 and 3 were re-rendered with larger chart text in iteration 12, but dense raster chart labels can still be smaller and are best inspected in the report or PNGs.
@@ -60,8 +60,8 @@ The checker compares selected printed numeric claims with saved source values us
 it fails if a bound context disappears. It does **not** check every number or certify the meaning of
 the prose; the adversarial reviews and [SOURCES.md](SOURCES.md) cover the wider claims.
 
-The release checks run in an independent copy with source paths set to nonexistent directories. All four
-regenerated figures (Fig. 1, 3, 4, 6) reproduce byte-identically. The bundle pins Q1.4 `732f08c` and Q2.2 `91ffb2d`; see
+The release checks run in an independent copy with source paths set to nonexistent directories. All six
+regenerated figures (Fig. 1–6) reproduce byte-identically. The bundle pins Q1.4 `732f08c` and Q2.2 `91ffb2d`; see
 [evidence/README.md](evidence/README.md) for its scope and rebuilding it from the exact git commits.
 `uv run python scripts/check_sources.py --live` instead checks files in sibling clones under `~/collusion/`
 (override with `BW_Q14_ROOT` / `BW_Q22_ROOT`). Use checkouts at the pinned commits: even later

@@ -121,7 +121,7 @@
    },
    {
     "token": "0.05",
-    "context": "ipted MI/pCMI rows, ≤ 0.19 on LLM sets; this largely follows from α = 0.05; this is not a boun"
+    "context": "pted MI/pCMI rows, ≤ 0.19 on LLM sets). This largely follows from α = 0.05 and is not a bound "
    },
    {
     "token": "0.5",

@@ -16,8 +16,8 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   [Codex](reviews/codex_i11.md) and [Opus](reviews/opus_i11.md) final rechecks have no open P1/P2.
 - Rebuild: `uv run --group export playwright install chromium` (once), then
   `uv run --group export python scripts/export_pdf.py`. [Export receipt](results/export_check.json):
-  **487/487 report text fragments, 55/55 slide fragments on the correct pages, and 10/10 embedded
-  figures with exact source pixels**; legacy checks (19 headings, 378 cells, 8 titles) also pass.
+  **492/492 report text fragments, 55/55 slide fragments on the correct pages, and 10/10 embedded
+  figures with exact source pixels**; legacy checks (21 headings, 378 cells, 8 titles) also pass.
   Slide body/table/code text fits at **≥14 pt** (busy slides previously shrank below that floor); chart labels
   remain raster text and can be smaller. Repository links now resolve to public GitHub URLs rather
   than local `file://` paths. These checks verify text presence and layout constraints, not scientific scope.
@@ -31,17 +31,17 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   printed numbers from SUBMISSION.md and SLIDES.md and compare them directly with saved source values,
   using half-up rounding. Iteration 14 extended them to Tables 1–2 and §5.2–5.4: `scripts/number_coverage.py` reports 222/260
   decimals in the report main text and 55/61 in the slides bound (was 58/254, 36/61; 208/254 after iteration 14). Most unbound tokens are
-  chance levels, α, thresholds and model/section numbers. Iteration 15 pinned the last cited source files (Q1.4 `eval/llm_ds_p2.json`; Q2.2 `p2_cue_llm_p2para{1,2}.json`, `p2_logbook.json`) and bound the paraphrase arms, weather notepad and deepseek TE CI. Iteration 17 found **five double-rounded values**: the sources saved a 3-dp tie (x.xx5) and printed it again at 2 dp. The unrounded values were recomputed with the sources' own estimators. E65 and the grid CI are replayed inside `check_sources.py` from pinned data, after pinning the E65 trajectories (76 files); the 3 Q2.2 values come via `scripts/recompute_unrounded_q22.py`. Each recompute must reproduce the stored 3-dp values exactly. Corrected: E65 +2.14 [1.29, 3.00] (was +2.13 [1.28, 3.00]), grid level 0.74 [0.66, 0.80] (was 0.81), E113 executed −0.30 [−0.44, −0.16] (was −0.17), Qwen3.8-base no-channel Spearman −0.40 (was −0.41), Fig. 6 action 0.57 (was 0.58; exactly 142/247). These are disclosed in SUBMISSION Reproducibility; no conclusion changes. Every bound tie value has now been checked, so E65 is bound and no real claim remains unbound. Bindings do not verify qualitative scope. Receipt:
+  chance levels, α, thresholds and model/section numbers. Iteration 15 pinned the last cited source files (Q1.4 `eval/llm_ds_p2.json`; Q2.2 `p2_cue_llm_p2para{1,2}.json`, `p2_logbook.json`) and bound the paraphrase arms, weather notepad and deepseek TE CI. Iteration 17 found **five double-rounded claims (six numbers)**: the sources saved a 3-dp tie (x.xx5) and printed it again at 2 dp. The unrounded values were recomputed with the sources' own estimators. E65 and the grid CI are replayed inside `check_sources.py` from pinned data, after pinning the E65 trajectories (76 files); the 3 Q2.2 values come via `scripts/recompute_unrounded_q22.py`. Each recompute must reproduce the stored 3-dp values exactly. Corrected: E65 +2.14 [1.29, 3.00] (was +2.13 [1.28, 3.00]), grid level 0.74 [0.66, 0.80] (was 0.81), E113 executed −0.30 [−0.44, −0.16] (was −0.17), Qwen3.8-base no-channel Spearman −0.40 (was −0.41), Fig. 6 action 0.57 (was 0.58; exactly 142/247). These are disclosed in SUBMISSION Reproducibility; no conclusion changes. Every bound tie value has now been checked, and E65 is now bound; the remaining unbound decimals (38 report, 6 slide) are mostly chance levels, thresholds and model names (`results/number_coverage.json`). Bindings do not verify qualitative scope. Receipt:
   `results/source_check.json`. The earlier 44-check script compared only saved JSON with hard-coded
   expected values; iteration 9 corrects its overstated description and adds actual document checks.
 - Standalone reproduction: [evidence/](evidence/README.md) bundles 76 exact source files at Q1.4 `732f08c`
   / Q2.2 `91ffb2d`, with full commit IDs and SHA256 provenance. No sibling clones or model credentials
-  are needed for the checks and Fig. 1/3/4/6 rendering. This verifies saved evidence; full experimental
+  are needed for the checks and the rendering of all six figures. This verifies saved evidence; full experimental
   regeneration still requires the source repos and their caches.
 - Release checks: `uv run python tests/test_reproduction.py` passes **9/9** in an independent copy with
   nonexistent source paths. All six regenerated figures reproduce byte-identically; edited report/slide values, a
   missing binding, incorrect rounding or reduced precision, a corrupt bundle file, and a changed live source are
   rejected. Receipt: `results/reproduction_check.json`.
-- Reviews (`reviews/`): codex v0–v2 and Opus v0–v2 adversarial claim reviews, plus a judge-style presentation review (`judge_v0.md`, applied in v1.4) and a codex + Opus scope review of the v1.4 diff (`codex_v3.md`, applied in v1.5).
+- Reviews (`reviews/`): codex v0–v3, i11, i14, i16, i17, i18 and Opus v0–v2, i11, i18 adversarial reviews, plus a judge-style presentation review (`judge_v0.md`, applied in v1.4) and a codex + Opus scope review of the v1.4 diff (`codex_v3.md`, applied in v1.5).
 - Reproduction implementation review: [codex_reproduction_i9.md](reviews/codex_reproduction_i9.md), one
-  precision bug fixed; no open P1/P2. All 66 source blobs independently checked against the pinned commits.
+  precision bug fixed; no open P1/P2. All 66 source blobs then in the bundle (now 76) independently checked against the pinned commits.

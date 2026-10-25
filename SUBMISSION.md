@@ -22,7 +22,8 @@ from public messages, or from both. AUROC is the auditor's ranking accuracy (0.5
 per-set 95% CIs are uncorrected for multiplicity.
 
 1. **The channel shows up as a higher price level.** Mean markup over the competitive (Nash) price was higher
-   with the channel in all 9 main sets of the prices-only project (Q1.4; 7 seller models). A simple screen on
+   with the channel in all 9 main sets of the prices-only project (Q1.4; 7 seller models; one prompt family —
+   across 5 alternative wordings the effect is resolved in only 2). A simple screen on
    the highest pair's markup had a higher point-estimate AUROC than a conditional-dependence detector (pCMI) in
    all 9 (0.75–0.99 vs 0.34–0.72; paired-difference CI > 0 in 8/9).
 2. **We find no robust contemporaneous co-movement.** pCMI flags and localises every pair in a scripted
@@ -134,14 +135,14 @@ mimo). Profit-maximisation / economics-lab framing after Fish et al. (2024).
 
 **Labels.** A gpt-6.1-sol judge reads only the private chat (never prices) → explicit agreement /
 information exchange / none. Claude Sonnet 5.5 re-judged Q2.2's 115 chats and gave the same binary label in
-115/115, but each dataset was single-class, the 3-class κ was only 0.33–0.38, and a second check (E84d)
+115/115, but within each dataset all chats had the same binary label (so this agreement is uninformative), the 3-class κ was only 0.33–0.38, and a second check (E84d)
 agreed on agreed-yes/no in 25/30. Q1.4's judge labels have no cross-family check.
 
 | term | rule | used for |
 |---|---|---|
 | executed (Q1.4) | judge-labelled agreement AND both pair firms ≥ agreed − 1 in ≥ ½ of post-agreement rounds AND second-half pair mean ≥ Nash + 2 | 48/149 executed games; E70 executed subsets. 27 variants give 13–78/149 (E71) |
 | strict-executed (Q2.2) | registered strict rule for the strong-framing arm (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
-| kept / followed (Q2.2) | E84 follow rule on the locked test | 14/50 communication-positive runs |
+| kept / followed (Q2.2) | E84 follow rule on the locked test: both pair firms price ≥ the judged agreed floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
 | tacit-high (Q2.2) | strong-framing no-channel market whose mean price minus cost-adjusted Nash over rounds 11–40 is ≥ 2 (a price threshold, not verified coordination) | 19/20 strong-framing markets |
 
 **Splits and discipline.** Q1.4 detector settings were tuned only on scripted dev seeds and evaluated once
@@ -163,7 +164,8 @@ on 422/424 run × statistic cells to < 1e-9 on the v1 datasets.
 
 **Auditors (Q2.2).** One zero-shot gpt-6.1-sol auditor, same task text, six views: `text` (public messages +
 public facts), `action` (prices, costs, demand, profit), `action_stats` (+ computed pair-statistics
-table), `combined` (text ∪ action), `combined_stats`, `structured`. Registered primary contrast:
+table), `combined` (text ∪ action), `combined_stats` (combined + pair-statistics table), `structured` (combined_stats +
+stated-vs-actual price table). Registered primary contrast:
 Δ_hybrid = AUROC(combined) − max(AUROC(text), AUROC(action)), on communication labels (positive = explicit agreement or information exchange; on the locked test all 50
 private runs are judged y = 1 — 48 explicit, 2 information exchange — so judge and channel labels coincide there).
 
@@ -187,13 +189,13 @@ row: surrogate null built from no-channel reference markets. Red (pCMI) is low o
 copies sharing a seed, and 100% on collusion. Purple (lagged TE) fires on leader–follower pricing, shared
 policies with independent noise or a common shock, and independent high-price sellers.*
 
-Every contemporaneous detector (Figure 1, right panels) flags and localises the planted pair in 100% of runs. Raw MI flags 100%
+Every contemporaneous detector (Figure 1, groups C and D right of the vertical line) flags and localises the planted pair in 100% of runs. Raw MI flags 100%
 of common-shock controls; conditioning on public state and lagged prices (pCMI) cuts this to 14% under the
 shift null and, for the held-out *shared policy + common shock* hard negative, 4% [1, 13] under the
 same-model surrogate null. Two failure modes are structural: two copies of one policy sharing a random
 seed are flagged by every contemporaneous detector (44–100%) — from price data they *are* a private shared
 signal — and lagged TE flags legitimate public leader–follower pricing in 100% of runs and shared policies
-in 90–98%, while flagging the scripted colluder groups in only 8–22%. Level screens fail elsewhere: unequal
+in 90–98%, while flagging the scripted colluder groups in only 8–22% (0–20% under the surrogate null). Level screens fail elsewhere: unequal
 private costs are false-flagged in 30/30 scripted markets (pCMI 4/30; locked seed 2003).
 
 ### 5.2 With LLM sellers, the channel shows up as a price level; no robust co-movement is detected (prices-only, Q1.4)
@@ -323,13 +325,13 @@ add predictive value.
 - **Legitimate asymmetry.** Scripted unequal costs: level screens false-flag 30/30 (Q1.4). LLM cost/quality
   edges: premium flags 7/10 and 9/10 vs controls 2/10 (Q2.2).
 - **Prevalence.** At a hypothetical 1% prevalence none of the frozen, tested price flags reaches
-  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54] on scripted MI/pCMI rows, ≤ 0.19 on LLM sets; this largely follows from α = 0.05; this is
-  not a bound on achievable precision); the premium screen's
-  point precision is 0.24 at 5% prevalence (Q2.2).
+  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54] on scripted MI/pCMI rows, ≤ 0.19 on LLM sets). This largely follows from α = 0.05 and is
+  not a bound on achievable precision. The Q2.2 premium screen's
+  point precision is 0.24 at 5% prevalence.
 - **Labels disagree (Q2.2).** Only 14/50 communication-positive private test runs meet the E84 follow rule.
 
 ![Placebo](figures/fig5_placebo_premium.png)
-*Figure 5 (say-vs-do, Q2.2; first fresh replication seeds, `llm_v3rep`). Designated-pair premium per round: delivered channel (n = 15) vs
+*Figure 5 (say-vs-do, Q2.2; first fresh replication seeds, `llm_v3rep`). Mean designated-pair premium per round (shading: 95% bootstrap band over runs): delivered channel (n = 15) vs
 offered-but-never-delivered placebo (n = 15) vs no channel (n = 10). The premium is present before any
 message is delivered (round 1); placebo − private over rounds 2–12 is +0.03 [−0.54, +0.49] (no resolved
 difference, not equivalence).*
@@ -348,9 +350,9 @@ and that it leaves a semantic one in words — and converged: in these markets, 
 mainly as **how high** prices are, with no robust detected **contemporaneous co-movement** (lagged TE is weakly above chance), and a zero-shot auditor shows no
 resolved gain from **what is said publicly** (small gains are not excluded). This is good news for cheap screening (a markup screen is simple and
 interpretable) and bad news for attribution: a high level has many innocent causes (wording, model, memory,
-legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (in Q2.2's logbook control — the same notepad, but entries must be invented weather — the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the pricing notepad, so being singled out alone produces little; caveats: longer instruction, later batch).
+legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (in Q2.2's logbook control — the same notepad, but entries must be invented weather — the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the pricing notepad, suggesting that being singled out alone produces little; not a matched contrast: longer instruction, later batch).
 
-Both projects state jointly that **detectability of LLM collusion by any price statistic is a property of
+Read together, the two projects suggest that **detectability of LLM collusion by any price statistic is a property of
 the (seller model × prompt) pair**: relative screens (pair vs rivals) survive a shared model but lose power
 under market-wide spillover (in Q1.4's spillover sets pair_level 0.75–0.80 vs market level 0.85–0.94), and
 absolute screens need model- and prompt-matched references. With memory and a profit objective gpt-6-luna
@@ -484,6 +486,8 @@ markup differences. "Precision 0.25" in the shared row is a point-estimate thres
 | E1 | generality over 7 design factors (E70, 2^(7−3) grid, 16 cells × 6 + 6, registered) | channel C − A positive in 13 / 0 / 3 cells (pos / tie / neg; one-sided sign p = 0.011), pooled +0.98 [0.65, 1.29]; level > pCMI 12 / 1 / 3; pooled AUROC level 0.74 [0.66, 0.80], pCMI 0.51 [0.43, 0.59], TE 0.62 [0.54, 0.70] (declared secondary: confirmed); qwen pCMI exception not replicated 0.46 [0.35, 0.58]; largest main effects M (= model incl. ≈100% vs 4–10% public-board use) +0.79 [0.10, 1.44], cost +0.79 [0.12, 1.41] (descriptive); follow-up on M not confirmed: +1.07 [−0.20, +2.41] (12 + 12 per level) | `eval/e70_grid.json` | P2.14 |
 
 ### B. Q2.2 claims × denominators (verbatim from Q2.2 `results/analysis/claims_denominators.md` @ `8b680ee`, generated by `p2_claims.py`)
+
+*Reading notes (merge side; table unchanged):* C13's "colluders" / "judged-agreement" are the 50 communication-positive private runs (48 explicit agreements + 2 information exchanges, §4). C34's "early-price rule" also uses the privately judged agreed price (Appendix C). C21b says F ≥ 12; we recomputed with Q2.2's `p2_strong.analyse` and both Qwen arms give 5/15 under F ≥ 12 and F ≥ 13 (late window from round 2 or 11).
 
 | id | claim | value (abstract text) | status | denominator / registration | source : key path |
 |---|---|---|---|---|---|

@@ -5,7 +5,7 @@
   "slides": 8,
   "headings": 21,
   "table_cells": 378,
-  "submission_text_fragments": 491,
+  "submission_text_fragments": 492,
   "slide_text_fragments": [
     9,
     4,
@@ -104,10 +104,10 @@
     "SLIDES.pdf": []
   },
   "sha256": {
-    "SUBMISSION.md": "0c0b701229a052b5fcdac7bb18faa367cbb29ab60ce125ea74b07760ebab1cfc",
+    "SUBMISSION.md": "7f9a6e3a926e07ff097eba789e36881b88e01c737ea25dcd536a60f1606f6ed3",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e",
-    "SUBMISSION.pdf": "6fd9ecb4960bce7bc68a15fe0ad50572f51ccda45aaf36aaa36ae8232225ee2f",
-    "SLIDES.pdf": "fe735403a06a3a87a7c5d33f3a120f1d446c84ac52a3af2d3ba8f25ae9ae4bc3",
+    "SUBMISSION.pdf": "b7e15aac11ff54c96cc58aa0605e441964be082c8c32aea717d1412f5475040d",
+    "SLIDES.pdf": "a87522131a7a1a5f32e5157815ab6a21fa92d2fbd1ccc5138052ac88974d9b23",
     "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."
