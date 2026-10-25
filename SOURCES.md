@@ -25,6 +25,16 @@ unchanged, 0 open P1); Q2.2 remains unchanged. All 157 bundled blobs independent
 `git show` at the existing pins; the previous 146 manifest entries are unchanged. Live Q1.4
 export/director work is concurrent and is not an evidence re-pin.
 
+Iteration 29 source re-check (2026-10-25 12:56 UTC): Q1.4 `29fefdd` / Q2.2 `371d8ec`.
+Q2.2 I148/I149 add render-only exports and merge-scope metadata; REPORT and saved scientific
+results remain unchanged. Both sources have 0 open P1; evidence pins remain unchanged.
+The expanded merge release at `731de19` was independently cloned from GitHub and rebuilt
+with fresh locked dependencies and Chromium, absent sibling-root overrides and no model
+environment variables. All five replay outputs, all six figures and every tracked file
+except the two PDFs and their export-receipt hashes reproduce byte-identically. Both PDFs
+match after date-metadata normalisation. [Receipt](results/distribution_check.json) and
+[procedure](reviews/distribution_i29.md); no scientific-result or provenance re-pin.
+
 | short | repo | commit synced | synced at (UTC) |
 |---|---|---|---|
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |

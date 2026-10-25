@@ -61,6 +61,14 @@ uv run --group export python tests/test_export.py   # deliberate export failure 
 uv run python scripts/finalize.py              # author machine only (reads runner logs): refresh LLM-usage counts, then all checks + export
 ```
 
+Latest distribution check: a fresh GitHub clone of `731de19` with a new locked virtualenv and
+Chromium download passed the scientific replay, figure, document and export commands above,
+including both test suites. All five replay outputs and all six figures were deleted and
+rebuilt byte-identically; both PDFs match apart from date metadata. See the
+[receipt](results/distribution_check.json) and [procedure](reviews/distribution_i29.md).
+This used the same VM with nonexistent sibling-root overrides; it does not establish
+portability to a different operating system. The author-only log refresh was excluded.
+
 The export receipt is [results/export_check.json](results/export_check.json): all 492 report text
 fragments and 55 slide text fragments are present (the latter on the correct slide), all 10 embedded
 figures match the source pixels, and PDF links use public URLs. Slide body, table and code text is at

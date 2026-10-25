@@ -1,0 +1,246 @@
+{
+  "checked_at_utc": "2026-10-25T12:55:31Z",
+  "revision": "731de19fbb15a151470ce98365639ee7aa137b22",
+  "remote": "https://github.com/DennisToma/collusion-beyond-words",
+  "clone": "git clone --no-local gh-cbw:DennisToma/collusion-beyond-words.git /var/tmp/bw-iteration29-release",
+  "dependency_install": "uv sync --locked --all-groups --no-cache",
+  "environment": {
+    "fresh_virtualenv": true,
+    "fresh_browser_download": true,
+    "sibling_root_overrides": "nonexistent paths",
+    "model_environment_variables": "not passed",
+    "scope": "Fresh clone and dependencies on the author VM; not a separate OS or filesystem sandbox."
+  },
+  "commands": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_unrounded_q22.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_c21b_floor.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_locked_test_q22.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_grid_q14.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/recompute_gate_q14.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig1_hard_negatives.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig2_level_vs_comovement.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig3_e70_grid.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig4_say_vs_do.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig5_placebo_premium.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/fig6_strong_framing.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/check_sources.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/number_coverage.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "tests/test_reproduction.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "playwright",
+        "install",
+        "chromium"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/export_pdf.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "tests/test_export.py"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "deleted_and_regenerated_byte_identical": {
+    "results/unrounded_q22.json": "44e6d6e004eae3773c8d61c4eea61594310017005c9e832a58804c3da76082ec",
+    "results/c21b_floor.json": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005",
+    "results/locked_test_q22.json": "840d771e90183c9a8b5b3a8a35dc3d4f4d8f8ff5ad471e28a7dacd6fa7132ee8",
+    "results/grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3",
+    "results/gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90",
+    "figures/fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "figures/fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+    "figures/fig3_e70_grid.png": "0141e85564dac087b195673b3ba4a532a5822a83a8979d1eb0cfeac86fb8cd11",
+    "figures/fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+    "figures/fig5_placebo_premium.png": "1f081a0b2e1cb2b241d18812ce881fcf42ac43a30ca205ef926d716dccdc16fd",
+    "figures/fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
+  },
+  "checks": {
+    "n_checks": 111,
+    "n_document_checks": 139,
+    "n_evidence_files": 157,
+    "n_fail": 0,
+    "n_document_fail": 0
+  },
+  "unclassified_decimals": {
+    "SUBMISSION.md": 0,
+    "SLIDES.md": 0
+  },
+  "reproduction_tests": {
+    "n_tests": 23,
+    "n_fail": 0,
+    "n_errors": 0
+  },
+  "export_tests": {
+    "n_tests": 9,
+    "n_fail": 0,
+    "n_errors": 0
+  },
+  "export": {
+    "ok": true,
+    "submission_pages": 17,
+    "slides": 8,
+    "submission_text_fragments": 492,
+    "slide_text_fragments": [
+      9,
+      4,
+      3,
+      15,
+      5,
+      6,
+      5,
+      8
+    ],
+    "figure_counts": {
+      "SUBMISSION.pdf": 6,
+      "SLIDES.pdf": 4
+    }
+  },
+  "pdfs": {
+    "SUBMISSION.pdf": {
+      "pages": 17,
+      "page_text_identical": true,
+      "content_streams_identical": true,
+      "byte_identical_after_date_normalisation": true,
+      "committed_sha256": "c9e414590cf7651b16c15219d68b1b17b2c705c507e146f881df96b258af5f5e",
+      "rebuilt_sha256": "13694c9d5cf22c62b754fe68e37d40549a2d6ddcf38de4c310c0067ef1fecd56",
+      "metadata_before": {
+        "/Title": "SUBMISSION",
+        "/Creator": "Chromium",
+        "/Producer": "Skia/PDF m156",
+        "/CreationDate": "D:20261025124631+00'00'",
+        "/ModDate": "D:20261025124631+00'00'"
+      },
+      "metadata_after": {
+        "/Title": "SUBMISSION",
+        "/Creator": "Chromium",
+        "/Producer": "Skia/PDF m156",
+        "/CreationDate": "D:20261025125521+00'00'",
+        "/ModDate": "D:20261025125521+00'00'"
+      }
+    },
+    "SLIDES.pdf": {
+      "pages": 8,
+      "page_text_identical": true,
+      "content_streams_identical": true,
+      "byte_identical_after_date_normalisation": true,
+      "committed_sha256": "767b335502e0f6d533a284844be3f1072c068c5d8db584a349f74999c851af94",
+      "rebuilt_sha256": "0b72bf948377264f609910fc17fbc59910dd73c1e4c7edb55eb4f6612837c167",
+      "metadata_before": {
+        "/Title": "SLIDES",
+        "/Creator": "Chromium",
+        "/Producer": "Skia/PDF m156",
+        "/CreationDate": "D:20261025124631+00'00'",
+        "/ModDate": "D:20261025124631+00'00'"
+      },
+      "metadata_after": {
+        "/Title": "SLIDES",
+        "/Creator": "Chromium",
+        "/Producer": "Skia/PDF m156",
+        "/CreationDate": "D:20261025125522+00'00'",
+        "/ModDate": "D:20261025125522+00'00'"
+      }
+    }
+  },
+  "changed_tracked_paths": [
+    "SLIDES.pdf",
+    "SUBMISSION.pdf",
+    "results/export_check.json"
+  ],
+  "all_other_tracked_files_byte_identical": true,
+  "retained_production_pdfs": true,
+  "scope": "Distribution verification of frozen evidence and calculations, not new experiments, labels, model judgments, null draws or held-out evaluation. Runner-log refresh intentionally excluded: author-machine only and already documented."
+}
