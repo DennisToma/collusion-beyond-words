@@ -1,18 +1,18 @@
 # STATUS
 
-## Current state (2026-10-25 17:47 UTC, iteration 10: release verification hold, no edits)
-- FINALIZE-only. Primary TEMPLATE_REPORT.pdf: 10 pages / 6 main, 246-word abstract; IMAGE.png 1600×900; slides 8.
-- Closed primary numeric-context gap: 65 section/table-scoped bindings check 135 slots directly against frozen evidence; exact occurrence and precision enforced.
-- Inventory covers 142 tokens in scientific main text and appendices A–B; 0 unclassified. Global 160 tokens / 26 CI triples still match extended report.
-- Four added release checks reject detector/endpoint/count/header/row swaps, deletion/duplicates, every numeric-slot mutation and unbound results beside non-results/in ethics.
-- Full finalize PASS: 14 commands / 57 tests; 120 source assertions / 144 extended + 65 primary bindings / 158 hashes; all coverage checks pass.
-- Codex high initial review found 2 P2 (table headers; appendix B); both fixed and follow-up has no remaining actionable finding (reviews/codex_fallback_i7.md).
-- Preservation PASS: 176 scientific/manuscript/image files and original 111 assertions / 144 bindings unchanged. Primary/slide page streams identical; extended pages 19–20 only provenance/usage changes, visually checked.
+## Current state (2026-10-25 17:48 UTC, iteration 11: final committed-revision handoff)
+- FINALIZE-only; stop by user's 18:00 UTC deadline. No experiments or model calls.
+- Primary TEMPLATE_REPORT.pdf 10 pages / 6 main; abstract 246 words; IMAGE 1600×900; slides 8.
+- Fresh provenance PASS: 158 pinned source blobs, 176 preserved scientific files, eight accepted artifacts.
+- Sources f6e6b79 / d4f9b62 advance only status/review notes; both declare 0 open P1 on current primary bytes.
+- Evidence pins remain 732f08c / 91ffb2d; manuscript, estimates, PDFs, figures and usage snapshot unchanged.
+- Existing full acceptance: 11 commands / 57 tests; 120 assertions / 144 extended +65 primary bindings /158 hashes.
 - Headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
-- Source handoffs: Q1.4 0708b80 / Q2.2 f15abfd accept prior merged bytes, 0 open P1; pins remain 732f08c / 91ffb2d. No sibling writes or experiments.
-- Clean-HEAD 77ab10d acceptance PASS: 11 commands / 57 tests, 302 tracked files preserved, 20 checksums; ZIP 24,181,531 bytes. Receipt: results/release_package_fallback_i7.json.
-- Final notes handoff: /var/tmp/bw-fallback-i7-final (exact HEAD receipt external), copied to root submission_code.zip; commands in reviews/handoff_fallback_i7.md.
-- Risks: integer-only/qualitative claims still need review; deployer pipeline unevaluated. Dennis must upload primary PDF + image + ZIP; optional extended report/slides.
+- This iteration freshness receipt: results/release_hold_i11.json; command: uv run python reviews/verify_hold_i11.py.
+- After notes commit, package clean HEAD to /var/tmp/bw-final-i11; its external receipt records exact revision/checks.
+- Copy that ZIP to root submission_code.zip; procedure: reviews/handoff_i11.md. Prior package receipts are historical.
+- Risks: integer/qualitative coverage is limited; screen→audit pipeline unevaluated; same-VM reproduction only.
+- Dennis must upload TEMPLATE_REPORT.pdf + IMAGE.png + final ZIP; optional extended report/slides.
 
 ## Log
 - 2026-10-25 17:47 UTC iteration 10: release verification hold. DIRECTION items all done. I skipped finalize.py this time because it only churns the usage counts. Root submission_code.zip, TEMPLATE_REPORT.pdf, IMAGE.png and SLIDES.pdf are byte-identical to /var/tmp/bw-fallback-i7-final, and SHA256SUMS all pass. No edits, no model calls, no deviation from DIRECTION.
@@ -118,3 +118,5 @@
 - 2026-10-25 17:31 UTC fallback iteration 7: chose the disclosed primary numeric-context gap over another freeze-hold rerun. Added 65 section/table-scoped bindings (135 numeric slots), nine assertions from existing frozen JSON, scientific-token coverage through ethics Appendix B and four release tests. Independent Codex read-only critic found 2 P2 (header swaps; omitted appendix), both fixed with regression probes; follow-up no remaining finding. Full finalizer passes 14 commands/57 tests;120/144+65/158;160 tokens+26 triples;142 contextual tokens,0 unclassified. All176 protected scientific/manuscript/image files, original111 checks/144 bindings and primary/slide PDF page streams preserved; extended pages19–20 change only reproducibility metadata and usage snapshot, visually inspected. README/SOURCES/REPORT current; preservation driver and receipt saved. No experiment, estimate change, held-out evaluation, auditor call or DIRECTION deviation; two implementation reviewer calls. Commit/push then clean-HEAD package follows.
 
 - 2026-10-25 17:35 UTC fallback iteration 7 acceptance: implementation77ab10d pushed. Clean-HEAD package /var/tmp/bw-fallback-i7-verified passes11 commands/57 tests, all302 tracked Git bytes/modes and20 checksums. ZIP24,181,531bytes,301 merged+550/1387 source members verified; frozen sourcepins match evidence. Saved receipt and handoff procedure; only notes/receipt/ledger change after tested commit. Commit/push these notes, then package their exact clean HEAD into /var/tmp/bw-fallback-i7-final and copy ZIP to root; final receipt remains external to avoid self-reference. No additional analysis or model call.
+
+- 2026-10-25 17:48 UTC iteration 11 (fallback manager): read CLAUDE/PLAN/STATUS/DIRECTION and ledger; selected final source freshness and exact committed-revision handoff. Source changes from 0708b80/f15abfd to f6e6b79/d4f9b62 are STATUS plus Q2.2 I183 review notes only (read in full); both source managers accept current primary bytes with 0 open P1. New read-only driver checks 158 pinned Git/evidence blobs, all 176 earlier preservation hashes and eight accepted artifacts against 77ab10d; PASS. REPORT/SOURCES updated with current provenance and historical-receipt scope. No manuscript/estimate/PDF/figure/usage change, experiment, held-out evaluation, model call or sibling write. Final clean-HEAD packaging runs after these notes; its external receipt at /var/tmp/bw-final-i11 records the exact notes revision and acceptance. Work is bounded by the user's explicit 18:00 hard stop rather than a new 45–60-minute chunk; DIRECTION's later extension is not used.

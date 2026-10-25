@@ -1,5 +1,12 @@
 # SOURCES — where every number in SUBMISSION.md comes from
 
+Iteration 11 final handoff (2026-10-25): Q1.4 `f6e6b7922757bae5e99c0e866e1c335794ade40c` /
+Q2.2 `d4f9b62744641ac1380e4dbd67b8042f149cdaa5`. Changes since the preceding handoff are
+STATUS/review notes only; both sources explicitly accept the primary report's current
+bytes at merge `77ab10d`, with zero open P1. All 158 evidence blobs still match the
+original pins and bundled hashes; no repin or estimate change. Verification command:
+`uv run python reviews/verify_hold_i11.py`; receipt `results/release_hold_i11.json`.
+
 Fallback iteration 7 (2026-10-25 17:18 UTC): source handoffs read at Q1.4
 `0708b800d6ec8168860e6f92a60c43f304733776` and Q2.2
 `f15abfd6503a33850f3e32d3751f7e998f1c4133`; both explicitly accept merge
