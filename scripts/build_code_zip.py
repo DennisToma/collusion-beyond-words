@@ -2,13 +2,14 @@
 
   uv run python scripts/build_code_zip.py [--out /var/tmp/submission_code.zip]
 
-Layout: beyond-words/ = git archive of this repo's HEAD; sources/q14-infotheory/ and
-sources/q22-say-vs-do/ = git archives of the two source repos at the evidence pins
-(evidence/manifest.json). Tracked files > 5 MB are excluded (listed in the README).
+Layout: beyond-words/ = git archive of this repo's HEAD; sources/*.tar.xz = git archives of
+the two source repos at the evidence pins (evidence/manifest.json), minus files > 5 MB and
+rendered HTML (listed in the README).
 Fails if the worktree is dirty, the zip exceeds 25 MB, or a secret pattern matches.
 """
 import argparse
 import io
+import lzma
 import os
 import re
 import subprocess
@@ -33,8 +34,10 @@ Layout
 - `beyond-words/` — the merged submission repo at commit {head}: TEMPLATE_REPORT/SUBMISSION sources,
   figure scripts, release checks and `evidence/` (158 exact files pinned from the two source repos,
   SHA256 in `evidence/manifest.json`).
-- `sources/q14-infotheory/` — Q1.4 prices-only market and information-theoretic detectors at `{q14}`.
-- `sources/q22-say-vs-do/` — Q2.2 say-vs-do market and text/action auditors at `{q22}`.
+- `sources/q14-infotheory-{q14}.tar.xz` — git archive of the Q1.4 prices-only market and
+  information-theoretic detectors at `{q14}` (unpack: `tar -xJf ...`).
+- `sources/q22-say-vs-do-{q22}.tar.xz` — git archive of the Q2.2 say-vs-do market and text/action
+  auditors at `{q22}`.
 
 Regenerate every figure and check every printed number (no model calls, no API keys needed):
 
@@ -44,8 +47,8 @@ The source repos each have their own reproduce section (Q1.4 REPORT §6; Q2.2 RE
 The repository https://github.com/DennisToma/collusion-beyond-words will be made public after the
 submission deadline.
 
-Excluded (tracked files over 5 MB; scripted positive-control trajectories that the generators
-re-create from their seeds):
+Excluded: tracked files over 5 MB (scripted positive-control trajectories that the generators
+re-create from their seeds) and the source repos' rendered HTML reports (their REPORT.md/.pdf are included):
 {excluded}
 """
 
@@ -71,6 +74,29 @@ def add_archive(zf, repo, rev, prefix, excluded):
     return n
 
 
+def add_source_tarball(zf, repo, rev, name, excluded):
+    """Filtered git archive as one .tar.xz (xz dedups the many near-identical JSONL files)."""
+    src = tarfile.open(fileobj=io.BytesIO(git(repo, "archive", "--format=tar", f"--prefix={name}/", rev)))
+    buf = io.BytesIO()
+    n = 0
+    with tarfile.open(fileobj=buf, mode="w") as dst:
+        for m in src.getmembers():
+            if m.isfile():
+                if m.size > MAX_FILE or m.name.endswith(".html"):
+                    excluded.append(f"- `sources/{m.name}` ({m.size / 1e6:.1f} MB)")
+                    continue
+                data = src.extractfile(m).read()
+                if SECRET.search(data):
+                    raise SystemExit(f"secret pattern in sources/{m.name}")
+                dst.addfile(m, io.BytesIO(data))
+                n += 1
+            elif m.isdir():
+                dst.addfile(m)
+    zf.writestr(f"sources/{name}-{rev[:7]}.tar.xz", lzma.compress(buf.getvalue(), preset=9 | lzma.PRESET_EXTREME),
+                compress_type=zipfile.ZIP_STORED)
+    return n
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(ROOT / "submission_code.zip"))
@@ -83,7 +109,7 @@ def main():
     with zipfile.ZipFile(tmp, "w") as zf:
         counts = {"beyond-words": add_archive(zf, ROOT, "HEAD", "beyond-words/", excluded)}
         for name, (repo, rev) in SOURCES.items():
-            counts[name] = add_archive(zf, repo, rev, f"sources/{name}/", excluded)
+            counts[name] = add_source_tarball(zf, repo, rev, name, excluded)
         zf.writestr("README.md", README.format(
             head=head, q14=SOURCES["q14-infotheory"][1][:7], q22=SOURCES["q22-say-vs-do"][1][:7],
             excluded="\n".join(sorted(set(excluded))) or "- none"))
