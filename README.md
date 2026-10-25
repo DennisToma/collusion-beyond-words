@@ -2,7 +2,7 @@
 
 Apart Research AI Collusion Sprint (23–25 Oct 2026) — Dennis Toma.
 
-**Read first:** [SUBMISSION.pdf](SUBMISSION.pdf) (17 pp; source [SUBMISSION.md](SUBMISSION.md)) and
+**Read first:** [SUBMISSION.pdf](SUBMISSION.pdf) (20 pp; 6 main-text pages; source [SUBMISSION.md](SUBMISSION.md)) and
 [SLIDES.pdf](SLIDES.pdf) (8 slides). One-line result: in our LLM pricing markets a private chat channel
 shows up mainly as *higher prices*; we find no robust contemporaneous price co-movement, public messages give a
 zero-shot LLM auditor no resolved gain, and high prices also arise without any channel — so a price flag
@@ -15,6 +15,25 @@ This repo merges two sprint projects and runs **no new experiments**:
 | Q1.4 prices-only (information-theoretic detection) | [collusion-14-infotheory](https://github.com/DennisToma/collusion-14-infotheory) |
 | Q2.2 say-vs-do (text + action auditing) | [collusion-22-say-vs-do](https://github.com/DennisToma/collusion-22-say-vs-do) |
 
+The submission-compliance revision has **6 main-text pages**, a **219-word abstract**,
+and the required limitations/dual-use appendix; references and appendices bring the PDF to 20 pages.
+[SUBMISSION_FORM.md](SUBMISSION_FORM.md) supplies the form summary and upload list.
+The [compliance receipt](results/submission_compliance.json) checks these limits, affiliation,
+disclosures, recorded reference identities and the actual export hashes. The earlier `c1e7fdd`
+archive predates this revision; package the final committed HEAD for the submission.
+
+## Pre-existing material and AI assistance
+
+The official [sprint starter](https://github.com/poseidon-research/collusion_hackathon) predates this
+work. Q1.4 adapted its `llm-agent-collusion` double-auction harness for E68 (starter `d585a7b`);
+`llm-trust-breaking` was considered for a dropped arm and is not a completed experiment here.
+Its `literature/` resources informed related work. SALT-NLP is pre-existing external data.
+The two pricing environments and analyses were written during the sprint. This merged repo
+copies/adapts those sprint repos' evidence, figure/replay implementations and Q1.4's PDF exporter;
+origins are recorded in docstrings and the evidence manifest, not claimed as independent new code.
+Autonomous Claude Opus managers, Codex reviewers/fallback managers and worker models performed
+the implementation, experiments, analysis and drafting under Dennis's direction (Appendix H).
+
 ## What is here
 
 | path | content |
@@ -24,8 +43,8 @@ This repo merges two sprint projects and runs **no new experiments**:
 | `SOURCES.md` | every number in the report → source repo, JSON file/key, commit |
 | `figures/` | Fig. 1–6; Fig. 1, 2 and 3 re-rendered from pinned Q1.4 JSON by `scripts/fig1_hard_negatives.py`, `scripts/fig2_level_vs_comovement.py`, `scripts/fig3_e70_grid.py`, Fig. 5 from pinned Q2.2 trajectories by `scripts/fig5_placebo_premium.py` (larger text only; same data and encodings), Fig. 4 and 6 by `scripts/fig4_say_vs_do.py`, `scripts/fig6_strong_framing.py` (label fixes) |
 | `evidence/` | 158 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
-| `scripts/check_sources.py` | 111 saved-source assertions, 139 bindings that extract printed numbers from the report/slides, and 158 evidence-file hash checks (→ `results/source_check.json`) |
-| `scripts/number_coverage.py` | lists every decimal in the report main text and slides and whether a binding checks it; fails if an unbound decimal is not a declared non-result (→ `results/number_coverage.json`; 222/260 and 55/61, 0 unclassified) |
+| `scripts/check_sources.py` | 111 saved-source assertions, 144 bindings that extract printed numbers from the report/slides, and 158 evidence-file hash checks (→ `results/source_check.json`) |
+| `scripts/number_coverage.py` | lists every decimal in the report main text, relocated scientific appendices D–G and slides and whether a binding checks it; fails if an unbound decimal is not a declared non-result (→ `results/number_coverage.json`; 248/281 and 55/61, 0 unclassified) |
 | `scripts/recompute_unrounded_q22.py` | replays 3 Q2.2 rounding corrections from pinned inputs with the source estimators/seeds → `results/unrounded_q22.json`; no sibling checkout needed |
 | `scripts/recompute_c21b_floor.py` | replays C21b with two agreed-floor thresholds and two descriptive windows from pinned trajectories/cached terms → `results/c21b_floor.json`; no sibling checkout needed |
 | `scripts/recompute_locked_test_q22.py` | replays the historical 95-run locked test from cached judge labels and six original LLM score views; eight run-AUROC contrasts match the saved B=2000 analysis, with no fitting or calls → `results/locked_test_q22.json` |
@@ -59,7 +78,7 @@ no `.git` directory is needed. Sharing the archive or granting repository access
 separate handoff step; this check did not change repository visibility.
 
 ```bash
-uv run python scripts/check_sources.py          # 111 source checks, 139 document bindings, 158 evidence hashes
+uv run python scripts/check_sources.py          # 111 source checks, 144 document bindings, 158 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
 uv run python scripts/recompute_unrounded_q22.py # exact saved rounding-correction replay
 uv run python scripts/recompute_c21b_floor.py    # C21b floor/window sensitivity replay
@@ -77,14 +96,16 @@ uv run python tests/test_reproduction.py        # standalone + bad-input checks,
 uv run --group export playwright install chromium   # once
 uv run --group export python scripts/export_pdf.py  # SUBMISSION.pdf + SLIDES.pdf
 uv run --group export python tests/test_export.py   # deliberate export failure checks
+uv run --group export python scripts/check_submission_compliance.py # lengths, main pages, disclosures, references, PDF hashes
+uv run --group export python tests/test_submission_compliance.py     # 3 compliance boundary/failure checks
 uv run python scripts/finalize.py              # author machine only (reads runner logs): refresh LLM-usage counts, then all checks + export
 ```
 
-Latest distribution check: an authorized fresh GitHub clone of `c1e7fdd` with a new locked
+Historical distribution check (before the compliance revision): an authorized fresh GitHub clone of `c1e7fdd` with a new locked
 virtualenv and Chromium download passed all six replay scripts, all six figure scripts,
 111 source assertions / 139 document bindings / 158 hashes, 26 reproduction tests and
 9 export tests. All six replay outputs and all six figures were deleted and rebuilt
-byte-identically; both PDFs match apart from date metadata. See the
+byte-identically; that revision's PDFs match apart from date metadata. See the
 [receipt](results/distribution_check_i33.json), [procedure](reviews/distribution_i33.md),
 and [recorded verification driver](reviews/distribution_i33_driver.py).
 The earlier [iteration-29 receipt](results/distribution_check.json) is retained as a historical record.
@@ -94,7 +115,7 @@ An extracted archive of the same release also passes all source/coverage checks,
 tests, PDF export and 9 export tests without a `.git` directory; it reuses that fresh Python/browser
 installation. [Archive receipt](results/reviewer_archive_i33.json) records its hash and scope.
 
-The export receipt is [results/export_check.json](results/export_check.json): all 492 report text
+The export receipt is [results/export_check.json](results/export_check.json): all 504 report text
 fragments and 55 slide text fragments are present (the latter on the correct slide), all 10 embedded
 figures match the source pixels, and PDF links use absolute GitHub URLs (repository access required).
 Slide body, table and code text is at least 14 pt; Fig. 1 and 3 were re-rendered with larger chart text in iteration 12, but dense raster chart labels can still be smaller and are best inspected in the report or PNGs.

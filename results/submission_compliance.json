@@ -1,0 +1,19 @@
+{
+  "abstract_words": 219,
+  "form_summary_words": 117,
+  "verified_reference_entries": 15,
+  "main_text_pages": 6,
+  "total_report_pages": 20,
+  "slides": 8,
+  "submission_pdf_bytes": 1153099,
+  "ok": true,
+  "scope": "Director's file/length/layout/disclosure checks and recorded reference identity concordance; not scientific validity.",
+  "sha256": {
+    "SUBMISSION.md": "4ff83a2b22302b647a3ac4ff4325160e51b54aeb30a4e8ed898e06d08c25ef61",
+    "SUBMISSION_FORM.md": "c0f0220f94c7a29e695d8a66a66f2c22627b3e2e11f748e09a7fe0ca48b78cbc",
+    "SUBMISSION.pdf": "76cdb56666234a6130bef5d6667ab67b5b484991601f1bc30494d3bbe0428ab6",
+    "SLIDES.pdf": "e673fc07da969e1a225ce179b422e5afae8ca27627ca41f17c261f397909cc90",
+    "results/reference_metadata_i33.json": "e01db712e197d8fd717dc1a685b28e23194c5ae00a1073bc8f20a458906e2fa1",
+    "scripts/check_submission_compliance.py": "3912b99b438d2ed85601302d96d657b11b86cfa8905b5f789729c3497db32e54"
+  }
+}

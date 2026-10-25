@@ -15,8 +15,8 @@
     "test_repo_links_become_portable_and_file_links_fail"
   ],
   "sha256": {
-    "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0",
+    "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb",
     "tests/test_export.py": "9037700fa155c00253a7055a36eac693e565bf5b7b7b3c690b654e1983cdacc2",
-    "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
+    "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b"
   }
 }

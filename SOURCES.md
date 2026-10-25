@@ -45,6 +45,24 @@ repository/API probes returned HTTP 404 (also both sibling repository pages); au
 access or an author-supplied archive is needed to acquire the files. This corrects earlier
 "public URL" wording, without changing repository visibility or any evidence provenance.
 
+Iteration 33 compliance addendum: director commit `2cf7c7d` arrived during the distribution
+check and overrides the freeze. The main text is shortened by moving the extended summary,
+glossary, operational labels, detailed results/figures and disclosures to appendices. Empirical
+estimates and source pins are unchanged. Five bindings cover the scoped primary abstract claim, repeated grid estimates and the
+notepad ratio in the shortened text (144 total; the previous 139 entries remain identical).
+The decimal inventory continues to check relocated scientific appendices D–G: 248/281 report
+and 55/61 slide decimal tokens bound, with all remaining 33 + 6 classified as non-results.
+All 15 reference identities have recorded primary evidence; 14 also match the starter CSV
+URL and year. Expanded author lists are supported by starter metadata or primary arXiv pages.
+[Reference record](results/reference_metadata_i33.json), [compliance receipt](results/submission_compliance.json).
+
+Compliance scope handoffs: Q1.4 `1ebf938` (I146/I147) and Q2.2 `e3fa1dc` (I155)
+independently read the rewrite and report 0 P1; their optional wording nits are applied.
+`reviews/compliance_preservation_i33.py` confirms all 111 saved-source assertion objects,
+139 original bindings, six replay JSONs, six figures and the evidence manifest are identical
+to pre-compliance `089ffb0`. The 158 evidence hashes still pass. [Preservation receipt](results/compliance_preservation_i33.json).
+No source re-pin or new scientific estimate; the finalizer refreshes only the dated process snapshot.
+
 | short | repo | commit synced | synced at (UTC) |
 |---|---|---|---|
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |

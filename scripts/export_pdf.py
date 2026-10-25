@@ -47,6 +47,7 @@ th { background: #f2f5f9 }
   p, li { font-size: 9.5pt; line-height: 1.35 } h1 { font-size: 17pt } h2 { font-size: 14pt } h3, h4 { font-size: 11pt }
   table { font-size: 7.5pt } tr { break-inside: avoid } thead { display: table-header-group }
   img { max-height: 115mm; object-fit: contain }
+  h2.end-matter { break-before: page }
 }
 """
 
@@ -228,6 +229,10 @@ def check_links(pdf):
 def main():
     report_md = (ROOT / "SUBMISSION.md").read_text()
     body = portable_links(embed_images(md().render(report_md)))
+    # Separate excluded references/appendices from the eight-page main-text limit.
+    # This also makes the first References PDF page an unambiguous boundary.
+    for heading in ("References", "Appendix — full tables"):
+        body = body.replace(f"<h2>{heading}</h2>", f'<h2 class="end-matter">{heading}</h2>')
     note = ('<p class="note">Export of SUBMISSION.md (scripts/export_pdf.py); no results recomputed. '
             'Source paths refer to the repository.</p>')
     (ROOT / "SUBMISSION.html").write_text(page("SUBMISSION", CSS, f"<main>{note}{body}</main>"))

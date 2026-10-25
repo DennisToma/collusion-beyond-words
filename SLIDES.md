@@ -1,6 +1,6 @@
 # Beyond Words: Detecting AI-Agent Collusion Through Information Theory and Behavioral Evidence
 
-**Dennis Toma** — Apart Research AI Collusion Sprint, 23–25 October 2026
+**Dennis Toma — Independent** — Apart Research AI Collusion Sprint, 23–25 October 2026
 
 Merged submission of two sprint projects:
 - **Q1.4** — information-theoretic, prices-only detection (does collusion leave a *dependence* fingerprint?)

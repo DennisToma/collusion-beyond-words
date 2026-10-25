@@ -59,6 +59,8 @@ def main():
     if export:
         run(["uv", "run", "--group", "export", "python", "scripts/export_pdf.py"])
         run(["uv", "run", "--group", "export", "python", "tests/test_export.py"])
+        run(["uv", "run", "--group", "export", "python", "scripts/check_submission_compliance.py"])
+        run(["uv", "run", "--group", "export", "python", "tests/test_submission_compliance.py"])
     print("\nFINALIZE OK" + ("" if export else " (export skipped)"))
 
 

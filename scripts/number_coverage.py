@@ -1,4 +1,4 @@
-"""List every decimal number in SUBMISSION.md (main text, before Reproducibility) and SLIDES.md
+"""List every decimal in the report's main text and relocated scientific appendices, and SLIDES.md
 and say whether a document binding checks it against saved source data.
 
 Unbound tokens are written with context so a reader can see exactly what is not
@@ -38,7 +38,12 @@ def main():
     for doc in ("SUBMISSION.md", "SLIDES.md"):
         text = (ROOT / doc).read_text()
         if doc == "SUBMISSION.md":
-            text = text.split("\n## Reproducibility")[0]
+            # The submission-compliance cut moves previously checked scientific prose
+            # to D-G. Keep checking it there; legacy verbatim tables A-C and process /
+            # reproducibility appendices remain outside this decimal inventory.
+            text = (text.split("\n## References")[0] + "\n" +
+                    text.split("\n### D. Extended summary, glossary and operational labels\n", 1)[1]
+                    .split("\n### H. AI assistance and pre-existing material\n", 1)[0])
         text = normalize(text)
         spans = []
         for b in bindings:

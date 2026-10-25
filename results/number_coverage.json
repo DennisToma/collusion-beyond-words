@@ -1,47 +1,12 @@
 {
  "SUBMISSION.md": {
-  "decimal_tokens": 260,
-  "bound": 222,
+  "decimal_tokens": 281,
+  "bound": 248,
   "unbound": [
    {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": "blic messages, or from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = i"
-   },
-   {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": "r from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = inverted); per-se"
-   },
-   {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": "tive control. With LLM sellers it is at chance (all three CIs include 0.5) in a 192-game seve"
-   },
-   {
-    "token": "5.2",
-    "category": "section number",
-    "context": "ropy) is weakly above chance in the grid but below the level screen (§5.2). 3. Public message"
-   },
-   {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": "en3.8 arms 0.15-0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42]; CIs below 0.5). Text did work on "
-   },
-   {
-    "token": "5.3",
-    "category": "section number",
-    "context": " from preceding messages (different task; no action-view comparison, §5.3). 4. Neither signal"
-   },
-   {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": "e positive class (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = i"
-   },
-   {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": " (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = inverted). Nash p"
+    "token": "6.1",
+    "category": "model version",
+    "context": "ance but also flagged legitimate shared policies. For a zero-shot gpt-6.1-sol auditor in the "
    },
    {
     "token": "5.6",
@@ -94,6 +59,56 @@
     "context": "y point estimate; the paired difference CI excludes 0 in 8/9 (not gpt-5.6-luna). Scores targe"
    },
    {
+    "token": "5.3",
+    "category": "section number",
+    "context": "es, the alternative estimators and descriptive factorial effects. ### 5.3 A zero-shot auditor"
+   },
+   {
+    "token": "5.4",
+    "category": "section number",
+    "context": "itivity is a selected subset, not a causal ablation (Appendix F). ### 5.4 Neither signal is s"
+   },
+   {
+    "token": "0.5",
+    "category": "chance level 0.5",
+    "context": "blic messages, or from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = i"
+   },
+   {
+    "token": "0.5",
+    "category": "chance level 0.5",
+    "context": "r from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = inverted); per-se"
+   },
+   {
+    "token": "0.5",
+    "category": "chance level 0.5",
+    "context": "tive control. With LLM sellers it is at chance (all three CIs include 0.5) in a 192-game seve"
+   },
+   {
+    "token": "5.2",
+    "category": "section number",
+    "context": "ropy) is weakly above chance in the grid but below the level screen (§5.2). 3. Public message"
+   },
+   {
+    "token": "0.5",
+    "category": "chance level 0.5",
+    "context": "en3.8 arms 0.15-0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42]; CIs below 0.5). Text did work on "
+   },
+   {
+    "token": "5.3",
+    "category": "section number",
+    "context": " from preceding messages (different task; no action-view comparison, §5.3). 4. Neither signal"
+   },
+   {
+    "token": "0.5",
+    "category": "chance level 0.5",
+    "context": "e positive class (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = i"
+   },
+   {
+    "token": "0.5",
+    "category": "chance level 0.5",
+    "context": " (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = inverted). Nash p"
+   },
+   {
     "token": "0.5",
     "category": "chance level 0.5",
     "context": ".99 (point est. > pCMI in 9/9); C - A CI > 0 in 9/9 | 0.34-0.72; CI ∋ 0.5 in 8/9 | N1-N4 | | "
@@ -107,11 +122,6 @@
     "token": "0.1",
     "category": "design parameter (planted move rate)",
     "context": ", whereas pCMI detects a planted shared ±1 move at per-round rate q = 0.1 with AUROC 0.79 [0."
-   },
-   {
-    "token": "5.3",
-    "category": "section number",
-    "context": "lls; pCMI scatters around chance. Cell estimates are descriptive. ### 5.3 A zero-shot auditor"
    },
    {
     "token": "0.5",
@@ -132,11 +142,6 @@
     "token": "6.1",
     "category": "model version",
     "context": "e rates do not differ. Inversion need not involve an agreement: a gpt-6.1-sol seller arm with"
-   },
-   {
-    "token": "5.4",
-    "category": "section number",
-    "context": "d there is no evidence that public messages add predictive value. ### 5.4 Neither signal is s"
    },
    {
     "token": "5.2",
@@ -162,36 +167,6 @@
     "token": "6.1",
     "category": "model version",
     "context": "ions - Ground truth. Agreement labels come from one judge family (gpt-6.1-sol, also the audit"
-   },
-   {
-    "token": "5.5",
-    "category": "model version",
-    "context": "interactive session with no memory beyond the repo files. Claude Opus 5.5 (via Claude Code) w"
-   },
-   {
-    "token": "6.1",
-    "category": "model version",
-    "context": " or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both so"
-   },
-   {
-    "token": "6.1",
-    "category": "model version",
-    "context": "r iterations had completed by 2026-10-25 13:07 UTC (228 Opus, 125 gpt-6.1-sol; the runners ke"
-   },
-   {
-    "token": "6.1",
-    "category": "model version",
-    "context": "py → results/process_log_summary.json). A separate director loop (gpt-6.1-sol, with Claude Op"
-   },
-   {
-    "token": "5.5",
-    "category": "model version",
-    "context": "ummary.json). A separate director loop (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-pri"
-   },
-   {
-    "token": "6.1",
-    "category": "model version",
-    "context": "eports and this merged report were reviewed adversarially by both gpt-6.1-sol and Claude Opus"
    }
   ],
   "unbound_unclassified": 0

@@ -72,7 +72,7 @@ class ReproductionChecks(unittest.TestCase):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
         self.assertEqual(self.receipt["n_evidence_files"], 158)
         self.assertEqual(self.receipt["n_checks"], 111)
-        self.assertEqual(self.receipt["n_document_checks"], 139)
+        self.assertEqual(self.receipt["n_document_checks"], 144)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
 
     def run_coverage(self):

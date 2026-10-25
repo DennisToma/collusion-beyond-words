@@ -1,0 +1,22 @@
+{
+  "baseline_revision": "089ffb08e8ca96b6c4ba94ce7b1c064b9045be96",
+  "identical_source_assertion_objects": 111,
+  "unchanged_original_bindings": 139,
+  "new_bindings_for_repeated_claims": 5,
+  "frozen_artifact_sha256": {
+    "evidence/manifest.json": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
+    "figures/fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "figures/fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+    "figures/fig3_e70_grid.png": "0141e85564dac087b195673b3ba4a532a5822a83a8979d1eb0cfeac86fb8cd11",
+    "figures/fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866",
+    "figures/fig5_placebo_premium.png": "1f081a0b2e1cb2b241d18812ce881fcf42ac43a30ca205ef926d716dccdc16fd",
+    "figures/fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a",
+    "results/unrounded_q22.json": "44e6d6e004eae3773c8d61c4eea61594310017005c9e832a58804c3da76082ec",
+    "results/c21b_floor.json": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005",
+    "results/locked_test_q22.json": "840d771e90183c9a8b5b3a8a35dc3d4f4d8f8ff5ad471e28a7dacd6fa7132ee8",
+    "results/grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3",
+    "results/gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90",
+    "results/gate_pcmi_q14.json": "92a1570b1a3e2336c336248b589fa9803c371588d9e4b2343ffb89f9b8dc018a"
+  },
+  "scope": "Original saved source-check objects, binding definitions, six replay outputs, six figures and evidence manifest are unchanged. The full 158-file bundle hashes are independently checked by check_sources.py. No new estimates or experimental data."
+}

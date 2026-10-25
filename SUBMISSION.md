@@ -1,100 +1,24 @@
 # Beyond Words: Detecting AI-Agent Collusion Through Information Theory and Behavioral Evidence
 
-**Dennis Toma** — Apart Research AI Collusion Sprint, 23–25 October 2026
-
-> **TL;DR.** In our LLM pricing markets, offering two sellers a private chat channel shows up to an auditor
-> mainly as *higher prices*. We find no robust contemporaneous price co-movement, and reading public messages gives
-> a zero-shot LLM auditor no resolved gain (for some models it is inverted). High prices also arise without any
-> channel (prompt cues, memory, cost advantages), so in these markets a price flag is a reason to audit, not
-> evidence of an agreement.
-
-*Merged submission of two sprint projects, named after the sprint's open-question numbers:* **Q1.4, the
-prices-only project** (information-theoretic detection from prices alone), and **Q2.2, the say-vs-do project**
-(auditing what agents say together with what they do). The two ran separate markets (cross-applications to each other's data are labelled as such), and each
-result is tagged with its source project. Every number is taken from the frozen source repos at the commits listed in
-[SOURCES.md](SOURCES.md), which maps each number to its JSON file and key.
+**Dennis Toma — Independent** — Apart Research AI Collusion Sprint, 23–25 October 2026
 
 ## Abstract
 
-We put LLM sellers in four-seller repeated pricing markets, offer one pair a private chat channel (never
-telling them to collude), and ask whether an auditor can tell which markets had the channel — from prices,
-from public messages, or from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = inverted);
-per-set 95% CIs are uncorrected for multiplicity.
+Can an auditor detect a private channel between LLM sellers from prices, public messages, or both? We study two separate repeated-pricing markets without instructing agents to collude, distinguishing channel assignment, judged agreements and price-based execution.
 
-1. **The channel shows up as a higher price level.** Mean markup over the competitive (Nash) price was higher
-   with the channel in all 9 main sets of the prices-only project (Q1.4; 7 seller models; one prompt family —
-   across 5 alternative wordings the effect is resolved in only 2). A simple screen on
-   the highest pair's markup had a higher point-estimate AUROC than a conditional-dependence detector (pCMI) in
-   all 9 (0.75–0.99 vs 0.34–0.72; paired-difference CI > 0 in 8/9).
-2. **We find no robust contemporaneous co-movement.** pCMI flags and localises every pair in a scripted
-   shared-signal positive control. With LLM sellers it is at chance (all three CIs include 0.5) in a 192-game
-   seven-factor grid (0.51 [0.43, 0.59]), in pre-registered 60-round games (0.34 [0.18, 0.52]) and on
-   agreements whose prices were kept ("executed", 48/149; 0.42 [0.33, 0.53]). One base-Qwen3.6 set separates
-   (0.71 [0.51, 0.88]) but did not replicate in the grid. Lagged dependence (transfer entropy) is weakly above
-   chance in the grid but below the level screen (§5.2).
-3. **Public messages give a zero-shot LLM auditor no resolved gain** (say-vs-do project, Q2.2). Adding them to
-   prices changes AUROC by −0.01 [−0.09, +0.06] (locked test split, n = 95) and −0.07 [−0.17, +0.02] (fresh
-   replications, pooled post hoc). In both Qwen families, whose sellers invite rivals publicly, the text-only
-   view is *inverted* (Qwen3.8 arms 0.15–0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42]; CIs below 0.5). Text did
-   work on an external peer-verification dataset, predicting verdicts from preceding messages (different
-   task; no action-view comparison, §5.3).
-4. **Neither signal is specific to collusion.** An unread private pricing notepad produces about two thirds of
-   the channel's premium over rounds 2–12 (point ratio 0.65, CI [0.34, 1.32]). With memory and profit framing,
-   19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40). Level screens also flag
-   legitimate cost asymmetry.
+Channel assignment, including its prompt cue, raised markup in all nine main prices-only sets (seven seller models, one prompt family); only two of five wordings resolved an effect. A level screen beat Gaussian conditional mutual information (pCMI) by point estimate in those nine sets; paired CIs resolved in eight. pCMI passed a scripted shared-signal positive control but scored 0.51 [0.43, 0.59] in a 192-game factorial grid. One model-specific separation did not replicate there; transfer entropy was weakly above chance but also flagged legitimate shared policies.
 
-**Implication.** Price-level screens could serve as a cheap first-stage audit trigger (not evaluated end to end).
-Their reference must be matched to the seller model and prompt, and a flag is not evidence of an agreement.
+For a zero-shot gpt-6.1-sol auditor in the say-vs-do market, adding public messages to prices changes AUROC by −0.01 [−0.09, +0.06] on the locked test. Some Qwen text views inverted rankings; a different external peer-verification task showed useful text signals. An unread pricing notepad produced much of the channel premium (point ratio 0.65, CI [0.34, 1.32]); memory plus profit framing yielded high no-channel gpt-6-luna prices.
 
-*Glossary.* **AUROC**: probability that a random positive example scores above a random negative one, ties
-counting half; the positive class (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 =
-inverted). **Nash price**: the static competitive price; **Nash + 2**: at least 2 price units above it.
-**Level / max-pair markup** (called "market-level markup" or `market_level` in figures and the appendix): the
-highest pair's mean price above the per-round Nash price. **pair_level** (Q1.4) / **pair premium** (Q2.2): a
-pair's mean price minus the other two sellers' mean (the designated pair, or the maximum over pairs when used
-as a detector). **C − A**: difference in mean all-seller markup over Nash, channel arm (C) minus no-channel arm
-(A) (Q1.4; Q2.2 contrasts use the designated-pair premium). **pCMI**: max-pair Gaussian conditional mutual
-information of prices given public state and all sellers' lagged prices (contemporaneous co-movement not
-explained by public information). **TE**: transfer entropy (lagged dependence). **Executed**: the judge found a
-private agreement *and* the pair's prices then followed it (Q1.4 rule, §3). **Locked test**: a split frozen
-before any tuning and scored once with the final configuration (Q2.2's had four disclosed exposures, so it
-is locked but not fully blind; §3). **E*nn* / P2.*n* / N*n***: experiment / section / claim IDs in the source
-repos and SOURCES.md.
+Price-level screens are possible audit triggers, not evidence of an agreement. Model/prompt dependence, imperfect labels, small samples and disclosed test exposures limit attribution and generalisation. A proposed two-stage audit was not evaluated end to end.
 
 ## 1. Introduction
 
-Algorithmic pricing agents built on LLMs reach supracompetitive prices without instruction (Fish et al.
-2024) and change behaviour when they can communicate (Agrawal et al. 2025). An overseer will mostly see two
-things: the agents' *actions* (prices) and what they *say* in public. Two detection strategies follow:
+LLM pricing agents can reach supracompetitive prices without instruction (Fish et al. 2024) and change behaviour when they can communicate (Agrawal et al. 2025). An overseer usually observes actions and public statements while private side channels remain hidden.
 
-1. **Information theory on actions** (Q1.4). Colluders should share information beyond what public state
-   explains, so their prices should be conditionally dependent (Bonjour et al. 2022). Such a detector is
-   blind to message content: it does not inspect wording directly (resistance to strategic evasion was not tested).
-2. **Say + do auditing** (Q2.2). An LLM auditor reading both public messages and prices should catch
-   inconsistencies between what agents say and what they do, and beat single-stream auditors.
+We merge two sprint projects: **Q1.4**, information-theoretic detection from prices, and **Q2.2**, auditing what agents say alongside what they do. Conditional dependence might reveal hidden shared information (Bonjour et al. 2022); an LLM auditor might detect inconsistencies between messages and prices. We test both expectations, cross-apply the projects' tools and distinguish assigned opportunity, judged agreement and realised price coordination. Each project ran its own market; neither public-text results nor pooled findings apply automatically to every prices-only set.
 
-We test both on LLM pricing markets, cross-apply each project's detectors to the other's data, and keep
-three label levels apart: *assigned opportunity* (channel offered), *verified agreement* (a judge reads the
-private chat) and *realised coordination* (prices follow the agreement).
-
-**Contributions.**
-- A prices-only conditional-dependence detector (pCMI, with shift and same-model surrogate nulls) that
-  passes a scripted positive control and a hard-negative battery (common shocks, shared policies,
-  legitimate leader–follower pricing), plus a map of what it cannot separate (policy copies sharing a seed).
-- Evidence across 9 main LLM sets, a 192-game factorial grid and a pre-registered long-game test that
-  channel assignment shows up as a **price level**, with no robust detected contemporaneous co-movement.
-- A registered say-vs-do comparison showing that public text gives a zero-shot auditor no resolved gain
-  and can be **inverted**.
-- Confound analyses (prompt artefacts, placebo, tacit high prices, cost asymmetry, prevalence) showing why
-  a price flag is an audit trigger, not proof.
-
-**Why this matters for AI safety.** As LLM agents act for competing parties, overseers will often see only
-their actions and their public messages, not private side channels. We test two natural monitoring strategies
-on exactly those signals: a statistical detector of hidden coordination in actions, and an LLM monitor that
-reads what agents say. In these markets neither recovered the side channel better than a crude price statistic
-(markup level in Q1.4; a post hoc pair premium in Q2.2). The text monitor could be *misled* (inverted AUROC), and the price-level statistic also fired without
-any channel. Sellers were never instructed to collude or to evade (§7), so these are results about naturally
-arising behaviour in narrow markets, not about adversarial colluders.
+Our contributions are a scripted positive-control and hard-negative battery, a cross-model price-versus-dependence comparison, a registered auditor-view comparison, and confound checks showing why a price flag cannot establish an agreement. Sellers were never instructed to collude or evade. Full definitions, robustness tables and additional figures are in the appendices; number-to-source mappings are in [SOURCES.md](SOURCES.md).
 
 ## 2. Related work
 
@@ -138,12 +62,9 @@ information exchange / none. Claude Sonnet 5.5 re-judged Q2.2's 115 chats and ga
 115/115, but within each dataset all chats had the same binary label (so this agreement is uninformative), the 3-class κ was only 0.33–0.38, and a second check (E84d)
 agreed on agreed-yes/no in 25/30. Q1.4's judge labels have no cross-family check.
 
-| term | rule | used for |
-|---|---|---|
-| executed (Q1.4) | judge-labelled agreement AND both pair firms ≥ agreed − 1 in ≥ ½ of post-agreement rounds AND second-half pair mean ≥ Nash + 2 | 48/149 executed games; E70 executed subsets. 27 variants give 13–78/149 (E71) |
-| strict-executed (Q2.2) | registered strict rule for the strong-framing arm (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
-| kept / followed (Q2.2) | E84 follow rule on the locked test: judged agreed floor ≥ 12 (lower floors do not count as followed); both pair firms price ≥ that floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
-| tacit-high (Q2.2) | strong-framing no-channel market whose mean price minus cost-adjusted Nash over rounds 11–40 is ≥ 2 (a price threshold, not verified coordination) | 19/20 strong-framing markets |
+Operational execution, kept/followed and tacit-high rules are in Appendix D; they are distinct labels.
+
+
 
 **Splits and discipline.** Q1.4 detector settings were tuned only on scripted dev seeds and evaluated once
 on locked seeds; no setting was tuned on LLM data. Q2.2's auditors are zero-shot with one prompt per view,
@@ -207,43 +128,9 @@ max-pair markup, blue) and pCMI (orange); dashed line = chance. "9/9" in panel (
 difference CI excludes 0 in 8/9 (not gpt-5.6-luna). Scores target channel assignment, not execution. Sets share
 designs and models, so they are not nine independent replications.*
 
-| evidence | max-pair markup (level) | pCMI (co-movement) | source |
-|---|---|---|---|
-| 9 main sets, 7 models | AUROC 0.75–0.99 (point est. > pCMI in 9/9); C − A CI > 0 in 9/9 | 0.34–0.72; CI ∋ 0.5 in 8/9 | N1–N4 |
-| paired Δ level − pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [−0.27, +0.33]) | | N3 |
-| E70 grid: 16-cell fractional factorial over 7 factors, 6 + 6 games per cell (192), board on (Figure 3) | 0.74 [0.66, 0.80]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
-| E44 long games, T = 60 (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] | N5 |
-| executed channel games vs no-channel controls (48 executed of 149 labelled channel games, Q1.4 rule) | max-pair 0.99 (inflated by construction); pair-level 0.87 [0.80, 0.94] (not inflated) | 0.42 [0.33, 0.53] | N7 |
-| rank (copula) pCMI / sign-change CMI, E70 | | 0.53 [0.44, 0.61] / 0.44 [0.36, 0.52] | N11 |
+Across the nine main sets, max-pair markup had higher point-estimate AUROC than pCMI; the paired difference resolved in eight. This is evidence under one prompt family: the channel effect resolves in only two of five wordings.
 
-*Table 1. Per-set CIs uncorrected. E74's paired differences were declared, but declaration and results
-first appear in the same commit, so their order is not independently established.*
-
-Neither rank-based nor discrete estimators detect co-movement that linear pCMI missed (both at chance,
-though sign-CMI has little power in E70's sparse state strata). At T = 60 the observed co-move excess is
-+0.004 [−0.007, +0.015], whereas pCMI detects a planted shared ±1 move at per-round rate q = 0.1 with
-AUROC 0.79 [0.70, 0.88] — this is injection-specific sensitivity, not a general power bound. At T = 20 (most sets, all
-of E70) the same planting gives only 0.62 [0.52, 0.71], so small co-movement is not excluded there, and the
-check bounds sensitivity only to that planting. The one pCMI exception (base Qwen3.6, 0.71 [0.51, 0.88]) did
-not replicate in the grid's Qwen cells.
-
-*Lagged dependence is not excluded.* TE is weakly above chance in the grid (0.62 [0.54, 0.70], declared
-secondary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3.8 0.91);
-level beats TE (CI > 0) in 6/9 main sets and in the grid (+0.12 [+0.01, +0.22]). Because TE also fires on
-shared policies in scripted markets, and in the grid its signal sits in channel games that did *not* meet the
-execution rule (0.73, n = 52: 38 with a judged agreement, 14 without) rather than executed ones (0.49, n = 44;
-post hoc, difference untested), we do not read it as evidence of coordination.
-
-**Robustness to prompt wording is limited.** Across five wordings (6 + 6 games each, gpt-6-luna), the
-channel effect C − A has CI > 0 in only 2/5, and no-channel markup ranges from −0.19 to +2.56 (P2.7). "9/9"
-holds for the main sets under one prompt family.
-
-![E70 grid](figures/fig3_e70_grid.png)
-*Figure 3 (prices-only, Q1.4 P2.14). Registered 16-cell fractional-factorial grid (E70) over seven design
-factors, 6 channel + 6 no-channel games per cell, public board on. (a) Main effect of switching each factor from
-its low to its high level on the channel effect C − A, with intervals (descriptive). (b) Per-cell run AUROC of the
-level screen ("market-level markup", blue) and pCMI (orange). Cells are ordered by their C − A, printed under each
-cell id. Level is above pCMI in 12/16 cells; pCMI scatters around chance. Cell estimates are descriptive.*
+The grid level screen scores 0.74 [0.66, 0.80], compared with pCMI 0.51 [0.43, 0.59]. In pre-registered long games and on executed agreements, pCMI intervals also include chance (Table 1, Appendix E). The single base-Qwen3.6 separation did not replicate in the grid. Injection sensitivity is specific to the planted strategy; small co-movement in short games is not excluded. Lagged TE is weakly above chance in the grid and clearly above chance in two main sets (Appendix E), but also flags legitimate shared policies, so it is not evidence of coordination. Appendix E gives its estimates, the alternative estimators and descriptive factorial effects.
 
 ### 5.3 A zero-shot auditor shows no resolved gain from public words — and can read them the wrong way (say-vs-do, Q2.2)
 
@@ -255,147 +142,29 @@ rates when private messages are delivered vs offered but never delivered vs no c
 is communication-positive runs on the test set and channel assignment on the replication, not verified
 coordination (figure regenerated by `scripts/fig4_say_vs_do.py` from Q2.2 JSON).*
 
-| where text could help | contrast | n | text view | action view |
-|---|---|---|---|---|
-| gpt-6-luna, base framing (locked test) | judge-labelled y = 1 vs 0 | 95 runs | 0.47 [0.36, 0.58] | 0.75 [0.65, 0.85] |
-| Claude Sonnet (talks publicly) | private vs none | 5 + 5 | 0.22 [0.00, 0.52] | 0.52 [0.20, 0.88] |
-| deepseek (talks publicly) | private vs none | 30 runs | 0.36 [0.20, 0.52] | 0.53 [0.30, 0.74] |
-| Qwen3.8 base | private vs none | 15 + 15 | **0.21 [0.12, 0.33]** | 0.86 [0.69, 0.98] |
-| Qwen3.8 abliterated | private vs none | 15 + 15 | **0.15 [0.05, 0.25]** | 0.57 [0.36, 0.78] |
-| SALT-NLP peer verification (external) | rule-violating mutual ACCEPT vs not | 240 episodes | 0.87 [0.83, 0.91] | – |
-
-*Table 2 (Q2.2 P2.0, `results/analysis/p2_say_vs_do.md`). AUROC < 0.5 = the view ranks controls higher;
-bold = CI entirely below 0.5.*
-
-The registered contrast shows no resolved gain from adding public text: combined − better single view
+The registered contrast (gpt-6-luna sellers) shows no resolved gain from adding public text: combined − better single view
 −0.01 [−0.09, +0.06] (locked test, n = 95), −0.07 [−0.17, +0.02] on pooled fresh replications (n = 90,
 pooling post hoc); gains above +0.06 / +0.02 are excluded at 95%.
 
-*Inversion.* An AUROC of 0.15 means the text carries information with the wrong sign for a zero-shot auditor,
-not that words are uninformative. Among the families in Table 2, the inversion is resolved only for the two
-Qwen3.8 arms. There, channel sellers, who can coordinate in private, invite rivals publicly *less* (invite rate
-0.40 vs 0.88 in controls, Qwen3.8 base; post hoc). This is consistent with the inversion but not shown to cause
-it: text score vs invite rate gives Spearman 0.49 [0.17, 0.71] with both Qwen3.8-base arms pooled (n = 30) but
-−0.40 [−0.83, +0.18] within the no-channel arm, so the association comes mainly from the arm difference.
-For deepseek and Claude, invite rates do not differ.
+The two Qwen3.8 arms invert the text-only ranking. In the Qwen3.8-base arm, controls invite rivals publicly more often (post hoc), but the association is not established as causal. In cross-application to Q1.4's grid, text also hurts Qwen classification; a gain in executed gpt-6-luna games cannot be credited to text because it also appears in cells without public posts. Table 2 and the full comparisons are in Appendix F.
 
-Inversion need not involve an agreement: a gpt-6.1-sol seller arm with 0/7 private agreements also scores 0.17
-[0.01, 0.41] (7 + 7 markets; post hoc, not interpreted in the Q2.2 report).
-
-*Cross-application to Q1.4's grid (E113, 192 games).* In the 8 Qwen cells the LLM auditor reading prices is
-at chance (0.52 [0.41, 0.64]) — although Q1.4's markup statistic on the same games is not (0.76) — text is
-inverted (0.32 [0.24, 0.42]), and adding text lowers AUROC (combined − action −0.24 [−0.37, −0.09]; −0.30
-[−0.44, −0.16] on games executed under Q1.4's rule). In the gpt-6-luna cells combined − action is
-+0.07 [−0.02, +0.17] overall and +0.16 [+0.05, +0.28] on executed games (registered secondary), but a
-similar +0.12 [−0.08, +0.32] appears in the 3 gpt-6-luna cells with no public posts (post hoc), so the gpt-6-luna gain
-cannot be credited to text. In these markets public text resolvedly hurt the auditor (Qwen); no gain could be credited to text.
-
-*External case (different construct).* In SALT-NLP peer verification (Shi, Zhang & Yang 2026), agents
-exchange task evidence, then submit ACCEPT/REJECT verdicts in a separate phase. "Executed" means mutual
-ACCEPT in violation of the raw-log verification rule. The auditor sees only the preceding messages,
-not submitted verdicts or task outcomes. It reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed),
-even though, in the full dataset (5169 executed episodes), 62% carry no explicit agreement
-(P(said | executed) = 0.385). Messages can announce intended verdicts; on the subset without case-insensitive matches to
-accept/reject, AUROC is 0.75 [0.66, 0.84] (n = 117). This selected-subset comparison is not a causal
-ablation. The violation label does not require an incorrect task outcome. Thus messages can predict later
-rule-breaking verdicts; this is no test of text added to an action view and does not establish why text
-works better here than in the pricing markets. This corrects the frozen source report's description of
-the act as happening in chat, following its analysis code and the primary paper.
-
-*Forecasting which agreements are kept (E133, exploratory, 78 games):* see Appendix C. Briefly, with the private
-chat, say–do consistency forecasts kept agreements (AUROC 0.77), but three hand-built say–do features in one
-logistic model add nothing beyond early price stability, and there is no evidence that public messages
-add predictive value.
+Text is useful in the external SALT-NLP peer-verification task: preceding communication predicts later rule-breaking verdicts. This is a different construct, not a test of adding text to an action view. The no-accept/reject sensitivity is a selected subset, not a causal ablation (Appendix F).
 
 ### 5.4 Neither signal is specific to collusion
 
-- **Prompt artefact (Q2.2).** In a six-arm study (15 matched seeds), a private *notes-to-self* pricing
-  notepad with no recipient raises the pair premium +1.04 [+0.65, +1.42] vs +1.61 [+0.92, +2.35] for the
-  real channel (ratio 0.65 [0.34, 1.32]; the registered rule that the notepad is *not* the driver failed); an
-  offered-but-never-delivered placebo gives +1.23 [+0.76, +1.85]; delivery itself (private − placebo, +0.38
-  [−0.41, +1.18]) is unresolved. Two paraphrases of the instructions (10 + 10 runs each) give +1.79
-  [+1.20, +2.43] and +0.24 [−0.32, +0.81]. Figure 5 shows the earlier placebo stratum: delivered and
-  undelivered channels track each other from round 1. What the level screens detect is channel *assignment
-  including its prompt cue*, not shown to be delivered coordination.
-- **Tacit high prices (Q2.2; gpt-6-luna).** With memory and profit framing, 19/20 *no-channel* markets
-  price ≥ Nash + 2; 13/20 channel pairs strict-execute, but the channel adds no detectable price, so channel
-  labels stop being ground truth (Figure 6). This is model-specific: abliterated Qwen with memory (Q1.4 E65)
-  is tacit-high in 0/20.
-- **Prompt wording (Q1.4).** Wording alone moves no-channel markup from −0.19 to +2.56 (§5.2).
-- **Legitimate asymmetry.** Scripted unequal costs: level screens false-flag 30/30 (Q1.4). LLM cost/quality
-  edges: premium flags 7/10 and 9/10 vs controls 2/10 (Q2.2).
-- **Prevalence.** At a hypothetical 1% prevalence none of the frozen, tested price flags reaches
-  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54] on scripted MI/pCMI rows, ≤ 0.19 on LLM sets). This largely follows from α = 0.05 and is
-  not a bound on achievable precision. The Q2.2 premium screen's
-  point precision is 0.24 at 5% prevalence.
-- **Labels disagree (Q2.2).** Only 14/50 communication-positive private test runs meet the E84 follow rule.
-
-![Placebo](figures/fig5_placebo_premium.png)
-*Figure 5 (say-vs-do, Q2.2; first fresh replication seeds, `llm_v3rep`). Mean designated-pair premium per round (shading: 95% bootstrap band over runs): delivered channel (n = 15) vs
-offered-but-never-delivered placebo (n = 15) vs no channel (n = 10). The premium is present before any
-message is delivered (round 1); placebo − private over rounds 2–12 is +0.03 [−0.54, +0.49] (no resolved
-difference, not equivalence).*
-
-![Strong framing](figures/fig6_strong_framing_tacit.png)
-*Figure 6 (say-vs-do, Q2.2 P2.7; strong-framing arm, `llm_p2strongF`, T = 40). Memory + profit framing: market-mean price − Nash by
-behaviour class; 19 tacit-high no-channel markets sit with the 13 strict-executed channel pairs. Tacit-high threshold:
-market mean ≥ Nash + 2 over rounds 11–40 (figure regenerated by `scripts/fig6_strong_framing.py` from Q2.2 data). Dashed line = tacit-high threshold. Right panel: the no-channel tacit-high class (green)
-overlaps the strict-executed channel class (blue); the tested price views show no resolved separation (AUROC 0.43–0.57,
-all CIs include 0.5; exploratory), which does not establish that price paths are indistinguishable.*
+An unread pricing notepad produces a premium-to-channel ratio 0.65 [0.34, 1.32]; delivery itself remains unresolved. With memory and profit framing, 19/20 no-channel gpt-6-luna markets have mean market price ≥ cost-adjusted Nash + 2 over rounds 11–40. The channel adds no detectable price in that arm, so channel labels stop being ground truth there; this is model-specific and does not verify coordination. Level screens also flag legitimate cost or quality advantages, and low assumed prevalence gives low positive predictive value. Figures 5–6 and all control estimates are in Appendix F. Only 14/50 communication-positive private test runs meet the E84 follow rule; channel assignment is not an execution label.
 
 ## 6. Discussion and implications
 
-The two projects started from opposite bets — that collusion leaves a statistical fingerprint in actions,
-and that it leaves a semantic one in words — and converged: in these markets, channel assignment is visible
-mainly as **how high** prices are, with no robust detected **contemporaneous co-movement** (lagged TE is weakly above chance), and a zero-shot auditor shows no
-resolved gain from **what is said publicly** (small gains are not excluded). This is good news for cheap screening (a markup screen is simple and
-interpretable) and bad news for attribution: a high level has many innocent causes (wording, model, memory,
-legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (in Q2.2's logbook control — the same notepad, but entries must be invented weather — the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the pricing notepad, suggesting that being singled out alone produces little; not a matched contrast: longer instruction, later batch).
+Channel assignment, including its prompt cue, shows up mainly in price level in these markets. Neither robust contemporaneous dependence nor additional public text provides the expected monitoring advantage. This is a result about the tested monitors and environments, not evidence that dependence or messages are universally uninformative. Inversion means that a zero-shot auditor reads a signal with the wrong sign.
 
-Read together, the two projects suggest that **detectability of LLM collusion by any price statistic is a property of
-the (seller model × prompt) pair**: relative screens (pair vs rivals) survive a shared model but lose power
-under market-wide spillover (in Q1.4's spillover sets pair_level 0.75–0.80 vs market level 0.85–0.94), and
-absolute screens need model- and prompt-matched references. With memory and a profit objective gpt-6-luna
-sellers raise prices market-wide without any channel (19/20; Q2.2 arm, re-scored by Q1.4 as E66), so
-channel labels stop being ground truth; abliterated Qwen with memory differs (channel adds +2.14 [1.29,
-3.00]; 5/20 executed under Q1.4's rule; Q1.4 E65, T = 40). The joint statement is a post-hoc synthesis, not
-a tested prediction.
+Price level offers a simple ranking signal but weak attribution: prompt wording, private deliberation, market-wide high pricing and legitimate advantages can all raise it. We therefore propose an audit trigger against a model- and prompt-matched reference, followed by private-log, dependence and provenance checks. This pipeline was not evaluated end to end, and these results do not establish which architecture to deploy. Appendix F retains the post-hoc synthesis and spillover comparisons.
 
-A practical reading is a two-stage design: an always-on level screen against a **model- and
-prompt-matched** reference as the first stage, with expensive audits (private-log review, dependence
-statistics, provenance checks for shared models and seeds) only on flagged pairs. We have not evaluated this
-pipeline end to end, and our evidence does not support recommending a particular architecture; it does
-support that a flag is an audit trigger, not a verdict. For multi-agent oversight more broadly, the same lesson
-applies within the tested settings: monitors of agents' public text and dependence tests on their actions both
-need validation against matched no-collusion references before a flag is read as coordination.
+## 7. Limitations and next steps
 
-## 7. Limitations
+One judge family supplies the main agreement labels; execution rules reuse prices, and locked-test exposure limits blindness. Small samples, uncorrected comparisons, short horizons and prompt dependence limit generalisation. Nonsignificance does not establish absence or equivalence. Full limitations and dual-use considerations are in Appendix G. Future work should test adversarial evasion, independent ground truth, larger simultaneous placebo studies and the complete proposed audit.
 
-- **Ground truth.** Agreement labels come from one judge family (gpt-6.1-sol, also the auditor); the
-  cross-family check is weak (above). Execution labels are defined from prices, so level screens are partly
-  scored on their own input on executed subsets.
-- **Scope of the co-movement null.** At T = 20 small co-movement is not excluded; sensitivity is bounded
-  only for the planted ±1 strategy. Below-chance pCMI in some sets is unexplained.
-- **Prompt dependence.** The channel effect is resolved in only 2/5 Q1.4 wordings; one Q2.2 paraphrase
-  removes most of the premium.
-- **No evasion test.** Monitor-aware sellers stopped agreeing (0/10, 0/10) rather than hiding; no red-teamed
-  or instructed colluder was run.
-- **Small samples, many comparisons.** 10–21 games per arm in most LLM sets; per-set CIs are uncorrected;
-  E70's per-cell estimates are descriptive; several contrasts (pooled replication, E133e, E72, E113 luna
-  split) are post hoc or secondary.
-- **Narrow markets.** Four sellers, logit demand, short horizons; one external double auction (E68) is
-  inconclusive (chat raises asks only +0.39 [+0.06, +0.69]); SALT is a different construct.
-- **Placebo.** Q1.4's own market has no placebo arm; Q2.2's placebo leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18]).
-
-## 8. Future work
-
-1. Instructed / red-teamed colluders (coded public signals, gradual drift) to test evasion.
-2. Ground truth independent of prices and of the condition, judged by more than one model family.
-3. A larger placebo study with simultaneous pre-play to isolate delivered coordination.
-4. Mixed-family markets and provenance data for the shared-model / shared-seed confound.
-5. End-to-end evaluation of the two-stage audit against legitimate partnerships and tacit markets.
-
-## 9. Conclusion
+## 8. Conclusion
 
 Offering two LLM sellers a private channel left a trace that an auditor could see, but not the trace either
 project set out to find. In these markets the channel showed up as a higher price level. We detected no robust
@@ -404,74 +173,11 @@ notepad, or memory with profit framing, and level screens also flag legitimate c
 alone does not show an agreement. The open test is whether instructed or red-teamed colluders can keep prices
 inside the matched reference while still coordinating.
 
-## LLM usage statement
-
-This project was run almost entirely by AI agents, and we disclose that as part of the method. The human author
-chose the two research questions and seeded each source repo with a plan, the shared trajectory schema, the
-agents' rule files and an LLM-call helper with rate limiting and call logging. They also wrote the Phase 2 gap lists and the agent runner
-scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
-were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
-beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
-possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 353 manager iterations had completed by 2026-10-25 13:07 UTC (228 Opus, 125
-gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
-A separate director loop
-(gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,
-judges and auditors are the LLMs named in §3. The source reports and this merged report were reviewed
-adversarially by both gpt-6.1-sol and Claude Opus (merged-report records in `reviews/`). Such review cannot rule
-out errors that all of these models share. For that reason, printed numbers are bound by script to saved source
-files wherever possible (Reproducibility).
-
-## Reproducibility
-
-Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.com/DennisToma/collusion-14-infotheory),
-[Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
-reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
-from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
-[evidence bundle](evidence/README.md) contains 158 exact files from the pinned source commits, with SHA256
-provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
-credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
-Fig. 5's per-round means are asserted equal to the saved source JSON.
-`scripts/check_sources.py` passes 111 saved-source assertions and 139 bindings that extract printed
-numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
-decimals are bound (222/260 in the main text, 55/61 in the slides). Each of the other 38 + 6 falls in a declared
-non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
-the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 26 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
-independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
-All three Q2.2 replay outputs regenerate byte-identically; C21b's per-run fields match the pinned original
-source function across both floors and windows. `uv run python scripts/recompute_locked_test_q22.py`
-reproduces the historical locked-test run AUROCs for all six original LLM views and eight contrasts
-from cached scores and frozen judge labels (95 runs; original paired class-stratified bootstrap).
-Every selected estimate and CI matches the saved analysis exactly. This is saved-evidence reproduction,
-not another held-out evaluation; pair/localisation endpoints, fusion and thresholds are outside this replay.
-`uv run python scripts/recompute_grid_q14.py` additionally rebuilds the E70 grid from frozen
-Q1.4 trajectories: all 768 observed run scores (four detectors, 192 games) match exactly.
-The original cell-by-arm bootstrap reproduces all four pooled AUROC/CI triples, both paired
-level contrasts, the markup contrast and all per-cell AUROCs. Release checks compare all six
-pair scores per game, cohort loading and the full bootstrap against pinned original functions.
-This checks the saved calculation; null calibration, permutation flags and executed labels
-are outside this replay. Its output also regenerates byte-identically without sibling repos.
-`uv run python scripts/recompute_gate_q14.py` reaggregates the scripted gate from archived
-pair scores and max-statistic run p-values (500 markets, nine detectors). All 666 saved
-summary values reproduce to floating-point precision; flag rates, Wilson intervals and
-localisation match exactly. Original-function parity and calculator fixtures check strict
-thresholds, near-ties and leave-one-out surrogate ranking. This verifies saved aggregation,
-without regenerating scores, trajectories or shift-null draws, or validating ground truth.
-`uv run python scripts/recompute_gate_pcmi_q14.py` separately reconstructs the gate's pCMI
-scores and historical shift-null draws from archived trajectories (original sorted-run seeds,
-200 draws per run). All 3000 pair scores match exactly, as do all pair p-values and 500
-max-statistic run p-values. Tests compare the unmodified original full scorer on ten group
-representatives plus constant/short-draw fixtures, and reject malformed trajectories and
-wrong cached p-values. Other detector nulls, market generation and label correctness remain
-outside this replay; no settings or held-out estimates change.
-`SUBMISSION.pdf` and `SLIDES.pdf` are built by
-`uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,
-per-slide placement and figure pixels; repository links work in downloaded PDFs.
-
 ## References
 
 Author years use first-preprint or publication years; versioned arXiv links identify the text checked.
 
-- Agrawal et al. (2025). [Evaluating LLM Agent Collusion in Double Auctions](https://arxiv.org/abs/2507.01413v1).
+- Agrawal, Teo, Vazquez, Kunnavakkam, Srikanth & Liu (2025). [Evaluating LLM Agent Collusion in Double Auctions](https://arxiv.org/abs/2507.01413v1).
 - Banchio & Mantegazza (2023). [Adaptive Algorithms and Collusion via Coupling](https://doi.org/10.1145/3580507.3597726). ACM EC '23. Revised preprint: [Artificial Intelligence and Spontaneous Collusion](https://arxiv.org/abs/2202.05946v5).
 - Bonjour, Aggarwal & Bhargava (2022). [Information theoretic approach to detect collusion in multi-agent games](https://proceedings.mlr.press/v180/bonjour22a.html). UAI, PMLR 180:223–232.
 - Calvano, Calzolari, Denicolò & Pastorello (2020). [Artificial Intelligence, Algorithmic Pricing, and Collusion](https://doi.org/10.1257/aer.20190623). AER 110(10):3267–3297.
@@ -479,10 +185,10 @@ Author years use first-preprint or publication years; versioned arXiv links iden
 - Dhanda (2026). [A Price Cap Can Act as a Focal Point for LLM Pricing Agents: Evidence from a Repeated Bertrand Duopoly (Revised)](https://doi.org/10.21203/rs.3.rs-10183486/v1). Research Square preprint.
 - Fish, Gonczarowski & Shorrer (2024). [Algorithmic Collusion by Large Language Models](https://arxiv.org/abs/2404.00806v6). Revised 2026; cited by first-preprint year.
 - Green & Porter (1984). [Noncooperative Collusion under Imperfect Price Information](https://doi.org/10.2307/1911462). Econometrica 52(1):87–100.
-- Lin et al. (2024). [Strategic Collusion of LLM Agents: Market Division in Multi-Commodity Competitions](https://arxiv.org/abs/2410.00031v2).
-- Mathew et al. (2024). [Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs](https://arxiv.org/abs/2410.03768v2).
-- Motwani et al. (2024). [Secret Collusion among AI Agents: Multi-Agent Deception via Steganography](https://arxiv.org/abs/2402.07510v5). NeurIPS 2024.
-- Rose et al. (2026). [Detecting Multi-Agent Collusion Through Multi-Agent Interpretability](https://arxiv.org/abs/2604.01151v5). Definitions 4.7 and 4.7′ distinguish causal and operational criteria.
+- Lin, Ojha, Cai & Chen (2024). [Strategic Collusion of LLM Agents: Market Division in Multi-Commodity Competitions](https://arxiv.org/abs/2410.00031v2).
+- Mathew, Matthews, McCarthy, Velja, Schroeder de Witt, Cope & Schoots (2024). [Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs](https://arxiv.org/abs/2410.03768v2).
+- Motwani, Baranchuk, Strohmeier, Bolina, Torr, Hammond & Schroeder de Witt (2024). [Secret Collusion among AI Agents: Multi-Agent Deception via Steganography](https://arxiv.org/abs/2402.07510v5). NeurIPS 2024.
+- Rose, Cullen, Abdelnabi, Torr, Kaplowitz & Schroeder de Witt (2026). [Detecting Multi-Agent Collusion Through Multi-Agent Interpretability](https://arxiv.org/abs/2604.01151v5). Definitions 4.7 and 4.7′ distinguish causal and operational criteria.
 - Schreiber (2000). [Measuring Information Transfer](https://doi.org/10.1103/PhysRevLett.85.461). PRL 85(2):461–464.
 - Shi, Zhang & Yang (2026). [Emergent Collusion in Long-Horizon LLM Agent Interaction](https://arxiv.org/abs/2609.24967v2). [SALT-NLP dataset](https://huggingface.co/datasets/SALT-NLP/agent-collusion/tree/2eba8f37), source-data revision used by Q2.2.
 - Tailor (2025). [Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent LLMs](https://arxiv.org/abs/2510.04303v2). Preprint.
@@ -566,3 +272,310 @@ that uses early prices *and* the privately judged agreed price — with no evide
 public messages. This is the third analysis of the same 78 games; the rule score was fixed after E133c/d
 were seen, the LLM prompt states the label rule, and the same model (gpt-6.1-sol) is Q1.4's label judge and
 extracted the agreed price.
+
+
+### D. Extended summary, glossary and operational labels
+
+The extended summary below retains the previous draft's full numerical scope and caveats.
+It is supplementary to the shorter abstract; source figure and table numbering is retained.
+
+We put LLM sellers in four-seller repeated pricing markets, offer one pair a private chat channel (never
+telling them to collude), and ask whether an auditor can tell which markets had the channel — from prices,
+from public messages, or from both. AUROC is the auditor's ranking accuracy (0.5 = chance, < 0.5 = inverted);
+per-set 95% CIs are uncorrected for multiplicity.
+
+1. **The channel shows up as a higher price level.** Mean markup over the competitive (Nash) price was higher
+   with the channel in all 9 main sets of the prices-only project (Q1.4; 7 seller models; one prompt family —
+   across 5 alternative wordings the effect is resolved in only 2). A simple screen on
+   the highest pair's markup had a higher point-estimate AUROC than a conditional-dependence detector (pCMI) in
+   all 9 (0.75–0.99 vs 0.34–0.72; paired-difference CI > 0 in 8/9).
+2. **We find no robust contemporaneous co-movement.** pCMI flags and localises every pair in a scripted
+   shared-signal positive control. With LLM sellers it is at chance (all three CIs include 0.5) in a 192-game
+   seven-factor grid (0.51 [0.43, 0.59]), in pre-registered 60-round games (0.34 [0.18, 0.52]) and on
+   agreements whose prices were kept ("executed", 48/149; 0.42 [0.33, 0.53]). One base-Qwen3.6 set separates
+   (0.71 [0.51, 0.88]) but did not replicate in the grid. Lagged dependence (transfer entropy) is weakly above
+   chance in the grid but below the level screen (§5.2).
+3. **Public messages give a zero-shot LLM auditor no resolved gain** (say-vs-do project, Q2.2). Adding them to
+   prices changes AUROC by −0.01 [−0.09, +0.06] (locked test split, n = 95) and −0.07 [−0.17, +0.02] (fresh
+   replications, pooled post hoc). In both Qwen families, where sellers can invite rivals publicly, the text-only
+   view is *inverted* (Qwen3.8 arms 0.15–0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42]; CIs below 0.5). Text did
+   work on an external peer-verification dataset, predicting verdicts from preceding messages (different
+   task; no action-view comparison, §5.3).
+4. **Neither signal is specific to collusion.** An unread private pricing notepad produces about two thirds of
+   the channel's premium over rounds 2–12 (point ratio 0.65, CI [0.34, 1.32]). With memory and profit framing,
+   19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40). Level screens also flag
+   legitimate cost asymmetry.
+
+**Implication.** Price-level screens could serve as a cheap first-stage audit trigger (not evaluated end to end).
+Their reference must be matched to the seller model and prompt, and a flag is not evidence of an agreement.
+
+*Glossary.* **AUROC**: probability that a random positive example scores above a random negative one, ties
+counting half; the positive class (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 =
+inverted). **Nash price**: the static competitive price; **Nash + 2**: at least 2 price units above it.
+**Level / max-pair markup** (called "market-level markup" or `market_level` in figures and the appendix): the
+highest pair's mean price above the per-round Nash price. **pair_level** (Q1.4) / **pair premium** (Q2.2): a
+pair's mean price minus the other two sellers' mean (the designated pair, or the maximum over pairs when used
+as a detector). **C − A**: difference in mean all-seller markup over Nash, channel arm (C) minus no-channel arm
+(A) (Q1.4; Q2.2 contrasts use the designated-pair premium). **pCMI**: max-pair Gaussian conditional mutual
+information of prices given public state and all sellers' lagged prices (contemporaneous co-movement not
+explained by public information). **TE**: transfer entropy (lagged dependence). **Executed**: the judge found a
+private agreement *and* the pair's prices then followed it (Q1.4 rule, Appendix D). **Locked test**: a split frozen
+before any tuning and scored once with the final configuration (Q2.2's had four disclosed exposures, so it
+is locked but not fully blind; §3). **E*nn* / P2.*n* / N*n***: experiment / section / claim IDs in the source
+repos and SOURCES.md.
+
+| term | rule | used for |
+|---|---|---|
+| executed (Q1.4) | judge-labelled agreement AND both pair firms ≥ agreed − 1 in ≥ ½ of post-agreement rounds AND second-half pair mean ≥ Nash + 2 | 48/149 executed games; E70 executed subsets. 27 variants give 13–78/149 (E71) |
+| strict-executed (Q2.2) | registered strict rule for the strong-framing arm (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
+| kept / followed (Q2.2) | E84 follow rule on the locked test: judged agreed floor ≥ 12 (lower floors do not count as followed); both pair firms price ≥ that floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
+| tacit-high (Q2.2) | strong-framing no-channel market whose mean price minus cost-adjusted Nash over rounds 11–40 is ≥ 2 (a price threshold, not verified coordination) | 19/20 strong-framing markets |
+
+### E. Price-detector estimates and robustness
+
+| evidence | max-pair markup (level) | pCMI (co-movement) | source |
+|---|---|---|---|
+| 9 main sets, 7 models | AUROC 0.75–0.99 (point est. > pCMI in 9/9); C − A CI > 0 in 9/9 | 0.34–0.72; CI ∋ 0.5 in 8/9 | N1–N4 |
+| paired Δ level − pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [−0.27, +0.33]) | | N3 |
+| E70 grid: 16-cell fractional factorial over 7 factors, 6 + 6 games per cell (192), board on (Figure 3) | 0.74 [0.66, 0.80]; level > pCMI in 12/16 cells (point est.) | 0.51 [0.43, 0.59] | N8 |
+| E44 long games, T = 60 (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] | N5 |
+| executed channel games vs no-channel controls (48 executed of 149 labelled channel games, Q1.4 rule) | max-pair 0.99 (inflated by construction); pair-level 0.87 [0.80, 0.94] (not inflated) | 0.42 [0.33, 0.53] | N7 |
+| rank (copula) pCMI / sign-change CMI, E70 | | 0.53 [0.44, 0.61] / 0.44 [0.36, 0.52] | N11 |
+
+*Table 1. Per-set CIs uncorrected. E74's paired differences were declared, but declaration and results
+first appear in the same commit, so their order is not independently established.*
+
+Neither rank-based nor discrete estimators detect co-movement that linear pCMI missed (both at chance,
+though sign-CMI has little power in E70's sparse state strata). At T = 60 the observed co-move excess is
++0.004 [−0.007, +0.015], whereas pCMI detects a planted shared ±1 move at per-round rate q = 0.1 with
+AUROC 0.79 [0.70, 0.88] — this is injection-specific sensitivity, not a general power bound. At T = 20 (most sets, all
+of E70) the same planting gives only 0.62 [0.52, 0.71], so small co-movement is not excluded there, and the
+check bounds sensitivity only to that planting. The one pCMI exception (base Qwen3.6, 0.71 [0.51, 0.88]) did
+not replicate in the grid's Qwen cells.
+
+*Lagged dependence is not excluded.* TE is weakly above chance in the grid (0.62 [0.54, 0.70], declared
+secondary) and clearly above chance in some main sets (deepseek 0.81 [0.62, 0.96]; base Qwen3.8 0.91);
+level beats TE (CI > 0) in 6/9 main sets and in the grid (+0.12 [+0.01, +0.22]). Because TE also fires on
+shared policies in scripted markets, and in the grid its signal sits in channel games that did *not* meet the
+execution rule (0.73, n = 52: 38 with a judged agreement, 14 without) rather than executed ones (0.49, n = 44;
+post hoc, difference untested), we do not read it as evidence of coordination.
+
+**Robustness to prompt wording is limited.** Across five wordings (6 + 6 games each, gpt-6-luna), the
+channel effect C − A has CI > 0 in only 2/5, and no-channel markup ranges from −0.19 to +2.56 (P2.7). "9/9"
+holds for the main sets under one prompt family.
+
+![E70 grid](figures/fig3_e70_grid.png)
+*Figure 3 (prices-only, Q1.4 P2.14). Registered 16-cell fractional-factorial grid (E70) over seven design
+factors, 6 channel + 6 no-channel games per cell, public board on. (a) Main effect of switching each factor from
+its low to its high level on the channel effect C − A, with intervals (descriptive). (b) Per-cell run AUROC of the
+level screen ("market-level markup", blue) and pCMI (orange). Cells are ordered by their C − A, printed under each
+cell id. Level is above pCMI in 12/16 cells; pCMI scatters around chance. Cell estimates are descriptive.*
+
+### F. Auditor comparisons, controls and extended interpretation
+
+| where text could help | contrast | n | text view | action view |
+|---|---|---|---|---|
+| gpt-6-luna, base framing (locked test) | judge-labelled y = 1 vs 0 | 95 runs | 0.47 [0.36, 0.58] | 0.75 [0.65, 0.85] |
+| Claude Sonnet (talks publicly) | private vs none | 5 + 5 | 0.22 [0.00, 0.52] | 0.52 [0.20, 0.88] |
+| deepseek (talks publicly) | private vs none | 30 runs | 0.36 [0.20, 0.52] | 0.53 [0.30, 0.74] |
+| Qwen3.8 base | private vs none | 15 + 15 | **0.21 [0.12, 0.33]** | 0.86 [0.69, 0.98] |
+| Qwen3.8 abliterated | private vs none | 15 + 15 | **0.15 [0.05, 0.25]** | 0.57 [0.36, 0.78] |
+| SALT-NLP peer verification (external) | rule-violating mutual ACCEPT vs not | 240 episodes | 0.87 [0.83, 0.91] | – |
+
+*Table 2 (Q2.2 P2.0, `results/analysis/p2_say_vs_do.md`). AUROC < 0.5 = the view ranks controls higher;
+bold = CI entirely below 0.5.*
+
+The registered contrast shows no resolved gain from adding public text: combined − better single view
+−0.01 [−0.09, +0.06] (locked test, n = 95), −0.07 [−0.17, +0.02] on pooled fresh replications (n = 90,
+pooling post hoc); gains above +0.06 / +0.02 are excluded at 95%.
+
+*Inversion.* An AUROC of 0.15 means the text carries information with the wrong sign for a zero-shot auditor,
+not that words are uninformative. Among the families in Table 2, the inversion is resolved only for the two
+Qwen3.8 arms. There, channel sellers, who can coordinate in private, invite rivals publicly *less* (invite rate
+0.40 vs 0.88 in controls, Qwen3.8 base; post hoc). This is consistent with the inversion but not shown to cause
+it: text score vs invite rate gives Spearman 0.49 [0.17, 0.71] with both Qwen3.8-base arms pooled (n = 30) but
+−0.40 [−0.83, +0.18] within the no-channel arm, so the association comes mainly from the arm difference.
+For deepseek and Claude, invite rates do not differ.
+
+Inversion need not involve an agreement: a gpt-6.1-sol seller arm with 0/7 private agreements also scores 0.17
+[0.01, 0.41] (7 + 7 markets; post hoc, not interpreted in the Q2.2 report).
+
+*Cross-application to Q1.4's grid (E113, 192 games).* In the 8 Qwen cells the LLM auditor reading prices is
+at chance (0.52 [0.41, 0.64]) — although Q1.4's markup statistic on the same games is not (0.76) — text is
+inverted (0.32 [0.24, 0.42]), and adding text lowers AUROC (combined − action −0.24 [−0.37, −0.09]; −0.30
+[−0.44, −0.16] on games executed under Q1.4's rule). In the gpt-6-luna cells combined − action is
++0.07 [−0.02, +0.17] overall and +0.16 [+0.05, +0.28] on executed games (registered secondary), but a
+similar +0.12 [−0.08, +0.32] appears in the 3 gpt-6-luna cells with no public posts (post hoc), so the gpt-6-luna gain
+cannot be credited to text. In these markets public text resolvedly hurt the auditor (Qwen); no gain could be credited to text.
+
+*External case (different construct).* In SALT-NLP peer verification (Shi, Zhang & Yang 2026), agents
+exchange task evidence, then submit ACCEPT/REJECT verdicts in a separate phase. "Executed" means mutual
+ACCEPT in violation of the raw-log verification rule. The auditor sees only the preceding messages,
+not submitted verdicts or task outcomes. It reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed),
+even though, in the full dataset (5169 executed episodes), 62% carry no explicit agreement
+(P(said | executed) = 0.385). Messages can announce intended verdicts; on the subset without case-insensitive matches to
+accept/reject, AUROC is 0.75 [0.66, 0.84] (n = 117). This selected-subset comparison is not a causal
+ablation. The violation label does not require an incorrect task outcome. Thus messages can predict later
+rule-breaking verdicts; this is no test of text added to an action view and does not establish why text
+works better here than in the pricing markets. This corrects the frozen source report's description of
+the act as happening in chat, following its analysis code and the primary paper.
+
+*Forecasting which agreements are kept (E133, exploratory, 78 games):* see Appendix C. Briefly, with the private
+chat, say–do consistency forecasts kept agreements (AUROC 0.77), but three hand-built say–do features in one
+logistic model add nothing beyond early price stability, and there is no evidence that public messages
+add predictive value.
+
+- **Prompt artefact (Q2.2).** In a six-arm study (15 matched seeds), a private *notes-to-self* pricing
+  notepad with no recipient raises the pair premium +1.04 [+0.65, +1.42] vs +1.61 [+0.92, +2.35] for the
+  real channel (ratio 0.65 [0.34, 1.32]; the registered rule that the notepad is *not* the driver failed); an
+  offered-but-never-delivered placebo gives +1.23 [+0.76, +1.85]; delivery itself (private − placebo, +0.38
+  [−0.41, +1.18]) is unresolved. Two paraphrases of the instructions (10 + 10 runs each) give +1.79
+  [+1.20, +2.43] and +0.24 [−0.32, +0.81]. Figure 5 shows the earlier placebo stratum: delivered and
+  undelivered channels track each other from round 1. What the level screens detect is channel *assignment
+  including its prompt cue*, not shown to be delivered coordination.
+- **Tacit high prices (Q2.2; gpt-6-luna).** With memory and profit framing, 19/20 *no-channel* markets
+  price ≥ Nash + 2; 13/20 channel pairs strict-execute, but the channel adds no detectable price, so channel
+  labels stop being ground truth (Figure 6). This is model-specific: abliterated Qwen with memory (Q1.4 E65)
+  is tacit-high in 0/20.
+- **Prompt wording (Q1.4).** Wording alone moves no-channel markup from −0.19 to +2.56 (§5.2).
+- **Legitimate asymmetry.** Scripted unequal costs: level screens false-flag 30/30 (Q1.4). LLM cost/quality
+  edges: premium flags 7/10 and 9/10 vs controls 2/10 (Q2.2).
+- **Prevalence.** At a hypothetical 1% prevalence none of the frozen, tested price flags reaches
+  point-estimate precision 0.25 (Q1.4; maximum 0.20 [0.07, 0.54] on scripted MI/pCMI rows, ≤ 0.19 on LLM sets). This largely follows from α = 0.05 and is
+  not a bound on achievable precision. The Q2.2 premium screen's
+  point precision is 0.24 at 5% prevalence.
+- **Labels disagree (Q2.2).** Only 14/50 communication-positive private test runs meet the E84 follow rule.
+
+![Placebo](figures/fig5_placebo_premium.png)
+*Figure 5 (say-vs-do, Q2.2; first fresh replication seeds, `llm_v3rep`). Mean designated-pair premium per round (shading: 95% bootstrap band over runs): delivered channel (n = 15) vs
+offered-but-never-delivered placebo (n = 15) vs no channel (n = 10). The premium is present before any
+message is delivered (round 1); placebo − private over rounds 2–12 is +0.03 [−0.54, +0.49] (no resolved
+difference, not equivalence).*
+
+![Strong framing](figures/fig6_strong_framing_tacit.png)
+*Figure 6 (say-vs-do, Q2.2 P2.7; strong-framing arm, `llm_p2strongF`, T = 40). Memory + profit framing: market-mean price − Nash by
+behaviour class; 19 tacit-high no-channel markets sit with the 13 strict-executed channel pairs. Tacit-high threshold:
+market mean ≥ Nash + 2 over rounds 11–40 (figure regenerated by `scripts/fig6_strong_framing.py` from Q2.2 data). Dashed line = tacit-high threshold. Right panel: the no-channel tacit-high class (green)
+overlaps the strict-executed channel class (blue); the tested price views show no resolved separation (AUROC 0.43–0.57,
+all CIs include 0.5; exploratory), which does not establish that price paths are indistinguishable.*
+
+The two projects started from opposite bets — that collusion leaves a statistical fingerprint in actions,
+and that it leaves a semantic one in words — and converged: in these markets, channel assignment is visible
+mainly as **how high** prices are, with no robust detected **contemporaneous co-movement** (lagged TE is weakly above chance), and a zero-shot auditor shows no
+resolved gain from **what is said publicly** (small gains are not excluded). This is good news for cheap screening (a markup screen is simple and
+interpretable) and bad news for attribution: a high level has many innocent causes (wording, model, memory,
+legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (in Q2.2's logbook control — the same notepad, but entries must be invented weather — the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the pricing notepad, suggesting that being singled out alone produces little; not a matched contrast: longer instruction, later batch).
+
+Read together, the two projects suggest that **detectability of LLM collusion by any price statistic is a property of
+the (seller model × prompt) pair**: relative screens (pair vs rivals) survive a shared model but lose power
+under market-wide spillover (in Q1.4's spillover sets pair_level 0.75–0.80 vs market level 0.85–0.94), and
+absolute screens need model- and prompt-matched references. With memory and a profit objective gpt-6-luna
+sellers raise prices market-wide without any channel (19/20; Q2.2 arm, re-scored by Q1.4 as E66), so
+channel labels stop being ground truth; abliterated Qwen with memory differs (channel adds +2.14 [1.29,
+3.00]; 5/20 executed under Q1.4's rule; Q1.4 E65, T = 40). The joint statement is a post-hoc synthesis, not
+a tested prediction.
+
+A practical reading is a two-stage design: an always-on level screen against a **model- and
+prompt-matched** reference as the first stage, with expensive audits (private-log review, dependence
+statistics, provenance checks for shared models and seeds) only on flagged pairs. We have not evaluated this
+pipeline end to end, and our evidence does not support recommending a particular architecture; it does
+support that a flag is an audit trigger, not a verdict. For multi-agent oversight more broadly, the same lesson
+applies within the tested settings: monitors of agents' public text and dependence tests on their actions both
+need validation against matched no-collusion references before a flag is read as coordination.
+
+### G. Limitations and Dual-Use / Ethical Considerations
+
+- **Ground truth.** Agreement labels come from one judge family (gpt-6.1-sol, also the auditor); the
+  cross-family check is weak (above). Execution labels are defined from prices, so level screens are partly
+  scored on their own input on executed subsets.
+- **Scope of the co-movement null.** At T = 20 small co-movement is not excluded; sensitivity is bounded
+  only for the planted ±1 strategy. Below-chance pCMI in some sets is unexplained.
+- **Prompt dependence.** The channel effect is resolved in only 2/5 Q1.4 wordings; one Q2.2 paraphrase
+  removes most of the premium.
+- **No evasion test.** Monitor-aware sellers stopped agreeing (0/10, 0/10) rather than hiding; no red-teamed
+  or instructed colluder was run.
+- **Small samples, many comparisons.** 10–21 games per arm in most LLM sets; per-set CIs are uncorrected;
+  E70's per-cell estimates are descriptive; several contrasts (pooled replication, E133e, E72, E113 luna
+  split) are post hoc or secondary.
+- **Narrow markets.** Four sellers, logit demand, short horizons; one external double auction (E68) is
+  inconclusive (chat raises asks only +0.39 [+0.06, +0.69]); SALT is a different construct.
+- **Placebo.** Q1.4's own market has no placebo arm; Q2.2's placebo leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18]).
+
+**Dual-use risk.** Documenting that public-text auditors can invert rankings and that price screens depend on the model and prompt may help an attacker identify monitoring blind spots. Releasing market prompts, traces and detector implementations could support repurposing beyond this sandbox. We did not introduce or test an evasion procedure: agents were never instructed to collude or evade, and monitor-aware sellers stopped agreeing rather than demonstrating concealment. This limits our empirical claims about strategic adversaries; it does not eliminate reuse risk.
+
+**Safeguards and intended use.** All market experiments were simulated; the abliterated models were used only as sellers in that sandbox. We did not deploy pricing agents in a real market. Defenders should treat a price flag as a reason to investigate, calibrate against legitimate partnerships and model/prompt-matched controls, and seek independent evidence of an agreement before attribution. A missing text or dependence flag cannot certify competitive behaviour. Shared models and shared randomness also need provenance checks. The two-stage audit remains an unevaluated proposal.
+
+**Interpretation and responsibility.** High prices alone do not establish a harmful agreement, and our price-defined execution rules are not independent ground truth. The SALT label is a protocol violation and does not require an incorrect task outcome. This report supports research on oversight, not accusations about real firms or a guarantee that any detector is safe to deploy. The author remains responsible for checking AI-assisted claims and deciding how to share the artifacts; automated reviews can share systematic errors.
+
+### H. AI assistance and pre-existing material
+
+#### LLM usage statement
+
+This project was run almost entirely by AI agents, and we disclose that as part of the method. The human author
+chose the two research questions and seeded each source repo with a plan, the shared trajectory schema, the
+agents' rule files and an LLM-call helper with rate limiting and call logging. They also wrote the Phase 2 gap lists and the agent runner
+scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
+were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
+beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 361 manager iterations had completed by 2026-10-25 13:45 UTC (233 Opus, 128
+gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
+A separate director loop
+(gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,
+judges and auditors are the LLMs named in §3. The source reports and this merged report were reviewed
+adversarially by both gpt-6.1-sol and Claude Opus (merged-report records in `reviews/`). Such review cannot rule
+out errors that all of these models share. For that reason, printed numbers are bound by script to saved source
+files wherever possible (Reproducibility).
+
+The work also used worker models for implementation and bulk simulated-agent tasks, as recorded in each source repo's `llm.py` routing and trajectory/cache metadata. Dennis directed the research priorities; autonomous AI managers, reviewers and workers performed the research and drafting. The reported numbers are traceable to regenerating code and saved evidence; the portable bundle checks the saved calculations within its documented scope.
+
+#### Pre-existing code and data
+
+The official [Poseidon Research sprint starter](https://github.com/poseidon-research/collusion_hackathon) is pre-existing material. Q1.4's external double-auction arm E68 adapted its `llm-agent-collusion` harness (starter commit `d585a7b`), with that origin recorded in the source REPORT. The starter's `llm-trust-breaking` code was considered for the dropped trust-breaking arm; it is not claimed as a sprint contribution or a completed experiment. The starter's `literature/` reading list and definition survey informed related work. SALT-NLP is pre-existing external data, not generated by this project.
+
+The primary pricing environments, analysis and research writing were developed during the sprint. This merge reuses the two sprint repos' code and frozen evidence: the PDF exporter is adapted from Q1.4, and figure/replay scripts identify their source implementations in their docstrings and evidence manifest. Those adaptations are not claimed as independent original implementations. Source repos, pins and exact file provenance are listed in [SOURCES.md](SOURCES.md) and [evidence/README.md](evidence/README.md).
+
+#### Reproducibility
+
+Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.com/DennisToma/collusion-14-infotheory),
+[Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
+reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
+from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
+[evidence bundle](evidence/README.md) contains 158 exact files from the pinned source commits, with SHA256
+provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
+credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
+Fig. 5's per-round means are asserted equal to the saved source JSON.
+`scripts/check_sources.py` passes 111 saved-source assertions and 144 bindings that extract printed
+numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
+decimals are bound (248/281 across the main text and relocated scientific appendices D–G, 55/61 in the slides). Each of the other 33 + 6 falls in a declared
+non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
+the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 26 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
+independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
+All three Q2.2 replay outputs regenerate byte-identically; C21b's per-run fields match the pinned original
+source function across both floors and windows. `uv run python scripts/recompute_locked_test_q22.py`
+reproduces the historical locked-test run AUROCs for all six original LLM views and eight contrasts
+from cached scores and frozen judge labels (95 runs; original paired class-stratified bootstrap).
+Every selected estimate and CI matches the saved analysis exactly. This is saved-evidence reproduction,
+not another held-out evaluation; pair/localisation endpoints, fusion and thresholds are outside this replay.
+`uv run python scripts/recompute_grid_q14.py` additionally rebuilds the E70 grid from frozen
+Q1.4 trajectories: all 768 observed run scores (four detectors, 192 games) match exactly.
+The original cell-by-arm bootstrap reproduces all four pooled AUROC/CI triples, both paired
+level contrasts, the markup contrast and all per-cell AUROCs. Release checks compare all six
+pair scores per game, cohort loading and the full bootstrap against pinned original functions.
+This checks the saved calculation; null calibration, permutation flags and executed labels
+are outside this replay. Its output also regenerates byte-identically without sibling repos.
+`uv run python scripts/recompute_gate_q14.py` reaggregates the scripted gate from archived
+pair scores and max-statistic run p-values (500 markets, nine detectors). All 666 saved
+summary values reproduce to floating-point precision; flag rates, Wilson intervals and
+localisation match exactly. Original-function parity and calculator fixtures check strict
+thresholds, near-ties and leave-one-out surrogate ranking. This verifies saved aggregation,
+without regenerating scores, trajectories or shift-null draws, or validating ground truth.
+`uv run python scripts/recompute_gate_pcmi_q14.py` separately reconstructs the gate's pCMI
+scores and historical shift-null draws from archived trajectories (original sorted-run seeds,
+200 draws per run). All 3000 pair scores match exactly, as do all pair p-values and 500
+max-statistic run p-values. Tests compare the unmodified original full scorer on ten group
+representatives plus constant/short-draw fixtures, and reject malformed trajectories and
+wrong cached p-values. Other detector nulls, market generation and label correctness remain
+outside this replay; no settings or held-out estimates change.
+`SUBMISSION.pdf` and `SLIDES.pdf` are built by
+`uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,
+per-slide placement and figure pixels; repository links use GitHub URLs and require repository access (README documents the archive alternative).
