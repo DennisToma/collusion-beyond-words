@@ -3,6 +3,31 @@
 The primary submission is **[TEMPLATE_REPORT.md](TEMPLATE_REPORT.md) / [TEMPLATE_REPORT.pdf](TEMPLATE_REPORT.pdf)**;
 **[SUBMISSION.md](SUBMISSION.md)** is the extended report. Number provenance: [SOURCES.md](SOURCES.md).
 
+Fallback iteration 7 closes the primary report's numerical-context gap. The source checker now
+validates **65 section/table-scoped primary bindings (135 numeric slots)** directly against frozen
+source values; it requires exact occurrence counts and fixed precision. Table headers and row
+identities are checked alongside values. The numeric inventory covers the scientific main text
+and appendices A–B, including ethics: **142 tokens, zero unclassified**, alongside the global
+**160-token / 26-CI-triple** membership check. Integer-only and qualitative claims still require review.
+Commands: `uv run python scripts/check_sources.py` and `uv run python scripts/check_template_numbers.py`.
+
+`uv run python scripts/finalize.py` passes **14 commands / 57 tests** (30 reproduction, 10 packaging,
+9 export, 3 compliance, 5 primary-artifact), with **120 source assertions / 144 extended-report and
+slide bindings / 65 primary bindings / 158 evidence hashes**. Four new regression checks reject
+endpoint, detector, count, header and row-label swaps, deleted/duplicate claims, every primary
+numeric-slot mutation, and unsupported results in the ethics appendix or beside non-results.
+The [independent review and follow-up](reviews/codex_fallback_i7.md) closed two P2 findings and
+report no remaining actionable issue within scope. [Finalizer log](reviews/finalize_fallback_i7.txt).
+
+[Preservation receipt](results/primary_preservation_fallback_i7.json) from
+`uv run --group export python reviews/verify_preservation_fallback_i7.py` confirms **176** scientific,
+manuscript and image files unchanged, including the primary Markdown and all six scientific replay outputs;
+the original 111 source assertions and 144 bindings are identical. Primary PDF and slide content streams
+are unchanged; only extended-report pages 19–20 change (provenance/test counts and usage snapshot), and
+both were visually inspected. No empirical estimate or evidence pin changed. No experiment, new
+held-out evaluation, simulation or auditor call. Clean committed archive acceptance follows the commit;
+Dennis still must upload the primary PDF, project image and final code ZIP. Earlier notes are historical.
+
 Fallback iteration 6 closes the primary-upload release gap. `finalize.py` now exports and checks the
 template PDF as well as the extended report/slides. `check_template_artifacts.py` checks the actual PDF
 text, four figure pixel matches, template structure, 150–250-word abstract, main-text limit, early headline
@@ -260,7 +285,7 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   blind spot fixed. Full finalize pipeline passes, with the report still 17 pages and the deck 8 slides.
 - Iteration 20 fresh-clone release check (GitHub `d1cc435` → /var/tmp, sibling paths disabled): 111/111 source checks, 139/139 bindings, 76 hashes; 0 unclassified decimals; all six figure scripts byte-identical; 11/11 reproduction + 9/9 export tests; PDF rebuild gives 17 pp / 8 slides with page text identical to the committed PDFs (only the CreationDate differs). README now lists the fig2/fig5 commands.
 - Iteration 21 dated + test-bound the LLM-usage counts (refresh again at finalize).
-- Iteration 16 added **§9 Conclusion** (no new numbers) and an **LLM usage statement**. The human author seeded plan, schema, rules and LLM helper. Autonomous agents did the market code, experiments, analysis and writing: 410 source-repo manager iterations by 2026-10-25 16:59 UTC (255 Opus, 155 gpt-6.1-sol; refreshed iter28 — earlier 323 was an undated snapshot), from `scripts/process_log_summary.py` → `results/process_log_summary.json`, which reads machine-local runner logs. Codex review: 1 P1 (Conclusion overstated "without any agreement") and 3 P2 wording fixes, all applied ([record](reviews/codex_i16.md)).
+- Iteration 16 added **§9 Conclusion** (no new numbers) and an **LLM usage statement**. The human author seeded plan, schema, rules and LLM helper. Autonomous agents did the market code, experiments, analysis and writing: 414 source-repo manager iterations by 2026-10-25 17:16 UTC (257 Opus, 157 gpt-6.1-sol; refreshed iter28 — earlier 323 was an undated snapshot), from `scripts/process_log_summary.py` → `results/process_log_summary.json`, which reads machine-local runner logs. Codex review: 1 P1 (Conclusion overstated "without any agreement") and 3 P2 wording fixes, all applied ([record](reviews/codex_i16.md)).
 - Iteration 11 scientific scope corrections: [primary-literature/code audit](reviews/literature_i11.md)
   verifies the bibliography and corrects the SALT explanation: preceding messages predict separately
   submitted verdicts; the detected act does not occur in the auditor-visible chat. The report and slides

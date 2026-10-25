@@ -9,7 +9,7 @@
   "ok": true,
   "sha256": {
     "TEMPLATE_REPORT.md": "af06861c136736c41925912e9a0be2da2b5d17292b3c8cf58f3d4193c171ce3e",
-    "TEMPLATE_REPORT.pdf": "03895b4192c7392e39b1f5e4f17a3c6b6c87f616ad03d41fbfa4b06a32e3cd17",
+    "TEMPLATE_REPORT.pdf": "693fd00bd4fa809ce45ebea8668bb650131e3a25bff675974f05f17c717917c6",
     "SUBMISSION_FORM.md": "02ee1b700ca3b91e47b3105c2bd17c6ced72f5b9d94e151fb4b5d968a0568d9a",
     "IMAGE.png": "5f76a6e9c6f001d6400259c9113c70ef99027bd16ce9fe8dcc18f589429d0d62",
     "scripts/export_template_pdf.py": "41daacfdcc9de5038f609b0c5932245ee9a2986b0efb0a5a61c16027b47360cb",

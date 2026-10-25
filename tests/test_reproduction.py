@@ -36,7 +36,7 @@ class ReproductionChecks(unittest.TestCase):
         cls.copy.mkdir()
         for name in ("scripts", "evidence", "figures", "results"):
             shutil.copytree(ROOT / name, cls.copy / name, ignore=shutil.ignore_patterns("__pycache__"))
-        for name in ("SUBMISSION.md", "SLIDES.md"):
+        for name in ("SUBMISSION.md", "SLIDES.md", "TEMPLATE_REPORT.md"):
             shutil.copyfile(ROOT / name, cls.copy / name)
         cls.env = dict(os.environ, BW_Q14_ROOT=str(cls.scratch / "absent-q14"),
                        BW_Q22_ROOT=str(cls.scratch / "absent-q22"),
@@ -60,20 +60,72 @@ class ReproductionChecks(unittest.TestCase):
         self.assertIn(old, original)
         modified = self.scratch / ("changed-" + document)
         modified.write_text(original.replace(old, new, 1))
-        flag = "--submission" if document == "SUBMISSION.md" else "--slides"
+        flag = {"SUBMISSION.md": "--submission", "SLIDES.md": "--slides", "TEMPLATE_REPORT.md": "--template"}[document]
         receipt = self.scratch / "mutation-receipt.json"
         result = self.run_checker(flag, str(modified), "--output", str(receipt))
         self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
         data = json.loads(receipt.read_text())
         self.assertEqual(data["n_fail"], 0)  # Saved source values alone still pass.
-        self.assertGreater(data["n_document_fail"], 0)
+        self.assertGreater(data["n_template_fail"] if document == "TEMPLATE_REPORT.md" else data["n_document_fail"], 0)
 
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
         self.assertEqual(self.receipt["n_evidence_files"], 158)
-        self.assertEqual(self.receipt["n_checks"], 111)
+        self.assertEqual(self.receipt["n_checks"], 120)
         self.assertEqual(self.receipt["n_document_checks"], 144)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
+        self.assertEqual(self.receipt["n_template_checks"], 65)
+        self.assertEqual(self.receipt["n_template_fail"], 0)
+
+    def test_primary_context_rejects_endpoint_and_table_swaps(self):
+        # All these wrong numbers/triples still exist elsewhere in SUBMISSION;
+        # membership-only checks cannot establish which result they describe.
+        for old, new in (("the level screen scored 0.74 and pCMI 0.51", "the level screen scored 0.51 and pCMI 0.74"),
+                         ("both views combined minus the better single view, text or prices) was −0.01 [−0.09, +0.06]",
+                          "both views combined minus the better single view, text or prices) was −0.07 [−0.17, +0.02]"),
+                         ("0.94 [0.86, 1.00] | 0.34 [0.18, 0.52]", "0.34 [0.18, 0.52] | 0.94 [0.86, 1.00]"),
+                         ("7/10 high-cost and 9/10 quality-edge", "9/10 high-cost and 7/10 quality-edge"),
+                         ("| n | text view | price view |", "| n | price view | text view |"),
+                         ("| evidence | price-level screen | pCMI (co-movement) |", "| evidence | pCMI (co-movement) | price-level screen |"),
+                         ("gpt-6-luna (locked test) | judge-labelled", "another set | judge-labelled")):
+            self.mutation("TEMPLATE_REPORT.md", old, new)
+
+    def test_primary_context_rejects_deleted_or_duplicate_claims(self):
+        claim = "pCMI stayed near chance (0.51 in a 192-game grid)"
+        self.mutation("TEMPLATE_REPORT.md", claim, "pCMI stayed near chance")
+        self.mutation("TEMPLATE_REPORT.md", claim, claim + "; " + claim)
+        # An intact duplicate in the abstract must not hide a deleted Results endpoint.
+        self.mutation("TEMPLATE_REPORT.md", "text or prices) was −0.01 [−0.09, +0.06] AUROC", "text or prices) was unresolved AUROC")
+
+    def test_primary_inventory_rejects_new_result_beside_non_results(self):
+        import check_template_numbers as primary
+        text = (ROOT / "TEMPLATE_REPORT.md").read_text()
+        submission = (ROOT / "SUBMISSION.md").read_text()
+        bindings = json.loads((ROOT / "results/template_document_bindings.json").read_text())
+        self.assertEqual(primary.check_numbers(text, submission, bindings)["unmatched"], [])
+        for suffix in ("; a new AUROC 0.74", "; a new rate 95%", "; another contrast 9/10"):
+            changed = text.replace("0.5 = chance", "0.5 = chance" + suffix, 1)
+            result = primary.check_numbers(changed, submission, bindings)
+            self.assertGreater(result["unclassified"], 0, suffix)
+        changed = text.replace("### B. Limitations and Dual-Use / Ethical Considerations",
+                               "### B. Limitations and Dual-Use / Ethical Considerations\n\nThe auditor achieved AUROC 0.74.", 1)
+        self.assertGreater(primary.check_numbers(changed, submission, bindings)["unclassified"], 0)
+
+    def test_each_primary_numeric_slot_is_checked(self):
+        import document_checks as docs
+        text = docs.normalize((ROOT / "TEMPLATE_REPORT.md").read_text())
+        bindings = json.loads((ROOT / "results/template_document_bindings.json").read_text())
+        modified = self.scratch / "slot-template.md"
+        for binding in bindings:
+            matches = docs.binding_matches(text, binding)
+            self.assertEqual(len(matches), 1, binding)
+            for i in range(1, matches[0].lastindex + 1):
+                start, end = matches[0].span(i)
+                wrong = "0.75" if matches[0].group(i) != "0.75" else "0.51"
+                modified.write_text(text[:start] + wrong + text[end:])
+                with self.subTest(template=binding["template"], slot=i):
+                    result = docs.check_documents(self.receipt["checks"], {"TEMPLATE_REPORT.md": modified}, [binding])
+                    self.assertFalse(result[0]["ok"])
 
     def run_coverage(self):
         return subprocess.run([sys.executable, str(self.copy / "scripts/number_coverage.py")],

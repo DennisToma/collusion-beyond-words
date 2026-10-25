@@ -1,0 +1,982 @@
+[
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N8:grid pcmi",
+    "template": "pCMI stayed near chance ({} in a 192-game grid)",
+    "section": [
+      "## Abstract",
+      "## 1. Introduction"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "no resolved gain ({} [{}, {}] AUROC on a locked test)",
+    "section": [
+      "## Abstract",
+      "## 1. Introduction"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M7:SALT text auditor",
+    "template": "text predicted rule-breaking well ({})",
+    "section": [
+      "## Abstract",
+      "## 1. Introduction"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "the registered text-added contrast, {} [{}, {}], is not plotted",
+    "section": [
+      "## Abstract",
+      "## 1. Introduction"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked n",
+    "template": "locked test of {} runs",
+    "section": [
+      "## Abstract",
+      "## 1. Introduction"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T1:scripted colluder flag and localisation range",
+    "template": "pCMI flags {}% of planted colluding pairs",
+    "section": [
+      "## 1. Introduction",
+      "## 2. Related Work"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "indices": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N13:MI flags common shock (B)",
+    "template": "cuts common-shock false alarms from {}%",
+    "section": [
+      "## 1. Introduction",
+      "## 2. Related Work"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N13:pCMI common shock, shift null",
+    "template": "false alarms from 100% to {}%",
+    "section": [
+      "## 1. Introduction",
+      "## 2. Related Work"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked n",
+    "template": "locked test split of {} runs",
+    "section": [
+      "## 3. Methods",
+      "## 4. Results"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T1:scripted colluder flag and localisation range",
+    "template": "flags and localises the planted colluding pair in {}% of scripted runs",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "indices": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N13:MI flags common shock (B)",
+    "template": "Raw mutual information also flags {}% of common-shock controls",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N13:pCMI common shock, shift null",
+    "template": "(pCMI) cuts this to {}%",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N13:pCMI shared policy + shock, surrogate",
+    "template": "and to {}% (null from no-channel reference markets)",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "indices": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T1:shared-seed flag range",
+    "template": "flagged by every contemporaneous detector ({}–{}% of runs)",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N13:TE legit leader-follower",
+    "template": "Lagged transfer entropy flags legitimate leader–follower pricing in {}% of runs",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N2:markup AUROC range",
+    "template": "A price-level screen reached AUROC {}–{} across sets",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N2:pCMI AUROC range",
+    "template": "pCMI ranged {}–{}, with its interval including chance",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N8:grid market_level",
+    "template": "the level screen scored {} and pCMI",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N8:grid pcmi",
+    "template": "and pCMI {} [{}, {}]. Longer",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N5:T60 pCMI",
+    "template": "did not rescue pCMI ({}, level",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N5:T60 max-pair markup",
+    "template": "pCMI (0.34, level {})",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "text or prices) was {} [{}, {}] AUROC on the locked test",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked combined - better single",
+    "template": "so gains above {} are excluded",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M3:locked text",
+    "template": "Text alone scored {} there",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M4:Qwen3.8 base text / action",
+    "template": "inverted ({} and 0.15)",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M4:Qwen3.8 abliterated text / action",
+    "template": "inverted (0.21 and {})",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M5:invite rate channel / control",
+    "template": "less often than controls ({} vs {}; post hoc)",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M7:SALT text auditor",
+    "template": "from preceding messages with AUROC {}, even though",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T3:SALT no explicit agreement percent",
+    "template": "in the full dataset, {}% of rule-breaking episodes",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M9:notepad - none r2-12",
+    "template": "no recipient raised the pair premium by {}, against",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M9:channel - none r2-12",
+    "template": "against {} for a real channel",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2
+    ],
+    "indices": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M9:notepad / channel ratio",
+    "template": "a ratio of {} [{}, {}], about two-thirds",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M10:strong tacit-high count",
+    "template": "{} of {} no-channel gpt-6-luna markets",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T4:followed and communication-positive",
+    "template": "Only {} of {} communication-positive channel runs",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T5:highcost premium flags",
+    "template": "{}/{} high-cost",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T5:quality premium flags",
+    "template": "and {}/{} quality-edge sellers",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T5:none_ref_p2cue premium flags",
+    "template": "vs {}/{} controls",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T1:scripted colluder flag and localisation range",
+    "template": "and {}% on colluders",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ],
+    "indices": [
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T1:TE colluder flag range",
+    "template": "lagged transfer entropy flagged only {}–{}% of scripted colluders",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ],
+    "scale": 100
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M2:pooled fresh combined - better single",
+    "template": "then replicated on fresh data ({} [{}, {}], n = 90",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M2:pooled n",
+    "template": "n = {}, pooled post hoc)",
+    "section": [
+      "## 4. Results",
+      "## 5. Discussion and Limitations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N2:point level > pCMI",
+    "template": "higher in {}/9 sets by point estimate",
+    "section": [
+      "### A. Extended results",
+      "### B. Limitations and Dual-Use / Ethical Considerations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N3:level-pCMI CI > 0",
+    "template": "CI excludes 0 in {}/9 (not gpt-5.6-luna)",
+    "section": [
+      "### A. Extended results",
+      "### B. Limitations and Dual-Use / Ethical Considerations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N2:markup AUROC range",
+    "template": "7 models | AUROC {}–{}; channel markup",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N1:main sets with C-A CI > 0",
+    "template": "channel markup CI > 0 in {}/9",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N2:pCMI AUROC range",
+    "template": "in 9/9 | {}–{}; CI includes",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N4:pCMI CI contains 0.5",
+    "template": "CI includes 0.5 in {}/9",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N3:level-pCMI CI > 0",
+    "template": "level − pCMI | CI > 0 in {}/9",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N3:gpt-5.6-luna level-pCMI",
+    "template": "exception gpt-5.6-luna {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N8:grid market_level",
+    "template": "board on) | {} [{}, {}]; above pCMI",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "T2:grid level beats pCMI cells",
+    "template": "above pCMI in {}/{} cells",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0,
+      0
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N8:grid pcmi",
+    "template": "in 12/16 cells | {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N5:T60 max-pair markup",
+    "template": "60-round games (pre-registered) | {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N5:T60 pCMI",
+    "template": "0.94 [0.86, 1.00] | {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N7:executed pair-level",
+    "template": "executed agreements vs no-channel controls | pair-level {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N7:executed pCMI",
+    "template": "pair-level 0.87 [0.80, 0.94] | {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "N11:E70 copula pCMI / sign CMI",
+    "template": "rank (copula) pCMI / sign-change CMI, grid | | {} [{}, {}] / {} [{}, {}]",
+    "section": [
+      "| evidence | price-level screen | pCMI (co-movement) |",
+      "Table A1. Price detectors"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M3:locked text",
+    "template": "gpt-6-luna (locked test) | judge-labelled agreement vs not | 95 runs | {} [{}, {}] | 0.75",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M3:locked action",
+    "template": "0.47 [0.36, 0.58] | {} [{}, {}]",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M4:Claude text / action",
+    "template": "Claude Sonnet | channel vs none | 5 + 5 | {} [{}, {}] | {} [{}, {}]",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M4:deepseek text / action",
+    "template": "deepseek | channel vs none | 30 runs | {} [{}, {}] | {} [{}, {}]",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M4:Qwen3.8 base text / action",
+    "template": "Qwen3.8 base | channel vs none | 15 + 15 | {} [{}, {}] | {} [{}, {}]",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M4:Qwen3.8 abliterated text / action",
+    "template": "Qwen3.8 abliterated | channel vs none | 15 + 15 | {} [{}, {}] | {} [{}, {}]",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M7:SALT text auditor",
+    "template": "SALT-NLP peer verification (external) | rule-violating mutual ACCEPT vs not | 240 episodes | {} [{}, {}]",
+    "section": [
+      "| where text could help | contrast | n | text view | price view |",
+      "Table A2. Zero-shot"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "TEMPLATE_REPORT.md",
+    "source_check": "M1:locked n",
+    "template": "locked test (n = {}, run once)",
+    "section": [
+      "### A. Extended results",
+      "### B. Limitations and Dual-Use / Ethical Considerations"
+    ],
+    "expected_matches": 1,
+    "digits": [
+      0
+    ]
+  }
+]

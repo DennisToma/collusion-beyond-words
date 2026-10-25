@@ -1,0 +1,455 @@
+
+$ uv run python scripts/process_log_summary.py
+{
+ "source": "/home/factory/collusion/logs",
+ "repos": {
+  "collusion-14-infotheory": {
+   "phase1": {
+    "completed_iterations": 27,
+    "by_backend": {
+     "codex-sol": 1,
+     "opus": 26
+    },
+    "first_start": "Fri Oct 23 20:25:35 UTC 2026",
+    "last_end": "Sat Oct 24 06:00:17 UTC 2026"
+   },
+   "phase2": {
+    "completed_iterations": 174,
+    "by_backend": {
+     "codex-sol": 77,
+     "opus": 97
+    },
+    "first_start": "Sat Oct 24 06:27:45 AM UTC 2026",
+    "last_end": "Sun Oct 25 05:15:03 PM UTC 2026"
+   }
+  },
+  "collusion-22-say-vs-do": {
+   "phase1": {
+    "completed_iterations": 31,
+    "by_backend": {
+     "codex-sol": 7,
+     "opus": 24
+    },
+    "first_start": "Fri Oct 23 20:25:35 UTC 2026",
+    "last_end": "Sat Oct 24 06:19:56 UTC 2026"
+   },
+   "phase2": {
+    "completed_iterations": 182,
+    "by_backend": {
+     "codex-sol": 72,
+     "opus": 110
+    },
+    "first_start": "Sat Oct 24 06:27:45 AM UTC 2026",
+    "last_end": "Sun Oct 25 05:16:31 PM UTC 2026"
+   }
+  },
+  "collusion-beyond-words": {
+   "phase1": null,
+   "phase2": {
+    "completed_iterations": 55,
+    "by_backend": {
+     "codex-sol": 21,
+     "opus": 34
+    },
+    "first_start": "Sun Oct 25 08:00:00 AM UTC 2026",
+    "last_end": "Sun Oct 25 05:17:52 PM UTC 2026"
+   }
+  }
+ },
+ "source_repos_total_by_backend": {
+  "codex-sol": 157,
+  "opus": 257
+ },
+ "source_repos_total": 414,
+ "source_repos_snapshot_utc": "2026-10-25 17:16 UTC"
+}
+
+LLM-usage counts: 414 by 2026-10-25 17:16 UTC (257 Opus, 157 gpt-6.1-sol); SUBMISSION unchanged
+
+$ uv run python scripts/check_sources.py
+OK   N1 main sets 9 want 9
+OK   N1 main sets with C-A CI > 0 9 want 9
+OK   N2 markup AUROC range [0.75, 0.991] want [0.75, 0.99]
+OK   N2 pCMI AUROC range [0.338, 0.72] want [0.34, 0.72]
+OK   N2 point level > pCMI 9 want 9
+OK   N3 level-pCMI CI > 0 8 want 8
+OK   N3 gpt-5.6-luna level-pCMI [0.03, -0.27, 0.33] want [0.03, -0.27, 0.33]
+OK   N3 base Qwen3.6 level-pCMI [0.218, 0.027, 0.436] want [0.22, 0.03, 0.44]
+OK   N4 pCMI CI contains 0.5 8 want 8
+OK   N4 base Qwen3.6 pCMI [0.7111111111111111, 0.5066666666666667, 0.8844444444444444] want [0.71, 0.51, 0.88]
+OK   N9 E70 level-pCMI [0.227, 0.117, 0.325] want [0.23, 0.12, 0.33]
+OK   N9 E70 level-TE [0.118, 0.013, 0.219] want [0.12, 0.01, 0.22]
+OK   N20 level-TE CI > 0 6 want 6
+OK   N20 deepseek TE 0.809 want 0.81
+OK   N20 base Qwen3.8 TE 0.907 want 0.91
+OK   N13 MI flags common shock (B) 1.0 want 1.0
+OK   N13 pCMI common shock, shift null 0.14 want 0.14
+OK   N13 pCMI shared policy + shock, surrogate [0.04, 0.011038652660826577, 0.13460337877954667] want [0.04, 0.01, 0.13]
+OK   N24 TE shared policy (A, B) [0.9, 0.98] want [0.9, 0.98]
+OK   N24 TE independent high price 0.62 want 0.62
+OK   N13 TE legit leader-follower 1.0 want 1.0
+OK   N14 level false flags /30 30 want 30
+OK   N14 pCMI flags /30 4 want 4
+OK   N18 E68 ask effect [0.394, 0.058, 0.693] want [0.39, 0.06, 0.69]
+OK   N18 E68 verdict inconclusive want inconclusive
+OK   N19 reimpl cells agreeing < 1e-9 [422, 424] want [422, 424]
+OK   N25 pair_level range (spillover sets) [0.7485119047619048, 0.80375] want [0.75, 0.8]
+OK   N25 market level range (spillover sets) [0.84875, 0.9434523809523809] want [0.85, 0.94]
+OK   N27 E72 non-executed n / judged yes / no [52, 38, 14] want [52, 38, 14]
+OK   N27 E72 executed n 44 want 44
+OK   N12 E72 TE non-exec vs exec [0.728, 0.491] want [0.73, 0.49]
+OK   N28 executed n range [13, 78] want [13, 78]
+OK   N28 pooled pCMI range [0.343, 0.531] want [0.343, 0.531]
+OK   M2 pooled fresh combined - better single [-0.0738, -0.1704, 0.0153] want [-0.07, -0.17, 0.02]
+OK   M2 pooled n 90 want 90
+OK   M5 invite rate channel / control [0.403, 0.883] want [0.4, 0.88]
+OK   M12 no-chat LLM vs rule score [0.942, 0.885] want [0.94, 0.885]
+OK   M12 LLM - rule score [0.057, 0.019, 0.103] want [0.06, 0.02, 0.1]
+OK   M12 say-do gap / pair SD [0.77, 0.855] want [0.77, 0.855]
+OK   M16 sol newcomer re-agrees [0, 20] want [0, 20]
+OK   M16 market >= Nash+2 [18, 20] want [18, 20]
+OK   M19 placebo - private r2-12 [0.03, -0.542, 0.488] want [0.03, -0.54, 0.49]
+OK   M34 action view unrounded matches stored 3 dp 0.575 want 0.575
+OK   M34 action view strict n, tacit-high n [13, 19] want [13, 19]
+OK   M34 Fig.6 price views strict vs tacit-high: min/max point [0.429, 0.5748987854251012] want [0.43, 0.57]
+OK   M34 all price-view CIs include 0.5 True want True
+OK   M35 SALT no-verdict-words AUROC [0.752089552238806, 0.6583226334083009, 0.835771585845047] want [0.75, 0.66, 0.84]
+OK   M35 SALT no-verdict-words n 117 want 117
+OK   N5 T60 pCMI [0.33749999999999997, 0.17750000000000005, 0.5175000000000001] want [0.34, 0.18, 0.52]
+OK   N7 executed pCMI [0.422, 0.328, 0.532] want [0.42, 0.33, 0.53]
+OK   N7 executed counts [48, 149] want [48, 149]
+OK   N7 executed pair-level [0.872, 0.797, 0.936] want [0.87, 0.8, 0.94]
+OK   N8 grid replay matches stored 3 dp market_level [0.737, 0.661, 0.805] want [0.737, 0.661, 0.805]
+OK   N8 grid market_level [0.7369791666666666, 0.6614583333333334, 0.8047092013888888] want [0.74, 0.66, 0.8]
+OK   N8 grid replay matches stored 3 dp pcmi [0.51, 0.429, 0.589] want [0.51, 0.429, 0.589]
+OK   N8 grid pcmi [0.5104166666666666, 0.4288194444444444, 0.589431423611111] want [0.51, 0.43, 0.59]
+OK   N8 grid replay matches stored 3 dp te [0.619, 0.543, 0.698] want [0.619, 0.543, 0.698]
+OK   N8 grid te [0.6189236111111112, 0.5434027777777778, 0.6979166666666666] want [0.62, 0.54, 0.7]
+OK   M1 locked combined - better single [-0.0127, -0.0913, 0.0642] want [-0.01, -0.09, 0.06]
+OK   M1 locked n 95 want 95
+OK   M3 locked text [0.472, 0.3647, 0.5807] want [0.47, 0.36, 0.58]
+OK   M3 locked action [0.7533, 0.6529, 0.8498] want [0.75, 0.65, 0.85]
+OK   M10 strong tacit-high count [19, 20] want [19, 20]
+OK   M10 strong strict-executed count [13, 20] want [13, 20]
+OK   N5 T60 max-pair markup [0.9425, 0.8599375, 0.9975] want [0.94, 0.86, 1.0]
+OK   N6 T60 observed co-move excess [0.003559322033898306, -0.006614406779661017, 0.014745762711864407] want [0.004, -0.007, 0.015]
+OK   N6 T60 planted q=0.1 pCMI [0.794, 0.704, 0.884] want [0.79, 0.7, 0.88]
+OK   N6 T20 planted q=0.1 pCMI [0.622, 0.52, 0.713] want [0.62, 0.52, 0.71]
+OK   N11 E70 copula pCMI / sign CMI [0.526, 0.443, 0.613, 0.442, 0.359, 0.523] want [0.53, 0.44, 0.61, 0.44, 0.36, 0.52]
+OK   N16 wording no-channel markup min/max [-0.1895833333333333, 2.5604166666666663] want [-0.19, 2.56]
+OK   N21 E70 Qwen cells max-pair markup 0.757 want 0.76
+OK   N29 max scripted precision@0.01 [0.20161290322580647, 0.07445587323905477, 0.5447454604462596] want [0.2, 0.07, 0.54]
+OK   N29 max LLM precision@0.01 0.1851851851851852 want 0.19
+OK   M4 Claude text / action [0.22, 0.0, 0.52, 0.52, 0.2, 0.88] want [0.22, 0.0, 0.52, 0.52, 0.2, 0.88]
+OK   M4 deepseek text / action [0.358, 0.2, 0.516, 0.531, 0.304, 0.738] want [0.36, 0.2, 0.52, 0.53, 0.3, 0.74]
+OK   M4 Qwen3.8 base text / action [0.213, 0.116, 0.334, 0.858, 0.693, 0.978] want [0.21, 0.12, 0.33, 0.86, 0.69, 0.98]
+OK   M4 Qwen3.8 abliterated text / action [0.147, 0.051, 0.253, 0.571, 0.364, 0.782] want [0.15, 0.05, 0.25, 0.57, 0.36, 0.78]
+OK   M4 Qwen3.8 text arms min/max [0.147, 0.213] want [0.15, 0.21]
+OK   M30 sol seller arm text [0.173, 0.01, 0.408] want [0.17, 0.01, 0.41]
+OK   M6 E113 Qwen text [0.324, 0.239, 0.416] want [0.32, 0.24, 0.42]
+OK   M6 E113 Qwen LLM action [0.524, 0.411, 0.639] want [0.52, 0.41, 0.64]
+OK   M6 Qwen combined - action [-0.236, -0.372, -0.09] want [-0.24, -0.37, -0.09]
+OK   M6 luna combined - action [0.073, -0.021, 0.17] want [0.07, -0.02, 0.17]
+OK   M6 Qwen executed combined - action unrounded matches stored 3 dp [-0.304, -0.443, -0.165] want [-0.304, -0.443, -0.165]
+OK   M6 Qwen executed combined - action [-0.30357142857142855, -0.44349702380952377, -0.16486607142857154] want [-0.3, -0.44, -0.16]
+OK   M6 luna executed combined - action [0.161, 0.051, 0.277] want [0.16, 0.05, 0.28]
+OK   M31 luna silent executed [0.12, -0.083, 0.324] want [0.12, -0.08, 0.32]
+OK   M7 SALT text auditor [0.8749305555555555, 0.8305071201787338, 0.9145740052961312] want [0.87, 0.83, 0.91]
+OK   M7 SALT P(said | executed) 0.3847939640162507 want 0.385
+OK   M9 notepad - none r2-12 [1.042, 0.652, 1.424] want [1.04, 0.65, 1.42]
+OK   M9 channel - none r2-12 [1.606, 0.915, 2.349] want [1.61, 0.92, 2.35]
+OK   M9 notepad / channel ratio [0.649, 0.335, 1.321] want [0.65, 0.34, 1.32]
+OK   M9 placebo - none r2-12 [1.227, 0.757, 1.845] want [1.23, 0.76, 1.85]
+OK   M9 private - placebo r2-12 [0.379, -0.412, 1.176] want [0.38, -0.41, 1.18]
+OK   M13 premium precision@0.05 0.237 want 0.24
+OK   M33 Spearman text vs invite pooled [0.49, 0.165, 0.714, 30] want [0.49, 0.17, 0.71, 30]
+OK   M33 Spearman within no-channel unrounded matches stored 3 dp [-0.405, -0.833, 0.178, 15] want [-0.405, -0.833, 0.178, 15]
+OK   M33 Spearman within no-channel [-0.4046200510212668, -0.8325820617903426, 0.17776393551121933, 15] want [-0.4, -0.83, 0.18, 15]
+OK   M15 3-class kappa llm_v3 / llm_v3rep [0.328, 0.375] want [0.33, 0.38]
+OK   N7 executed max-pair markup (inflated) 0.987 want 0.99
+OK   N20 deepseek TE C vs A with CI [0.8088888888888889, 0.6221111111111111, 0.9644444444444444] want [0.81, 0.62, 0.96]
+OK   M9 paraphrase 1 n private/none [10, 10] want [10, 10]
+OK   M9 paraphrase 1 private - none r2-12 [1.786, 1.195, 2.427] want [1.79, 1.2, 2.43]
+OK   M9 paraphrase 2 n private/none [10, 10] want [10, 10]
+OK   M9 paraphrase 2 private - none r2-12 [0.236, -0.318, 0.814] want [0.24, -0.32, 0.81]
+OK   M9 logbook (weather) - none r2-12 [0.218, 0.052, 0.4] want [0.22, 0.05, 0.4]
+OK   M9 logbook matched seeds 15 want 15
+OK   N23 E65 abliterated+memory C - A (stored 3 dp) [2.135, 1.285, 3.005] want [2.135, 1.285, 3.005]
+OK   N23 E65 games A, C [20, 20] want [20, 20]
+OK   N23 E65 recomputed matches stored 3 dp [2.135, 1.285, 3.005] want [2.135, 1.285, 3.005]
+OK   N23 E65 abliterated+memory C - A [2.1353125000000004, 1.2852734375, 3.0046953125] want [2.14, 1.29, 3.0]
+OK   T1 scripted colluder flag and localisation range [1.0, 1.0] want [1, 1]
+OK   T1 shared-seed flag range [0.44, 1.0] want [0.44, 1]
+OK   T1 TE colluder flag range [0.08, 0.22] want [0.08, 0.22]
+OK   T2 grid level beats pCMI cells [12, 16] want [12, 16]
+OK   T3 SALT no explicit agreement percent 61.520603598374926 want 62
+OK   T4 followed and communication-positive [14, 50] want [14, 50]
+OK   T5 highcost premium flags [7, 10] want [7, 10]
+OK   T5 quality premium flags [9, 10] want [9, 10]
+OK   T5 none_ref_p2cue premium flags [2, 10] want [2, 10]
+120/120 source checks; 144/144 document bindings; 158 evidence hashes (snapshot) -> /home/factory/collusion/collusion-beyond-words/results/source_check.json
+65/65 primary-report context bindings
+
+$ uv run python scripts/number_coverage.py
+SUBMISSION.md: 248/281 decimal tokens bound; 33 unbound are non-results; 0 unclassified
+SLIDES.md: 55/60 decimal tokens bound; 5 unbound are non-results; 0 unclassified
+
+$ uv run python scripts/check_template_numbers.py
+TEMPLATE_REPORT numeric tokens: 160, CI triples: 26; failures: 0; context inventory: 142, unclassified: 0
+
+$ uv run python tests/test_reproduction.py
+test_c21b_per_run_parity_with_pinned_source_function (__main__.ReproductionChecks.test_c21b_per_run_parity_with_pinned_source_function) ... ok
+test_corrupt_evidence_is_rejected (__main__.ReproductionChecks.test_corrupt_evidence_is_rejected) ... ok
+test_each_primary_numeric_slot_is_checked (__main__.ReproductionChecks.test_each_primary_numeric_slot_is_checked) ... ok
+test_edited_primary_endpoint_is_rejected (__main__.ReproductionChecks.test_edited_primary_endpoint_is_rejected) ... ok
+test_edited_slide_interval_is_rejected (__main__.ReproductionChecks.test_edited_slide_interval_is_rejected) ... ok
+test_every_unbound_decimal_is_a_non_result (__main__.ReproductionChecks.test_every_unbound_decimal_is_a_non_result) ... ok
+test_figures_reproduce_without_source_repos (__main__.ReproductionChecks.test_figures_reproduce_without_source_repos) ... ok
+test_finalize_rewrites_exactly_one_usage_sentence (__main__.ReproductionChecks.test_finalize_rewrites_exactly_one_usage_sentence) ... ok
+test_gate_pcmi_parity_with_original_null_and_loader (__main__.ReproductionChecks.test_gate_pcmi_parity_with_original_null_and_loader) ... ok
+test_gate_pcmi_rejects_malformed_trajectories_and_cache (__main__.ReproductionChecks.test_gate_pcmi_rejects_malformed_trajectories_and_cache) ... ok
+test_gate_pcmi_replay_reproduces_without_source_repos (__main__.ReproductionChecks.test_gate_pcmi_replay_reproduces_without_source_repos) ... ok
+test_gate_replay_parity_with_pinned_source_functions (__main__.ReproductionChecks.test_gate_replay_parity_with_pinned_source_functions) ... ok
+test_gate_replay_rejects_malformed_cache_and_cohort (__main__.ReproductionChecks.test_gate_replay_rejects_malformed_cache_and_cohort) ... ok
+test_gate_replay_reproduces_without_source_repos (__main__.ReproductionChecks.test_gate_replay_reproduces_without_source_repos) ... ok
+test_grid_parity_with_original_scores_cohort_and_bootstrap (__main__.ReproductionChecks.test_grid_parity_with_original_scores_cohort_and_bootstrap) ... ok
+test_grid_replay_rejects_malformed_completed_runs (__main__.ReproductionChecks.test_grid_replay_rejects_malformed_completed_runs) ... ok
+test_grid_replay_reproduces_without_source_repos (__main__.ReproductionChecks.test_grid_replay_reproduces_without_source_repos) ... ok
+test_half_up_boundary_rejects_alternative_rounding (__main__.ReproductionChecks.test_half_up_boundary_rejects_alternative_rounding) ... ok
+test_live_mode_rejects_changed_source (__main__.ReproductionChecks.test_live_mode_rejects_changed_source) ... ok
+test_llm_usage_counts_match_process_log_summary (__main__.ReproductionChecks.test_llm_usage_counts_match_process_log_summary) ... ok
+test_locked_test_replay_parity_with_pinned_source_functions (__main__.ReproductionChecks.test_locked_test_replay_parity_with_pinned_source_functions) ... ok
+test_locked_test_replay_rejects_missing_duplicate_or_invalid_inputs (__main__.ReproductionChecks.test_locked_test_replay_rejects_missing_duplicate_or_invalid_inputs) ... ok
+test_missing_binding_is_rejected (__main__.ReproductionChecks.test_missing_binding_is_rejected) ... ok
+test_primary_context_rejects_deleted_or_duplicate_claims (__main__.ReproductionChecks.test_primary_context_rejects_deleted_or_duplicate_claims) ... ok
+test_primary_context_rejects_endpoint_and_table_swaps (__main__.ReproductionChecks.test_primary_context_rejects_endpoint_and_table_swaps) ... ok
+test_primary_inventory_rejects_new_result_beside_non_results (__main__.ReproductionChecks.test_primary_inventory_rejects_new_result_beside_non_results) ... ok
+test_q22_replays_reproduce_without_source_repos (__main__.ReproductionChecks.test_q22_replays_reproduce_without_source_repos) ... ok
+test_reducing_precision_cannot_widen_tolerance (__main__.ReproductionChecks.test_reducing_precision_cannot_widen_tolerance) ... ok
+test_standalone_sources_and_documents (__main__.ReproductionChecks.test_standalone_sources_and_documents) ... ok
+test_unbound_result_decimal_is_rejected (__main__.ReproductionChecks.test_unbound_result_decimal_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 94.692s
+
+OK
+
+$ uv run python tests/test_packaging.py
+test_a_check_cannot_silently_modify_archived_release_files (__main__.PackagingChecks.test_a_check_cannot_silently_modify_archived_release_files) ... ok
+test_checks_do_not_receive_model_environment_variables (__main__.PackagingChecks.test_checks_do_not_receive_model_environment_variables) ... ok
+test_code_zip_rejects_stale_missing_changed_and_duplicate_members (__main__.PackagingChecks.test_code_zip_rejects_stale_missing_changed_and_duplicate_members) ... /home/factory/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'README.md'
+  return self._open_to_write(zinfo, force_zip64=force_zip64)
+ok
+test_concurrent_worktree_and_head_changes_are_rejected (__main__.PackagingChecks.test_concurrent_worktree_and_head_changes_are_rejected) ... ok
+test_dirty_tracked_staged_and_untracked_files_are_rejected (__main__.PackagingChecks.test_dirty_tracked_staged_and_untracked_files_are_rejected) ... ok
+test_export_ignore_and_symlink_are_not_silently_omitted (__main__.PackagingChecks.test_export_ignore_and_symlink_are_not_silently_omitted) ... ok
+test_failed_check_publishes_no_package (__main__.PackagingChecks.test_failed_check_publishes_no_package) ... /var/tmp/bw-package-test-xrb3gv_e/code.zip: 0.0 MB, files {'beyond-words': 19, 'q14-infotheory': 1, 'q22-say-vs-do': 1}, excluded 0
+/var/tmp/bw-package-test-b_0bi_oa/.bw-package-5tjjsc_8/ready/submission_code.zip: 0.0 MB, files {'beyond-words': 19, 'q14-infotheory': 1, 'q22-say-vs-do': 1}, excluded 0
+[1/11] scripts/check_sources.py
+ok
+test_modified_missing_extra_duplicate_and_unsafe_members_are_rejected (__main__.PackagingChecks.test_modified_missing_extra_duplicate_and_unsafe_members_are_rejected) ... ok
+test_output_inside_repo_or_existing_directory_is_rejected (__main__.PackagingChecks.test_output_inside_repo_or_existing_directory_is_rejected) ... ok
+test_package_matches_git_uploads_checksums_and_is_repeatable (__main__.PackagingChecks.test_package_matches_git_uploads_checksums_and_is_repeatable) ... [1/11] scripts/check_sources.py
+[2/11] scripts/number_coverage.py
+[3/11] scripts/check_template_numbers.py
+[4/11] scripts/check_template_artifacts.py
+[5/11] scripts/check_submission_compliance.py
+[6/11] scripts/check_committed_export.py
+[7/11] tests/test_reproduction.py
+[8/11] tests/test_export.py
+[9/11] tests/test_submission_compliance.py
+[10/11] tests/test_packaging.py
+[11/11] tests/test_template_artifacts.py
+/var/tmp/bw-package-test-sz6952kb/.bw-package-d1nioiv4/ready/submission_code.zip: 0.0 MB, files {'beyond-words': 19, 'q14-infotheory': 1, 'q22-say-vs-do': 1}, excluded 0
+PACKAGE OK: /var/tmp/bw-package-test-sz6952kb/handoff
+revision: 4be2fece55ca3b63f121483f04abd2e43c13e46e
+[1/11] scripts/check_sources.py
+[2/11] scripts/number_coverage.py
+[3/11] scripts/check_template_numbers.py
+[4/11] scripts/check_template_artifacts.py
+[5/11] scripts/check_submission_compliance.py
+[6/11] scripts/check_committed_export.py
+[7/11] tests/test_reproduction.py
+[8/11] tests/test_export.py
+[9/11] tests/test_submission_compliance.py
+[10/11] tests/test_packaging.py
+[11/11] tests/test_template_artifacts.py
+/var/tmp/bw-package-test-sz6952kb/.bw-package-2cxn2ig8/ready/submission_code.zip: 0.0 MB, files {'beyond-words': 19, 'q14-infotheory': 1, 'q22-say-vs-do': 1}, excluded 0
+PACKAGE OK: /var/tmp/bw-package-test-sz6952kb/another
+revision: 4be2fece55ca3b63f121483f04abd2e43c13e46e
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.888s
+
+OK
+
+$ uv run --group export python scripts/export_pdf.py
+slide base font (pt): [14, 14.5, 15, 16, 14.5, 14, 16, 16]
+[ok] SUBMISSION headings: all 26 fragments found in PDF text
+[ok] SUBMISSION table cells: all 378 fragments found in PDF text
+[ok] deck: 8 PDF pages for 8 slides
+[ok] slide titles: all 8 fragments found in PDF text
+[ok] SUBMISSION all text fragments: all 504 fragments found in PDF text
+[ok] slide 1 all text on correct page: all 3 fragments found in PDF text
+[ok] slide 2 all text on correct page: all 4 fragments found in PDF text
+[ok] slide 3 all text on correct page: all 3 fragments found in PDF text
+[ok] slide 4 all text on correct page: all 15 fragments found in PDF text
+[ok] slide 5 all text on correct page: all 5 fragments found in PDF text
+[ok] slide 6 all text on correct page: all 6 fragments found in PDF text
+[ok] slide 7 all text on correct page: all 5 fragments found in PDF text
+[ok] slide 8 all text on correct page: all 8 fragments found in PDF text
+[ok] SUBMISSION.pdf: 6 figures match source pixels exactly
+[ok] SLIDES.pdf: 5 figures match source pixels exactly
+SUBMISSION.pdf pages: 20
+
+$ uv run --group export python scripts/export_template_pdf.py
+[ok] primary template report: all 147 fragments found in PDF text
+[ok] TEMPLATE_REPORT.pdf: 4 figures match source pixels exactly
+TEMPLATE_REPORT.pdf: 10 pages, 6 main; receipt written
+
+$ uv run --group export python scripts/check_committed_export.py
+[ok] committed report: all 504 fragments found in PDF text
+[ok] SUBMISSION.pdf: 6 figures match source pixels exactly
+[ok] committed slide 1: all 3 fragments found in PDF text
+[ok] committed slide 2: all 4 fragments found in PDF text
+[ok] committed slide 3: all 3 fragments found in PDF text
+[ok] committed slide 4: all 15 fragments found in PDF text
+[ok] committed slide 5: all 5 fragments found in PDF text
+[ok] committed slide 6: all 6 fragments found in PDF text
+[ok] committed slide 7: all 5 fragments found in PDF text
+[ok] committed slide 8: all 8 fragments found in PDF text
+[ok] SLIDES.pdf: 5 figures match source pixels exactly
+{
+  "ok": true,
+  "documents": {
+    "SUBMISSION": {
+      "figures": 6,
+      "links": [
+        "https://github.com/DennisToma/collusion-beyond-words/blob/main/SOURCES.md",
+        "https://arxiv.org/abs/2507.01413v1",
+        "https://arxiv.org/abs/2507.01413v1",
+        "https://doi.org/10.1145/3580507.3597726",
+        "https://arxiv.org/abs/2202.05946v5",
+        "https://proceedings.mlr.press/v180/bonjour22a.html",
+        "https://proceedings.mlr.press/v180/bonjour22a.html",
+        "https://doi.org/10.1257/aer.20190623",
+        "https://doi.org/10.1257/aer.20190623",
+        "https://arxiv.org/abs/2601.01279v3",
+        "https://doi.org/10.21203/rs.3.rs-10183486/v1",
+        "https://doi.org/10.21203/rs.3.rs-10183486/v1",
+        "https://arxiv.org/abs/2404.00806v6",
+        "https://doi.org/10.2307/1911462",
+        "https://arxiv.org/abs/2410.00031v2",
+        "https://arxiv.org/abs/2410.00031v2",
+        "https://arxiv.org/abs/2410.03768v2",
+        "https://arxiv.org/abs/2410.03768v2",
+        "https://arxiv.org/abs/2402.07510v5",
+        "https://arxiv.org/abs/2402.07510v5",
+        "https://arxiv.org/abs/2604.01151v5",
+        "https://arxiv.org/abs/2604.01151v5",
+        "https://doi.org/10.1103/PhysRevLett.85.461",
+        "https://arxiv.org/abs/2609.24967v2",
+        "https://huggingface.co/datasets/SALT-NLP/agent-collusion/tree/2eba8f37",
+        "https://huggingface.co/datasets/SALT-NLP/agent-collusion/tree/2eba8f37",
+        "https://arxiv.org/abs/2510.04303v2",
+        "https://github.com/poseidon-research/collusion_hackathon",
+        "https://github.com/DennisToma/collusion-beyond-words/blob/main/SOURCES.md",
+        "https://github.com/DennisToma/collusion-beyond-words/blob/main/evidence/README.md",
+        "https://github.com/DennisToma/collusion-beyond-words/blob/main/SOURCES.md",
+        "https://github.com/DennisToma/collusion-beyond-words/blob/main/evidence/README.md"
+      ]
+    },
+    "SLIDES": {
+      "figures": 5,
+      "links": []
+    }
+  },
+  "scope": "Committed text, per-slide placement, actual figure pixels and portable link schemes; no PDF rebuild or browser layout recheck."
+}
+
+$ uv run --group export python tests/test_export.py
+test_deleted_body_and_wrong_slide_are_detected (__main__.ExportChecks.test_deleted_body_and_wrong_slide_are_detected) ... ok
+test_excess_content_is_rejected_at_font_floor (__main__.ExportChecks.test_excess_content_is_rejected_at_font_floor) ... ok
+test_figure_height_yields_before_font_floor (__main__.ExportChecks.test_figure_height_yields_before_font_floor) ... ok
+test_font_floor_includes_tables_and_code (__main__.ExportChecks.test_font_floor_includes_tables_and_code) ... ok
+test_markdown_formatting_preserves_meaningful_text (__main__.ExportChecks.test_markdown_formatting_preserves_meaningful_text) ... ok
+test_missing_or_broken_images_are_rejected (__main__.ExportChecks.test_missing_or_broken_images_are_rejected) ... ok
+test_missing_or_substituted_pdf_figure_is_rejected (__main__.ExportChecks.test_missing_or_substituted_pdf_figure_is_rejected) ... ok
+test_padding_and_horizontal_overflow_are_detected (__main__.ExportChecks.test_padding_and_horizontal_overflow_are_detected) ... ok
+test_repo_links_become_portable_and_file_links_fail (__main__.ExportChecks.test_repo_links_become_portable_and_file_links_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.277s
+
+OK
+
+$ uv run --group export python scripts/check_submission_compliance.py
+{
+  "abstract_words": 234,
+  "form_summary_words": 117,
+  "verified_reference_entries": 15,
+  "main_text_pages": 6,
+  "total_report_pages": 20,
+  "slides": 8,
+  "submission_pdf_bytes": 1153273,
+  "ok": true,
+  "scope": "Director's file/length/layout/disclosure checks and recorded reference identity concordance; not scientific validity.",
+  "sha256": {
+    "SUBMISSION.md": "92f83f04a534e528edb66c6da7708275a9164805046dcd51c4baedf1a7c885d9",
+    "SUBMISSION_FORM.md": "02ee1b700ca3b91e47b3105c2bd17c6ced72f5b9d94e151fb4b5d968a0568d9a",
+    "SUBMISSION.pdf": "a2a3f954cd8968aeeb9ce877b07de099ce236e1362034bf7346f67ea8b577595",
+    "SLIDES.pdf": "1c0e55edd0391b6dd3dfc31138f36aa04b70ff2e4091decfcc6dfab61c41a3a6",
+    "results/reference_metadata_i33.json": "e01db712e197d8fd717dc1a685b28e23194c5ae00a1073bc8f20a458906e2fa1",
+    "scripts/check_submission_compliance.py": "3912b99b438d2ed85601302d96d657b11b86cfa8905b5f789729c3497db32e54"
+  }
+}
+
+$ uv run --group export python tests/test_submission_compliance.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
+
+$ uv run --group export python scripts/check_template_artifacts.py
+[ok] primary template report: all 147 fragments found in PDF text
+[ok] TEMPLATE_REPORT.pdf: 4 figures match source pixels exactly
+{
+  "abstract_words": 246,
+  "form_summary_words": 117,
+  "text_fragments": 147,
+  "figures": 4,
+  "main_text_pages": 6,
+  "total_pages": 10,
+  "pdf_bytes": 781044,
+  "ok": true,
+  "sha256": {
+    "TEMPLATE_REPORT.md": "af06861c136736c41925912e9a0be2da2b5d17292b3c8cf58f3d4193c171ce3e",
+    "TEMPLATE_REPORT.pdf": "693fd00bd4fa809ce45ebea8668bb650131e3a25bff675974f05f17c717917c6",
+    "SUBMISSION_FORM.md": "02ee1b700ca3b91e47b3105c2bd17c6ced72f5b9d94e151fb4b5d968a0568d9a",
+    "IMAGE.png": "5f76a6e9c6f001d6400259c9113c70ef99027bd16ce9fe8dcc18f589429d0d62",
+    "scripts/export_template_pdf.py": "41daacfdcc9de5038f609b0c5932245ee9a2986b0efb0a5a61c16027b47360cb",
+    "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb",
+    "scripts/check_template_artifacts.py": "2b01e456d893d2a0a17599e8cad5e7143e967e1fc3b20d53d5b810d603c91a91",
+    "figures/fig0_headline.png": "0b4f8004de50d8eb726e2dcf4f1bd1a42216371409768fcbb40cac19bacd937a",
+    "figures/fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "figures/fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+    "figures/fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866"
+  },
+  "scope": "Primary PDF text/figure pixels/links, template structure and lengths, page limits, early headline placement and project image format; not scientific validity."
+}
+
+$ uv run --group export python tests/test_template_artifacts.py
+test_concurrent_source_or_artifact_changes_are_rejected (__main__.TemplateChecks.test_concurrent_source_or_artifact_changes_are_rejected) ... ok
+test_current_primary_artifacts (__main__.TemplateChecks.test_current_primary_artifacts) ... ok
+test_headline_and_project_image_regenerate_byte_exact_without_siblings (__main__.TemplateChecks.test_headline_and_project_image_regenerate_byte_exact_without_siblings) ... ok
+test_stale_pdf_source_figure_and_image_fail_closed (__main__.TemplateChecks.test_stale_pdf_source_figure_and_image_fail_closed) ... ok
+test_structure_disclosures_and_abstract_limits (__main__.TemplateChecks.test_structure_disclosures_and_abstract_limits) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 5.541s
+
+OK
+
+FINALIZE OK

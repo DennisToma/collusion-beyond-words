@@ -1,5 +1,720 @@
 {
  "tokens": 160,
  "ci_triples": 26,
- "unmatched": []
+ "unmatched": [],
+ "context_coverage": [
+  {
+   "token": "0.51",
+   "category": "source_slot",
+   "context": "hannel games, while pCMI stayed near chance (⟨0.51⟩ in a 192-game gri"
+  },
+  {
+   "token": "-0.01",
+   "category": "source_slot",
+   "context": "sages gave the LLM auditor no resolved gain (⟨-0.01⟩ [-0.09, +0.06] AU"
+  },
+  {
+   "token": "-0.09",
+   "category": "source_slot",
+   "context": "ave the LLM auditor no resolved gain (-0.01 [⟨-0.09⟩, +0.06] AUROC on "
+  },
+  {
+   "token": "+0.06",
+   "category": "source_slot",
+   "context": " LLM auditor no resolved gain (-0.01 [-0.09, ⟨+0.06⟩] AUROC on a locke"
+  },
+  {
+   "token": "0.87",
+   "category": "source_slot",
+   "context": " verdict, text predicted rule-breaking well (⟨0.87⟩). The price signa"
+  },
+  {
+   "token": "0.5",
+   "category": "chance level",
+   "context": " game scores above a random no-channel game; ⟨0.5⟩ = chance). Prices"
+  },
+  {
+   "token": "-0.01",
+   "category": "source_slot",
+   "context": "ly view (the registered text-added contrast, ⟨-0.01⟩ [-0.09, +0.06], i"
+  },
+  {
+   "token": "-0.09",
+   "category": "source_slot",
+   "context": " (the registered text-added contrast, -0.01 [⟨-0.09⟩, +0.06], is not p"
+  },
+  {
+   "token": "+0.06",
+   "category": "source_slot",
+   "context": "egistered text-added contrast, -0.01 [-0.09, ⟨+0.06⟩], is not plotted)"
+  },
+  {
+   "token": "95%",
+   "category": "confidence level",
+   "context": "ng text to prices. Bars = estimates, lines = ⟨95%⟩ CIs; dashed line "
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": "en it fails. On scripted sellers, pCMI flags ⟨100%⟩ of planted collud"
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": "airs and cuts common-shock false alarms from ⟨100%⟩ to 14%. It cannot"
+  },
+  {
+   "token": "14%",
+   "category": "fixed_binding_context",
+   "context": " cuts common-shock false alarms from 100% to ⟨14%⟩. It cannot distin"
+  },
+  {
+   "token": "5.6",
+   "category": "model version",
+   "context": "-only sets use seven models: gpt-6-luna, gpt-⟨5.6⟩-luna, deepseek-v4"
+  },
+  {
+   "token": "6.1",
+   "category": "model version",
+   "context": " deepseek, Qwen3.8 base and abliterated, gpt-⟨6.1⟩-sol). A pre-regis"
+  },
+  {
+   "token": "6.1",
+   "category": "model version",
+   "context": "lagged). (iv) LLM auditor: one zero-shot gpt-⟨6.1⟩-sol prompt, score"
+  },
+  {
+   "token": "6.1",
+   "category": "model version",
+   "context": "etter single view. Labels and metrics. A gpt-⟨6.1⟩-sol judge reads t"
+  },
+  {
+   "token": "0.5",
+   "category": "chance level",
+   "context": "gher than a randomly chosen no-channel game (⟨0.5⟩ = chance, 1 = per"
+  },
+  {
+   "token": "95%",
+   "category": "confidence level",
+   "context": "ce, 1 = perfect). Market AUROC intervals are ⟨95%⟩ run-level bootstr"
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": " and localises the planted colluding pair in ⟨100%⟩ of scripted runs "
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": "Figure 2). Raw mutual information also flags ⟨100%⟩ of common-shock c"
+  },
+  {
+   "token": "14%",
+   "category": "fixed_binding_context",
+   "context": " state and lagged prices (pCMI) cuts this to ⟨14%⟩, and to 4% (null "
+  },
+  {
+   "token": "4%",
+   "category": "fixed_binding_context",
+   "context": "agged prices (pCMI) cuts this to 14%, and to ⟨4%⟩ (null from no-cha"
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": "lagged by every contemporaneous detector (44-⟨100%⟩ of runs), because"
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": " flags legitimate leader-follower pricing in ⟨100%⟩ of runs. With LLM"
+  },
+  {
+   "token": "0.75",
+   "category": "source_slot",
+   "context": "gure A1). A price-level screen reached AUROC ⟨0.75⟩-0.99 across sets,"
+  },
+  {
+   "token": "0.99",
+   "category": "source_slot",
+   "context": "A1). A price-level screen reached AUROC 0.75-⟨0.99⟩ across sets, abov"
+  },
+  {
+   "token": "0.34",
+   "category": "source_slot",
+   "context": "erence was significant in eight. pCMI ranged ⟨0.34⟩-0.72, with its in"
+  },
+  {
+   "token": "0.72",
+   "category": "source_slot",
+   "context": "e was significant in eight. pCMI ranged 0.34-⟨0.72⟩, with its interva"
+  },
+  {
+   "token": "0.74",
+   "category": "source_slot",
+   "context": "n the 192-game grid, the level screen scored ⟨0.74⟩ and pCMI 0.51 [0."
+  },
+  {
+   "token": "0.51",
+   "category": "source_slot",
+   "context": " grid, the level screen scored 0.74 and pCMI ⟨0.51⟩ [0.43, 0.59]. Lon"
+  },
+  {
+   "token": "0.43",
+   "category": "source_slot",
+   "context": " the level screen scored 0.74 and pCMI 0.51 [⟨0.43⟩, 0.59]. Longer 60"
+  },
+  {
+   "token": "0.59",
+   "category": "source_slot",
+   "context": "evel screen scored 0.74 and pCMI 0.51 [0.43, ⟨0.59⟩]. Longer 60-round"
+  },
+  {
+   "token": "0.34",
+   "category": "source_slot",
+   "context": ". Longer 60-round games did not rescue pCMI (⟨0.34⟩, level 0.94), nor"
+  },
+  {
+   "token": "0.94",
+   "category": "source_slot",
+   "context": "round games did not rescue pCMI (0.34, level ⟨0.94⟩), nor did restric"
+  },
+  {
+   "token": "-0.01",
+   "category": "source_slot",
+   "context": " the better single view, text or prices) was ⟨-0.01⟩ [-0.09, +0.06] AU"
+  },
+  {
+   "token": "-0.09",
+   "category": "source_slot",
+   "context": "tter single view, text or prices) was -0.01 [⟨-0.09⟩, +0.06] AUROC on "
+  },
+  {
+   "token": "+0.06",
+   "category": "source_slot",
+   "context": "ngle view, text or prices) was -0.01 [-0.09, ⟨+0.06⟩] AUROC on the loc"
+  },
+  {
+   "token": "+0.06",
+   "category": "source_slot",
+   "context": "06] AUROC on the locked test, so gains above ⟨+0.06⟩ are excluded. Tex"
+  },
+  {
+   "token": "0.47",
+   "category": "source_slot",
+   "context": " above +0.06 are excluded. Text alone scored ⟨0.47⟩ there, and for bo"
+  },
+  {
+   "token": "0.21",
+   "category": "source_slot",
+   "context": ", and for both Qwen3.8 arms it was inverted (⟨0.21⟩ and 0.15): the au"
+  },
+  {
+   "token": "0.15",
+   "category": "source_slot",
+   "context": " both Qwen3.8 arms it was inverted (0.21 and ⟨0.15⟩): the auditor ran"
+  },
+  {
+   "token": "0.40",
+   "category": "source_slot",
+   "context": "ed rivals publicly less often than controls (⟨0.40⟩ vs 0.88; post hoc"
+  },
+  {
+   "token": "0.88",
+   "category": "source_slot",
+   "context": "s publicly less often than controls (0.40 vs ⟨0.88⟩; post hoc), which"
+  },
+  {
+   "token": "0.87",
+   "category": "source_slot",
+   "context": " verdicts from preceding messages with AUROC ⟨0.87⟩, even though, in "
+  },
+  {
+   "token": "62%",
+   "category": "fixed_binding_context",
+   "context": "UROC 0.87, even though, in the full dataset, ⟨62%⟩ of rule-breaking "
+  },
+  {
+   "token": "+1.04",
+   "category": "source_slot",
+   "context": "with no recipient raised the pair premium by ⟨+1.04⟩, against +1.61 fo"
+  },
+  {
+   "token": "+1.61",
+   "category": "source_slot",
+   "context": "nt raised the pair premium by +1.04, against ⟨+1.61⟩ for a real channe"
+  },
+  {
+   "token": "0.65",
+   "category": "source_slot",
+   "context": "against +1.61 for a real channel: a ratio of ⟨0.65⟩ [0.34, 1.32], abo"
+  },
+  {
+   "token": "0.34",
+   "category": "source_slot",
+   "context": "t +1.61 for a real channel: a ratio of 0.65 [⟨0.34⟩, 1.32], about two"
+  },
+  {
+   "token": "1.32",
+   "category": "source_slot",
+   "context": "1 for a real channel: a ratio of 0.65 [0.34, ⟨1.32⟩], about two-third"
+  },
+  {
+   "token": "7/10",
+   "category": "fixed_binding_context",
+   "context": "vel screens also flag legitimate advantages: ⟨7/10⟩ high-cost and 9/1"
+  },
+  {
+   "token": "9/10",
+   "category": "fixed_binding_context",
+   "context": "ag legitimate advantages: 7/10 high-cost and ⟨9/10⟩ quality-edge sell"
+  },
+  {
+   "token": "2/10",
+   "category": "fixed_binding_context",
+   "context": "0 high-cost and 9/10 quality-edge sellers vs ⟨2/10⟩ controls. Finally"
+  },
+  {
+   "token": "0.05",
+   "category": "alpha",
+   "context": "alse alarms. Fraction of runs flagged at α = ⟨0.05⟩ (dashed) by each "
+  },
+  {
+   "token": "95%",
+   "category": "confidence level",
+   "context": "(50 runs per group, locked seed, 100 rounds; ⟨95%⟩ Wilson CIs). The "
+  },
+  {
+   "token": "100%",
+   "category": "fixed_binding_context",
+   "context": "ard negatives except seed-sharing copies and ⟨100%⟩ on colluders; tra"
+  },
+  {
+   "token": "22%",
+   "category": "fixed_binding_context",
+   "context": " use (lagged transfer entropy flagged only 8-⟨22%⟩ of scripted collu"
+  },
+  {
+   "token": "-0.07",
+   "category": "source_slot",
+   "context": "locked split, then replicated on fresh data (⟨-0.07⟩ [-0.17, +0.02], n"
+  },
+  {
+   "token": "-0.17",
+   "category": "source_slot",
+   "context": "split, then replicated on fresh data (-0.07 [⟨-0.17⟩, +0.02], n = 90, "
+  },
+  {
+   "token": "+0.02",
+   "category": "source_slot",
+   "context": "then replicated on fresh data (-0.07 [-0.17, ⟨+0.02⟩], n = 90, pooled "
+  },
+  {
+   "token": "6.1",
+   "category": "model version",
+   "context": " Limitations - Labels. One judge family (gpt-⟨6.1⟩-sol, also the aud"
+  },
+  {
+   "token": "95%",
+   "category": "confidence level",
+   "context": "s). (a) Channel minus no-channel markup with ⟨95%⟩ game-bootstrap CI"
+  },
+  {
+   "token": "9/9",
+   "category": "fixed_binding_context",
+   "context": "pCMI (orange). The level screen is higher in ⟨9/9⟩ sets by point est"
+  },
+  {
+   "token": "8/9",
+   "category": "fixed_binding_context",
+   "context": "mate; the paired difference CI excludes 0 in ⟨8/9⟩ (not gpt-5.6-luna"
+  },
+  {
+   "token": "5.6",
+   "category": "fixed_binding_context",
+   "context": "red difference CI excludes 0 in 8/9 (not gpt-⟨5.6⟩-luna). Sets share"
+  },
+  {
+   "token": "0.75",
+   "category": "source_slot",
+   "context": "---|---|---| | 9 main sets, 7 models | AUROC ⟨0.75⟩-0.99; channel mar"
+  },
+  {
+   "token": "0.99",
+   "category": "source_slot",
+   "context": "--|---| | 9 main sets, 7 models | AUROC 0.75-⟨0.99⟩; channel markup C"
+  },
+  {
+   "token": "9/9",
+   "category": "fixed_binding_context",
+   "context": " | AUROC 0.75-0.99; channel markup CI > 0 in ⟨9/9⟩ | 0.34-0.72; CI i"
+  },
+  {
+   "token": "0.34",
+   "category": "source_slot",
+   "context": "OC 0.75-0.99; channel markup CI > 0 in 9/9 | ⟨0.34⟩-0.72; CI includes"
+  },
+  {
+   "token": "0.72",
+   "category": "source_slot",
+   "context": "75-0.99; channel markup CI > 0 in 9/9 | 0.34-⟨0.72⟩; CI includes 0.5 "
+  },
+  {
+   "token": "0.5",
+   "category": "fixed_binding_context",
+   "context": "arkup CI > 0 in 9/9 | 0.34-0.72; CI includes ⟨0.5⟩ in 8/9 | | paired"
+  },
+  {
+   "token": "8/9",
+   "category": "fixed_binding_context",
+   "context": "I > 0 in 9/9 | 0.34-0.72; CI includes 0.5 in ⟨8/9⟩ | | paired differ"
+  },
+  {
+   "token": "8/9",
+   "category": "fixed_binding_context",
+   "context": "| paired difference level - pCMI | CI > 0 in ⟨8/9⟩ (exception gpt-5."
+  },
+  {
+   "token": "5.6",
+   "category": "fixed_binding_context",
+   "context": " level - pCMI | CI > 0 in 8/9 (exception gpt-⟨5.6⟩-luna +0.03 [-0.27"
+  },
+  {
+   "token": "+0.03",
+   "category": "source_slot",
+   "context": "pCMI | CI > 0 in 8/9 (exception gpt-5.6-luna ⟨+0.03⟩ [-0.27, +0.33]) |"
+  },
+  {
+   "token": "-0.27",
+   "category": "source_slot",
+   "context": "CI > 0 in 8/9 (exception gpt-5.6-luna +0.03 [⟨-0.27⟩, +0.33]) | | | 19"
+  },
+  {
+   "token": "+0.33",
+   "category": "source_slot",
+   "context": "in 8/9 (exception gpt-5.6-luna +0.03 [-0.27, ⟨+0.33⟩]) | | | 192-game "
+  },
+  {
+   "token": "0.74",
+   "category": "source_slot",
+   "context": "-game grid (16 cells × 12 games, board on) | ⟨0.74⟩ [0.66, 0.80]; abo"
+  },
+  {
+   "token": "0.66",
+   "category": "source_slot",
+   "context": "grid (16 cells × 12 games, board on) | 0.74 [⟨0.66⟩, 0.80]; above pCM"
+  },
+  {
+   "token": "0.80",
+   "category": "source_slot",
+   "context": "16 cells × 12 games, board on) | 0.74 [0.66, ⟨0.80⟩]; above pCMI in 1"
+  },
+  {
+   "token": "12/16",
+   "category": "fixed_binding_context",
+   "context": "board on) | 0.74 [0.66, 0.80]; above pCMI in ⟨12/16⟩ cells | 0.51 [0.4"
+  },
+  {
+   "token": "0.51",
+   "category": "source_slot",
+   "context": "74 [0.66, 0.80]; above pCMI in 12/16 cells | ⟨0.51⟩ [0.43, 0.59] | | "
+  },
+  {
+   "token": "0.43",
+   "category": "source_slot",
+   "context": "66, 0.80]; above pCMI in 12/16 cells | 0.51 [⟨0.43⟩, 0.59] | | 60-rou"
+  },
+  {
+   "token": "0.59",
+   "category": "source_slot",
+   "context": "80]; above pCMI in 12/16 cells | 0.51 [0.43, ⟨0.59⟩] | | 60-round gam"
+  },
+  {
+   "token": "0.94",
+   "category": "source_slot",
+   "context": " 0.59] | | 60-round games (pre-registered) | ⟨0.94⟩ [0.86, 1.00] | 0."
+  },
+  {
+   "token": "0.86",
+   "category": "source_slot",
+   "context": " | | 60-round games (pre-registered) | 0.94 [⟨0.86⟩, 1.00] | 0.34 [0."
+  },
+  {
+   "token": "1.00",
+   "category": "source_slot",
+   "context": "0-round games (pre-registered) | 0.94 [0.86, ⟨1.00⟩] | 0.34 [0.18, 0."
+  },
+  {
+   "token": "0.34",
+   "category": "source_slot",
+   "context": "games (pre-registered) | 0.94 [0.86, 1.00] | ⟨0.34⟩ [0.18, 0.52] | | "
+  },
+  {
+   "token": "0.18",
+   "category": "source_slot",
+   "context": "(pre-registered) | 0.94 [0.86, 1.00] | 0.34 [⟨0.18⟩, 0.52] | | execut"
+  },
+  {
+   "token": "0.52",
+   "category": "source_slot",
+   "context": "egistered) | 0.94 [0.86, 1.00] | 0.34 [0.18, ⟨0.52⟩] | | executed agr"
+  },
+  {
+   "token": "0.87",
+   "category": "source_slot",
+   "context": "reements vs no-channel controls | pair-level ⟨0.87⟩ [0.80, 0.94] | 0."
+  },
+  {
+   "token": "0.80",
+   "category": "source_slot",
+   "context": "ts vs no-channel controls | pair-level 0.87 [⟨0.80⟩, 0.94] | 0.42 [0."
+  },
+  {
+   "token": "0.94",
+   "category": "source_slot",
+   "context": "no-channel controls | pair-level 0.87 [0.80, ⟨0.94⟩] | 0.42 [0.33, 0."
+  },
+  {
+   "token": "0.42",
+   "category": "source_slot",
+   "context": "el controls | pair-level 0.87 [0.80, 0.94] | ⟨0.42⟩ [0.33, 0.53] | | "
+  },
+  {
+   "token": "0.33",
+   "category": "source_slot",
+   "context": "trols | pair-level 0.87 [0.80, 0.94] | 0.42 [⟨0.33⟩, 0.53] | | rank ("
+  },
+  {
+   "token": "0.53",
+   "category": "source_slot",
+   "context": "| pair-level 0.87 [0.80, 0.94] | 0.42 [0.33, ⟨0.53⟩] | | rank (copula"
+  },
+  {
+   "token": "0.53",
+   "category": "source_slot",
+   "context": "nk (copula) pCMI / sign-change CMI, grid | | ⟨0.53⟩ [0.44, 0.61] / 0."
+  },
+  {
+   "token": "0.44",
+   "category": "source_slot",
+   "context": "pula) pCMI / sign-change CMI, grid | | 0.53 [⟨0.44⟩, 0.61] / 0.44 [0."
+  },
+  {
+   "token": "0.61",
+   "category": "source_slot",
+   "context": "pCMI / sign-change CMI, grid | | 0.53 [0.44, ⟨0.61⟩] / 0.44 [0.36, 0."
+  },
+  {
+   "token": "0.44",
+   "category": "source_slot",
+   "context": "ign-change CMI, grid | | 0.53 [0.44, 0.61] / ⟨0.44⟩ [0.36, 0.52] | Ta"
+  },
+  {
+   "token": "0.36",
+   "category": "source_slot",
+   "context": "ange CMI, grid | | 0.53 [0.44, 0.61] / 0.44 [⟨0.36⟩, 0.52] | Table A1"
+  },
+  {
+   "token": "0.52",
+   "category": "source_slot",
+   "context": "MI, grid | | 0.53 [0.44, 0.61] / 0.44 [0.36, ⟨0.52⟩] | Table A1. Pric"
+  },
+  {
+   "token": "95%",
+   "category": "confidence level",
+   "context": ". Price detectors on LLM sellers (run AUROC [⟨95%⟩ CI]; per-set CIs "
+  },
+  {
+   "token": "0.47",
+   "category": "source_slot",
+   "context": " judge-labelled agreement vs not | 95 runs | ⟨0.47⟩ [0.36, 0.58] | 0."
+  },
+  {
+   "token": "0.36",
+   "category": "source_slot",
+   "context": "-labelled agreement vs not | 95 runs | 0.47 [⟨0.36⟩, 0.58] | 0.75 [0."
+  },
+  {
+   "token": "0.58",
+   "category": "source_slot",
+   "context": "led agreement vs not | 95 runs | 0.47 [0.36, ⟨0.58⟩] | 0.75 [0.65, 0."
+  },
+  {
+   "token": "0.75",
+   "category": "source_slot",
+   "context": "ement vs not | 95 runs | 0.47 [0.36, 0.58] | ⟨0.75⟩ [0.65, 0.85] | | "
+  },
+  {
+   "token": "0.65",
+   "category": "source_slot",
+   "context": "vs not | 95 runs | 0.47 [0.36, 0.58] | 0.75 [⟨0.65⟩, 0.85] | | Claude"
+  },
+  {
+   "token": "0.85",
+   "category": "source_slot",
+   "context": " | 95 runs | 0.47 [0.36, 0.58] | 0.75 [0.65, ⟨0.85⟩] | | Claude Sonne"
+  },
+  {
+   "token": "0.22",
+   "category": "source_slot",
+   "context": " | Claude Sonnet | channel vs none | 5 + 5 | ⟨0.22⟩ [0.00, 0.52] | 0."
+  },
+  {
+   "token": "0.00",
+   "category": "source_slot",
+   "context": "ude Sonnet | channel vs none | 5 + 5 | 0.22 [⟨0.00⟩, 0.52] | 0.52 [0."
+  },
+  {
+   "token": "0.52",
+   "category": "source_slot",
+   "context": "nnet | channel vs none | 5 + 5 | 0.22 [0.00, ⟨0.52⟩] | 0.52 [0.20, 0."
+  },
+  {
+   "token": "0.52",
+   "category": "source_slot",
+   "context": "hannel vs none | 5 + 5 | 0.22 [0.00, 0.52] | ⟨0.52⟩ [0.20, 0.88] | | "
+  },
+  {
+   "token": "0.20",
+   "category": "source_slot",
+   "context": " vs none | 5 + 5 | 0.22 [0.00, 0.52] | 0.52 [⟨0.20⟩, 0.88] | | deepse"
+  },
+  {
+   "token": "0.88",
+   "category": "source_slot",
+   "context": "ne | 5 + 5 | 0.22 [0.00, 0.52] | 0.52 [0.20, ⟨0.88⟩] | | deepseek | c"
+  },
+  {
+   "token": "0.36",
+   "category": "source_slot",
+   "context": "] | | deepseek | channel vs none | 30 runs | ⟨0.36⟩ [0.20, 0.52] | 0."
+  },
+  {
+   "token": "0.20",
+   "category": "source_slot",
+   "context": "deepseek | channel vs none | 30 runs | 0.36 [⟨0.20⟩, 0.52] | 0.53 [0."
+  },
+  {
+   "token": "0.52",
+   "category": "source_slot",
+   "context": "ek | channel vs none | 30 runs | 0.36 [0.20, ⟨0.52⟩] | 0.53 [0.30, 0."
+  },
+  {
+   "token": "0.53",
+   "category": "source_slot",
+   "context": "nnel vs none | 30 runs | 0.36 [0.20, 0.52] | ⟨0.53⟩ [0.30, 0.74] | | "
+  },
+  {
+   "token": "0.30",
+   "category": "source_slot",
+   "context": "s none | 30 runs | 0.36 [0.20, 0.52] | 0.53 [⟨0.30⟩, 0.74] | | Qwen3."
+  },
+  {
+   "token": "0.74",
+   "category": "source_slot",
+   "context": " | 30 runs | 0.36 [0.20, 0.52] | 0.53 [0.30, ⟨0.74⟩] | | Qwen3.8 base"
+  },
+  {
+   "token": "0.21",
+   "category": "source_slot",
+   "context": "| Qwen3.8 base | channel vs none | 15 + 15 | ⟨0.21⟩ [0.12, 0.33] | 0."
+  },
+  {
+   "token": "0.12",
+   "category": "source_slot",
+   "context": "3.8 base | channel vs none | 15 + 15 | 0.21 [⟨0.12⟩, 0.33] | 0.86 [0."
+  },
+  {
+   "token": "0.33",
+   "category": "source_slot",
+   "context": "se | channel vs none | 15 + 15 | 0.21 [0.12, ⟨0.33⟩] | 0.86 [0.69, 0."
+  },
+  {
+   "token": "0.86",
+   "category": "source_slot",
+   "context": "nnel vs none | 15 + 15 | 0.21 [0.12, 0.33] | ⟨0.86⟩ [0.69, 0.98] | | "
+  },
+  {
+   "token": "0.69",
+   "category": "source_slot",
+   "context": "s none | 15 + 15 | 0.21 [0.12, 0.33] | 0.86 [⟨0.69⟩, 0.98] | | Qwen3."
+  },
+  {
+   "token": "0.98",
+   "category": "source_slot",
+   "context": " | 15 + 15 | 0.21 [0.12, 0.33] | 0.86 [0.69, ⟨0.98⟩] | | Qwen3.8 abli"
+  },
+  {
+   "token": "0.15",
+   "category": "source_slot",
+   "context": ".8 abliterated | channel vs none | 15 + 15 | ⟨0.15⟩ [0.05, 0.25] | 0."
+  },
+  {
+   "token": "0.05",
+   "category": "source_slot",
+   "context": "iterated | channel vs none | 15 + 15 | 0.15 [⟨0.05⟩, 0.25] | 0.57 [0."
+  },
+  {
+   "token": "0.25",
+   "category": "source_slot",
+   "context": "ed | channel vs none | 15 + 15 | 0.15 [0.05, ⟨0.25⟩] | 0.57 [0.36, 0."
+  },
+  {
+   "token": "0.57",
+   "category": "source_slot",
+   "context": "nnel vs none | 15 + 15 | 0.15 [0.05, 0.25] | ⟨0.57⟩ [0.36, 0.78] | | "
+  },
+  {
+   "token": "0.36",
+   "category": "source_slot",
+   "context": "s none | 15 + 15 | 0.15 [0.05, 0.25] | 0.57 [⟨0.36⟩, 0.78] | | SALT-N"
+  },
+  {
+   "token": "0.78",
+   "category": "source_slot",
+   "context": " | 15 + 15 | 0.15 [0.05, 0.25] | 0.57 [0.36, ⟨0.78⟩] | | SALT-NLP pee"
+  },
+  {
+   "token": "0.87",
+   "category": "source_slot",
+   "context": "lating mutual ACCEPT vs not | 240 episodes | ⟨0.87⟩ [0.83, 0.91] | - "
+  },
+  {
+   "token": "0.83",
+   "category": "source_slot",
+   "context": " mutual ACCEPT vs not | 240 episodes | 0.87 [⟨0.83⟩, 0.91] | - | Tabl"
+  },
+  {
+   "token": "0.91",
+   "category": "source_slot",
+   "context": "l ACCEPT vs not | 240 episodes | 0.87 [0.83, ⟨0.91⟩] | - | Table A2. "
+  },
+  {
+   "token": "6.1",
+   "category": "model version",
+   "context": "7 [0.83, 0.91] | - | Table A2. Zero-shot gpt-⟨6.1⟩-sol auditor, run "
+  },
+  {
+   "token": "95%",
+   "category": "confidence level",
+   "context": "2. Zero-shot gpt-6.1-sol auditor, run AUROC [⟨95%⟩ CI]. Below 0.5 = "
+  },
+  {
+   "token": "0.5",
+   "category": "chance level",
+   "context": "t-6.1-sol auditor, run AUROC [95% CI]. Below ⟨0.5⟩ = the view ranks "
+  },
+  {
+   "token": "0.5",
+   "category": "chance level",
+   "context": "ks controls higher; bold = CI entirely below ⟨0.5⟩. The price view h"
+  },
+  {
+   "token": "6.1",
+   "category": "model version",
+   "context": "ement labels come from one judge family (gpt-⟨6.1⟩-sol, also the aud"
+  }
+ ],
+ "unclassified": 0,
+ "template_sha256": "af06861c136736c41925912e9a0be2da2b5d17292b3c8cf58f3d4193c171ce3e",
+ "bindings_sha256": "3c3447cef8a11579f52163d3476a2ac3892c8ec59878bed6c0a4454a5d5cb501"
 }

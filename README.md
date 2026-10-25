@@ -52,9 +52,9 @@ the implementation, experiments, analysis and drafting under Dennis's direction 
 | `SOURCES.md` | every number in the report → source repo, JSON file/key, commit |
 | `figures/` | Fig. 1–6; Fig. 1, 2 and 3 re-rendered from pinned Q1.4 JSON by `scripts/fig1_hard_negatives.py`, `scripts/fig2_level_vs_comovement.py`, `scripts/fig3_e70_grid.py`, Fig. 5 from pinned Q2.2 trajectories by `scripts/fig5_placebo_premium.py` (larger text only; same data and encodings), Fig. 4 and 6 by `scripts/fig4_say_vs_do.py`, `scripts/fig6_strong_framing.py` (label fixes) |
 | `evidence/` | 158 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
-| `scripts/check_sources.py` | 111 saved-source assertions, 144 bindings that extract printed numbers from the report/slides, and 158 evidence-file hash checks (→ `results/source_check.json`) |
+| `scripts/check_sources.py` | 120 saved-source assertions, 144 extended-report/slide bindings, 65 section-scoped primary-report bindings, and 158 evidence-file hash checks (→ `results/source_check.json`) |
 | `scripts/number_coverage.py` | lists every decimal in the report main text, relocated scientific appendices D–G and slides and whether a binding checks it; fails if an unbound decimal is not a declared non-result (→ `results/number_coverage.json`; 248/281 and 55/61, 0 unclassified) |
-| `scripts/check_template_numbers.py` | checks that every decimal, percentage and fraction in TEMPLATE_REPORT.md occurs in the script-bound SUBMISSION.md, and that every `estimate [lo, hi]` triple occurs there verbatim (→ `results/template_number_check.json`; 161 tokens, 26 triples, 0 unmatched) |
+| `scripts/check_template_numbers.py` | inventories primary-report decimals, percentages and fractions against SUBMISSION.md and requires scientific tokens to have a section-scoped binding or explicit non-result category (→ `results/template_number_check.json`; 160 tokens, 26 triples, 142 contextual tokens (including the limitations/ethics appendix), 0 unclassified). Run with `check_sources.py`, which checks binding values directly against the frozen evidence |
 | `scripts/recompute_unrounded_q22.py` | replays 3 Q2.2 rounding corrections from pinned inputs with the source estimators/seeds → `results/unrounded_q22.json`; no sibling checkout needed |
 | `scripts/recompute_c21b_floor.py` | replays C21b with two agreed-floor thresholds and two descriptive windows from pinned trajectories/cached terms → `results/c21b_floor.json`; no sibling checkout needed |
 | `scripts/recompute_locked_test_q22.py` | replays the historical 95-run locked test from cached judge labels and six original LLM score views; eight run-AUROC contrasts match the saved B=2000 analysis, with no fitting or calls → `results/locked_test_q22.json` |
@@ -65,7 +65,7 @@ the implementation, experiments, analysis and drafting under Dennis's direction 
 | `scripts/package_release.py` | checks a clean committed release from an extracted Git archive, then prepares the PDFs, form text, code/evidence archive, receipt, logs and checksums outside the repo |
 | `tests/test_packaging.py` | 10 handoff checks: exact/repeatable archives, dirty/concurrent changes, omitted/altered/unsafe members, failed checks, code-ZIP membership/pins and publication only after success |
 | `scripts/check_template_artifacts.py`, `tests/test_template_artifacts.py` | actual primary-report/PDF/image acceptance plus 5 structure, stale-artifact and image-reproduction checks |
-| `tests/test_reproduction.py` | 26 checks: independent-copy reproduction, figure and replay parity, original-function parity for the Q1.4 grid and gate, C21b and the locked test, malformed trajectory/audit rejection, LLM-usage counts, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
+| `tests/test_reproduction.py` | 30 checks: primary-report endpoint/table/slot mutations, independent-copy reproduction, figure and replay parity, original-function parity for the Q1.4 grid and gate, C21b and the locked test, malformed trajectory/audit rejection, LLM-usage counts, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
 | `scripts/check_committed_export.py` | checks committed PDF text, slide placement/page count, actual figure pixels and portable links without rebuilding; catches changed PNGs with unchanged PDFs |
 | `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
@@ -117,9 +117,9 @@ retain their Git bytes/modes after checking. [Receipt](results/release_package_i
 That receipt predates its own notes; package clean HEAD for the actual handoff.
 
 ```bash
-uv run python scripts/check_sources.py          # 111 source checks, 144 document bindings, 158 evidence hashes
+uv run python scripts/check_sources.py          # 120 source checks, 144 extended + 65 primary bindings, 158 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
-uv run python scripts/check_template_numbers.py # TEMPLATE_REPORT numbers = SUBMISSION numbers
+uv run python scripts/check_template_numbers.py # primary numeric inventory + context coverage (run with check_sources)
 uv run python scripts/fig0_headline.py           # primary headline figure + IMAGE.png, from pinned data
 uv run python scripts/recompute_unrounded_q22.py # exact saved rounding-correction replay
 uv run python scripts/recompute_c21b_floor.py    # C21b floor/window sensitivity replay
@@ -151,7 +151,7 @@ Post-compliance archive check: release `2add728` passes the reproduction, figure
 export and compliance commands listed above from an extracted archive without `.git`, with absent
 sibling-root overrides and no model environment variables passed. All 257 extracted
 files match Git; all six deleted calculation outputs and six figures rebuild
-byte-identically. Source checks pass (111/144/158), as do 26 reproduction, 9 export
+byte-identically. The historical source checks passed (111/144/158), as did 26 reproduction, 9 export
 and 3 compliance tests. Both rebuilt PDFs match the committed page text, content
 streams and full bytes after normalising only date metadata (20 report pages,
 6 main; 8 slides). This reuses iteration 33's Python environment/browser with an

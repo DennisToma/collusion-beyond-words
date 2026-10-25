@@ -1,10 +1,11 @@
 {
-  "n_tests": 26,
+  "n_tests": 30,
   "n_fail": 0,
   "n_errors": 0,
   "tests": [
     "test_c21b_per_run_parity_with_pinned_source_function",
     "test_corrupt_evidence_is_rejected",
+    "test_each_primary_numeric_slot_is_checked",
     "test_edited_primary_endpoint_is_rejected",
     "test_edited_slide_interval_is_rejected",
     "test_every_unbound_decimal_is_a_non_result",
@@ -25,6 +26,9 @@
     "test_locked_test_replay_parity_with_pinned_source_functions",
     "test_locked_test_replay_rejects_missing_duplicate_or_invalid_inputs",
     "test_missing_binding_is_rejected",
+    "test_primary_context_rejects_deleted_or_duplicate_claims",
+    "test_primary_context_rejects_endpoint_and_table_swaps",
+    "test_primary_inventory_rejects_new_result_beside_non_results",
     "test_q22_replays_reproduce_without_source_repos",
     "test_reducing_precision_cannot_widen_tolerance",
     "test_standalone_sources_and_documents",
@@ -32,7 +36,7 @@
   ],
   "evidence_manifest_sha256": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
   "document_sha256": {
-    "SUBMISSION.md": "975f1505a37a7ca5e802995e98618e23fc4c84864ea4a9b8242e2fb4e64e6e12",
+    "SUBMISSION.md": "92f83f04a534e528edb66c6da7708275a9164805046dcd51c4baedf1a7c885d9",
     "SLIDES.md": "37a182ed234ec0bede90e5b4a10cb7b20b00516267feddf52e8315978dd4fab5"
   },
   "figure_sha256": {
@@ -89,7 +93,7 @@
     "source": "q22/p2_strong.py"
   },
   "standalone": {
-    "n_checks": 111,
+    "n_checks": 120,
     "n_document_checks": 144,
     "n_evidence_files": 158,
     "n_fail": 0,

@@ -1,5 +1,25 @@
 # SOURCES — where every number in SUBMISSION.md comes from
 
+Fallback iteration 7 (2026-10-25 17:18 UTC): source handoffs read at Q1.4
+`0708b800d6ec8168860e6f92a60c43f304733776` and Q2.2
+`f15abfd6503a33850f3e32d3751f7e998f1c4133`; both explicitly accept merge
+`7c7be5e` / `8e4ef25` with zero open P1. Scientific pins remain unchanged.
+`results/template_document_bindings.json` maps 65 primary-report claims to the
+same source checks used by the extended report, with named-section boundaries,
+fixed precision and exactly one required occurrence; table bindings include column headers and row identities. `check_sources.py` checks
+those mappings directly; `check_template_numbers.py` inventories the scientific
+sections and rejects unbound decimals, percentages or fractions. Other integers,
+qualitative interpretation, references and process disclosures remain outside that
+inventory. This verifies frozen results; it creates no estimate or test evaluation.
+
+| added source assertion | frozen source file/key | source pin |
+|---|---|---|
+| T1: colluder flag/localisation, shared-seed flag range, lagged-TE flag range | Q1.4 `results/eval/gate_test.json:metrics` (contemporaneous detectors; both historical nulls for shared seeds) | `732f08c` |
+| T2: cells where level beats pCMI (12/16) | Q1.4 `results/eval/e70_grid.json:per_cell.*.auroc` | `732f08c` |
+| T3: rule-breaking episodes without explicit agreement (62%, rounded) | Q2.2 `results/analysis/salt_d1.json:E104_sayvsdo.P_said_given_exec.est`, complement × 100 | `91ffb2d` |
+| T4: followed / communication-positive (14/50) | Q2.2 `results/analysis/p2_behaviour.json:datasets.llm_v3.class_counts` | `91ffb2d` |
+| T5: legitimate high-cost / quality / control premium flags | Q2.2 `results/analysis/p2_asym.json:conditions.{highcost,quality,none_ref_p2cue}.premium_flags` | `91ffb2d` |
+
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 

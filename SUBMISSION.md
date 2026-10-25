@@ -517,7 +517,7 @@ agents' rule files and an LLM-call helper with rate limiting and call logging. T
 scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
 were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
 beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
-possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 410 manager iterations had completed by 2026-10-25 16:59 UTC (255 Opus, 155
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 414 manager iterations had completed by 2026-10-25 17:16 UTC (257 Opus, 157
 gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
 A separate director loop
 (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,
@@ -544,11 +544,11 @@ from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and 
 provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
 credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
 Fig. 5's per-round means are asserted equal to the saved source JSON.
-`scripts/check_sources.py` passes 111 saved-source assertions and 144 bindings that extract printed
-numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
+`scripts/check_sources.py` passes 120 saved-source assertions and 144 bindings that extract printed
+numbers from this report and the slides, plus 65 section-scoped bindings for the primary report and all bundle-file hashes. The primary-report inventory covers decimals, percentages and fractions in its scientific sections; integer-only and qualitative claims still require review. `scripts/number_coverage.py` lists which
 decimals are bound (248/281 across the main text and relocated scientific appendices D–G, 55/61 in the slides). Each of the other 33 + 6 falls in a declared
 non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
-the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 26 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
+the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 30 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
 All three Q2.2 replay outputs regenerate byte-identically; C21b's per-run fields match the pinned original
 source function across both floors and windows. `uv run python scripts/recompute_locked_test_q22.py`

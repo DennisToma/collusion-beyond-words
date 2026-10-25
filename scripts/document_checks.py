@@ -19,10 +19,29 @@ def normalize(text):
     return re.sub(r"\s+", " ", text).strip()
 
 
-def check_documents(source_checks, documents):
+SLOT = r"([+-]?(?:\d+(?:\.\d+)?|\.\d+))(?!\d)"
+
+
+def binding_matches(text, binding):
+    """Return matches in the declared section, retaining full-document offsets."""
+    start, end = 0, len(text)
+    if "section" in binding:
+        first, last = map(normalize, binding["section"])
+        if text.count(first) != 1 or text.count(last) != 1:
+            return []
+        start = text.index(first) + len(first)
+        end = text.index(last)
+        if end < start:
+            return []
+    pattern = SLOT.join(re.escape(x) for x in normalize(binding["template"]).split("{}"))
+    return list(re.compile(pattern).finditer(text, start, end))
+
+
+def check_documents(source_checks, documents, bindings=None):
     lookup = {f"{c['row']}:{c['what']}": c["got"] for c in source_checks}
     texts = {name: normalize(path.read_text()) for name, path in documents.items()}
-    bindings = json.loads((ROOT / "results/document_bindings.json").read_text())
+    if bindings is None:
+        bindings = json.loads((ROOT / "results/document_bindings.json").read_text())
     results = []
     for binding in bindings:
         source = lookup[binding["source_check"]]
@@ -34,10 +53,11 @@ def check_documents(source_checks, documents):
         digits = binding["digits"]
         if len(chunks) - 1 != len(expected) or len(digits) != len(expected):
             raise ValueError(f"Numeric slot/source length mismatch: {binding}")
-        pattern = r"([+-]?(?:\d+(?:\.\d+)?|\.\d+))(?!\d)".join(re.escape(x) for x in chunks)
-        matches = list(re.finditer(pattern, texts[binding["document"]]))
+        matches = binding_matches(texts[binding["document"]], binding)
         extracted = []
         ok = bool(matches)
+        if "expected_matches" in binding:
+            ok = ok and len(matches) == binding["expected_matches"]
         for match in matches:
             printed = match.groups()
             extracted.append(list(printed))

@@ -19,6 +19,7 @@ ap = argparse.ArgumentParser(description=__doc__)
 ap.add_argument("--live", action="store_true", help="Read pinned files from the sibling checkouts")
 ap.add_argument("--submission", type=Path, default=ROOT / "SUBMISSION.md")
 ap.add_argument("--slides", type=Path, default=ROOT / "SLIDES.md")
+ap.add_argument("--template", type=Path, default=ROOT / "TEMPLATE_REPORT.md")
 ap.add_argument("--output", type=Path, default=ROOT / "results/source_check.json")
 args = ap.parse_args()
 evidence = Evidence(live=args.live)
@@ -322,10 +323,38 @@ check("N23", "E65 games A, C", [len(a_), len(c_)], [20, 20])
 check("N23", "E65 recomputed matches stored 3 dp", [round(x, 3) for x in e65], [sq["d"], *sq["d_ci"]], tol=1e-9)
 check("N23", "E65 abliterated+memory C - A", e65, [2.14, 1.29, 3.00])
 
+# Primary-report checks use the same frozen values and rounding as the extended
+# report, but require exactly one occurrence in a named section or appendix.
+contemporary = [v for k, v in g.items() if k != "te"]
+check("T1", "scripted colluder flag and localisation range",
+      [min(v[c][metric] for v in contemporary for c in ("C", "D")
+           for metric in ("flag_rate", "surrogate_flag_rate", "top1") if metric in v[c]),
+       max(v[c][metric] for v in contemporary for c in ("C", "D")
+           for metric in ("flag_rate", "surrogate_flag_rate", "top1") if metric in v[c])], [1, 1], tol=0)
+check("T1", "shared-seed flag range",
+      [min(v[c][metric] for v in contemporary for c in ("A+shared_seed", "B+shared_seed")
+           for metric in ("flag_rate", "surrogate_flag_rate") if metric in v[c]),
+       max(v[c][metric] for v in contemporary for c in ("A+shared_seed", "B+shared_seed")
+           for metric in ("flag_rate", "surrogate_flag_rate") if metric in v[c])], [.44, 1], tol=0)
+check("T1", "TE colluder flag range", sorted(g["te"][c]["flag_rate"] for c in ("C", "D")), [.08, .22], tol=0)
+check("T2", "grid level beats pCMI cells",
+      [sum(c["auroc"]["market_level"] > c["auroc"]["pcmi"] for c in grid["per_cell"].values()),
+       len(grid["per_cell"])], [12, 16], tol=0)
+check("T3", "SALT no explicit agreement percent",
+      100 * (1 - sd["E104_sayvsdo"]["P_said_given_exec"]["est"]), 62, tol=.5)
+bc = load(Q22, "analysis/p2_behaviour.json")["datasets"]["llm_v3"]["class_counts"]
+check("T4", "followed and communication-positive", [bc["followed"], bc["followed"] + bc["not_followed"]], [14, 50], tol=0)
+for condition, wanted in (("highcost", [7, 10]), ("quality", [9, 10]), ("none_ref_p2cue", [2, 10])):
+    check("T5", condition + " premium flags", load(Q22, "analysis/p2_asym.json")["conditions"][condition]["premium_flags"], wanted, tol=0)
+
 document_checks = check_documents(checks, {"SUBMISSION.md": args.submission, "SLIDES.md": args.slides})
+template_bindings_path = ROOT / "results/template_document_bindings.json"
+template_checks = check_documents(checks, {"TEMPLATE_REPORT.md": args.template},
+                                  json.loads(template_bindings_path.read_text()))
 n_files = evidence.verify()
 bad = [c for c in checks if not c["ok"]]
 doc_bad = [c for c in document_checks if not c["ok"]]
+template_bad = [c for c in template_checks if not c["ok"]]
 commits = {p + "_commit": c["commit"] for p, c in evidence.manifest["projects"].items()}
 receipt = {**commits, "source_mode": "live" if args.live else "snapshot", "n_evidence_files": n_files,
            "evidence_manifest_sha256": hashlib.sha256(MANIFEST.read_bytes()).hexdigest(),
@@ -335,12 +364,19 @@ receipt = {**commits, "source_mode": "live" if args.live else "snapshot", "n_evi
            "document_sha256": {name: hashlib.sha256(path.read_bytes()).hexdigest()
                                for name, path in {"SUBMISSION.md": args.submission, "SLIDES.md": args.slides}.items()},
            "document_checks": document_checks}
+receipt.update(n_template_checks=len(template_checks), n_template_fail=len(template_bad),
+               template_bindings_sha256=hashlib.sha256(template_bindings_path.read_bytes()).hexdigest(),
+               template_sha256=hashlib.sha256(args.template.read_bytes()).hexdigest(),
+               template_checks=template_checks)
 OUT.write_text(json.dumps(receipt, indent=1) + "\n")
 for c in checks:
     print(("OK  " if c["ok"] else "FAIL"), c["row"], c["what"], c["got"], "want", c["want"])
 for c in doc_bad:
     print("FAIL document", c)
+for c in template_bad:
+    print("FAIL template", c)
 print(f"{len(checks) - len(bad)}/{len(checks)} source checks; "
       f"{len(document_checks) - len(doc_bad)}/{len(document_checks)} document bindings; "
       f"{n_files} evidence hashes ({receipt['source_mode']}) -> {OUT}")
-sys.exit(1 if bad or doc_bad else 0)
+print(f"{len(template_checks) - len(template_bad)}/{len(template_checks)} primary-report context bindings")
+sys.exit(1 if bad or doc_bad or template_bad else 0)

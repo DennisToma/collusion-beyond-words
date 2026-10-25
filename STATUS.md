@@ -1,18 +1,17 @@
 # STATUS
 
-## Current state (2026-10-25 17:13 UTC, fallback manager iteration 6)
-- FINALIZE-only. Primary: TEMPLATE_REPORT.pdf (10 pp, 6 main; 246-word abstract), IMAGE.png (1600×900); SLIDES.pdf (8).
-- Closed source-manager P1s: abliteration null concerns the channel-related premium, not absolute prices; Discussion/slide 1 preserve no-resolved-text-gain and Qwen inversion. No empirical estimate changed.
-- Fixed primary-upload release gap: finalizer exports/checks TEMPLATE_REPORT; handoff stages primary PDF, image, code ZIP, form and optional supplements.
-- New byte-bound primary receipt checks text, 4 figure pixel matches, structure, word/page limits and Figure 1 on pages 1–2; 5 acceptance/failure checks include image regeneration and export races.
-- Code ZIP now verifies all included merged/source files against committed Git, matches both source pins to evidence, sanitizes Git env, and rejects stale/missing/altered ZIP members before publication.
-- Full finalize PASS: 14 commands / 53 tests; 111 source assertions / 144 bindings / 158 hashes; 0 unclassified decimals; 160 template tokens +26 CI triples match.
-- Independent Codex high review: no remaining findings (reviews/codex_fallback_i6.md). Page 1 visually checked; all scientific JSON/evidence/PNG bytes unchanged.
+## Current state (2026-10-25 17:31 UTC, fallback manager iteration 7)
+- FINALIZE-only. Primary TEMPLATE_REPORT.pdf: 10 pages / 6 main, 246-word abstract; IMAGE.png 1600×900; slides 8.
+- Closed primary numeric-context gap: 65 section/table-scoped bindings check 135 slots directly against frozen evidence; exact occurrence and precision enforced.
+- Inventory covers 142 tokens in scientific main text and appendices A–B; 0 unclassified. Global 160 tokens / 26 CI triples still match extended report.
+- Four added release checks reject detector/endpoint/count/header/row swaps, deletion/duplicates, every numeric-slot mutation and unbound results beside non-results/in ethics.
+- Full finalize PASS: 14 commands / 57 tests; 120 source assertions / 144 extended + 65 primary bindings / 158 hashes; all coverage checks pass.
+- Codex high initial review found 2 P2 (table headers; appendix B); both fixed and follow-up has no remaining actionable finding (reviews/codex_fallback_i7.md).
+- Preservation PASS: 176 scientific/manuscript/image files and original 111 assertions / 144 bindings unchanged. Primary/slide page streams identical; extended pages 19–20 only provenance/usage changes, visually checked.
 - Headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
-- Source handoffs read at Q1.4 48662dc / Q2.2 05e588a; evidence pins stay 732f08c / 91ffb2d. No sibling writes, experiments or auditor calls.
-- Clean-HEAD handoff 7c7be5e: 11 commands/53 tests pass, 295 tracked files preserved, 20 checksums pass; ZIP 24,124,969 bytes (294 merged +550/1387 source files).
-- Handoff: reviews/handoff_fallback_i6.md; final notes package goes to /var/tmp/bw-fallback-i6-final, copied to root submission_code.zip. Dennis uploads primary PDF + image + ZIP; optional slides/extended report.
-- Risk: template numeric check is token/CI membership rather than context-specific binding; deployer pipeline remains unevaluated. Dennis must upload artifacts.
+- Source handoffs: Q1.4 0708b80 / Q2.2 f15abfd accept prior merged bytes, 0 open P1; pins remain 732f08c / 91ffb2d. No sibling writes or experiments.
+- Next: commit/push, clean-HEAD package acceptance, record receipt, then package final notes HEAD; root submission_code.zip must match that final package.
+- Risks: integer-only/qualitative claims still need review; deployer pipeline unevaluated. Dennis must upload primary PDF + image + ZIP; optional extended report/slides.
 
 ## Log
 - 2026-10-25 17:00 UTC merge iter54: release verification hold. DIRECTION unchanged since 16:29 (addendum). finalize.py --no-export → FINALIZE OK. It again changed only the usage counts (404→407), which I reverted so the committed bytes match the PDFs and the zip. Artefacts checked: TEMPLATE_REPORT.pdf 10 pp, SLIDES.pdf 8 pp, IMAGE.png 1600×900, submission_code.zip 24.1 MB, built 16:54 from 557715f (later commits touch only STATUS/ledger, so no rebuild needed). No edits to documents, no model calls.
@@ -111,3 +110,5 @@
 - 2026-10-25 17:08 UTC fallback iteration 6: selected primary-upload release integrity over another freeze-hold rerun. Found finalizer/packager still excluded new primary report and image. Added byte-bound primary acceptance, exporter/finalizer integration, correct handoff uploads, Git/pin-verified code ZIP and targeted failure tests. Source sync also found outstanding P1 wording flags ignored by prior hold notes; verified pinned E61/E69/C23 and applied source I179 patch (premium vs absolute-price null; text-added gain vs Qwen inversion). Full finalize: 14 commands, 53 tests, all pass; 147/4/6main/10total; scientific outputs unchanged. Codex high read-only review found no remaining issue after Git-env and snapshot-race fixes. No DIRECTION deviation or new experiment. Packaging/commit follows.
 
 - 2026-10-25 17:13 UTC fallback iteration 6 acceptance: pushed implementation 7c7be5e; clean-HEAD package succeeds (11 commands/53 tests; 295 exact tracked files; 20 sidecar checksums). Code ZIP 24,124,969 bytes; all 294 merged +550/1387 source files match Git and both source pins match evidence; 8 oversized/HTML files excluded. Copied immutable receipt to results/release_package_fallback_i6.json and wrote handoff procedure. Only notes/receipt/ledger change after the tested implementation; run final clean-HEAD package after this notes commit so the root ZIP includes these notes. No new analysis or model call.
+
+- 2026-10-25 17:31 UTC fallback iteration 7: chose the disclosed primary numeric-context gap over another freeze-hold rerun. Added 65 section/table-scoped bindings (135 numeric slots), nine assertions from existing frozen JSON, scientific-token coverage through ethics Appendix B and four release tests. Independent Codex read-only critic found 2 P2 (header swaps; omitted appendix), both fixed with regression probes; follow-up no remaining finding. Full finalizer passes 14 commands/57 tests;120/144+65/158;160 tokens+26 triples;142 contextual tokens,0 unclassified. All176 protected scientific/manuscript/image files, original111 checks/144 bindings and primary/slide PDF page streams preserved; extended pages19–20 change only reproducibility metadata and usage snapshot, visually inspected. README/SOURCES/REPORT current; preservation driver and receipt saved. No experiment, estimate change, held-out evaluation, auditor call or DIRECTION deviation; two implementation reviewer calls. Commit/push then clean-HEAD package follows.
