@@ -126,6 +126,12 @@ check("M16", "market >= Nash+2", rs["O6_market_excess_ge2"]["repl"], [18, 20], t
 pl = load(Q22, "analysis/placebo_llm_v3plc.json")["windows"]["r2_12"]["placebo_minus_private_paired"]
 check("M19", "placebo - private r2-12", pl, [0.03, -0.54, 0.49])
 
+se = load(Q22, "analysis/p2_strong_eval_llm_p2strongF.json")["detectors"]
+pv = [se[k]["auroc_strict_vs_tacit_high"] for k in ("premium", "market_excess_nash", "action", "action_stats")]
+check("M34", "Fig.6 price views strict vs tacit-high: min/max point", [min(v[0] for v in pv), max(v[0] for v in pv)],
+      [0.43, 0.58])
+check("M34", "all price-view CIs include 0.5", all(v[1] < 0.5 < v[2] for v in pv), True)
+
 
 def head(repo):
     return subprocess.run(["git", "-C", str(repo), "rev-parse", "--short", "HEAD"],

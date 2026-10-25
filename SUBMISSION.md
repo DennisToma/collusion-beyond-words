@@ -10,8 +10,8 @@
 
 *Merged submission of two sprint projects, named after the sprint's open-question numbers:* **Q1.4, the
 prices-only project** (information-theoretic detection from prices alone), and **Q2.2, the say-vs-do project**
-(auditing what agents say together with what they do). The two use separate markets, and each result is tagged
-with its source project. Every number is taken from the frozen source repos at the commits listed in
+(auditing what agents say together with what they do). The two ran separate markets (cross-applications to each other's data are labelled as such), and each
+result is tagged with its source project. Every number is taken from the frozen source repos at the commits listed in
 [SOURCES.md](SOURCES.md), which maps each number to its JSON file and key.
 
 ## Abstract
@@ -55,7 +55,8 @@ as a detector). **C − A**: difference in mean all-seller markup over Nash, cha
 information of prices given public state and all sellers' lagged prices (contemporaneous co-movement not
 explained by public information). **TE**: transfer entropy (lagged dependence). **Executed**: the judge found a
 private agreement *and* the pair's prices then followed it (Q1.4 rule, §3). **Locked test**: a split frozen
-before any tuning and scored once. **E*nn* / P2.*n* / N*n***: experiment / section / claim IDs in the source
+before any tuning and scored once with the final configuration (Q2.2's had four disclosed exposures, so it
+is locked but not fully blind; §3). **E*nn* / P2.*n* / N*n***: experiment / section / claim IDs in the source
 repos and SOURCES.md.
 
 ## 1. Introduction
@@ -88,8 +89,8 @@ private chat) and *realised coordination* (prices follow the agreement).
 **Why this matters for AI safety.** As LLM agents act for competing parties, overseers will often see only
 their actions and their public messages, not private side channels. We test two natural monitoring strategies
 on exactly those signals: a statistical detector of hidden coordination in actions, and an LLM monitor that
-reads what agents say. In these markets neither recovered the side channel better than a crude price-level
-statistic. The text monitor could be *misled* (inverted AUROC), and the price-level statistic also fired without
+reads what agents say. In these markets neither recovered the side channel better than a crude price statistic
+(markup level in Q1.4; a post hoc pair premium in Q2.2). The text monitor could be *misled* (inverted AUROC), and the price-level statistic also fired without
 any channel. Sellers were never instructed to collude or to evade (§7), so these are results about naturally
 arising behaviour in narrow markets, not about adversarial colluders.
 
@@ -176,8 +177,8 @@ contain **no** collusion and should be flagged rarely: independent sellers, comm
 high-price sellers, legitimate leader–follower pricing and shared policies. The two groups on the right (C, D)
 contain a planted colluding pair and should be flagged always. Top row: within-run circular-shift null. Bottom
 row: surrogate null built from no-channel reference markets. Red (pCMI) is low on the hard negatives except
-copies sharing a seed, and 100% on collusion. Purple (lagged TE) fires on leader–follower pricing and shared
-policies.*
+copies sharing a seed, and 100% on collusion. Purple (lagged TE) fires on leader–follower pricing, shared
+policies with independent noise or a common shock, and independent high-price sellers.*
 
 Every contemporaneous detector (Figure 1, right panels) flags and localises the planted pair in 100% of runs. Raw MI flags 100%
 of common-shock controls; conditioning on public state and lagged prices (pCMI) cuts this to 14% under the
@@ -266,7 +267,7 @@ not that words are uninformative. Among the families in Table 2, the inversion i
 Qwen3.8 arms. There, channel sellers, who can coordinate in private, invite rivals publicly *less* (invite rate
 0.40 vs 0.88 in controls, Qwen3.8 base; post hoc). This is consistent with the inversion but not shown to cause
 it: text score vs invite rate gives Spearman 0.49 [0.17, 0.71] with both Qwen3.8-base arms pooled (n = 30) but
-−0.41 [−0.83, +0.18] within the no-channel arm, so the association comes from the arm difference.
+−0.41 [−0.83, +0.18] within the no-channel arm, so the association comes mainly from the arm difference.
 For deepseek and Claude, invite rates do not differ.
 
 Inversion need not involve an agreement: a gpt-6.1-sol seller arm with 0/7 private agreements also scores 0.17
@@ -287,7 +288,8 @@ explicit agreement (P(said | executed) = 0.385). It shows that text can work whe
 does not show that this is the only such condition.
 
 *Forecasting which agreements are kept (E133, exploratory, 78 games):* see Appendix C. Briefly, with the private
-chat, say–do features add nothing beyond early price stability, and there is no evidence that public messages
+chat, say–do consistency forecasts kept agreements (AUROC 0.77), but three hand-built say–do features in one
+logistic model add nothing beyond early price stability, and there is no evidence that public messages
 add predictive value.
 
 ### 5.4 Neither signal is specific to collusion
@@ -322,9 +324,9 @@ difference, not equivalence).*
 ![Strong framing](figures/fig6_strong_framing_tacit.png)
 *Figure 6 (say-vs-do, Q2.2 P2.7; strong-framing arm, `llm_p2strongF`, T = 40). Memory + profit framing: market-mean price − Nash by
 behaviour class; 19 tacit-high no-channel markets sit with the 13 strict-executed channel pairs. Tacit-high threshold:
-market mean ≥ Nash + 2 over rounds 11–40 (figure regenerated by `scripts/fig6_strong_framing.py` from Q2.2 data; only the
-threshold label changed). Dashed line = tacit-high threshold. Right panel: the no-channel tacit-high class (green)
-overlaps the strict-executed channel class (blue), so price paths cannot separate them.*
+market mean ≥ Nash + 2 over rounds 11–40 (figure regenerated by `scripts/fig6_strong_framing.py` from Q2.2 data). Dashed line = tacit-high threshold. Right panel: the no-channel tacit-high class (green)
+overlaps the strict-executed channel class (blue); the tested price views show no resolved separation (AUROC 0.43–0.58,
+all CIs include 0.5; exploratory), which does not establish that price paths are indistinguishable.*
 
 ## 6. Discussion and implications
 

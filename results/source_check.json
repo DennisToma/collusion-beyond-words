@@ -1,7 +1,7 @@
 {
- "q14_commit": "499c500",
- "q22_commit": "966b9fe",
- "n_checks": 42,
+ "q14_commit": "732f08c",
+ "q22_commit": "91ffb2d",
+ "n_checks": 44,
  "n_fail": 0,
  "checks": [
   {
@@ -468,6 +468,26 @@
     -0.54,
     0.49
    ],
+   "ok": true
+  },
+  {
+   "row": "M34",
+   "what": "Fig.6 price views strict vs tacit-high: min/max point",
+   "got": [
+    0.429,
+    0.575
+   ],
+   "want": [
+    0.43,
+    0.58
+   ],
+   "ok": true
+  },
+  {
+   "row": "M34",
+   "what": "all price-view CIs include 0.5",
+   "got": true,
+   "want": true,
    "ok": true
   }
  ]

@@ -9,7 +9,7 @@ Merged submission of two sprint projects:
 Shared setup: four LLM sellers in repeated logit-demand pricing markets; one pair is *offered* a private chat
 channel (never told to collude). Can an auditor tell which markets had the channel?
 
-**Takeaway:** the channel shows up as *higher prices*; we detect no co-movement, and public messages give a zero-shot auditor no resolved gain, so a price flag is an audit trigger, not proof.
+**Takeaway:** the channel shows up as *higher prices*; we detect no contemporaneous co-movement, and public messages give a zero-shot auditor no resolved gain, so a price flag is an audit trigger, not proof.
 
 **Terms.** AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup: price above the competitive (Nash) price. pCMI: how much a pair's prices co-move after removing public state and lagged prices. TE: lagged dependence. Executed: a privately agreed price the pair then actually kept.
 
