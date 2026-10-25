@@ -70,7 +70,7 @@ class ReproductionChecks(unittest.TestCase):
 
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
-        self.assertEqual(self.receipt["n_evidence_files"], 107)
+        self.assertEqual(self.receipt["n_evidence_files"], 146)
         self.assertEqual(self.receipt["n_checks"], 111)
         self.assertEqual(self.receipt["n_document_checks"], 139)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
@@ -283,6 +283,140 @@ class ReproductionChecks(unittest.TestCase):
                     self.assertEqual(portable.analyse(ev, ds, floor, late),
                                      namespace["analyse"](ds, floor, late)["runs"])
 
+    def test_grid_replay_reproduces_without_source_repos(self):
+        output = self.copy / "results/grid_q14.json"
+        output.unlink()
+        result = subprocess.run([sys.executable, str(self.copy / "scripts/recompute_grid_q14.py")],
+                                cwd=self.scratch, env=self.env, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(output.read_bytes(), (ROOT / "results/grid_q14.json").read_bytes())
+
+    def test_grid_parity_with_original_scores_cohort_and_bootstrap(self):
+        import itertools
+        import numpy as np
+        import recompute_grid_q14 as portable
+
+        ev = evidence.Evidence()
+
+        def source_functions(path, names, namespace):
+            tree = ast.parse(ev.read_bytes("q14", path))
+            functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names]
+            self.assertEqual({n.name for n in functions}, set(names))
+            exec(compile(ast.Module(body=functions, type_ignores=[]), "pinned/" + path, "exec"), namespace)
+
+        # The original detector module imports only stdlib + numpy, but execute
+        # only its definitions/assignments to exclude even its read-only CLI.
+        tree = ast.parse(ev.read_bytes("q14", "detectors/infotheory.py"))
+        ns = {"np": np, "itertools": itertools}
+        pure = [n for n in tree.body if isinstance(n, (ast.FunctionDef, ast.Assign))]
+        exec(compile(ast.Module(body=pure, type_ignores=[]), "pinned/detectors/infotheory.py", "exec"), ns)
+        llm_tree = ast.parse(ev.read_bytes("q14", "experiments/llm_eval.py"))
+        original_nash = next(ast.literal_eval(n.value) for n in llm_tree.body if isinstance(n, ast.Assign)
+                             and any(isinstance(t, ast.Name) and t.id == "NASH" for t in n.targets))
+        self.assertEqual(portable.NASH, original_nash)
+        ns.update(json=json)
+        source_functions("experiments/llm_eval.py", ("arrays", "add_level_scores"), ns)
+        from datetime import datetime, timezone
+        ns.update(datetime=datetime, timezone=timezone, Path=Path, math=__import__("math"))
+        source_functions("scripts/e70_inputs.py", ("load_games",), ns)
+        source_functions("scripts/e1_grid.py", ("cells",), ns)
+        grid_tree = ast.parse(ev.read_bytes("q14", "scripts/e1_grid.py"))
+        ns["FACTORS"] = next(ast.literal_eval(n.value) for n in grid_tree.body if isinstance(n, ast.Assign)
+                             and any(isinstance(t, ast.Name) and t.id == "FACTORS" for t in n.targets))
+        original_cells = ns["cells"]()
+        self.assertEqual(original_cells, ev.json("q14", "data/llm_grid_p2_manifest.json")["cells"])
+        original_root = self.scratch / "original-grid-inputs"
+        original_games = []
+        for cell in original_cells:
+            directory = original_root / cell["cell"]
+            directory.mkdir(parents=True)
+            for name in ("ground_truth", "trajectories"):
+                rel = f"data/llm_grid_p2_{cell['cell']}/{name}.jsonl"
+                (directory / f"{name}.jsonl").write_bytes(ev.read_bytes("q14", rel))
+            conds = ("B", "D") if cell["levels"]["shocks"] == "random" else ("A", "C")
+            gt, rows, nbad = ns["load_games"](directory, cell["levels"]["model"], conditions=conds)
+            self.assertEqual(portable.load_cell(ev, cell), (gt, rows, nbad))
+            for rid, g in gt.items():
+                P, S, _ = ns["arrays"](rows[rid])
+                nash = np.array([original_nash[r["market"]["cost"]] for r in rows[rid]], float)
+                score = ns["score_run"](P, S, B=0)
+                ns["add_level_scores"](score, P, nash)
+                expected_pairs = {p: {d: score[p]["score"][d] for d in portable.DETS} for p in ns["PAIR_NAMES"]}
+                self.assertEqual(portable.pair_scores(P, S, nash), expected_pairs)
+                channel = g["condition"] in "CD"
+                ids = [a["id"] for a in rows[rid][0]["agents"]]
+                rivals = [i for i in range(4) if not channel or ids[i] not in g["assigned_pair"]]
+                original_games.append({"cell": cell["cell"], "run_id": rid, "channel": channel,
+                                       "markup": float((P - nash[:, None]).mean()),
+                                       "rival_markup": float((P[:, rivals] - nash[:, None]).mean()),
+                                       "scores": {d: max(v[d] for v in expected_pairs.values()) for d in portable.DETS}})
+
+        # Execute the original nested stats/auroc_strat functions (not main),
+        # with independently reconstructed original scores and source cell signs.
+        grid_tree = ast.parse(ev.read_bytes("q14", "scripts/e70_grid.py"))
+        main = next(n for n in grid_tree.body if isinstance(n, ast.FunctionDef) and n.name == "main")
+        functions = [n for n in main.body if isinstance(n, ast.FunctionDef) and n.name in ("stats", "auroc_strat")]
+        self.assertEqual({n.name for n in functions}, {"stats", "auroc_strat"})
+        original_dets = next(ast.literal_eval(n.value) for n in grid_tree.body if isinstance(n, ast.Assign)
+                             and any(isinstance(t, ast.Name) and t.id == "DETS" for t in n.targets))
+        self.assertEqual(portable.DETS, original_dets)
+        ns.update(DETS=original_dets, sign={c["cell"]: c["signs"] for c in original_cells})
+        exec(compile(ast.Module(body=functions, type_ignores=[]), "pinned/e70_grid.py", "exec"), ns)
+        by = {c["cell"]: {v: [g for g in original_games if g["cell"] == c["cell"] and g["channel"] == v]
+                          for v in (True, False)} for c in original_cells}
+        rng = np.random.default_rng(0)
+        points = ns["stats"](by)
+        boots = []
+        for _ in range(2000):
+            sample = {c: {v: [a[v][i] for i in rng.integers(0, len(a[v]), len(a[v]))] for v in (True, False)}
+                      for c, a in by.items()}
+            boots.append(ns["stats"](sample))
+        actual = portable.summarize(original_cells, original_games)
+        for d in portable.DETS:
+            self.assertEqual(actual["pooled_auroc_unrounded"][d],
+                             [points[3][d], *map(float, np.quantile([b[3][d] for b in boots], [.025, .975]))])
+        self.assertEqual(actual["pooled_C_minus_A"], [round(float(np.mean(list(points[0].values()))), 3),
+                          *[round(float(x), 3) for x in np.quantile([np.mean(list(b[0].values())) for b in boots], [.025, .975])]])
+        # Independent original paired-bootstrap implementation, also full B=2000.
+        paired_tree = ast.parse(ev.read_bytes("q14", "scripts/e74_paired_diff.py"))
+        for name in ("B", "SEED", "LEVEL", "OTHERS"):
+            # The source declares these in tuple assignments.
+            for node in paired_tree.body:
+                if isinstance(node, ast.Assign):
+                    target = node.targets[0]
+                    names = [t.id for t in target.elts] if isinstance(target, ast.Tuple) else [target.id]
+                    if name in names:
+                        values = ast.literal_eval(node.value)
+                        ns[name] = values[names.index(name)] if isinstance(target, ast.Tuple) else values
+                        break
+        source_functions("scripts/e74_paired_diff.py", ("strat_au", "paired"), ns)
+        groups = [([dict(g["scores"]) for g in a[True]], [dict(g["scores"]) for g in a[False]]) for a in by.values()]
+        expected = ns["paired"](groups)
+        self.assertEqual(actual["paired_contrasts"], {k: expected[k] for k in actual["paired_contrasts"]})
+
+    def test_grid_replay_rejects_malformed_completed_runs(self):
+        import recompute_grid_q14 as portable
+
+        ev = evidence.Evidence()
+        cell = ev.json("q14", "data/llm_grid_p2_manifest.json")["cells"][0]
+        base = "data/llm_grid_p2_c00/"
+        paths = {name: base + name + ".jsonl" for name in ("ground_truth", "trajectories")}
+        data = {name: [json.loads(x) for x in ev.lines("q14", path)] for name, path in paths.items()}
+        original_lines = ev.lines
+        wrong_sellers = json.loads(json.dumps(data["trajectories"][0]))
+        wrong_sellers["agents"].reverse()
+        nonfinite = json.loads(json.dumps(data["trajectories"][0]))
+        nonfinite["agents"][0]["price"] = float("nan")
+        for name, changed in (("ground_truth", data["ground_truth"] * 2),
+                              ("trajectories", data["trajectories"][1:]),
+                              ("trajectories", data["trajectories"] + data["trajectories"][:1]),
+                              ("trajectories", [wrong_sellers] + data["trajectories"][1:]),
+                              ("trajectories", [nonfinite] + data["trajectories"][1:])):
+            with patch.object(ev, "lines", side_effect=lambda project, path: (
+                    [json.dumps(r) for r in changed] if path == paths[name] else original_lines(project, path))):
+                with self.assertRaises(AssertionError):
+                    portable.load_cell(ev, cell)
+
     def test_llm_usage_counts_match_process_log_summary(self):
         # the LLM-usage statement prints runner-log counts; they must equal the committed snapshot
         summary = json.loads((ROOT / "results/process_log_summary.json").read_text())
@@ -314,6 +448,10 @@ if __name__ == "__main__":
                                       "fig6_strong_framing_tacit.png")},
                    "q22_replay_sha256": {p: sha(ROOT / "results" / p) for p in
                                          ("unrounded_q22.json", "c21b_floor.json", "locked_test_q22.json")},
+                   "q14_replay_sha256": {"grid_q14.json": sha(ROOT / "results/grid_q14.json")},
+                   "grid_original_function_parity": {"games": 192, "pairs_per_game": 6, "detectors": 4,
+                                                     "grid_bootstraps": 2000, "paired_bootstraps": 2000,
+                                                     "source": "q14/detectors/infotheory.py, scripts/e70_grid.py, scripts/e74_paired_diff.py"},
                    "locked_test_original_function_parity": {"real_cohort_bootstraps": 31,
                                                             "tied_fixture_bootstraps": 73,
                                                             "full_saved_result_bootstraps": 2000,
@@ -327,6 +465,8 @@ if __name__ == "__main__":
                             "Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original "
                             "analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match "
                             "pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay "
-                            "matches all selected saved results. Missing, duplicate and invalid audit inputs are rejected."}
+                            "matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; "
+                            "all pair scores, cohort loading and full bootstraps match original functions. "
+                            "Malformed completed trajectories and missing, duplicate and invalid audit inputs are rejected."}
         (ROOT / "results/reproduction_check.json").write_text(json.dumps(receipt, indent=2) + "\n")
     raise SystemExit(0 if result.wasSuccessful() else 1)

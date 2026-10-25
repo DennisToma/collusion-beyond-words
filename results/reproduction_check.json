@@ -1,5 +1,5 @@
 {
-  "n_tests": 17,
+  "n_tests": 20,
   "n_fail": 0,
   "n_errors": 0,
   "tests": [
@@ -10,6 +10,9 @@
     "test_every_unbound_decimal_is_a_non_result",
     "test_figures_reproduce_without_source_repos",
     "test_finalize_rewrites_exactly_one_usage_sentence",
+    "test_grid_parity_with_original_scores_cohort_and_bootstrap",
+    "test_grid_replay_rejects_malformed_completed_runs",
+    "test_grid_replay_reproduces_without_source_repos",
     "test_half_up_boundary_rejects_alternative_rounding",
     "test_live_mode_rejects_changed_source",
     "test_llm_usage_counts_match_process_log_summary",
@@ -21,9 +24,9 @@
     "test_standalone_sources_and_documents",
     "test_unbound_result_decimal_is_rejected"
   ],
-  "evidence_manifest_sha256": "375bf613fff6a9f99249beb006efadd25e85ddb02230a713b35a5a265e51b4a7",
+  "evidence_manifest_sha256": "07e3ea562825c7b348862eeb455d8821880c626baf4c5238d4d8a3e56819b48f",
   "document_sha256": {
-    "SUBMISSION.md": "4af027ccce8ff481f4b3afc0ae31a7e0bdf65bc9553c63db18f1aec110d5f969",
+    "SUBMISSION.md": "dc0beb7b37a3c14b80c9fef6093f64f900a0cc2c32979681bb58417059ef3d62",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
   },
   "figure_sha256": {
@@ -39,6 +42,17 @@
     "c21b_floor.json": "63911f28d52c6faa0cea8bfca7eb4f012ce088d4d38de085166736c9906fa005",
     "locked_test_q22.json": "840d771e90183c9a8b5b3a8a35dc3d4f4d8f8ff5ad471e28a7dacd6fa7132ee8"
   },
+  "q14_replay_sha256": {
+    "grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3"
+  },
+  "grid_original_function_parity": {
+    "games": 192,
+    "pairs_per_game": 6,
+    "detectors": 4,
+    "grid_bootstraps": 2000,
+    "paired_bootstraps": 2000,
+    "source": "q14/detectors/infotheory.py, scripts/e70_grid.py, scripts/e74_paired_diff.py"
+  },
   "locked_test_original_function_parity": {
     "real_cohort_bootstraps": 31,
     "tied_fixture_bootstraps": 73,
@@ -53,9 +67,9 @@
   "standalone": {
     "n_checks": 111,
     "n_document_checks": 139,
-    "n_evidence_files": 107,
+    "n_evidence_files": 146,
     "n_fail": 0,
     "n_document_fail": 0
   },
-  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All six figures and three Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay matches all selected saved results. Missing, duplicate and invalid audit inputs are rejected."
+  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All six figures and three Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; all pair scores, cohort loading and full bootstraps match original functions. Malformed completed trajectories and missing, duplicate and invalid audit inputs are rejected."
 }

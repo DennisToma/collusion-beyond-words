@@ -1,8 +1,8 @@
 # Pinned source evidence
 
 This bundle makes the merged submission's saved-value checks, all six figures and the Q2.2 rounding,
-C21b sensitivity and historical locked-test replays independent of the source checkouts. It contains
-107 exact git blobs from:
+C21b sensitivity, historical locked-test and Q1.4 raw-grid replays independent of the source checkouts. It contains
+146 exact git blobs from:
 
 - [Q1.4 @ 732f08c11a765cd8500f4ef3c29fb630b309d5b2](https://github.com/DennisToma/collusion-14-infotheory/tree/732f08c11a765cd8500f4ef3c29fb630b309d5b2)
 - [Q2.2 @ 91ffb2d4737a7537cdf9afe239a98e0d1061090b](https://github.com/DennisToma/collusion-22-say-vs-do/tree/91ffb2d4737a7537cdf9afe239a98e0d1061090b)
@@ -20,6 +20,14 @@ run-AUROC estimates/CIs and eight contrasts against saved results, using exactly
 and the original seed-0, B=2000 paired class-stratified bootstrap. It reuses the frozen judge
 labels; it does not re-audit, fit thresholds/fusion, compute pair endpoints, or create a new test evaluation.
 
+Iteration 26 adds 39 exact Q1.4 blobs (146 total; previous 107 unchanged): sixteen cell
+ground-truth/trajectory pairs, the original grid manifest and six original source files.
+The raw-grid replay rebuilds 768 observed run scores for 192 games, then reproduces the
+four pooled AUROC/CI triples, two paired level contrasts, markup contrast and per-cell AUROCs
+with the original cell-by-arm bootstrap. Tests compare the loader, all 4608 per-pair scores
+and full B=2000 bootstrap against original source functions. No null draws, flags or
+judge/executed-label validation; no simulation or new evaluation.
+
 Run from the repo root:
 
 ```bash
@@ -27,6 +35,7 @@ uv run python scripts/check_sources.py
 uv run python scripts/recompute_unrounded_q22.py
 uv run python scripts/recompute_c21b_floor.py
 uv run python scripts/recompute_locked_test_q22.py
+uv run python scripts/recompute_grid_q14.py
 uv run python tests/test_reproduction.py
 ```
 
@@ -54,7 +63,7 @@ model calls, new metrics, refitting or experiment runs are involved.
 
 The bundle supports **checking saved results**, not rebuilding every experimental result from raw
 trajectories. Full generators, caches, labels and registration history remain in the source repos.
-All three Q2.2 replays reproduce their committed outputs byte-identically, and the release tests compare
+The Q1.4 grid and all three Q2.2 replays reproduce their committed outputs byte-identically, and the release tests compare
 C21b's per-run fields with the original pinned source function in all eight floor/window settings.
 Source modules are retained for inspection; the replay scripts never import their model-calling
 terms loader. All six figures can be regenerated from this bundle (Fig. 1/2/3/5 re-rendered with larger text only; Fig. 5 reads the pinned Q2.2 `llm_v3plc`/`llm_v3rep` ground truth + trajectories and asserts its per-round means equal the saved `placebo_llm_v3plc.json`). The reports retained
