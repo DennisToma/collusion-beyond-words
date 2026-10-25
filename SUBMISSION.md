@@ -142,7 +142,7 @@ agreed on agreed-yes/no in 25/30. Q1.4's judge labels have no cross-family check
 |---|---|---|
 | executed (Q1.4) | judge-labelled agreement AND both pair firms ≥ agreed − 1 in ≥ ½ of post-agreement rounds AND second-half pair mean ≥ Nash + 2 | 48/149 executed games; E70 executed subsets. 27 variants give 13–78/149 (E71) |
 | strict-executed (Q2.2) | registered strict rule for the strong-framing arm (E99-amend): judged agreement with floor F ≥ 13; ≥ 10 later rounds; both firms price ≥ F − 1 in ≥ ½ of those rounds; post-agreement pair mean excess over Nash ≥ 2 | 13/20 channel pairs (10–16/20 under one-at-a-time threshold changes) |
-| kept / followed (Q2.2) | E84 follow rule on the locked test: judged agreed floor ≥ 12 (lower floors count as trivially kept and are excluded); both pair firms price ≥ that floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
+| kept / followed (Q2.2) | E84 follow rule on the locked test: judged agreed floor ≥ 12 (lower floors do not count as followed); both pair firms price ≥ that floor − 1 in ≥ ½ of later rounds | 14/50 communication-positive runs |
 | tacit-high (Q2.2) | strong-framing no-channel market whose mean price minus cost-adjusted Nash over rounds 11–40 is ≥ 2 (a price threshold, not verified coordination) | 19/20 strong-framing markets |
 
 **Splits and discipline.** Q1.4 detector settings were tuned only on scripted dev seeds and evaluated once
@@ -412,7 +412,7 @@ agents' rule files and an LLM-call helper with rate limiting and call logging. T
 scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
 were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
 beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
-possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 336 manager iterations had completed by 2026-10-25 11:50 UTC (219 Opus, 117
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 338 manager iterations had completed by 2026-10-25 12:07 UTC (220 Opus, 118
 gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
 A separate director loop
 (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,
@@ -427,7 +427,7 @@ Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.co
 [Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
 from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
-[evidence bundle](evidence/README.md) contains 76 exact files from the pinned source commits, with SHA256
+[evidence bundle](evidence/README.md) contains 98 exact files from the pinned source commits, with SHA256
 provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
 credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
 Fig. 5's per-round means are asserted equal to the saved source JSON.
@@ -435,8 +435,10 @@ Fig. 5's per-round means are asserted equal to the saved source JSON.
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
 decimals are bound (222/260 in the main text, 55/61 in the slides). Each of the other 38 + 6 falls in a declared
 non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
-the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `uv run python tests/test_reproduction.py` passes 13 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
+the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 15 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
+Both Q2.2 replay outputs regenerate byte-identically; C21b's per-run fields match the pinned original
+source function across both floors and windows.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
 `uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,
 per-slide placement and figure pixels; repository links work in downloaded PDFs.

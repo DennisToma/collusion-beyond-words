@@ -138,8 +138,9 @@ check("M19", "placebo - private r2-12", pl, [0.03, -0.54, 0.49])
 se = load(Q22, "analysis/p2_strong_eval_llm_p2strongF.json")["detectors"]
 pv = [se[k]["auroc_strict_vs_tacit_high"] for k in ("premium", "market_excess_nash", "action", "action_stats")]
 # Three Q2.2 values are stored at 3 dp on a tie (action 0.575, -0.165, -0.405). Their unrounded values come from
-# scripts/recompute_unrounded_q22.py (Q2.2's own code; needs the Q2.2 checkout) -> results/unrounded_q22.json;
+# scripts/recompute_unrounded_q22.py (portable replay of Q2.2's estimators) -> results/unrounded_q22.json;
 # each must round to the pinned stored value, and the printed numbers are checked against the unrounded ones.
+# The release tests delete and regenerate this file from the pinned inputs, requiring byte equality.
 unr = json.loads((ROOT / "results/unrounded_q22.json").read_text())
 act = unr["M34_action_strict_vs_tacit_high"]
 check("M34", "action view unrounded matches stored 3 dp", round(act["value"], 3), se["action"]["auroc_strict_vs_tacit_high"][0], tol=1e-9)

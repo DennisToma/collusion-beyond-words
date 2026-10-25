@@ -23,12 +23,13 @@ This repo merges two sprint projects and runs **no new experiments**:
 | `SLIDES.md/.pdf` | short presentation |
 | `SOURCES.md` | every number in the report → source repo, JSON file/key, commit |
 | `figures/` | Fig. 1–6; Fig. 1, 2 and 3 re-rendered from pinned Q1.4 JSON by `scripts/fig1_hard_negatives.py`, `scripts/fig2_level_vs_comovement.py`, `scripts/fig3_e70_grid.py`, Fig. 5 from pinned Q2.2 trajectories by `scripts/fig5_placebo_premium.py` (larger text only; same data and encodings), Fig. 4 and 6 by `scripts/fig4_say_vs_do.py`, `scripts/fig6_strong_framing.py` (label fixes) |
-| `evidence/` | 76 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
-| `scripts/check_sources.py` | 111 saved-source assertions, 139 bindings that extract printed numbers from the report/slides, and 76 evidence-file hash checks (→ `results/source_check.json`) |
+| `evidence/` | 98 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
+| `scripts/check_sources.py` | 111 saved-source assertions, 139 bindings that extract printed numbers from the report/slides, and 98 evidence-file hash checks (→ `results/source_check.json`) |
 | `scripts/number_coverage.py` | lists every decimal in the report main text and slides and whether a binding checks it; fails if an unbound decimal is not a declared non-result (→ `results/number_coverage.json`; 222/260 and 55/61, 0 unclassified) |
-| `scripts/recompute_unrounded_q22.py` | recomputes 3 Q2.2 values saved as 3-dp ties with Q2.2's own code (needs the Q2.2 checkout; run with its `.venv/bin/python`) → `results/unrounded_q22.json`, which `check_sources.py` checks against the pinned values |
+| `scripts/recompute_unrounded_q22.py` | replays 3 Q2.2 rounding corrections from pinned inputs with the source estimators/seeds → `results/unrounded_q22.json`; no sibling checkout needed |
+| `scripts/recompute_c21b_floor.py` | replays C21b with two agreed-floor thresholds and two descriptive windows from pinned trajectories/cached terms → `results/c21b_floor.json`; no sibling checkout needed |
 | `scripts/process_log_summary.py` | counts autonomous manager iterations per repo/backend from the machine-local runner logs for the LLM usage statement, with a snapshot timestamp (→ `results/process_log_summary.json`; not regenerable without those logs) |
-| `tests/test_reproduction.py` | 13 checks: independent-copy reproduction, figure parity, LLM-usage counts = committed log summary (and finalize can rewrite them), and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
+| `tests/test_reproduction.py` | 15 checks: independent-copy reproduction, figure and Q2.2 replay parity, per-run C21b parity with the pinned original function, LLM-usage counts, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
 | `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
 | `reviews/` | adversarial claim reviews (codex gpt-6.1-sol, Opus), presentation review, and a primary-literature/construct audit; dispositions recorded |
@@ -37,8 +38,10 @@ This repo merges two sprint projects and runs **no new experiments**:
 ## Reproduce this submission (no sibling repos or model credentials needed)
 
 ```bash
-uv run python scripts/check_sources.py          # 111 source checks, 139 document bindings, 76 evidence hashes
+uv run python scripts/check_sources.py          # 111 source checks, 139 document bindings, 98 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
+uv run python scripts/recompute_unrounded_q22.py # exact saved rounding-correction replay
+uv run python scripts/recompute_c21b_floor.py    # C21b floor/window sensitivity replay
 uv run python scripts/fig1_hard_negatives.py     # byte-identical figures/fig1_*.png
 uv run python scripts/fig2_level_vs_comovement.py # byte-identical figures/fig2_*.png
 uv run python scripts/fig3_e70_grid.py           # byte-identical figures/fig3_*.png
@@ -64,7 +67,10 @@ it fails if a bound context disappears. It does **not** check every number or ce
 the prose; the adversarial reviews and [SOURCES.md](SOURCES.md) cover the wider claims.
 
 The release checks run in an independent copy with source paths set to nonexistent directories. All six
-regenerated figures (Fig. 1–6) reproduce byte-identically. The bundle pins Q1.4 `732f08c` and Q2.2 `91ffb2d`; see
+regenerated figures (Fig. 1–6) and both Q2.2 replay outputs reproduce byte-identically after deleting the
+outputs. C21b's per-run fields also match the pinned original `p2_strong.analyse` in all eight settings;
+strict execution uses all post-agreement rounds, independently of the descriptive late window.
+The bundle pins Q1.4 `732f08c` and Q2.2 `91ffb2d`; see
 [evidence/README.md](evidence/README.md) for its scope and rebuilding it from the exact git commits.
 `uv run python scripts/check_sources.py --live` instead checks files in sibling clones under `~/collusion/`
 (override with `BW_Q14_ROOT` / `BW_Q22_ROOT`). Use checkouts at the pinned commits: even later

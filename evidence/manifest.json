@@ -621,6 +621,182 @@
           "stored_path": "q22/results/analysis/p2_logbook.json.gz",
           "stored_bytes": 902,
           "stored_sha256": "95af9f4688f262d33e6ea5311d200fdf9a0793693b3b242db1f738d4ef6c3b3d"
+        },
+        "p2_e1_audit.py": {
+          "sha256": "b6b66982a451847a5cef93edcb5bb4a1009697921723807f955cce4040dd91be",
+          "bytes": 24165,
+          "compression": "none",
+          "stored_path": "q22/p2_e1_audit.py",
+          "stored_bytes": 24165,
+          "stored_sha256": "b6b66982a451847a5cef93edcb5bb4a1009697921723807f955cce4040dd91be"
+        },
+        "p2_e113_secondary.py": {
+          "sha256": "cff9a228b11f5830f44f9aec8452035b1e72d8cf749e937c526ef6d758b06dee",
+          "bytes": 5448,
+          "compression": "none",
+          "stored_path": "q22/p2_e113_secondary.py",
+          "stored_bytes": 5448,
+          "stored_sha256": "cff9a228b11f5830f44f9aec8452035b1e72d8cf749e937c526ef6d758b06dee"
+        },
+        "p2_e132_inversion.py": {
+          "sha256": "4fbfefc3f6425982d90baf81ee4a2a108b04363babc0aa174ca63537ead67a58",
+          "bytes": 5000,
+          "compression": "none",
+          "stored_path": "q22/p2_e132_inversion.py",
+          "stored_bytes": 5000,
+          "stored_sha256": "4fbfefc3f6425982d90baf81ee4a2a108b04363babc0aa174ca63537ead67a58"
+        },
+        "p2_family3way.py": {
+          "sha256": "73f9a9acf7f7a7cf39baec9efc7a971330de7ec6d5ee2404340fba8a4146a3d9",
+          "bytes": 8099,
+          "compression": "none",
+          "stored_path": "q22/p2_family3way.py",
+          "stored_bytes": 8099,
+          "stored_sha256": "73f9a9acf7f7a7cf39baec9efc7a971330de7ec6d5ee2404340fba8a4146a3d9"
+        },
+        "p2_cue.py": {
+          "sha256": "6314057e4f579b1c7280e138506707638a326f39132feb4d9c8b414c13661a14",
+          "bytes": 7807,
+          "compression": "none",
+          "stored_path": "q22/p2_cue.py",
+          "stored_bytes": 7807,
+          "stored_sha256": "6314057e4f579b1c7280e138506707638a326f39132feb4d9c8b414c13661a14"
+        },
+        "p2_strong.py": {
+          "sha256": "9d7026e53f3e69e184996767734828c1355aab17dc1e9c04bb695254ec193172",
+          "bytes": 6998,
+          "compression": "none",
+          "stored_path": "q22/p2_strong.py",
+          "stored_bytes": 6998,
+          "stored_sha256": "9d7026e53f3e69e184996767734828c1355aab17dc1e9c04bb695254ec193172"
+        },
+        "p2_behaviour.py": {
+          "sha256": "1d839a33e8cfe966a4b1b8142727738eefbd3c9cabcaa3d82c3bbf9b5e617682",
+          "bytes": 11872,
+          "compression": "none",
+          "stored_path": "q22/p2_behaviour.py",
+          "stored_bytes": 11872,
+          "stored_sha256": "1d839a33e8cfe966a4b1b8142727738eefbd3c9cabcaa3d82c3bbf9b5e617682"
+        },
+        "data/ext_llm_grid_p2/labels.jsonl": {
+          "sha256": "3a2dd87cddd8fb34b07cbd8768b1e71e03aac1e47ffebdbddc65674f9725ffd1",
+          "bytes": 24288,
+          "compression": "gzip",
+          "stored_path": "q22/data/ext_llm_grid_p2/labels.jsonl.gz",
+          "stored_bytes": 1244,
+          "stored_sha256": "32c369ba855e401b0690724a349988a93dbe6965b4403ff6bfaaea1015212668"
+        },
+        "data/ext_llm_grid_p2/grid_manifest.json": {
+          "sha256": "467c44cef7c686fd1defe205369ddbea04deca43a03dac0fadd8300a57ff8115",
+          "bytes": 9779,
+          "compression": "gzip",
+          "stored_path": "q22/data/ext_llm_grid_p2/grid_manifest.json.gz",
+          "stored_bytes": 1082,
+          "stored_sha256": "43874a7524af7a07a53ec4e57b0832a8f1f9a9349ac4e1b7918c641fa2cbd2bb"
+        },
+        "data/ext_llm_grid_p2_e70/e70_grid.json": {
+          "sha256": "bf0c0adcc644352babc9089140cbf816539e986ed9b1c11790ac898d34aed857",
+          "bytes": 78119,
+          "compression": "gzip",
+          "stored_path": "q22/data/ext_llm_grid_p2_e70/e70_grid.json.gz",
+          "stored_bytes": 10068,
+          "stored_sha256": "94c9f96f5ce441a952deb8b1c9e70798958da9fdadb13052e94e1c5606e82045"
+        },
+        "results/llm_auditor/ext_llm_grid_p2/gpt-6.1-sol/action_orig.jsonl": {
+          "sha256": "bfa874ec5de1d802678112d8102461cb90e854702af9aac042206423ef270257",
+          "bytes": 171958,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/ext_llm_grid_p2/gpt-6.1-sol/action_orig.jsonl.gz",
+          "stored_bytes": 29286,
+          "stored_sha256": "a37dbb62539f17b645c627b6d723ba98669260d2d57dd0f6368c5238db187738"
+        },
+        "results/llm_auditor/ext_llm_grid_p2/gpt-6.1-sol/combined_orig.jsonl": {
+          "sha256": "3c4542bc104ac9436bd62210940f69add2d4ab1407465a4a4838426136fa5255",
+          "bytes": 169285,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/ext_llm_grid_p2/gpt-6.1-sol/combined_orig.jsonl.gz",
+          "stored_bytes": 29583,
+          "stored_sha256": "c4346dbef1941cf367ecdbd0c6c5b681f4adb2cfe25862fa42670bd689d519c3"
+        },
+        "data/llm_p2qwenb/labels.jsonl": {
+          "sha256": "5e92f250a0185f8d58240b51cd98c78ba2766eb8122685e1ecbd9a220e24ac11",
+          "bytes": 10201,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwenb/labels.jsonl.gz",
+          "stored_bytes": 1551,
+          "stored_sha256": "b960989fe3d43c72571cbbaf544843d7c68d5eccdc7f73e2165302345a41a1c3"
+        },
+        "results/llm_auditor/llm_p2qwenb/gpt-6.1-sol/text_orig.jsonl": {
+          "sha256": "e20b91f1c2db31814828aa8473815baff4e8957dfa9620b2cae2174adce1aa16",
+          "bytes": 25994,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_p2qwenb/gpt-6.1-sol/text_orig.jsonl.gz",
+          "stored_bytes": 4557,
+          "stored_sha256": "5aafdc7774dff05591738e09abb715699b937ca438f1794b8e00944a73c70b6f"
+        },
+        "results/llm_auditor/llm_p2strongF/gpt-6.1-sol/action_orig.jsonl": {
+          "sha256": "1c418470ac51ec6c42d2b1c28ce1bebb0aeedfd57855c5de4ad2917253b35f4b",
+          "bytes": 36942,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_p2strongF/gpt-6.1-sol/action_orig.jsonl.gz",
+          "stored_bytes": 7809,
+          "stored_sha256": "0df7fc659f898c0068b7712c16b42a53ac148f381a42374a345b58767983ab41"
+        },
+        "results/analysis/p2_strong_classes_llm_p2qwenb.json": {
+          "sha256": "793d0e4e05bc124c8ffd3a76a69498584d0df60c4ad3f3ecb0deb31285a020b8",
+          "bytes": 4000,
+          "compression": "gzip",
+          "stored_path": "q22/results/analysis/p2_strong_classes_llm_p2qwenb.json.gz",
+          "stored_bytes": 514,
+          "stored_sha256": "a574e7ac60490dab2cc2c22a5d97e00d4f300939ebbe103a2ed40c25cf3079fd"
+        },
+        "data/llm_p2qwena/ground_truth.jsonl": {
+          "sha256": "99c98ff7a76e661d198cc80019f6e07fc2b9cb7010cc782143d5eb12ec8c8453",
+          "bytes": 13380,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwena/ground_truth.jsonl.gz",
+          "stored_bytes": 554,
+          "stored_sha256": "e4576f8149a38d638ff355f81be93b0b2c9472989d5eda223a38f73a8ff3cf82"
+        },
+        "data/llm_p2qwena/trajectories.jsonl": {
+          "sha256": "c3290b2544ceafab1393926256f06e7be5579b51e5401e740fd2d8653d7d2b9f",
+          "bytes": 395237,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwena/trajectories.jsonl.gz",
+          "stored_bytes": 43794,
+          "stored_sha256": "098ac52e4f82599eba731d46156547dd72ad5516564da710d6256bb6f8f20ce8"
+        },
+        "data/llm_p2qwena/terms.jsonl": {
+          "sha256": "d7e7cd94e3a57a9b93cb67f9dfabe9b7016eb7e51dc3dbe56e80512d99a18a6b",
+          "bytes": 3330,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwena/terms.jsonl.gz",
+          "stored_bytes": 763,
+          "stored_sha256": "6a99324b496b1eb4190e08584caa21f364374d610bd87e306777d5874c4de465"
+        },
+        "data/llm_p2qwenb/ground_truth.jsonl": {
+          "sha256": "7ab6e74b655ef69cd821dcdb3593508b0e45f0d796508ef1398fc82ee13e892f",
+          "bytes": 13860,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwenb/ground_truth.jsonl.gz",
+          "stored_bytes": 568,
+          "stored_sha256": "26f4b28d71c98c7fbfe9dbfe7631913ab265003033f4957241d11d711b5ab220"
+        },
+        "data/llm_p2qwenb/trajectories.jsonl": {
+          "sha256": "603fce5aab3399543c72a18ec1d2e01b87bbab761d67aec3da02bcba6f7fa9c2",
+          "bytes": 392562,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwenb/trajectories.jsonl.gz",
+          "stored_bytes": 38250,
+          "stored_sha256": "ac8fee0f600b081e53d86e0f91a2d63523d37c52750d0495e81a30461b40e59f"
+        },
+        "data/llm_p2qwenb/terms.jsonl": {
+          "sha256": "1a59b9a55f8c9e86703e584810bf1a83134d0907d8a48f8c632d85ec831eb9d0",
+          "bytes": 3408,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_p2qwenb/terms.jsonl.gz",
+          "stored_bytes": 782,
+          "stored_sha256": "7e8e9eab13aeb1d6e94ad0faf4e7fd089ffda7d846568e6591bbf9931fad0f54"
         }
       }
     }

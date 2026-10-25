@@ -5,6 +5,7 @@ uv run python tests/test_reproduction.py
 All mutations and figure runs use /var/tmp copies; sibling repos are never written.
 Writes results/reproduction_check.json on success. No model calls or new metrics.
 """
+import ast
 import hashlib
 import json
 import os
@@ -69,7 +70,7 @@ class ReproductionChecks(unittest.TestCase):
 
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
-        self.assertEqual(self.receipt["n_evidence_files"], 76)
+        self.assertEqual(self.receipt["n_evidence_files"], 98)
         self.assertEqual(self.receipt["n_checks"], 111)
         self.assertEqual(self.receipt["n_document_checks"], 139)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
@@ -159,6 +160,50 @@ class ReproductionChecks(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertEqual(sha(self.copy / "figures" / figure), expected)
 
+    def test_q22_replays_reproduce_without_source_repos(self):
+        # Remove the cached outputs: replays must regenerate them from evidence alone.
+        for script, output in [("recompute_unrounded_q22.py", "unrounded_q22.json"),
+                               ("recompute_c21b_floor.py", "c21b_floor.json")]:
+            path = self.copy / "results" / output
+            path.unlink()
+            result = subprocess.run([sys.executable, str(self.copy / "scripts" / script)],
+                                    cwd=self.scratch, env=self.env, capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertEqual(path.read_bytes(), (ROOT / "results" / output).read_bytes())
+
+    def test_c21b_per_run_parity_with_pinned_source_function(self):
+        import numpy as np
+        import recompute_c21b_floor as portable
+        from recompute_unrounded_q22 import records, unique
+
+        ev = evidence.Evidence()
+        # Execute only the original pure analyse function, not source module imports or
+        # its terms() loader (which can spend). Supply read-only cached terms instead.
+        tree = ast.parse(ev.read_bytes("q22", "p2_strong.py"))
+        functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "analyse"]
+        self.assertEqual(len(functions), 1)
+        mappings = [n.value for n in tree.body if isinstance(n, ast.Assign)
+                    and any(isinstance(t, ast.Name) and t.id == "REQ" for t in n.targets)]
+        self.assertEqual(len(mappings), 1)
+        original_req = ast.literal_eval(mappings[0])
+        datasets = ("llm_p2qwena", "llm_p2qwenb")
+        self.assertEqual(portable.REQ, {ds: original_req[ds] for ds in datasets})
+        original_root = self.scratch / "original-strong-inputs"
+        for ds in datasets:
+            for name in ("ground_truth", "trajectories"):
+                rel = f"data/{ds}/{name}.jsonl"
+                target = original_root / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(ev.read_bytes("q22", rel))
+        namespace = {"np": np, "json": json, "Path": lambda p: original_root / p, "REQ": original_req,
+                     "terms": lambda ds: unique(records(ev, f"data/{ds}/terms.jsonl")),
+                     "jeffreys": lambda *args: None}  # interval summaries are not compared
+        exec(compile(ast.Module(body=functions, type_ignores=[]), "pinned/p2_strong.py", "exec"), namespace)
+        for ds in datasets:
+            for floor in (12, 13):
+                for late in (2, 11):
+                    self.assertEqual(portable.analyse(ev, ds, floor, late),
+                                     namespace["analyse"](ds, floor, late)["runs"])
 
     def test_llm_usage_counts_match_process_log_summary(self):
         # the LLM-usage statement prints runner-log counts; they must equal the committed snapshot
@@ -189,9 +234,15 @@ if __name__ == "__main__":
                                      ("fig1_scripted_hard_negatives.png", "fig2_level_vs_comovement_9sets.png", "fig3_e70_grid.png",
                                       "fig4_say_vs_do_summary.png", "fig5_placebo_premium.png",
                                       "fig6_strong_framing_tacit.png")},
+                   "q22_replay_sha256": {p: sha(ROOT / "results" / p) for p in
+                                         ("unrounded_q22.json", "c21b_floor.json")},
+                   "c21b_original_function_parity": {"settings": 8, "runs_per_setting": 30,
+                                                     "source": "q22/p2_strong.py"},
                    "standalone": {k: ReproductionChecks.receipt[k] for k in
                                   ("n_checks", "n_document_checks", "n_evidence_files", "n_fail", "n_document_fail")},
                    "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, "
-                            "rounding edge, corrupt snapshot and changed live source rejected. All six regenerated figures byte-identical."}
+                            "rounding edge, corrupt snapshot and changed live source rejected. All six figures and both "
+                            "Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original "
+                            "analyse function in all eight floor/window settings."}
         (ROOT / "results/reproduction_check.json").write_text(json.dumps(receipt, indent=2) + "\n")
     raise SystemExit(0 if result.wasSuccessful() else 1)

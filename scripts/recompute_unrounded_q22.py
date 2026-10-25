@@ -1,36 +1,43 @@
-"""Recompute unrounded values behind three Q2.2 numbers whose saved JSON is rounded to 3 dp on a tie
-(x.xx5), so printing them at 2 dp would double-round. Uses Q2.2's own functions, seeds and cached data,
-with only the round(..., 3) removed; no model calls. Reads the Q2.2 (and Q1.4) checkouts, writes only
-results/unrounded_q22.json in this repo. check_sources.py then requires round(raw, 3) to equal the pinned
-saved values and binds the printed numbers to the unrounded ones.
+"""Replay three Q2.2 rounding corrections from pinned evidence, without sibling checkouts.
 
-    PYTHONDONTWRITEBYTECODE=1 ~/collusion/collusion-22-say-vs-do/.venv/bin/python scripts/recompute_unrounded_q22.py
+Estimator functions, seed=0 and B=2000 match the pinned Q2.2 source, with round(..., 3)
+removed. Inputs are exact cached git blobs, not new judgments or experiments. Source
+implementations are bundled for inspection; they are not imported (their terms loader
+can issue model calls). Writes only results/unrounded_q22.json in this repo.
+
+    uv run python scripts/recompute_unrounded_q22.py
 
 M6  E113 Qwen executed-only combined - action (p2_e113_secondary / p2_e1_audit.stratified_delta)
 M33 Qwen3.8-base Spearman text vs invite rate, within no-channel (p2_e132_inversion.boot_spearman)
 M34 Fig. 6 action view strict-executed vs tacit-high AUROC (p2_strong_eval.auroc; exact fraction)
 """
 import json
-import os
-import subprocess
-import sys
+import re
+from collections import defaultdict
 from fractions import Fraction
-from pathlib import Path
 
 import numpy as np
 
-OUT = Path(__file__).resolve().parent.parent / "results" / "unrounded_q22.json"
-Q22 = Path(os.environ.get("BW_Q22_ROOT", str(Path.home() / "collusion" / "collusion-22-say-vs-do")))
-os.environ.setdefault("Q22_SIB", str(Path.home() / "collusion" / "collusion-14-infotheory"))
-sys.dont_write_bytecode = True
-sys.path.insert(0, str(Q22))
-os.chdir(Q22)
+from scipy.stats import spearmanr
+from evidence import Evidence, ROOT
 
-import p2_e1_audit as A  # noqa: E402
-import p2_e113_secondary as S2  # noqa: E402
-import p2_e132_inversion as M  # noqa: E402
-from p2_cue import auc  # noqa: E402
-from scipy.stats import spearmanr  # noqa: E402
+OUT = ROOT / "results" / "unrounded_q22.json"
+
+
+def records(ev, path):
+    return [json.loads(line) for line in ev.lines("q22", path)]
+
+
+def unique(rows):
+    out = {r["run_id"]: r for r in rows}
+    assert len(out) == len(rows), "duplicate run_id in replay inputs"
+    return out
+
+
+def auc(neg, pos):  # p2_cue.auc
+    if not neg or not pos:
+        return None
+    return float(np.mean([(p > q) + 0.5 * (p == q) for p in pos for q in neg]))
 
 
 def stratified_delta(rows, cids, a, b, B=2000):  # p2_e1_audit.stratified_delta without round(., 3)
@@ -64,40 +71,69 @@ def boot_spearman(x, y, B=2000):  # p2_e132_inversion.boot_spearman without roun
     return [float(spearmanr(x, y)[0]), float(np.percentile(b, 2.5)), float(np.percentile(b, 97.5)), len(x)]
 
 
-out = {"q22_commit": subprocess.check_output(["git", "-C", str(Q22), "rev-parse", "HEAD"]).decode().strip()}
+def replay(ev):
+    out = {"q22_commit": ev.manifest["projects"]["q22"]["commit"]}
 
-# M6 (e113_secondary.json : stratified.executed_vs_A.qwen_combined_minus_action)
-games = {g["run_id"]: g for g in json.loads((S2.SNAP / "e70_grid.json").read_bytes())["games"]}
-labs, S = A.load()
-C = A.cells()
-rows = []
-for r, lab in labs.items():
-    g, model = games[r], C[lab["cell"]]["levels"]["model"]
-    x = {"cell": lab["cell"], "y": int(lab["channel"]), "executed": bool(g["executed"]) if lab["channel"] else None}
-    for v in A.VIEWS:
-        if v == "text" and not model.startswith("qwen"):
+    # M6: keep original row/cell order, paired views and within-cell/arm bootstrap.
+    games = unique(ev.json("q22", "data/ext_llm_grid_p2_e70/e70_grid.json")["games"])
+    # Verify that the Q2.2 snapshot used precisely the published Q1.4 labels.
+    assert ev.read_bytes("q22", "data/ext_llm_grid_p2_e70/e70_grid.json") == ev.read_bytes(
+        "q14", "results/eval/e70_grid.json")
+    labs = unique(records(ev, "data/ext_llm_grid_p2/labels.jsonl"))
+    C = {c["cell"]: c for c in ev.json("q22", "data/ext_llm_grid_p2/grid_manifest.json")["cells"]}
+    S = {v: unique(records(ev, f"results/llm_auditor/ext_llm_grid_p2/gpt-6.1-sol/{v}_orig.jsonl"))
+         for v in ("action", "combined")}
+    rows = []
+    for r, lab in labs.items():
+        g = games[r]
+        assert (g["cell"], g["sweep"], bool(g["channel"])) == (
+            lab["cell"], lab["sweep"], bool(lab["channel"])), r
+        x = {"cell": lab["cell"], "y": int(lab["channel"]),
+             "executed": bool(g["executed"]) if lab["channel"] else None}
+        for v in S:
+            if r in S[v] and S[v][r].get("collusion_present") is not None:
+                x[v] = float(S[v][r]["collusion_present"])
+        rows.append(x)
+    qids = sorted(c for c in C if C[c]["levels"]["model"].startswith("qwen"))
+    m6, n_cells = stratified_delta([x for x in rows if not x["y"] or x["executed"]],
+                                  qids, "combined", "action")
+    out["M6_qwen_executed_combined_minus_action"] = {"value": m6, "n_cells": n_cells}
+
+    # M33: same frozen invitation regex, nonempty-message denominator and sorted run order.
+    rx = re.compile(r"\b(let'?s|we all|everyone|avoid (a )?price war|undercut\w*|keep prices)\b", re.I)
+    ds = "llm_p2qwenb"
+    y = {r["run_id"]: {"private": 1, "none": 0}[r["condition"]]
+         for r in records(ev, f"data/{ds}/labels.jsonl") if r["condition"] in ("private", "none")}
+    msgs, hits = defaultdict(int), defaultdict(int)
+    for row in records(ev, f"data/{ds}/trajectories.jsonl"):
+        if row["run_id"] not in y:
             continue
-        if r in S[v] and S[v][r].get("collusion_present") is not None:
-            x[v] = float(S[v][r]["collusion_present"])
-    rows.append(x)
-qids = sorted(c for c in C if C[c]["levels"]["model"].startswith("qwen"))
-m6, n_cells = stratified_delta([x for x in rows if not x["y"] or x["executed"]], qids, "combined", "action")
-out["M6_qwen_executed_combined_minus_action"] = {"value": m6, "n_cells": n_cells}
+        for ag in row["agents"]:
+            m = (ag.get("public_message") or "").strip()
+            if m:
+                msgs[row["run_id"]] += 1
+                hits[row["run_id"]] += bool(rx.search(m))
+    scores = {r["run_id"]: float(r["collusion_present"]) for r in records(
+        ev, f"results/llm_auditor/{ds}/gpt-6.1-sol/text_orig.jsonl")
+        if r["run_id"] in y and r.get("collusion_present") is not None}
+    ids = sorted(r for r in y if r in scores and y[r] == 0)
+    rates = [hits[r] / msgs[r] if msgs[r] else 0.0 for r in ids]
+    out["M33_qwen38_base_within_no_channel"] = {"value": boot_spearman([scores[r] for r in ids], rates)}
 
-# M33 (e132_inversion.json : sets."Qwen3.8 base".spearman_text_vs_invite_rate_within_no_channel)
-M.boot_spearman = boot_spearman
-out["M33_qwen38_base_within_no_channel"] = {"value": M.one(M.SETS["Qwen3.8 base"])
-                                            ["spearman_text_vs_invite_rate_within_no_channel"]}
+    # M34: exact pair-count AUROC on frozen strict/tacit-high classes and cached action scores.
+    ds = "llm_p2strongF"
+    cl = ev.json("q22", f"results/analysis/p2_strong_classes_{ds}.json")["runs"]
+    sc = {r["run_id"]: r["collusion_present"] for r in records(
+        ev, f"results/llm_auditor/{ds}/gpt-6.1-sol/action_orig.jsonl")}
+    p = [sc[r] for r, c in cl.items() if c["class"] == "executed"]
+    n = [sc[r] for r, c in cl.items() if c["class"] == "tacit_high"]
+    fr = sum(Fraction(2 * (a > b) + (a == b), 2) for a in p for b in n) / (len(p) * len(n))
+    out["M34_action_strict_vs_tacit_high"] = {"value": float(fr), "fraction": f"{fr.numerator}/{fr.denominator}",
+                                             "n_strict": len(p), "n_tacit_high": len(n)}
+    return out
 
-# M34 (p2_strong_eval_llm_p2strongF.json : detectors.action.auroc_strict_vs_tacit_high[0])
-ds = "llm_p2strongF"
-cl = json.load(open(f"results/analysis/p2_strong_classes_{ds}.json"))["runs"]
-sc = {x["run_id"]: x["collusion_present"] for x in map(json.loads, open(f"results/llm_auditor/{ds}/gpt-6.1-sol/action_orig.jsonl"))}
-p = [sc[r] for r, c in cl.items() if c["class"] == "executed"]
-n = [sc[r] for r, c in cl.items() if c["class"] == "tacit_high"]
-fr = sum(Fraction(2 * (a > b) + (a == b), 2) for a in p for b in n) / (len(p) * len(n))
-out["M34_action_strict_vs_tacit_high"] = {"value": float(fr), "fraction": f"{fr.numerator}/{fr.denominator}",
-                                          "n_strict": len(p), "n_tacit_high": len(n)}
 
-OUT.write_text(json.dumps(out, indent=1) + "\n")
-print(json.dumps(out, indent=1))
+if __name__ == "__main__":
+    out = replay(Evidence())
+    OUT.write_text(json.dumps(out, indent=1) + "\n")
+    print(json.dumps(out, indent=1))

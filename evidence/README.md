@@ -1,7 +1,7 @@
 # Pinned source evidence
 
-This bundle makes the merged submission's saved-value checks and Fig. 1/3/4/6 rendering independent of
-the source checkouts. It contains 76 exact git blobs from:
+This bundle makes the merged submission's saved-value checks, all six figures and the Q2.2 rounding
+and C21b sensitivity replays independent of the source checkouts. It contains 98 exact git blobs from:
 
 - [Q1.4 @ 732f08c11a765cd8500f4ef3c29fb630b309d5b2](https://github.com/DennisToma/collusion-14-infotheory/tree/732f08c11a765cd8500f4ef3c29fb630b309d5b2)
 - [Q2.2 @ 91ffb2d4737a7537cdf9afe239a98e0d1061090b](https://github.com/DennisToma/collusion-22-say-vs-do/tree/91ffb2d4737a7537cdf9afe239a98e0d1061090b)
@@ -10,12 +10,16 @@ the source checkouts. It contains 76 exact git blobs from:
 path, compression, and stored SHA256. JSON/JSONL files use deterministic gzip (`mtime=0`); decompression
 returns the original bytes. Reports, split declarations and a few setup/label definitions accompany
 the saved JSON. The strong-framing trajectories are included because Fig. 6 reads them. The file list
-includes the explicit JSON paths cited in the provenance/report tables and the two renderers' inputs.
+includes the explicit JSON paths cited in the provenance/report tables and all six renderers' inputs.
+Iteration 24 added 22 blobs: the Q2.2 replays' raw inputs, cached audit scores/terms, grid snapshot and
+original estimator/label code. The previous 76 blobs and both commit pins are unchanged.
 
 Run from the repo root:
 
 ```bash
 uv run python scripts/check_sources.py
+uv run python scripts/recompute_unrounded_q22.py
+uv run python scripts/recompute_c21b_floor.py
 uv run python tests/test_reproduction.py
 ```
 
@@ -43,5 +47,8 @@ model calls, new metrics, refitting or experiment runs are involved.
 
 The bundle supports **checking saved results**, not rebuilding every experimental result from raw
 trajectories. Full generators, caches, labels and registration history remain in the source repos.
-All six figures can be regenerated from this bundle (Fig. 1/2/3/5 re-rendered with larger text only; Fig. 5 reads the pinned Q2.2 `llm_v3plc`/`llm_v3rep` ground truth + trajectories and asserts its per-round means equal the saved `placebo_llm_v3plc.json`). The reports retained
+Both Q2.2 replays reproduce their committed outputs byte-identically, and the release tests compare
+C21b's per-run fields with the original pinned source function in all eight floor/window settings.
+Source modules are retained for inspection; the replay scripts never import their model-calling
+terms loader. All six figures can be regenerated from this bundle (Fig. 1/2/3/5 re-rendered with larger text only; Fig. 5 reads the pinned Q2.2 `llm_v3plc`/`llm_v3rep` ground truth + trajectories and asserts its per-round means equal the saved `placebo_llm_v3plc.json`). The reports retained
 here preserve their original source-relative paths.
