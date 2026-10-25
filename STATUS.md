@@ -1,15 +1,16 @@
 # STATUS
 
-## Current state (2026-10-25 15:05 UTC, merge iteration 41 — freeze hold; sources still e8cf411/5a012a0)
-- DIRECTION compliance and both manuscript critics resolved; reviewed manuscript/PDFs remain frozen (6 main/20 total report pages; 234-word abstract; 8 slides).
-- Full source reconciliation: Q1.4 e8cf411, Q2.2 5a012a0; both declare research final. All tracked changes since pins classified; no result/dataset/split/analysis changes to import.
-- 81/81 Q1.4 and 76/77 Q2.2 live bundle files match pins; sole drift = known Q2.2 REPORT review line. All 158 source Git-pin hashes match. Receipt: results/source_freeze_i40.json.
-- Current numeric/coverage/committed-PDF checks pass: 111 assertions, 144 bindings, 158 hashes, zero unclassified decimals, ten figure embeddings. 179 protected release files match a924419 bytes.
-- Q1.4 saved checker has zero JSON mismatches but two disclosed 0.81 quote misses; independent merged replay gives 0.80. Both source scope reviews cover SUBMISSION 96d0ed7b… with 0 open P1.
-- Prior c3d2903 packaging acceptance: 8 commands, 47 tests, 264 archive files and 14 sidecar checksums. Not rerun this iteration; packaging procedure remains README/reviews/handoff_i39.md.
+## Current state (2026-10-25 15:08 UTC, merge iteration 42 — post-cutoff handoff)
+- Experiments are closed; reviewed manuscript/science/PDFs remain frozen (6 main/20 total report pages; 234-word abstract; 8 slides).
+- Post-cutoff reconciliation at 15:02: Q1.4 e8cf411 / Q2.2 5a012a0; same tracked-tree classifications and 158 pin hashes as i40; all 179 protected files preserved.
+- Q1.4 later advanced to 372f375: only STATUS I156/I157 lines; Q2.2 unchanged. Both worktrees clean at the addendum check; no scientific import or repin.
+- Fresh authorized remote clone e64ff45, new locked Python dependencies and new Chromium: package acceptance passes 8/8 commands, 47 tests, 269 Git-matching archive files and 14 sidecar checksums.
+- Extra fresh-browser PDF rebuild preserves page text/content streams and all bytes except date metadata; only PDF-bound receipt hashes otherwise change. Production artifacts untouched.
+- Checks: 111 assertions, 144 document bindings, 158 hashes, zero unclassified decimals. Receipts: results/source_freeze_i42.json, release_package_i42.json, fresh_export_i42.json; commands: reviews/handoff_i42.md.
 - Frozen headlines: markup rises in 9/9 main sets (one prompt family; 2/5 wordings resolved); grid pCMI 0.51 [0.43, 0.59]; locked-test Δ −0.01 [−0.09, +0.06].
-- Next: preserve freeze; 16:30 finalize.py, commit/push, package clean HEAD into a new external directory. Source managers do final freshness/diff checks. Ready 17:30; hard stop 18:00 UTC.
-- Handoff still needs Dennis to transfer artifacts or grant access. Risks: synthetic/price-derived labels, exchangeability, narrow prompts/markets. No experiment or scientific analysis in iteration 40.
+- Both source scope reviews cover SUBMISSION 96d0ed7b… with 0 open P1. Q1.4 saved checker retains two disclosed 0.81 quote misses; merged replay gives 0.80.
+- Handoff command packages this notes commit to /var/tmp/beyond-words-i42-handoff; at 16:30 run finalize.py, commit/push and package the new clean HEAD. Ready 17:30; hard stop 18:00 UTC.
+- Dennis still needs to transfer artifacts or arrange reader access. Risks: synthetic/price-derived labels, exchangeability, narrow prompts/markets; fresh install is on the same VM.
 
 ## Log
 - 2026-10-25 15:05 UTC merge iter41: freeze hold. Sources unchanged since iter40 (Q1.4 e8cf411, Q2.2 5a012a0). finalize.py --no-export on 6101429: FINALIZE OK (8/8 commands, packaging test passes). Only diffs were usage counts (368→378) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
@@ -84,3 +85,5 @@
 
 
 - 2026-10-25 14:58 UTC merge iter40 (Codex fallback): reconciled complete source Git trees from evidence pins to e8cf411/5a012a0; all 8 Q1.4 and 12 Q2.2 changed paths inspected/classified. No missing scientific result or scope correction; only metadata, exports and the known label fix. Driver verifies all 158 pin hashes, live 81/81 + 76/77 (Q2.2 report line), clean/stable source trees and 179 protected merge file hashes; independent Git diffs agree. Two concurrent Q2.2 HEAD advances were rejected, inspected (STATUS only) and captured. Source checker two rounding quote misses recorded honestly; merged 111/144/158, coverage and committed-PDF checks pass. Added receipt/procedure; REPORT/SOURCES current. No manuscript/PDF/evidence/result/usage changes, experiments, model calls or DIRECTION deviation. End bounded reconciliation early under the research freeze; 16:30 finalize/package remains next.
+
+- 2026-10-25 15:08 UTC merge iter42 (Codex fallback): read rules/plan/status/direction/ledger; chose post-cutoff handoff verification. Added only --output to the i40 source driver so the original receipt remains immutable; new live receipt differs from i40 solely by merge HEAD/time, with 158 pin hashes and 179 protected merge files unchanged. Source Q1.4 advanced e8cf411→372f375 during acceptance (two STATUS lines only); Q2.2 stayed 5a012a0. Fresh authorized GitHub clone e64ff45, new locked dependencies and Chromium; archive acceptance passes 8 commands/47 tests, all 269 files match Git bytes/modes and 14 sidecar checksums pass. Separate fresh-browser export preserves both PDFs except date metadata and corresponding receipt hashes; production research/manuscript/PDF/usage bytes unchanged. Saved receipts and reproducible command/driver, updated REPORT/SOURCES, ledger M42. Package the notes commit from clean HEAD; finalizer remains scheduled for 16:30. No new experiment, scientific analysis, model call or DIRECTION deviation. End this bounded verification early under the evidence freeze rather than create new research work.

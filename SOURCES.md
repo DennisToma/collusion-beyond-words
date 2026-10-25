@@ -3,6 +3,17 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 42 post-15:00 live reconciliation: Q1.4
+`e8cf411460358ab14ffdb4769ada846406fd9497` / Q2.2
+`5a012a0bba87dbfbd5bbbfcb16c810ab91483bc9`; all source-tree classifications,
+158 pin hashes and 179 protected merge-file hashes agree with iteration 40.
+Q1.4 subsequently advanced to `372f375e2ba2dd7d610a03ec4b114fa90a714ffa`;
+its complete diff adds STATUS I156/I157 lines only. Q2.2 is unchanged. No
+scientific import, repin or scope correction. [Receipt](results/source_freeze_i42.json),
+[commands and exact revision scope](reviews/handoff_i42.md). The fresh-clone
+package/export receipts cover merged release `e64ff45`, preserving every
+scientific estimate and the reviewed manuscript bytes.
+
 Iteration 40 full source reconciliation (2026-10-25 14:58 UTC; before the 15:00
 cutoff): Q1.4 `e8cf411460358ab14ffdb4769ada846406fd9497` / Q2.2
 `5a012a0bba87dbfbd5bbbfcb16c810ab91483bc9`. Both managers declare research final.

@@ -5,6 +5,7 @@ Requires the two source clones and their historical Git objects. Checks the
 recorded source revisions, and requires live HEADs/worktrees to match them.
 Unknown deltas fail; the explicit exceptions below were read by the manager.
 Run: uv run python reviews/source_freeze_i40_driver.py
+Use --output to record a later live check without overwriting the original receipt.
 Later, use --historical to check the recorded commits without requiring the live
 source/merge files to remain frozen; the receipt marks that reduced scope.
 """
@@ -76,6 +77,7 @@ def require(condition, message):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--historical", action="store_true")
+    parser.add_argument("--output", type=Path, default=ROOT / "results/source_freeze_i40.json")
     args = parser.parse_args()
     manifest = json.loads((ROOT / "evidence/manifest.json").read_text())
     receipt = {"merge_head": git(ROOT, "rev-parse", "a924419" if args.historical else "HEAD").decode().strip(),
@@ -159,7 +161,7 @@ def main():
         "worktrees must have no reportable changes. Current zero-P1 judgment comes from recorded source scope reviews. "
         "Historical snapshots remain the evidence pins; no repin performed.")
     receipt["ok"] = True
-    (ROOT / "results/source_freeze_i40.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    args.output.write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps({p: {k: v for k, v in row.items() if k in
                          {"head", "unchanged_tree_files", "bundled_files", "bundled_live_drift"}}
                       for p, row in receipt["projects"].items()}, indent=2))
