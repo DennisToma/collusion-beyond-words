@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 08:45 UTC, merge iteration 1)
+## Current state (2026-10-25 08:05 UTC, merge iteration 1)
 - Sources synced: Q1.4 `0e06c03`, Q2.2 `8b680ee` (both frozen since 07:30; check their "Changes after 08:00" logs each iteration).
 - SUBMISSION.md draft v0 complete end-to-end (abstract → refs), story: LLM channel collusion shows up as price *level*, not co-movement (pCMI at chance) nor public words (text adds nothing, can invert); neither signal collusion-specific.
 - SOURCES.md maps ~35 numbers to file:key; 7 rows spot-checked against JSON (✔), rest copied from frozen merge blocks.
@@ -11,4 +11,4 @@
 - Not ours: `llm.py` has an uncommitted 78-line change present at session start (left as is).
 
 ## Log
-- 2026-10-25 08:45 UTC merge iter1: read PLAN/DIRECTION + both source REPORTs/STATUS; wrote SOURCES.md, SUBMISSION.md v0, REPORT.md pointer, figures fig1–6; spot-checked E70/E74/E44 mde JSON and Q2.2 claims table; launched codex + Opus adversarial reviews.
+- 2026-10-25 08:05 UTC merge iter1: read PLAN/DIRECTION + both source REPORTs/STATUS; wrote SOURCES.md, SUBMISSION.md v0, REPORT.md pointer, figures fig1–6; spot-checked E70/E74/E44 mde JSON and Q2.2 claims table; launched codex + Opus adversarial reviews.
