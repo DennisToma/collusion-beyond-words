@@ -3,7 +3,7 @@
 **Dennis Toma** — Apart Research AI Collusion Sprint, 23–25 October 2026
 
 > **TL;DR.** In our LLM pricing markets, offering two sellers a private chat channel shows up to an auditor
-> mainly as *higher prices*. We detect no contemporaneous price co-movement, and reading public messages gives
+> mainly as *higher prices*. We find no robust contemporaneous price co-movement, and reading public messages gives
 > a zero-shot LLM auditor no resolved gain (for some models it is inverted). High prices also arise without any
 > channel (prompt cues, memory, cost advantages), so in these markets a price flag is a reason to audit, not
 > evidence of an agreement.
@@ -35,7 +35,8 @@ per-set 95% CIs are uncorrected for multiplicity.
    prices changes AUROC by −0.01 [−0.09, +0.06] (locked test split, n = 95) and −0.07 [−0.17, +0.02] (fresh
    replications, pooled post hoc). In both Qwen families, whose sellers invite rivals publicly, the text-only
    view is *inverted* (Qwen3.8 arms 0.15–0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42]; CIs below 0.5). Text did
-   work on an external negotiation dataset where the detected act happens in the chat (§5.3).
+   work on an external peer-verification dataset, predicting verdicts from preceding messages (different
+   task; no action-view comparison, §5.3).
 4. **Neither signal is specific to collusion.** An unread private pricing notepad produces about two thirds of
    the channel's premium over rounds 2–12 (point ratio 0.65, CI [0.34, 1.32]). With memory and profit framing,
    19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40). Level screens also flag
@@ -80,7 +81,7 @@ private chat) and *realised coordination* (prices follow the agreement).
   passes a scripted positive control and a hard-negative battery (common shocks, shared policies,
   legitimate leader–follower pricing), plus a map of what it cannot separate (policy copies sharing a seed).
 - Evidence across 9 main LLM sets, a 192-game factorial grid and a pre-registered long-game test that
-  channel assignment shows up as a **price level**, with no detected contemporaneous co-movement.
+  channel assignment shows up as a **price level**, with no robust detected contemporaneous co-movement.
 - A registered say-vs-do comparison showing that public text gives a zero-shot auditor no resolved gain
   and can be **inverted**.
 - Confound analyses (prompt artefacts, placebo, tacit high prices, cost asymmetry, prevalence) showing why
@@ -102,12 +103,15 @@ supracompetitive play from "spontaneous coupling" without agreement — the case
 shared-policy hard negatives target. Tailor (2025) applies mutual-information detectors to steganographic
 message channels; we apply the same estimator family to actions. Transfer entropy follows Schreiber (2000).
 *LLM pricing collusion.* Fish et al. (2024), Agrawal et al. (2025; double auctions), Lin et al. (2024;
-market division expressed in actions, not messages), Dhanda (2026; price caps as focal points).
-*Shared models.* Cao & Hu (2026) show supracompetitive prices from a shared LLM advisor without
-coordination, motivating our same-model references. *Definitions.* Rose et al. (2026): communication within
-a subgroup leading to actions harmful to outsiders; Calvano et al. (2020) and Green & Porter (1984) for
-repeated-pricing benchmarks. *Message-side collusion.* Motwani et al. (2024) and Mathew et al. (2024) study
-secret/steganographic collusion in messages; SALT-NLP negotiation data serve as our external text case.
+market division without a communication channel), Dhanda (2026; price caps as focal points).
+*Shared models.* Cao & Hu (2026) model supracompetitive prices from a shared AI advisor without
+communication between sellers, motivating our same-model references. *Definitions.* Rose et al. (2026) distinguish a causal
+definition (communication induces harmful actions) from their operational criterion of observed
+communication and harmful actions without a causal requirement. Calvano et al. (2020) and Green & Porter
+(1984) provide repeated-pricing benchmarks; we use the static Nash reference and do not test the
+reward–punishment strategies studied in that literature. *Message-side collusion.* Motwani et al. (2024)
+and Mathew et al. (2024) study secret/steganographic collusion in messages. Shi, Zhang & Yang (2026) study
+joint verification-rule violations in repeated peer verification; their SALT-NLP data serve as our external text case.
 
 ## 3. Setup
 
@@ -163,8 +167,11 @@ table), `combined` (text ∪ action), `combined_stats`, `structured`. Registered
 Δ_hybrid = AUROC(combined) − max(AUROC(text), AUROC(action)), on communication labels (positive = explicit agreement or information exchange; on the locked test all 50
 private runs are judged y = 1 — 48 explicit, 2 information exchange — so judge and channel labels coincide there).
 
-**Statistics.** Run-level AUROC with class-stratified game bootstrap 95% CIs; Wilson intervals for flag
-rates; Jeffreys for precision. CIs are per-set and uncorrected for multiplicity unless stated.
+**Statistics.** Market comparisons use run-level AUROC and bootstrap 95% CIs, class-stratified in the main
+analyses; secondary analyses can resample matched seeds or cell × arm strata. SALT episode AUROCs use a
+bootstrap clustered by multi-episode run. Rate intervals are Wilson or Jeffreys as specified in the source
+tables; Q2.2's execution-rate differences use Newcombe intervals. The reported Q1.4 precision CI uses Jeffreys.
+CIs are per-set and uncorrected for multiplicity unless stated.
 
 ## 5. Results
 
@@ -189,7 +196,7 @@ signal — and lagged TE flags legitimate public leader–follower pricing in 10
 in 90–98%, while flagging the scripted colluder groups in only 8–22%. Level screens fail elsewhere: unequal
 private costs are false-flagged in 30/30 scripted markets (pCMI 4/30; locked seed 2003).
 
-### 5.2 With LLM sellers, the channel shows up as a price level; no co-movement is detected (prices-only, Q1.4)
+### 5.2 With LLM sellers, the channel shows up as a price level; no robust co-movement is detected (prices-only, Q1.4)
 
 ![Level vs co-movement](figures/fig2_level_vs_comovement_9sets.png)
 *Figure 2 (prices-only, Q1.4 P2.13). Nine main sets, seven seller models. (a) Channel − no-channel markup (C − A)
@@ -253,7 +260,7 @@ coordination (figure regenerated by `scripts/fig4_say_vs_do.py` from Q2.2 JSON).
 | deepseek (talks publicly) | private vs none | 30 runs | 0.36 [0.20, 0.52] | 0.53 [0.30, 0.74] |
 | Qwen3.8 base | private vs none | 15 + 15 | **0.21 [0.12, 0.33]** | 0.86 [0.69, 0.98] |
 | Qwen3.8 abliterated | private vs none | 15 + 15 | **0.15 [0.05, 0.25]** | 0.57 [0.36, 0.78] |
-| SALT-NLP negotiation (external; act happens in chat) | rule-violating mutual ACCEPT vs not | 240 episodes | 0.87 [0.83, 0.91] | – |
+| SALT-NLP peer verification (external) | rule-violating mutual ACCEPT vs not | 240 episodes | 0.87 [0.83, 0.91] | – |
 
 *Table 2 (Q2.2 P2.0, `results/analysis/p2_say_vs_do.md`). AUROC < 0.5 = the view ranks controls higher;
 bold = CI entirely below 0.5.*
@@ -281,11 +288,17 @@ inverted (0.32 [0.24, 0.42]), and adding text lowers AUROC (combined − action 
 similar +0.12 [−0.08, +0.32] appears in the 3 gpt-6-luna cells with no public posts (post hoc), so the gpt-6-luna gain
 cannot be credited to text. In these markets public text resolvedly hurt the auditor (Qwen); no gain could be credited to text.
 
-*External case (different construct).* In SALT-NLP bilateral negotiations, "executed" means a mutual ACCEPT
-that violates a verification rule — an act inside the conversation, not a pricing deal. There a text auditor
-reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed), even though, in the full dataset (5169 executed episodes), 62% of executed episodes carry no
-explicit agreement (P(said | executed) = 0.385). It shows that text can work when the act is in the talk; it
-does not show that this is the only such condition.
+*External case (different construct).* In SALT-NLP peer verification (Shi, Zhang & Yang 2026), agents
+exchange task evidence, then submit ACCEPT/REJECT verdicts in a separate phase. "Executed" means mutual
+ACCEPT in violation of the raw-log verification rule. The auditor sees only the preceding messages,
+not submitted verdicts or task outcomes. It reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed),
+even though, in the full dataset (5169 executed episodes), 62% carry no explicit agreement
+(P(said | executed) = 0.385). Messages can announce intended verdicts; on the subset without case-insensitive matches to
+accept/reject, AUROC is 0.75 [0.66, 0.84] (n = 117). This selected-subset comparison is not a causal
+ablation. The violation label does not require an incorrect task outcome. Thus messages can predict later
+rule-breaking verdicts; this is no test of text added to an action view and does not establish why text
+works better here than in the pricing markets. This corrects the frozen source report's description of
+the act as happening in chat, following its analysis code and the primary paper.
 
 *Forecasting which agreements are kept (E133, exploratory, 78 games):* see Appendix C. Briefly, with the private
 chat, say–do consistency forecasts kept agreements (AUROC 0.77), but three hand-built say–do features in one
@@ -332,7 +345,7 @@ all CIs include 0.5; exploratory), which does not establish that price paths are
 
 The two projects started from opposite bets — that collusion leaves a statistical fingerprint in actions,
 and that it leaves a semantic one in words — and converged: in these markets, channel assignment is visible
-mainly as **how high** prices are, not in detected **contemporaneous co-movement** (lagged TE is weakly above chance), and a zero-shot auditor shows no
+mainly as **how high** prices are, with no robust detected **contemporaneous co-movement** (lagged TE is weakly above chance), and a zero-shot auditor shows no
 resolved gain from **what is said publicly** (small gains are not excluded). This is good news for cheap screening (a markup screen is simple and
 interpretable) and bad news for attribution: a high level has many innocent causes (wording, model, memory,
 legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (in Q2.2's logbook control — the same notepad, but entries must be invented weather — the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the pricing notepad, so being singled out alone produces little; caveats: longer instruction, later batch).
@@ -389,7 +402,7 @@ from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and 
 [evidence bundle](evidence/README.md) contains 66 exact files from the pinned source commits, with SHA256
 provenance. It supports checking saved results and rendering Fig. 4/6 without sibling checkouts or model
 credentials; it does not regenerate the experiments. The other figures are committed copies.
-`scripts/check_sources.py` passes 57 saved-source assertions and 64 bindings that extract selected printed
+`scripts/check_sources.py` passes 59 saved-source assertions and 68 bindings that extract selected printed
 numbers from this report and the slides, plus all bundle-file hashes. It does not certify unbound numbers
 or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
 independent-copy reproduction of both figures byte-identically and rejection of deliberately bad inputs.
@@ -399,20 +412,23 @@ per-slide placement and figure pixels; repository links work in downloaded PDFs.
 
 ## References
 
-- Agrawal et al. (2025). Evaluating LLM Agent Collusion in Double Auctions. arXiv:2507.01413.
-- Banchio & Mantegazza (2023). Adaptive Algorithms and Collusion via Coupling. ACM EC '23. arXiv:2202.05946.
-- Bonjour et al. (2022). Information-Theoretic Approach to Detect Collusion in Multi-Agent Games. UAI 2022, PMLR 180.
-- Calvano, Calzolari, Denicolò & Pastorello (2020). Artificial Intelligence, Algorithmic Pricing, and Collusion. AER 110(10).
-- Cao & Hu (2026). Supracompetitive Pricing Under AI Monoculture. arXiv:2601.01279.
-- Dhanda (2026). A Price Cap Can Act as a Focal Point for LLM Pricing Agents. Preprint.
-- Fish et al. (2024). Algorithmic Collusion by Large Language Models. arXiv:2404.00806.
-- Green & Porter (1984). Noncooperative Collusion under Imperfect Price Information. Econometrica 52(1).
-- Lin et al. (2024). Strategic Collusion of LLM Agents: Market Division in Multi-Commodity Competitions. arXiv:2410.00031.
-- Mathew et al. (2024). Hidden in Plain Text: Steganographic Collusion in LLMs. arXiv:2410.03768.
-- Motwani et al. (2024). Secret Collusion among AI Agents: Multi-Agent Deception via Steganography. NeurIPS 2024.
-- Rose et al. (2026). Detecting Multi-Agent Collusion Through Multi-Agent Interpretability. arXiv:2604.01151.
-- Schreiber (2000). Measuring Information Transfer. PRL 85(2).
-- Tailor (2025). Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent LLMs. arXiv:2510.04303.
+Author years use first-preprint or publication years; versioned arXiv links identify the text checked.
+
+- Agrawal et al. (2025). [Evaluating LLM Agent Collusion in Double Auctions](https://arxiv.org/abs/2507.01413v1).
+- Banchio & Mantegazza (2023). [Adaptive Algorithms and Collusion via Coupling](https://doi.org/10.1145/3580507.3597726). ACM EC '23. Revised preprint: [Artificial Intelligence and Spontaneous Collusion](https://arxiv.org/abs/2202.05946v5).
+- Bonjour, Aggarwal & Bhargava (2022). [Information theoretic approach to detect collusion in multi-agent games](https://proceedings.mlr.press/v180/bonjour22a.html). UAI, PMLR 180:223–232.
+- Calvano, Calzolari, Denicolò & Pastorello (2020). [Artificial Intelligence, Algorithmic Pricing, and Collusion](https://doi.org/10.1257/aer.20190623). AER 110(10):3267–3297.
+- Cao & Hu (2026). [Supracompetitive Pricing Under AI Monoculture](https://arxiv.org/abs/2601.01279v3).
+- Dhanda (2026). [A Price Cap Can Act as a Focal Point for LLM Pricing Agents: Evidence from a Repeated Bertrand Duopoly (Revised)](https://doi.org/10.21203/rs.3.rs-10183486/v1). Research Square preprint.
+- Fish, Gonczarowski & Shorrer (2024). [Algorithmic Collusion by Large Language Models](https://arxiv.org/abs/2404.00806v6). Revised 2026; cited by first-preprint year.
+- Green & Porter (1984). [Noncooperative Collusion under Imperfect Price Information](https://doi.org/10.2307/1911462). Econometrica 52(1):87–100.
+- Lin et al. (2024). [Strategic Collusion of LLM Agents: Market Division in Multi-Commodity Competitions](https://arxiv.org/abs/2410.00031v2).
+- Mathew et al. (2024). [Hidden in Plain Text: Emergence & Mitigation of Steganographic Collusion in LLMs](https://arxiv.org/abs/2410.03768v2).
+- Motwani et al. (2024). [Secret Collusion among AI Agents: Multi-Agent Deception via Steganography](https://arxiv.org/abs/2402.07510v5). NeurIPS 2024.
+- Rose et al. (2026). [Detecting Multi-Agent Collusion Through Multi-Agent Interpretability](https://arxiv.org/abs/2604.01151v5). Definitions 4.7 and 4.7′ distinguish causal and operational criteria.
+- Schreiber (2000). [Measuring Information Transfer](https://doi.org/10.1103/PhysRevLett.85.461). PRL 85(2):461–464.
+- Shi, Zhang & Yang (2026). [Emergent Collusion in Long-Horizon LLM Agent Interaction](https://arxiv.org/abs/2609.24967v2). [SALT-NLP dataset](https://huggingface.co/datasets/SALT-NLP/agent-collusion/tree/2eba8f37), source-data revision used by Q2.2.
+- Tailor (2025). [Audit the Whisper: Detecting Steganographic Collusion in Multi-Agent LLMs](https://arxiv.org/abs/2510.04303v2). Preprint.
 
 ## Appendix — full tables
 

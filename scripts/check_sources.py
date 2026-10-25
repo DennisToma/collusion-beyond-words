@@ -141,6 +141,10 @@ check("M34", "Fig.6 price views strict vs tacit-high: min/max point", [min(v[0] 
       [0.43, 0.58])
 check("M34", "all price-view CIs include 0.5", all(v[1] < 0.5 < v[2] for v in pv), True)
 
+salt = load(Q22, "analysis/salt_d1.json")["E105_audit"]["auroc_no_verdict_words"]
+check("M35", "SALT no-verdict-words AUROC", [salt["est"], *salt["ci"]], [0.75, 0.66, 0.84])
+check("M35", "SALT no-verdict-words n", salt["n"], 117, tol=0)
+
 # Further headline quantities, formerly checked only by the human/source reviews.
 lc = cd["llm_long_p2_T60"]
 check("N5", "T60 pCMI", [lc["pcmi"], *lc["pcmi_ci"]], [0.34, 0.18, 0.52])

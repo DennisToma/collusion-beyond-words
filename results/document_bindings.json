@@ -593,5 +593,41 @@
       0,
       0
     ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M35:SALT no-verdict-words AUROC",
+    "template": "accept/reject, AUROC is {} [{}, {}] (n = 117)",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SUBMISSION.md",
+    "source_check": "M35:SALT no-verdict-words n",
+    "template": "accept/reject, AUROC is 0.75 [0.66, 0.84] (n = {})",
+    "digits": [
+      0
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M35:SALT no-verdict-words AUROC",
+    "template": "without accept/reject substrings (selected subset), {} [{}, {}] (n = 117)",
+    "digits": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "document": "SLIDES.md",
+    "source_check": "M35:SALT no-verdict-words n",
+    "template": "without accept/reject substrings (selected subset), 0.75 [0.66, 0.84] (n = {})",
+    "digits": [
+      0
+    ]
   }
 ]

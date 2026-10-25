@@ -9,7 +9,7 @@ Merged submission of two sprint projects:
 Shared setup: four LLM sellers in repeated logit-demand pricing markets; one pair is *offered* a private chat
 channel (never told to collude). Can an auditor tell which markets had the channel?
 
-**Takeaway:** the channel shows up as *higher prices*; we detect no contemporaneous co-movement, and public messages give a zero-shot auditor no resolved gain, so a price flag is an audit trigger, not proof.
+**Takeaway:** the channel shows up as *higher prices*; we find no robust contemporaneous co-movement, and public messages give a zero-shot auditor no resolved gain, so a price flag is an audit trigger, not proof.
 
 **Terms.** AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup: price above the competitive (Nash) price. pCMI: how much a pair's prices co-move after removing public state and lagged prices. TE: lagged dependence. Executed: a privately agreed price the pair then actually kept.
 
@@ -36,7 +36,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ---
 
-## 3. No contemporaneous co-movement detected
+## 3. No robust contemporaneous co-movement detected
 
 | evidence | markup (level) | pCMI (co-movement) |
 |---|---|---|
@@ -45,7 +45,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 | executed channel games vs controls (48 of 149) | pair-level 0.87 [0.80, 0.94] | 0.42 [0.33, 0.53] |
 
 - Rank and discrete estimators also show no resolved separation (sign-CMI has little power here). For one planted strategy — a shared ±1 price move in 10% of rounds — pCMI reaches 0.79 [0.70, 0.88] in 60-round games; not a general sensitivity bound, and in 20-round games small co-movement is not excluded.
-- Lagged TE weakly above chance in the grid (0.62 [0.54, 0.70]) but below level, and fires on shared policies.
+- Base Qwen3.6 separates once, without grid replication. Lagged TE weakly above chance in the grid (0.62 [0.54, 0.70]) but below level, and fires on shared policies.
 
 ---
 
@@ -55,7 +55,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 - Combined − better single view: −0.01 [−0.09, +0.06] (locked test, n = 95); −0.07 [−0.17, +0.02] (fresh replications, pooled post hoc).
 - Qwen3.8 text view is **inverted** (0.15–0.21, CI below 0.5); in the base arm, channel sellers invite rivals publicly *less* (0.40 vs 0.88, post hoc).
-- Text did work on external SALT-NLP negotiations, where the detected act happens in the chat (0.87 [0.83, 0.91]) — a different construct.
+- SALT-NLP: messages predict later ACCEPT verdicts (0.87 [0.83, 0.91]); without accept/reject substrings (selected subset), 0.75 [0.66, 0.84] (n = 117). Different task; no action-view comparison.
 
 *Locked test had four disclosed exposures (not fully blind); the plotted premium statistic was chosen post hoc.*
 
@@ -76,7 +76,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 ## 6. Implications
 
 - **AI oversight:** two natural monitors (dependence tests on actions, an LLM reading public text) did not recover the side channel better than a crude price statistic here; the text monitor could be misled. Sellers were not adversarial.
-- Channel assignment (including its prompt cue) shows up mainly as **how high** prices are; we detect no **contemporaneous co-movement**, and a zero-shot auditor gains nothing resolved from **public messages** (small gains not excluded).
+- Channel assignment (including its prompt cue) shows up mainly as **how high** prices are; we find no robust **contemporaneous co-movement**, and a zero-shot auditor gains nothing resolved from **public messages** (small gains not excluded).
 - Detectability by any price statistic is a property of the **(seller model × prompt)** pair (post-hoc synthesis).
 - Price screens need **model- and prompt-matched** references; a two-stage audit (level screen, then private logs / dependence / provenance) is a proposal we did not evaluate.
 

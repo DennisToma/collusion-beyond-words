@@ -70,8 +70,8 @@ class ReproductionChecks(unittest.TestCase):
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
         self.assertEqual(self.receipt["n_evidence_files"], 66)
-        self.assertEqual(self.receipt["n_checks"], 57)
-        self.assertEqual(self.receipt["n_document_checks"], 64)
+        self.assertEqual(self.receipt["n_checks"], 59)
+        self.assertEqual(self.receipt["n_document_checks"], 68)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
 
     def test_edited_primary_endpoint_is_rejected(self):

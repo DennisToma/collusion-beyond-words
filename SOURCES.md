@@ -8,7 +8,7 @@ in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |
 | Q2.2 | `~/collusion/collusion-22-say-vs-do` | `8b680ee` | 2026-10-25 08:02 |
 
-Re-checked 2026-10-25 10:31 UTC at Q1.4 `65d44bb` / Q2.2 `94018c8`: both confirm 0 open merge flags, no science change; evidence stays pinned at `732f08c` / `91ffb2d`. Q1.4's new commit changes only bookkeeping and review receipts. Earlier ~10:22 UTC at Q1.4 `732f08c` / Q2.2 `94018c8` (I133 confirms 131-1 applied and 0 open; only review metadata changed, so the evidence bundle retains `91ffb2d`); ~10:07 UTC at Q1.4 `732f08c` / Q2.2 `91ffb2d` (Q1.4: 0 open; Q2.2 131-1 Fig. 6 caption P1 applied; both source commits are review-only, no science change); ~10:02 UTC at Q1.4 `499c500` / Q2.2 `966b9fe` (I129: 0 open, one optional P2 applied as M33); earlier ~09:55 at `499c500` / `badcd8d` (0 open flags in both; earlier check ~09:25 at `0124252`/`71a0365`): no research changes after the freeze;
+Re-checked 2026-10-25 10:44 UTC at Q1.4 `4ff7e65` / Q2.2 `7247c6c`: both have 0 open P1; Q1.4 independently confirms the current co-movement scope, Q2.2 confirms the corrected SALT framing. Q2.2 also fixed its own unpinned Fig. P2.7 window label to match our existing Fig. 6; no saved scientific result changed and no evidence re-pin is needed. Earlier 10:31 UTC at Q1.4 `65d44bb` / Q2.2 `94018c8`: both confirm 0 open merge flags, no science change; evidence stays pinned at `732f08c` / `91ffb2d`. Q1.4's new commit changes only bookkeeping and review receipts. Earlier ~10:22 UTC at Q1.4 `732f08c` / Q2.2 `94018c8` (I133 confirms 131-1 applied and 0 open; only review metadata changed, so the evidence bundle retains `91ffb2d`); ~10:07 UTC at Q1.4 `732f08c` / Q2.2 `91ffb2d` (Q1.4: 0 open; Q2.2 131-1 Fig. 6 caption P1 applied; both source commits are review-only, no science change); ~10:02 UTC at Q1.4 `499c500` / Q2.2 `966b9fe` (I129: 0 open, one optional P2 applied as M33); earlier ~09:55 at `499c500` / `badcd8d` (0 open flags in both; earlier check ~09:25 at `0124252`/`71a0365`): no research changes after the freeze;
 both posted `merge_flags.md` (Q1.4 `results/reviews/merge_flags.md`, its `check_merge_sources.py`: 35/35 Q1.4
 values match JSON; Q2.2 `results/analysis/merge_flags.md`: all Q2.2 numbers correct). Applied: Q1.4 F1 (P1),
 F3; Q2.2 114-4 (P1), 116-2 (already applied), 114-2, 114-3. Not applied: Q1.4 F2 (optional; §5.2 states it).
@@ -80,13 +80,22 @@ table below records the original claim provenance; later review-only commits did
 | M32 | Fig. 6 tacit-high window = rounds 11–40 (source figure label said "2nd half") | Q2.2 | `p2_strong_eval.py : --late 11 (frozen, line 145)`; data `data/llm_p2strongF/trajectories.jsonl` + `analysis/p2_strong_classes_llm_p2strongF.json` | P2.7 | ✔ (iter6, code) |
 | M33 | Qwen3.8-base text score vs invite rate Spearman pooled 0.49 [0.17, 0.71] (n = 30); within no-channel −0.41 [−0.83, +0.18] (n = 15) | Q2.2 | `analysis/e132_inversion.json : sets."Qwen3.8 base".spearman_text_vs_invite_rate_{pooled,within_no_channel}` | Q2.2 merge_flags I129 (optional P2) | ✔ (iter6, JSON) |
 | M34 | Fig. 6 caption: price views (pair premium, market excess over Nash, LLM action view, action stats) strict-executed vs tacit-high AUROC 0.43–0.58, all CIs include 0.5 (exploratory) | Q2.2 | `analysis/p2_strong_eval_llm_p2strongF.json : detectors.{premium,market_excess_nash,action,action_stats}.auroc_strict_vs_tacit_high` | P2.7 | ✔ check_sources |
+| M35 | SALT messages without accept/reject substrings: episode AUROC 0.75 [0.66, 0.84], n = 117; selected subset, not causal ablation | Q2.2 | `analysis/salt_d1.json : E105_audit.auroc_no_verdict_words.{est,ci,n}`; code `salt_d1.py : render, cluster_boot, report` at evidence pin `91ffb2d` | P2.12 | ✔ check_sources; iter11 Opus + Codex |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |
 
-`✔ check_sources` = a saved-source assertion in `uv run python scripts/check_sources.py` (now 57/57
+`✔ check_sources` = a saved-source assertion in `uv run python scripts/check_sources.py` (now 59/59
 assertions; output `results/source_check.json`). The original 44 checks compared source JSON with frozen
-expected values, without reading the report. Iteration 9 adds 64 separate document bindings that extract
-selected numbers from SUBMISSION.md/SLIDES.md and compare them directly with saved source values using
-half-up rounding; `results/document_bindings.json` lists their exact coverage. Some source assertions
+expected values, without reading the report. Iteration 9 introduced separate document bindings; iteration
+11 adds four for M35, bringing the total to 68. They extract selected numbers from SUBMISSION.md/SLIDES.md
+and compare them directly with saved source values using half-up rounding; `results/document_bindings.json`
+lists their exact coverage. Some source assertions
 refer only to this provenance table. Neither check certifies every report number or qualitative scope.
 Plain ✔ = read from JSON by hand or by a review. Rows with no ✔ are either non-numeric (M17, M18 construct definitions — the 0.885 in M18 is checked under M12;
 J1 verbatim statement) or were verified by the adversarial reviews noted in their last column.
+
+**Interpretation correction (iteration 11).** The frozen Q2.2 REPORT describes SALT's act as happening in
+chat. `salt_d1.py` at the same pin shows the auditor sees only preceding communication and predicts
+separately submitted verdicts. The primary Shi/Zhang/Yang paper agrees. SUBMISSION and SLIDES follow
+the code and primary paper, preserve every saved result, and include the M35 subset sensitivity. The
+source reports in `evidence/` are retained verbatim. [Literature audit](reviews/literature_i11.md) records
+the decision and all primary bibliography checks, including the Rose definition and Cao & Hu scope fixes.
