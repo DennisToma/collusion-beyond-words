@@ -1,7 +1,8 @@
 # SOURCES — where every number in SUBMISSION.md comes from
 
-Iteration 13 source freshness (2026-10-25 17:57 UTC): Q1.4 `6bf9e65677649695c9727212184bb5c55e3ae9f0` /
-Q2.2 `b1d550a8363935a1d9f41dc092a54d774de3c20d`; allowed STATUS/review-note changes only, zero declared open P1.
+Iteration 14 source freshness (2026-10-25 18:01 UTC): Q1.4 `6bf9e65677649695c9727212184bb5c55e3ae9f0` /
+Q2.2 `b1d550a8363935a1d9f41dc092a54d774de3c20d`; unchanged since iteration 13,
+allowed STATUS/review-note changes only, zero declared open P1.
 All 158 pinned blobs, 176 preserved scientific files and eight accepted artifacts verified
 by `uv run python reviews/verify_hold_i11.py`; no scientific import or repin.
 

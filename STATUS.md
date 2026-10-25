@@ -1,18 +1,19 @@
 # STATUS
 
-## Current state (2026-10-25 17:57 UTC, iteration 13: final committed upload package)
-- FINALIZE-only; user hard stop 18:00 UTC. No experiments or model calls.
+## Current state (2026-10-25 18:01 UTC, iteration 14: hard-stop handoff closure)
+- Research stopped at the user's 18:00 UTC deadline; only final handoff closure remains.
 - Primary TEMPLATE_REPORT.pdf 10 pages / 6 main; abstract 246 words; IMAGE 1600×900; slides 8.
-- Fresh provenance PASS: 158 pinned source blobs, 176 preserved scientific files, eight accepted artifacts.
-- Scientific pins remain 732f08c / 91ffb2d; accepted manuscripts, PDFs, figures and usage unchanged.
-- Completed i12 package verified at 248db6e: 11 successful commands; 308 Git-matching files; 20 checksums.
-- Root ZIP matches i12; after this notes commit replace it with the exact clean-HEAD i13 package.
-- Final package: /var/tmp/bw-final-i13; external receipt.json records actual acceptance and revision.
-- Headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
-- Provenance command: uv run python reviews/verify_hold_i11.py; receipt results/release_hold_i11.json.
+- Fresh provenance PASS: 158 pinned blobs, 176 preserved scientific files, eight accepted artifacts.
+- Scientific pins 732f08c / 91ffb2d; manuscripts, PDFs, figures, estimates and usage unchanged.
+- Completed i12 package reverified at 248db6e: 11 successful commands; 308 Git-matching files; 20 checksums.
+- Correction: i13 package was never created; its prior package location described intended work.
+- Commit/push these closure notes, then package exact clean HEAD into /var/tmp/bw-final-i14.
+- External receipt.json records actual completion/revision; copy its ZIP to root only after success.
+- Headlines: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
+- Provenance: uv run python reviews/verify_hold_i11.py; receipt results/release_hold_i11.json.
 - Prior full acceptance: 57 tests; 120 source assertions /144 extended +65 primary bindings /158 hashes.
 - Risks: integer/qualitative coverage limited; pipeline unevaluated; same-VM reproduction; author upload pending.
-- Dennis uploads TEMPLATE_REPORT.pdf + IMAGE.png + root submission_code.zip; optional extended report/slides.
+- Dennis uploads TEMPLATE_REPORT.pdf + IMAGE.png + root submission_code.zip; optional report/slides.
 
 ## Log
 - 2026-10-25 17:47 UTC iteration 10: release verification hold. DIRECTION items all done. I skipped finalize.py this time because it only churns the usage counts. Root submission_code.zip, TEMPLATE_REPORT.pdf, IMAGE.png and SLIDES.pdf are byte-identical to /var/tmp/bw-fallback-i7-final, and SHA256SUMS all pass. No edits, no model calls, no deviation from DIRECTION.
@@ -124,3 +125,5 @@
 - 2026-10-25 17:54 UTC iteration 12: verified that the iteration-11 clean-HEAD handoff actually completed for 2fe0265 (11 successful commands, 307 Git-matching tracked files, all 20 sidecar checksums and root ZIP match). Re-ran the source/payload freshness checker: 158 evidence pins, 176 preserved files and eight accepted artifacts pass; source heads 6bf9e65/b1d550a differ only in allowed status/review notes and declare 0 open P1. Updated the final handoff procedure and report; package this notes commit into /var/tmp/bw-final-i12 and replace root ZIP after commit/push. Its external receipt records actual acceptance/completion; earlier package receipts certify their own revisions only. No science, manuscript, PDF, figure, model call or usage refresh. Bounded below 45–60 minutes by the user's explicit 18:00 hard stop; no DIRECTION deviation.
 
 - 2026-10-25 17:57 UTC iteration 13 (fallback manager): read CLAUDE/PLAN/STATUS/DIRECTION and ledger. User hard stop leaves three minutes, so selected final committed upload handoff rather than a new 45–60-minute chunk. Verified completed i12 receipt for248db6e, all11 successful command logs, all package artifact hashes,20 checksums and root ZIP identity (308 trackedfiles). Fresh provenance checker passes158 pins/176 preservedfiles/8 artifacts; no scientific repin or accepted payload change. Updated REPORT/SOURCES/ledger; commit/push these notes then package their exact clean HEAD into /var/tmp/bw-final-i13 and copy ZIP to root. The external receipt records actual completion. No new experiment, estimate, evaluation, model call, PDF export or usage refresh; no DIRECTION deviation.
+
+- 2026-10-25 18:01 UTC iteration 14 (fallback manager): read CLAUDE/PLAN/STATUS/DIRECTION and ledger at the user's hard stop. No new research chunk is authorized past18:00; selected bounded closure of the unfinished exact-HEAD handoff. Found /var/tmp/bw-final-i13 absent and root ZIP still matching i12, so corrected prior intended-package wording. Reverified i12 receipt at248db6e:11 successful commands,308 trackedfiles,20 checksums, every recorded command-log/artifact hash and root ZIP identity. Fresh source/payload check passes158pins/176preserved/8artifacts; sourceheads unchanged6bf9e65/b1d550a. Commit/push closure notes, then run existing clean-HEAD packaging into /var/tmp/bw-final-i14 and copy its ZIP only on success; external receipt records actual acceptance/completion. No new experiment, estimate, model call, held-out evaluation, PDF export, usage refresh or sibling write. The requested45–60-minute chunk is shortened to respect the explicit hard stop; no further research work.

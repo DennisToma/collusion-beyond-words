@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "checked_at_utc": "2026-10-25T17:56:50.467398+00:00",
-  "merge_input_head": "248db6e154cc7a7d3630564e2b7502fb9ca49346",
+  "checked_at_utc": "2026-10-25T18:01:00.147090+00:00",
+  "merge_input_head": "a10d996af0a095c9b613b6391ca82a2aa595af2e",
   "accepted_artifact_revision": "77ab10d38861d4b5434923f3b2abcb898f793dc6",
   "projects": {
     "q14": {

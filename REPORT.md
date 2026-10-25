@@ -3,9 +3,11 @@
 The primary submission is **[TEMPLATE_REPORT.md](TEMPLATE_REPORT.md) / [TEMPLATE_REPORT.pdf](TEMPLATE_REPORT.pdf)**;
 **[SUBMISSION.md](SUBMISSION.md)** is the extended report. Number provenance: [SOURCES.md](SOURCES.md).
 
-Iteration 13 verifies the completed iteration-12 upload handoff for committed revision
-`248db6e`: **11 successful acceptance commands**, **308 Git-matching tracked files**,
-**20 valid sidecar checksums**, all command-log/artifact hashes and root ZIP identity.
+Iteration 14 closes the final handoff at the user's 18:00 UTC hard stop. The completed
+iteration-12 package for `248db6e` was reverified: **11 successful acceptance commands**,
+**308 Git-matching tracked files**, **20 valid sidecar checksums**, all recorded command-log
+and artifact hashes, and root ZIP identity. The iteration-13 package was never created;
+its previously listed location described intended work, not completed acceptance.
 A fresh provenance check passes **158 pinned evidence blobs**, **176 preserved scientific
 files** and **eight accepted manuscript/upload artifacts**. Scientific estimates,
 manuscripts, PDFs, figures and usage snapshot remain unchanged.
@@ -13,12 +15,13 @@ manuscripts, PDFs, figures and usage snapshot remain unchanged.
 `uv run python reviews/verify_hold_i11.py`. This verifies frozen evidence and prior
 handoff integrity; it is not a new scientific evaluation or independent review.
 
-After this notes commit, package exact clean HEAD:
-`uv run --group export python scripts/package_release.py --output-dir /var/tmp/bw-final-i13`,
-then copy `/var/tmp/bw-final-i13/submission_code.zip` to root `submission_code.zip`.
-The external `/var/tmp/bw-final-i13/receipt.json` records the actual final revision and
+After this closure-notes commit, package exact clean HEAD:
+`uv run --group export python scripts/package_release.py --output-dir /var/tmp/bw-final-i14`,
+then copy `/var/tmp/bw-final-i14/submission_code.zip` to root only after success.
+The external `/var/tmp/bw-final-i14/receipt.json` records the actual final revision and
 acceptance; check its `ok` field and `SHA256SUMS`. Earlier receipts certify their own
-revisions only. Dennis must upload `TEMPLATE_REPORT.pdf`, `IMAGE.png` and the final ZIP;
+revisions only. [Final handoff procedure](reviews/handoff_i14.md).
+Dennis must upload `TEMPLATE_REPORT.pdf`, `IMAGE.png` and the final ZIP;
 form fields are in `SUBMISSION_FORM.md`. No upload has been performed here.
 
 Fallback iteration 7 closes the primary report's numerical-context gap. The source checker now
