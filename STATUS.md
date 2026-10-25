@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 18:12 UTC, iteration 16: final handoff closed)
+## Current state (2026-10-25 18:28 UTC, iteration 17: post-hard-stop check; handoff closed)
 - Research stopped at the user's explicit 18:00 UTC deadline; no research work remains.
 - Final accepted release: 7ba00f1; package completed 18:10:47 UTC in /var/tmp/bw-final-i15.
 - Verified 11 successful command logs, 311 Git-matching tracked files and 20 checksums.
@@ -16,6 +16,7 @@
 - Dennis uploads TEMPLATE_REPORT.pdf + IMAGE.png + root submission_code.zip; optional report/slides.
 
 ## Log
+- 2026-10-25 18:28 UTC iteration 17: this run started after the 18:00 hard stop, so I did no research or document work. Read-only check: root submission_code.zip (24,246,215 B, sha 4380a077…), TEMPLATE_REPORT.pdf and IMAGE.png are byte-identical to /var/tmp/bw-final-i15, and SHA256SUMS there pass. No edits other than this entry, no model calls, no deviation from DIRECTION.
 - 2026-10-25 17:47 UTC iteration 10: release verification hold. DIRECTION items all done. I skipped finalize.py this time because it only churns the usage counts. Root submission_code.zip, TEMPLATE_REPORT.pdf, IMAGE.png and SLIDES.pdf are byte-identical to /var/tmp/bw-fallback-i7-final, and SHA256SUMS all pass. No edits, no model calls, no deviation from DIRECTION.
 - 2026-10-25 17:50 UTC iteration 9: release verification hold, 10 min before the hard stop. finalize.py --no-export → FINALIZE OK. It again changed only the usage counts (414→418) and timestamps in REPORT/SUBMISSION/results, which I reverted. The root submission_code.zip, TEMPLATE_REPORT.pdf, IMAGE.png and SLIDES.pdf are byte-identical to /var/tmp/bw-fallback-i7-final, and its SHA256SUMS all pass. No edits, no model calls, no deviation from DIRECTION.
 - 2026-10-25 17:45 UTC iteration 8: release verification hold. Everything in DIRECTION was already done. finalize.py --no-export → FINALIZE OK. It again changed only the usage counts (414→418) and check timestamps, which I reverted so the committed bytes match the PDFs and the zip. The root submission_code.zip (24,201,594 B, sha 9a15c238…) is identical to /var/tmp/bw-fallback-i7-final, which was built from HEAD cce6aed; SHA256SUMS all pass. TEMPLATE_REPORT.pdf (10 pp), IMAGE.png and SLIDES.pdf (8 pp) are identical to the handoff copies. Secret scan of the zip (including inner tar.xz): the only hit is DIRECTION.md's instruction text. No document edits, no model calls, no deviation from DIRECTION.
