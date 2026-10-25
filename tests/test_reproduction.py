@@ -70,7 +70,7 @@ class ReproductionChecks(unittest.TestCase):
 
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
-        self.assertEqual(self.receipt["n_evidence_files"], 98)
+        self.assertEqual(self.receipt["n_evidence_files"], 107)
         self.assertEqual(self.receipt["n_checks"], 111)
         self.assertEqual(self.receipt["n_document_checks"], 139)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
@@ -163,13 +163,91 @@ class ReproductionChecks(unittest.TestCase):
     def test_q22_replays_reproduce_without_source_repos(self):
         # Remove the cached outputs: replays must regenerate them from evidence alone.
         for script, output in [("recompute_unrounded_q22.py", "unrounded_q22.json"),
-                               ("recompute_c21b_floor.py", "c21b_floor.json")]:
+                               ("recompute_c21b_floor.py", "c21b_floor.json"),
+                               ("recompute_locked_test_q22.py", "locked_test_q22.json")]:
             path = self.copy / "results" / output
             path.unlink()
             result = subprocess.run([sys.executable, str(self.copy / "scripts" / script)],
                                     cwd=self.scratch, env=self.env, capture_output=True, text=True, timeout=30)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertEqual(path.read_bytes(), (ROOT / "results" / output).read_bytes())
+
+    def test_locked_test_replay_parity_with_pinned_source_functions(self):
+        import numpy as np
+        from scipy.stats import rankdata
+        import recompute_locked_test_q22 as portable
+
+        ev = evidence.Evidence()
+        tree = ast.parse(ev.read_bytes("q22", "final_analysis.py"))
+        functions = [n for n in tree.body if isinstance(n, ast.FunctionDef)
+                     and n.name in ("metrics", "ci", "boot")]
+        self.assertEqual({n.name for n in functions}, {"metrics", "ci", "boot"})
+        original_views = next(ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign)
+                              and any(isinstance(t, ast.Name) and t.id == "LLM_VIEWS" for t in n.targets))
+        self.assertEqual(set(portable.VIEWS), set(original_views))
+        original_auc_tree = ast.parse(ev.read_bytes("q22", "analyze_llm.py"))
+        auc_function = [n for n in original_auc_tree.body if isinstance(n, ast.FunctionDef) and n.name == "auc"]
+        pairs = next(ast.literal_eval(n.value) for n in original_auc_tree.body if isinstance(n, ast.Assign)
+                     and any(isinstance(t, ast.Name) and t.id == "PAIRS" for t in n.targets))
+
+        def rank_auc(y, s):
+            # Independent rank-sum definition in place of sklearn's roc_auc_score;
+            # scipy's average ranks count score ties as one half.
+            y = np.asarray(y, bool)
+            p, n = int(y.sum()), int((~y).sum())
+            return float((rankdata(s)[y].sum() - p * (p + 1) / 2) / (p * n))
+
+        namespace = {"np": np, "roc_auc_score": rank_auc, "PAIRS": pairs, "LLM_VIEWS": original_views}
+        exec(compile(ast.Module(body=auc_function + functions, type_ignores=[]),
+                     "pinned/final_analysis.py", "exec"), namespace)
+        ids, y, scores = portable.inputs(ev)
+        # Construct the reference cohort/labels independently of the portable loader.
+        constants = {t.id: ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign)
+                     for t in n.targets if isinstance(t, ast.Name) and t.id in ("DEV_MAX", "N_FROZEN")}
+        source_ids = [f"llm_v3_{i:04d}" for i in range(constants["DEV_MAX"], constants["N_FROZEN"])]
+        self.assertEqual(ids, source_ids)
+        labs = {row["run_id"]: dict(row, y=int(row["agreement"] in ("explicit", "info_exchange")))
+                for row in map(json.loads, ev.lines("q22", "data/llm_v3/labels.jsonl"))}
+        self.assertEqual(y, {r: labs[r]["y"] for r in source_ids})
+        original_scores = {v: {row["run_id"]: {"run": row["collusion_present"], "scores": row["scores"]}
+                               for row in map(json.loads, ev.lines("q22", f"results/llm_auditor/llm_v3/gpt-6.1-sol/{v}_orig.jsonl"))}
+                           for v in original_views}
+
+        def compare(cohort, labels, source_scores, n_boot):
+            actual = portable.compute(cohort, {r: labels[r]["y"] for r in cohort},
+                                      {v: {r: source_scores[v][r]["run"] for r in cohort} for v in original_views}, n_boot)
+            expected = namespace["boot"](cohort, source_scores, labels, n_boot)
+            self.assertEqual(actual["point_ci"], {v: {"run_auroc": expected["point_ci"][v]["run_auroc"]}
+                                                  for v in original_views})
+            source_keys = {k for k in expected["contrasts"] if k.endswith(":run_auroc")}
+            self.assertEqual(set(actual["contrasts"]), source_keys)
+            self.assertEqual(actual["contrasts"], {k: expected["contrasts"][k] for k in source_keys})
+
+        compare(ids, labs, original_scores, 31)
+        # Calculator fixture with ties and frequent text/action rank reversals:
+        # selecting the better single view only once would fail this check.
+        cohort = [f"fixture_{i}" for i in range(8)]
+        labels = {r: {"y": int(i < 4), "assigned_pair": ["A", "B"]} for i, r in enumerate(cohort)}
+        rng = np.random.default_rng(41)
+        source_scores = {v: {r: {"run": float(rng.integers(0, 5)), "scores": dict.fromkeys(pairs, 0)}
+                             for r in cohort} for v in original_views}
+        compare(cohort, labels, source_scores, 73)
+
+    def test_locked_test_replay_rejects_missing_duplicate_or_invalid_inputs(self):
+        import recompute_locked_test_q22 as portable
+
+        ev = evidence.Evidence()
+        target = "results/llm_auditor/llm_v3/gpt-6.1-sol/action_orig.jsonl"
+        original_lines = ev.lines
+        rows = portable.records(ev, target)
+        invalid = dict(rows[0], collusion_present=float("nan"))
+        wrong_model = dict(rows[0], model="different-auditor")
+        for changed in (rows[:-1], rows + rows[:1], [invalid] + rows[1:], [wrong_model] + rows[1:]):
+            def lines(project, path):
+                return [json.dumps(row) for row in changed] if path == target else original_lines(project, path)
+            with self.subTest(n_rows=len(changed), first_score=changed[0]["collusion_present"]):
+                with patch.object(ev, "lines", side_effect=lines), self.assertRaises(AssertionError):
+                    portable.inputs(ev)
 
     def test_c21b_per_run_parity_with_pinned_source_function(self):
         import numpy as np
@@ -235,14 +313,20 @@ if __name__ == "__main__":
                                       "fig4_say_vs_do_summary.png", "fig5_placebo_premium.png",
                                       "fig6_strong_framing_tacit.png")},
                    "q22_replay_sha256": {p: sha(ROOT / "results" / p) for p in
-                                         ("unrounded_q22.json", "c21b_floor.json")},
+                                         ("unrounded_q22.json", "c21b_floor.json", "locked_test_q22.json")},
+                   "locked_test_original_function_parity": {"real_cohort_bootstraps": 31,
+                                                            "tied_fixture_bootstraps": 73,
+                                                            "full_saved_result_bootstraps": 2000,
+                                                            "source": "q22/final_analysis.py"},
                    "c21b_original_function_parity": {"settings": 8, "runs_per_setting": 30,
                                                      "source": "q22/p2_strong.py"},
                    "standalone": {k: ReproductionChecks.receipt[k] for k in
                                   ("n_checks", "n_document_checks", "n_evidence_files", "n_fail", "n_document_fail")},
                    "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, "
-                            "rounding edge, corrupt snapshot and changed live source rejected. All six figures and both "
+                            "rounding edge, corrupt snapshot and changed live source rejected. All six figures and three "
                             "Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original "
-                            "analyse function in all eight floor/window settings."}
+                            "analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match "
+                            "pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay "
+                            "matches all selected saved results. Missing, duplicate and invalid audit inputs are rejected."}
         (ROOT / "results/reproduction_check.json").write_text(json.dumps(receipt, indent=2) + "\n")
     raise SystemExit(0 if result.wasSuccessful() else 1)

@@ -32,32 +32,32 @@
     "last_end": "Sat Oct 24 06:19:56 UTC 2026"
    },
    "phase2": {
-    "completed_iterations": 144,
+    "completed_iterations": 146,
     "by_backend": {
      "codex-sol": 54,
-     "opus": 90
+     "opus": 92
     },
     "first_start": "Sat Oct 24 06:27:45 AM UTC 2026",
-    "last_end": "Sun Oct 25 11:50:06 AM UTC 2026"
+    "last_end": "Sun Oct 25 12:22:09 PM UTC 2026"
    }
   },
   "collusion-beyond-words": {
    "phase1": null,
    "phase2": {
-    "completed_iterations": 23,
+    "completed_iterations": 24,
     "by_backend": {
-     "codex-sol": 3,
+     "codex-sol": 4,
      "opus": 20
     },
     "first_start": "Sun Oct 25 08:00:00 AM UTC 2026",
-    "last_end": "Sun Oct 25 12:03:28 PM UTC 2026"
+    "last_end": "Sun Oct 25 12:16:21 PM UTC 2026"
    }
   }
  },
  "source_repos_total_by_backend": {
   "codex-sol": 118,
-  "opus": 220
+  "opus": 222
  },
- "source_repos_total": 338,
- "source_repos_snapshot_utc": "2026-10-25 12:07 UTC"
+ "source_repos_total": 340,
+ "source_repos_snapshot_utc": "2026-10-25 12:22 UTC"
 }

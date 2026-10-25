@@ -9,3 +9,5 @@ no-communication scope, and robust co-movement headlines. codex_i11.md + opus_i1
 scientific diff reviews; one Codex P2 fixed, all applicable Opus items applied, final reviews no open P1/P2.
 Opus did not independently browse external primary papers; manager and Codex did.
 - codex_i14.md: semantic review of the iteration-14 number bindings (key ↔ claim, sign handling, template anchoring): 0 P1, 2 P2 scope anchors fixed, 1 duplicate removed.
+
+- codex_i25.md: independent gpt-6.1-sol high read-only review of the historical locked-test replay, evidence additions, parity tests and documentation; no actionable findings. Full original B=2000 replay and exact input/output provenance independently verified.

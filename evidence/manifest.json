@@ -797,6 +797,78 @@
           "stored_path": "q22/data/llm_p2qwenb/terms.jsonl.gz",
           "stored_bytes": 782,
           "stored_sha256": "7e8e9eab13aeb1d6e94ad0faf4e7fd089ffda7d846568e6591bbf9931fad0f54"
+        },
+        "final_analysis.py": {
+          "sha256": "c16655736a8b4a58b3a4c0e780ec7b15c62e333b119953601e6db9c713c64d18",
+          "bytes": 20882,
+          "compression": "none",
+          "stored_path": "q22/final_analysis.py",
+          "stored_bytes": 20882,
+          "stored_sha256": "c16655736a8b4a58b3a4c0e780ec7b15c62e333b119953601e6db9c713c64d18"
+        },
+        "analyze_llm.py": {
+          "sha256": "2f98ff200219f8236b409fa0acbe396bd92c1d590af64b5073c5c3d3994ac76f",
+          "bytes": 7612,
+          "compression": "none",
+          "stored_path": "q22/analyze_llm.py",
+          "stored_bytes": 7612,
+          "stored_sha256": "2f98ff200219f8236b409fa0acbe396bd92c1d590af64b5073c5c3d3994ac76f"
+        },
+        "data/llm_v3/labels.jsonl": {
+          "sha256": "9f84de78ef37add4641b942cfb1674cefa08f20baa18933a91c688a2a8b073b1",
+          "bytes": 46396,
+          "compression": "gzip",
+          "stored_path": "q22/data/llm_v3/labels.jsonl.gz",
+          "stored_bytes": 4104,
+          "stored_sha256": "faf9bb43bf71693373bbb6d9b06b30580142308bded33701723f2f531da9f868"
+        },
+        "results/llm_auditor/llm_v3/gpt-6.1-sol/text_orig.jsonl": {
+          "sha256": "28c98099e7b2909aa07a2d092c03caaf80b624609f3b9965dda8b1de6c5fd9c2",
+          "bytes": 104006,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_v3/gpt-6.1-sol/text_orig.jsonl.gz",
+          "stored_bytes": 14547,
+          "stored_sha256": "cd3444b1012e4e439e8ed6111b0c0798166e61442c7b5d2c97749a090413c8a7"
+        },
+        "results/llm_auditor/llm_v3/gpt-6.1-sol/action_orig.jsonl": {
+          "sha256": "d7ba3f5ae69a56a23461c7e8a0f65ad24318ac145cb1697a0515e8ab0a34e058",
+          "bytes": 109940,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_v3/gpt-6.1-sol/action_orig.jsonl.gz",
+          "stored_bytes": 18126,
+          "stored_sha256": "b540785698347bc6e49a35ca03ffb18d6da0e7ca72833b1153fe648680ef4caa"
+        },
+        "results/llm_auditor/llm_v3/gpt-6.1-sol/combined_orig.jsonl": {
+          "sha256": "904b46b4a0f7968aa814d6478da40116c22cb74756d34b88750008c1ea75e256",
+          "bytes": 111795,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_v3/gpt-6.1-sol/combined_orig.jsonl.gz",
+          "stored_bytes": 17455,
+          "stored_sha256": "5cb08aebbb47a8e94ed7169b4cb9eaa0b706127ec4d97a1c0d92308d4adfa85f"
+        },
+        "results/llm_auditor/llm_v3/gpt-6.1-sol/action_stats_orig.jsonl": {
+          "sha256": "1a1da39f6c5c7b4cb658bb76d351b94cf2f1f0912fb644f441f3a4f69d0eadd7",
+          "bytes": 109956,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_v3/gpt-6.1-sol/action_stats_orig.jsonl.gz",
+          "stored_bytes": 18192,
+          "stored_sha256": "c63750cd8abcd383c47186bac06ba2e89e9eabd2c4996b45d857eedb3cc54e3d"
+        },
+        "results/llm_auditor/llm_v3/gpt-6.1-sol/combined_stats_orig.jsonl": {
+          "sha256": "d09855f456e0e5bade6ff4778c574683811a4f925c96fdea90b152ece4d61ab9",
+          "bytes": 114900,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_v3/gpt-6.1-sol/combined_stats_orig.jsonl.gz",
+          "stored_bytes": 18534,
+          "stored_sha256": "848a249bcfe233179b117581d5751599a9ec7a86552bcbce11ab9fcc2b3dad1d"
+        },
+        "results/llm_auditor/llm_v3/gpt-6.1-sol/structured_orig.jsonl": {
+          "sha256": "e9eb4ed5da0117d8b68ea988fba033c9f3645425793c2e3602473f72905bd885",
+          "bytes": 112213,
+          "compression": "gzip",
+          "stored_path": "q22/results/llm_auditor/llm_v3/gpt-6.1-sol/structured_orig.jsonl.gz",
+          "stored_bytes": 17401,
+          "stored_sha256": "15f2a7a4649a0c51483b0c5b8b55ed3d25ea517cdcd96a2f5820365fa53b707e"
         }
       }
     }

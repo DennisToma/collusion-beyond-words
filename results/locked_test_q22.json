@@ -1,0 +1,218 @@
+{
+  "q22_commit": "91ffb2d4737a7537cdf9afe239a98e0d1061090b",
+  "dataset": "llm_v3",
+  "split": "historical locked test",
+  "auditor": "gpt-6.1-sol",
+  "run_ids": [
+    "llm_v3_0030",
+    "llm_v3_0031",
+    "llm_v3_0032",
+    "llm_v3_0033",
+    "llm_v3_0034",
+    "llm_v3_0035",
+    "llm_v3_0036",
+    "llm_v3_0037",
+    "llm_v3_0038",
+    "llm_v3_0039",
+    "llm_v3_0040",
+    "llm_v3_0041",
+    "llm_v3_0042",
+    "llm_v3_0043",
+    "llm_v3_0044",
+    "llm_v3_0045",
+    "llm_v3_0046",
+    "llm_v3_0047",
+    "llm_v3_0048",
+    "llm_v3_0049",
+    "llm_v3_0050",
+    "llm_v3_0051",
+    "llm_v3_0052",
+    "llm_v3_0053",
+    "llm_v3_0054",
+    "llm_v3_0055",
+    "llm_v3_0056",
+    "llm_v3_0057",
+    "llm_v3_0058",
+    "llm_v3_0059",
+    "llm_v3_0060",
+    "llm_v3_0061",
+    "llm_v3_0062",
+    "llm_v3_0063",
+    "llm_v3_0064",
+    "llm_v3_0065",
+    "llm_v3_0066",
+    "llm_v3_0067",
+    "llm_v3_0068",
+    "llm_v3_0069",
+    "llm_v3_0070",
+    "llm_v3_0071",
+    "llm_v3_0072",
+    "llm_v3_0073",
+    "llm_v3_0074",
+    "llm_v3_0075",
+    "llm_v3_0076",
+    "llm_v3_0077",
+    "llm_v3_0078",
+    "llm_v3_0079",
+    "llm_v3_0080",
+    "llm_v3_0081",
+    "llm_v3_0082",
+    "llm_v3_0083",
+    "llm_v3_0084",
+    "llm_v3_0085",
+    "llm_v3_0086",
+    "llm_v3_0087",
+    "llm_v3_0088",
+    "llm_v3_0089",
+    "llm_v3_0090",
+    "llm_v3_0091",
+    "llm_v3_0092",
+    "llm_v3_0093",
+    "llm_v3_0094",
+    "llm_v3_0095",
+    "llm_v3_0096",
+    "llm_v3_0097",
+    "llm_v3_0098",
+    "llm_v3_0099",
+    "llm_v3_0100",
+    "llm_v3_0101",
+    "llm_v3_0102",
+    "llm_v3_0103",
+    "llm_v3_0104",
+    "llm_v3_0105",
+    "llm_v3_0106",
+    "llm_v3_0107",
+    "llm_v3_0108",
+    "llm_v3_0109",
+    "llm_v3_0110",
+    "llm_v3_0111",
+    "llm_v3_0112",
+    "llm_v3_0113",
+    "llm_v3_0114",
+    "llm_v3_0115",
+    "llm_v3_0116",
+    "llm_v3_0117",
+    "llm_v3_0118",
+    "llm_v3_0119",
+    "llm_v3_0120",
+    "llm_v3_0121",
+    "llm_v3_0122",
+    "llm_v3_0123",
+    "llm_v3_0124"
+  ],
+  "n_runs": 95,
+  "n_pos": 50,
+  "n_neg": 45,
+  "n_dev_used": 0,
+  "n_boot": 2000,
+  "seed": 0,
+  "saved_result_matches": true,
+  "scope": "Six cached LLM run-score views and eight run-AUROC contrasts only; reuses frozen judge labels; no pair endpoints, threshold calibration or fusion fitting. Reproduction of saved evidence, not a new held-out evaluation.",
+  "point_ci": {
+    "text": {
+      "run_auroc": [
+        0.472,
+        0.3647,
+        0.5807
+      ]
+    },
+    "action": {
+      "run_auroc": [
+        0.7533,
+        0.6529,
+        0.8498
+      ]
+    },
+    "combined": {
+      "run_auroc": [
+        0.7407,
+        0.6398,
+        0.83
+      ]
+    },
+    "combined_stats": {
+      "run_auroc": [
+        0.7978,
+        0.7046,
+        0.8876
+      ]
+    },
+    "action_stats": {
+      "run_auroc": [
+        0.8589,
+        0.7682,
+        0.9371
+      ]
+    },
+    "structured": {
+      "run_auroc": [
+        0.836,
+        0.7489,
+        0.9118
+      ]
+    }
+  },
+  "contrasts": {
+    "delta_hybrid[combined]:run_auroc": {
+      "delta": -0.0127,
+      "ci": [
+        -0.0913,
+        0.0642
+      ]
+    },
+    "delta_hybrid[combined_stats]:run_auroc": {
+      "delta": 0.0444,
+      "ci": [
+        -0.0382,
+        0.1349
+      ]
+    },
+    "delta_hybrid[action_stats]:run_auroc": {
+      "delta": 0.1056,
+      "ci": [
+        0.0376,
+        0.1802
+      ]
+    },
+    "delta_hybrid[structured]:run_auroc": {
+      "delta": 0.0827,
+      "ci": [
+        0.0007,
+        0.1693
+      ]
+    },
+    "action_stats-action:run_auroc": {
+      "delta": 0.1056,
+      "ci": [
+        0.0376,
+        0.1802
+      ]
+    },
+    "combined_stats-action_stats:run_auroc": {
+      "delta": -0.0611,
+      "ci": [
+        -0.1378,
+        0.0142
+      ]
+    },
+    "structured-combined_stats:run_auroc": {
+      "delta": 0.0382,
+      "ci": [
+        -0.0353,
+        0.1165
+      ]
+    },
+    "combined_stats-combined:run_auroc": {
+      "delta": 0.0571,
+      "ci": [
+        -0.0218,
+        0.1416
+      ]
+    }
+  },
+  "primary_unrounded": [
+    -0.012666666666666604,
+    -0.09134444444444449,
+    0.06422222222222218
+  ]
+}
