@@ -4,7 +4,7 @@
 
 ![Figure 1](figures/fig0_headline.png)
 
-(a) Real games: with a private channel the pair prices above its rivals; without one, no gap. (b) A price-level screen separates channel from no-channel games; co-movement (pCMI) and a text-reading LLM auditor stay near chance in pricing markets. On a different external task where the collusive act is a verbal verdict (SALT-NLP), text works. AUROC: 0.5 = chance, 1 = perfect. Sellers were never told to collude; every number traces to `SOURCES.md`.
+(a) Real games: with a private channel the pair prices above its rivals; without one, no gap. (b) A price-level screen separates channel from no-channel games; pCMI intervals include chance in 8/9 main sets and in the pooled grid; adding public text gave an LLM auditor no measurable gain. On a different external task where the collusive act is a verbal verdict (SALT-NLP), text works. AUROC: 0.5 = chance, 1 = perfect. Sellers were never told to collude; every number traces to `SOURCES.md`.
 
 ---
 

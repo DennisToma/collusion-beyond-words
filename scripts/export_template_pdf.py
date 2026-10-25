@@ -2,13 +2,12 @@
 uv run --group export python scripts/export_template_pdf.py  ->  TEMPLATE_REPORT.html, TEMPLATE_REPORT.pdf
 Reuses the SUBMISSION exporter's renderer and checks (all text fragments, figure pixels, portable links).
 """
-import re
+import json
 
 from playwright.sync_api import sync_playwright
-from pypdf import PdfReader
 
-from export_pdf import (CSS, ROOT, check_figures, check_links, check_pdf, embed_images, md, page, portable_links,
-                        text_fragments, validate_browser_images)
+from export_pdf import CSS, ROOT, embed_images, md, page, portable_links, validate_browser_images
+from check_template_artifacts import RECEIPT, check_template
 
 TEMPLATE_CSS = CSS + """
 @media print { h2.end-matter { break-before: page } img { max-height: 105mm } }
@@ -29,17 +28,9 @@ def main():
         validate_browser_images(pg)
         pg.pdf(path=str(ROOT / "TEMPLATE_REPORT.pdf"), prefer_css_page_size=True, print_background=True)
         b.close()
-    pdf = ROOT / "TEMPLATE_REPORT.pdf"
-    fragments = [re.sub(r"<[^>]+>", "", f) for f in text_fragments(source)]
-    missing = check_pdf(pdf, [f for f in fragments if f.strip()], "TEMPLATE_REPORT all text fragments")
-    check_figures(pdf, source)
-    check_links(pdf)
-    reader = PdfReader(pdf)
-    ref_page = next(i for i, pg_ in enumerate(reader.pages) if "References" in (pg_.extract_text() or "")
-                    and "1. Agrawal" in (pg_.extract_text() or "").replace("\n", " ")) + 1
-    print(f"TEMPLATE_REPORT.pdf pages: {len(reader.pages)}; main text = pages 1-{ref_page - 1}")
-    if missing:
-        raise SystemExit("Template export verification failed")
+    result = check_template(require_receipt=False, expected_source=source)
+    (ROOT / RECEIPT).write_text(json.dumps(result, indent=2) + "\n")
+    print(f"TEMPLATE_REPORT.pdf: {result['total_pages']} pages, {result['main_text_pages']} main; receipt written")
 
 
 if __name__ == "__main__":

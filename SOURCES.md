@@ -3,6 +3,15 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Fallback iteration 6 (2026-10-25 17:04 UTC): read source handoffs at Q1.4 `48662dc` and
+Q2.2 `05e588a`; applied Q2.2's `results/analysis/template_scope_fixes_i179.patch`, which also
+contains Q1.4's remaining abliteration corrections. Pinned Q1.4 `results/eval/p2_partc.json`
+confirms that the tested null is the channel-related premium, not absolute prices;
+Q2.2 C23 in SUBMISSION names its paired channel-premium contrast. Discussion and slide 1
+retain the no-resolved-text-added-gain result and allow inverted Qwen rankings. No new
+estimate, dataset, evidence pin or scientific analysis. Older source-check notes below
+record historical release states; the frozen evidence pins remain `732f08c` / `91ffb2d`.
+
 Iteration 49 source re-check (2026-10-25 15:50 UTC): Q1.4
 `13e8b09485dc8656a0e26010401f92e8f26f7667` / Q2.2
 `07d986e8099d1db2c95fb267daa19162eff214ea` remain clean and unchanged since

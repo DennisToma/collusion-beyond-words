@@ -13,6 +13,7 @@ import sys
 import tarfile
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,25 @@ class PackagingChecks(unittest.TestCase):
         self.git("config", "user.email", "fixture@example.invalid")
         self.git("config", "user.name", "Packaging fixture")
         self.git("config", "commit.gpgsign", "false")
+        sources = {}
+        projects = {}
+        for key, name in (("q14", "q14-infotheory"), ("q22", "q22-say-vs-do")):
+            source = self.scratch / name
+            source.mkdir()
+            def source_git(*args):
+                return subprocess.check_output(["git", *args], cwd=source, env=release.local_environment())
+            source_git("init", "-q")
+            (source / "data.txt").write_text(f"pinned {key} evidence\n")
+            source_git("add", "data.txt")
+            source_git("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+                       "-c", "commit.gpgsign=false", "commit", "-qm", "source fixture")
+            pin = source_git("rev-parse", "HEAD").decode().strip()
+            sources[name] = (source, pin)
+            projects[key] = {"commit": pin}
+        self.source_patch = patch.object(release.build_code_zip, "SOURCES", sources)
+        self.source_patch.start()
+        (self.repo / "evidence").mkdir()
+        (self.repo / "evidence/manifest.json").write_text(json.dumps({"projects": projects}))
         for path in (*release.CHECKS, *release.UPLOADS, "uv.lock", "results/submission_compliance.json"):
             target = self.repo / path
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -38,6 +58,7 @@ class PackagingChecks(unittest.TestCase):
         self.output = self.scratch / "handoff"
 
     def tearDown(self):
+        self.source_patch.stop()
         self.temp.cleanup()
 
     def git(self, *args):
@@ -54,6 +75,8 @@ class PackagingChecks(unittest.TestCase):
         self.assertEqual(receipt["revision"], revision)
         self.assertEqual(len(receipt["commands"]), len(release.CHECKS))
         self.assertEqual(receipt["tracked_files_verified"], len(receipt["files"]))
+        self.assertEqual(receipt["code_zip"]["revision"], revision)
+        self.assertIn("`TEMPLATE_REPORT.pdf` as the primary report", (self.output / "HANDOFF.md").read_text())
         self.assertEqual(json.loads((self.output / "receipt.json").read_text()), receipt)
         for path in release.UPLOADS:
             self.assertEqual((self.output / path).read_bytes(), self.git("show", f"HEAD:{path}"))
@@ -69,6 +92,49 @@ class PackagingChecks(unittest.TestCase):
         self.assertEqual(archive.read_bytes(), (other / archive.name).read_bytes())
         self.assertFalse(self.git("status", "--porcelain").strip())
         self.assertFalse(list(self.scratch.glob(".bw-package-*")))
+
+    def test_code_zip_rejects_stale_missing_changed_and_duplicate_members(self):
+        path = self.scratch / "code.zip"
+        code = release.build_code_zip
+        baseline = code.build(self.repo, path)
+        with zipfile.ZipFile(path) as zf:
+            original = {name: zf.read(name) for name in zf.namelist()}
+        cases = []
+        for name in ("beyond-words/TEMPLATE_REPORT.pdf", "sources/q14-infotheory-" + code.SOURCES["q14-infotheory"][1][:7] + ".tar.xz"):
+            omitted = dict(original)
+            del omitted[name]
+            cases.append(list(omitted.items()))
+        changed = dict(original)
+        changed["beyond-words/TEMPLATE_REPORT.pdf"] = b"stale PDF"
+        cases.append(list(changed.items()))
+        cases.append(list(original.items()) + [("unexpected", b"extra")])
+        cases.append(list(original.items()) + [("README.md", original["README.md"])])
+        source_member = next(name for name in original if name.startswith("sources/"))
+        altered = io.BytesIO()
+        with tarfile.open(fileobj=io.BytesIO(original[source_member]), mode="r:xz") as src:
+            with tarfile.open(fileobj=altered, mode="w:xz") as dst:
+                for member in src:
+                    if member.isfile():
+                        data = b"changed source evidence\n"
+                        member.size = len(data)
+                        dst.addfile(member, io.BytesIO(data))
+                    else:
+                        dst.addfile(member)
+        changed_source = dict(original)
+        changed_source[source_member] = altered.getvalue()
+        cases.append(list(changed_source.items()))
+        for rows in cases:
+            with zipfile.ZipFile(path, "w") as zf:
+                for name, data in rows:
+                    zf.writestr(name, data)
+            with self.assertRaises((ValueError, KeyError)):
+                code.verify_code_zip(path, self.repo, baseline["revision"], code.SOURCES)
+        # A source pin change must be rejected before producing any ZIP.
+        manifest = self.repo / "evidence/manifest.json"
+        manifest.write_text(manifest.read_text().replace(code.SOURCES["q14-infotheory"][1], "0" * 40))
+        self.commit()
+        with self.assertRaisesRegex(ValueError, "pins differ"):
+            code.build(self.repo, path)
 
     def test_dirty_tracked_staged_and_untracked_files_are_rejected(self):
         for kind in ("tracked", "staged", "untracked"):

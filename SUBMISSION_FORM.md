@@ -20,7 +20,7 @@ Can an auditor detect a private channel between competing LLM sellers from price
 
 ## Files to upload
 
-- `TEMPLATE_REPORT.pdf` — **primary report in the official Apart template** (≈ 5 pp main text; Figure 1 on page 1; from `TEMPLATE_REPORT.md` via `scripts/export_template_pdf.py`). Same numbers as SUBMISSION.
+- `TEMPLATE_REPORT.pdf` — **primary report in the official Apart template** (6 pp main text; Figure 1 on page 1; from `TEMPLATE_REPORT.md` via `scripts/export_template_pdf.py`). Same estimates as SUBMISSION.
 - `IMAGE.png` — project image for the form (1600×900; Figure 1 panel a; `scripts/fig0_headline.py`).
 - `SUBMISSION.pdf` — extended report with all appendices (A–H) and per-number provenance; upload as supplementary material if the form permits, or keep in the repository.
 - `SLIDES.pdf` — optional presentation supplement, if the form permits it.
@@ -34,3 +34,10 @@ Autonomous AI research agents performed the implementation, experiments, analysi
 ## Before submitting
 
 Run `uv run python scripts/finalize.py`. Its compliance receipt checks the abstract and form-summary lengths, main-text page limit, required ethics appendix, affiliation, references, PDF size and slide count. Upload the resulting PDFs and final code/evidence artifact. This file prepares the form; it does not submit it or grant repository access.
+
+The finalizer now also exports and verifies the primary template PDF, its Figure 1 placement and the
+project image. Commit its outputs, then run
+`uv run --group export python scripts/package_release.py --output-dir /var/tmp/beyond-words-final`
+(choose a new directory if it exists). The handoff includes the correct primary report, image and
+freshly built `submission_code.zip`, with checksums and verification logs. The author needs both
+source Git checkouts to build the ZIP; reviewers need neither checkout to run the merged checks.

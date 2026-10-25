@@ -62,10 +62,15 @@ def main():
     run(["uv", "run", "python", "tests/test_packaging.py"])
     if export:
         run(["uv", "run", "--group", "export", "python", "scripts/export_pdf.py"])
+        run(["uv", "run", "--group", "export", "python", "scripts/export_template_pdf.py"])
         run(["uv", "run", "--group", "export", "python", "scripts/check_committed_export.py"])
         run(["uv", "run", "--group", "export", "python", "tests/test_export.py"])
         run(["uv", "run", "--group", "export", "python", "scripts/check_submission_compliance.py"])
         run(["uv", "run", "--group", "export", "python", "tests/test_submission_compliance.py"])
+    # Primary uploads are checked even when export is skipped; these commands
+    # inspect the committed PDF and need no installed Chromium/browser launch.
+    run(["uv", "run", "--group", "export", "python", "scripts/check_template_artifacts.py"])
+    run(["uv", "run", "--group", "export", "python", "tests/test_template_artifacts.py"])
     print("\nFINALIZE OK" + ("" if export else " (export skipped)"))
 
 

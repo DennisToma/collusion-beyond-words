@@ -2,8 +2,9 @@
 
 Apart Research AI Collusion Sprint (23–25 Oct 2026) — Dennis Toma.
 
-**Read first:** [SUBMISSION.pdf](SUBMISSION.pdf) (20 pp; 6 main-text pages; source [SUBMISSION.md](SUBMISSION.md)) and
-[SLIDES.pdf](SLIDES.pdf) (8 slides). One-line result: in our LLM pricing markets a private chat channel
+**Read first:** [TEMPLATE_REPORT.pdf](TEMPLATE_REPORT.pdf) (official Apart template; 10 pp, 6 main;
+source [TEMPLATE_REPORT.md](TEMPLATE_REPORT.md)). [SUBMISSION.pdf](SUBMISSION.pdf) is the extended report
+(20 pp), and [SLIDES.pdf](SLIDES.pdf) has 8 slides. One-line result: in our LLM pricing markets a private chat channel
 shows up mainly as *higher prices*; we find no robust contemporaneous price co-movement, public messages give a
 zero-shot LLM auditor no resolved gain, and high prices also arise without any channel — so a price flag
 is a reason to audit, not evidence of an agreement.
@@ -13,10 +14,15 @@ This repo merges two sprint projects and runs **no new experiments**:
 The repositories are private until the submission deadline; `submission_code.zip` (built by
 `scripts/build_code_zip.py`) contains this repo and both source repos at their pinned commits (`sources/`).
 
-| project | repo (code, data, per-claim JSON) |
+| project | included source archive (code, data, per-claim JSON) |
 |---|---|
-| Q1.4 prices-only (information-theoretic detection) | [collusion-14-infotheory](https://github.com/DennisToma/collusion-14-infotheory) |
-| Q2.2 say-vs-do (text + action auditing) | [collusion-22-say-vs-do](https://github.com/DennisToma/collusion-22-say-vs-do) |
+| Q1.4 prices-only (information-theoretic detection) | `sources/q14-infotheory-732f08c.tar.xz` |
+| Q2.2 say-vs-do (text + action auditing) | `sources/q22-say-vs-do-91ffb2d.tar.xz` |
+
+The primary report has a 246-word abstract. Its byte-bound
+[receipt](results/template_artifact_check.json) checks template structure, text and figure pixels,
+main-text length, Figure 1 on pages 1–2 and the 1600×900 project image. Five additional failure/reproduction
+checks cover stale uploads, template requirements and byte-exact regeneration of both new images.
 
 The submission-compliance revision has **6 main-text pages**, a **234-word abstract**,
 and the required limitations/dual-use appendix; references and appendices bring the PDF to 20 pages.
@@ -57,7 +63,8 @@ the implementation, experiments, analysis and drafting under Dennis's direction 
 | `scripts/recompute_gate_pcmi_q14.py` | reconstructs the scripted gate’s pCMI scores and original B=200 shift-null draws from archived trajectories; all 3000 scores/pair p-values and 500 run p-values match → `results/gate_pcmi_q14.json` |
 | `scripts/process_log_summary.py` | counts autonomous manager iterations per repo/backend from the machine-local runner logs for the LLM usage statement, with a snapshot timestamp (→ `results/process_log_summary.json`; not regenerable without those logs) |
 | `scripts/package_release.py` | checks a clean committed release from an extracted Git archive, then prepares the PDFs, form text, code/evidence archive, receipt, logs and checksums outside the repo |
-| `tests/test_packaging.py` | 9 handoff checks: exact/repeatable archives, dirty/concurrent changes, omitted/altered/unsafe members, failed checks and publication only after success |
+| `tests/test_packaging.py` | 10 handoff checks: exact/repeatable archives, dirty/concurrent changes, omitted/altered/unsafe members, failed checks, code-ZIP membership/pins and publication only after success |
+| `scripts/check_template_artifacts.py`, `tests/test_template_artifacts.py` | actual primary-report/PDF/image acceptance plus 5 structure, stale-artifact and image-reproduction checks |
 | `tests/test_reproduction.py` | 26 checks: independent-copy reproduction, figure and replay parity, original-function parity for the Q1.4 grid and gate, C21b and the locked test, malformed trajectory/audit rejection, LLM-usage counts, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
 | `scripts/check_committed_export.py` | checks committed PDF text, slide placement/page count, actual figure pixels and portable links without rebuilding; catches changed PNGs with unchanged PDFs |
@@ -76,8 +83,12 @@ model credentials or sibling repos. GitHub links in the PDFs also require reposi
 After the author-machine finalizer, commit its outputs before packaging. The packager
 refuses a dirty worktree, checks every archive file against Git, and runs source,
 decimal-coverage, compliance, committed-PDF, reproduction, export-failure and packaging checks from
-an extraction without `.git`. It uses the existing export dependencies and Chromium;
-install those as below first. Choose an unused output directory outside the repository:
+an extraction without `.git`. It also builds `submission_code.zip` from the same committed HEAD and
+both pinned source Git checkouts, verifies every included file against Git, scans for secrets, enforces
+the 25 MB limit, and stages the primary report, project image, slides, form and extended report with
+checksums. Packaging requires the two sibling checkouts; checking the extracted merged report does not.
+It uses the existing export dependencies and Chromium; install those as below first.
+Choose an unused output directory outside the repository:
 
 ```bash
 uv run --group export python scripts/package_release.py --output-dir /var/tmp/beyond-words-handoff
@@ -109,6 +120,7 @@ That receipt predates its own notes; package clean HEAD for the actual handoff.
 uv run python scripts/check_sources.py          # 111 source checks, 144 document bindings, 158 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
 uv run python scripts/check_template_numbers.py # TEMPLATE_REPORT numbers = SUBMISSION numbers
+uv run python scripts/fig0_headline.py           # primary headline figure + IMAGE.png, from pinned data
 uv run python scripts/recompute_unrounded_q22.py # exact saved rounding-correction replay
 uv run python scripts/recompute_c21b_floor.py    # C21b floor/window sensitivity replay
 uv run python scripts/recompute_locked_test_q22.py # historical locked-test run-AUROC replay
@@ -124,11 +136,14 @@ uv run python scripts/fig6_strong_framing.py     # byte-identical figures/fig6_*
 uv run python tests/test_reproduction.py        # standalone + bad-input checks, including all six figure scripts
 uv run --group export playwright install chromium   # once
 uv run --group export python scripts/export_pdf.py  # SUBMISSION.pdf + SLIDES.pdf
+uv run --group export python scripts/export_template_pdf.py # primary PDF + byte-bound receipt
+uv run --group export python scripts/check_template_artifacts.py # verify current primary uploads without rebuilding
+uv run --group export python tests/test_template_artifacts.py # 5 primary-upload failure/reproduction checks
 uv run --group export python scripts/check_committed_export.py # current text/PNG pixels vs committed PDFs, without rebuilding
 uv run --group export python tests/test_export.py   # deliberate export failure checks
 uv run --group export python scripts/check_submission_compliance.py # lengths, main pages, disclosures, references, PDF hashes
 uv run --group export python tests/test_submission_compliance.py     # 3 compliance boundary/failure checks
-uv run python tests/test_packaging.py          # 9 packaging failure/integrity checks in temporary Git repos
+uv run python tests/test_packaging.py          # 10 packaging failure/integrity checks in temporary Git repos
 uv run python scripts/finalize.py              # author machine only (reads runner logs): refresh LLM-usage counts, then all checks + export
 ```
 

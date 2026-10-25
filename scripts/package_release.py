@@ -20,18 +20,23 @@ import tarfile
 import tempfile
 import time
 
+import build_code_zip
+
 ROOT = Path(__file__).resolve().parents[1]
 CHECKS = (
     "scripts/check_sources.py",
     "scripts/number_coverage.py",
+    "scripts/check_template_numbers.py",
+    "scripts/check_template_artifacts.py",
     "scripts/check_submission_compliance.py",
     "scripts/check_committed_export.py",
     "tests/test_reproduction.py",
     "tests/test_export.py",
     "tests/test_submission_compliance.py",
     "tests/test_packaging.py",
+    "tests/test_template_artifacts.py",
 )
-UPLOADS = ("SUBMISSION.pdf", "SLIDES.pdf", "SUBMISSION_FORM.md")
+UPLOADS = ("TEMPLATE_REPORT.pdf", "IMAGE.png", "SUBMISSION.pdf", "SLIDES.pdf", "SUBMISSION_FORM.md")
 
 
 def sha(data):
@@ -165,13 +170,16 @@ def package(repo, output):
         verify_extracted(extracted, files)
         for path in UPLOADS:
             shutil.copyfile(extracted / path, ready / path)
+        code_zip = ready / "submission_code.zip"
+        code_receipt = build_code_zip.build(repo, code_zip)
         artifacts = {p.name: dict(sha256=sha(p.read_bytes()), bytes=p.stat().st_size)
-                     for p in (archive, *(ready / name for name in UPLOADS))}
+                     for p in (archive, code_zip, *(ready / name for name in UPLOADS))}
         compliance = json.loads((extracted / "results/submission_compliance.json").read_text())
         receipt = dict(
             revision=revision, checked_at_utc=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             ok=True, tracked_files_verified=len(files), files=files, artifacts=artifacts, commands=rows,
             python=sys.version, uv_lock_sha256=files["uv.lock"]["sha256"], compliance=compliance,
+            code_zip=code_receipt,
             scope="Committed archive matches Git; all listed checks pass without .git, with absent sibling roots "
                   "and no model environment variables passed. Existing Python/browser on the same VM; HOME retained, "
                   "no OS sandbox. No PDF rebuild, runner-log refresh, new dependency install, experiment, "
@@ -179,8 +187,9 @@ def package(repo, output):
         (ready / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
         (ready / "HANDOFF.md").write_text(
             f"# Beyond Words handoff\n\nVerified committed revision: `{revision}`.\n\n"
-            "Upload `SUBMISSION.pdf` as the primary report; use `SUBMISSION_FORM.md` for form fields. "
-            "Upload `SLIDES.pdf` and the `.tar.gz` code/evidence supplement if the form permits them. "
+            "Upload `TEMPLATE_REPORT.pdf` as the primary report, `IMAGE.png` as the project image, "
+            "and `submission_code.zip` in the Project code field; use `SUBMISSION_FORM.md` for form fields. "
+            "Upload `SUBMISSION.pdf` and `SLIDES.pdf` as optional supplements if the form permits them. "
             "Check local file integrity with `sha256sum -c SHA256SUMS` in this directory. "
             "The archive extracts to `beyond-words/`; its README gives reproduction instructions.\n\n"
             "`receipt.json` records Git file hashes and the checks run from the extraction; `logs/` holds "

@@ -1,0 +1,24 @@
+{
+  "abstract_words": 246,
+  "form_summary_words": 117,
+  "text_fragments": 147,
+  "figures": 4,
+  "main_text_pages": 6,
+  "total_pages": 10,
+  "pdf_bytes": 781044,
+  "ok": true,
+  "sha256": {
+    "TEMPLATE_REPORT.md": "af06861c136736c41925912e9a0be2da2b5d17292b3c8cf58f3d4193c171ce3e",
+    "TEMPLATE_REPORT.pdf": "03895b4192c7392e39b1f5e4f17a3c6b6c87f616ad03d41fbfa4b06a32e3cd17",
+    "SUBMISSION_FORM.md": "02ee1b700ca3b91e47b3105c2bd17c6ced72f5b9d94e151fb4b5d968a0568d9a",
+    "IMAGE.png": "5f76a6e9c6f001d6400259c9113c70ef99027bd16ce9fe8dcc18f589429d0d62",
+    "scripts/export_template_pdf.py": "41daacfdcc9de5038f609b0c5932245ee9a2986b0efb0a5a61c16027b47360cb",
+    "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb",
+    "scripts/check_template_artifacts.py": "2b01e456d893d2a0a17599e8cad5e7143e967e1fc3b20d53d5b810d603c91a91",
+    "figures/fig0_headline.png": "0b4f8004de50d8eb726e2dcf4f1bd1a42216371409768fcbb40cac19bacd937a",
+    "figures/fig1_scripted_hard_negatives.png": "5d570e4629325894f4d95a44319822e22ee0cb8fba241df14943542092daf35b",
+    "figures/fig2_level_vs_comovement_9sets.png": "120309a199864d8789e75a9bd7ae6258d42e52e375b2086643cfa56eb7cd2e7e",
+    "figures/fig4_say_vs_do_summary.png": "df754e561a0abb753d231fa570e918dac86818397859c9d963a2608395e36866"
+  },
+  "scope": "Primary PDF text/figure pixels/links, template structure and lengths, page limits, early headline placement and project image format; not scientific validity."
+}

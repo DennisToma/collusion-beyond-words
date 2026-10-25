@@ -9,6 +9,8 @@ Fails if the worktree is dirty, the zip exceeds 25 MB, or a secret pattern match
 """
 import argparse
 import io
+import hashlib
+import json
 import lzma
 import os
 import re
@@ -39,9 +41,11 @@ Layout
 - `sources/q22-say-vs-do-{q22}.tar.xz` — git archive of the Q2.2 say-vs-do market and text/action
   auditors at `{q22}`.
 
-Regenerate every figure and check every printed number (no model calls, no API keys needed):
+Replay the saved calculations, regenerate all seven figures and the project image in
+temporary copies, and check the documented numeric bindings and primary PDF (no model
+calls, no API keys or browser installation needed; numeric coverage limits are in README):
 
-    cd beyond-words && uv run python scripts/finalize.py --no-export
+    cd beyond-words && uv run --group export python scripts/finalize.py --no-export
 
 The source repos each have their own reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E).
 The repository https://github.com/DennisToma/collusion-beyond-words will be made public after the
@@ -54,7 +58,50 @@ re-create from their seeds) and rendered HTML reports (the .md sources and PDFs 
 
 
 def git(repo, *args):
-    return subprocess.check_output(["git", *args], cwd=repo)
+    # Keep caller Git overrides/credentials out of both release and source reads.
+    env = {key: os.environ[key] for key in ("PATH", "HOME", "LANG", "LC_ALL", "TMPDIR") if key in os.environ}
+    return subprocess.check_output(["git", *args], cwd=repo, env=env)
+
+
+def filtered_files(repo, rev):
+    """Expected regular-file bytes, read independently from the committed Git archive."""
+    with tarfile.open(fileobj=io.BytesIO(git(repo, "archive", "--format=tar", rev))) as packed:
+        return {m.name: packed.extractfile(m).read() for m in packed
+                if m.isfile() and m.size <= MAX_FILE and not m.name.endswith(".html")}
+
+
+def verify_code_zip(path, repo, revision, sources):
+    """Reject stale, omitted, extra or corrupted committed files, including inside sources/."""
+    if path.stat().st_size > MAX_ZIP:
+        raise ValueError("zip exceeds 25 MB")
+    counts = {}
+    with zipfile.ZipFile(path) as zf:
+        if zf.testzip() is not None or len(zf.namelist()) != len(set(zf.namelist())):
+            raise ValueError("Corrupt or duplicate ZIP member")
+        expected = filtered_files(repo, revision)
+        expected_names = {"beyond-words/" + name for name in expected} | {"README.md"}
+        for name, data in expected.items():
+            if zf.read("beyond-words/" + name) != data:
+                raise ValueError(f"ZIP differs from committed release: {name}")
+        counts["beyond-words"] = len(expected)
+        for name, (source_repo, pin) in sources.items():
+            member = f"sources/{name}-{pin[:7]}.tar.xz"
+            expected_names.add(member)
+            expected_source = {f"{name}/{p}": data for p, data in filtered_files(source_repo, pin).items()}
+            with tarfile.open(fileobj=io.BytesIO(zf.read(member)), mode="r:xz") as packed:
+                members = [m for m in packed if not m.isdir()]
+                if (len(members) != len(expected_source) or len({m.name for m in members}) != len(members)
+                        or any(not m.isfile() or m.name not in expected_source for m in members)):
+                    raise ValueError(f"Source archive membership mismatch: {name}")
+                for m in members:
+                    if packed.extractfile(m).read() != expected_source[m.name]:
+                        raise ValueError(f"Source archive differs from pin: {m.name}")
+            counts[name] = len(expected_source)
+        if set(zf.namelist()) != expected_names or revision not in zf.read("README.md").decode():
+            raise ValueError("ZIP membership or README revision mismatch")
+    return dict(revision=revision, bytes=path.stat().st_size,
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest(), files=counts,
+                source_pins={name: pin for name, (_, pin) in sources.items()})
 
 
 def add_archive(zf, repo, rev, prefix, excluded):
@@ -97,29 +144,37 @@ def add_source_tarball(zf, repo, rev, name, excluded):
     return n
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default=str(ROOT / "submission_code.zip"))
-    out = Path(ap.parse_args().out)
-    if git(ROOT, "status", "--porcelain").strip():
-        raise SystemExit("commit first: worktree is dirty")
-    head = git(ROOT, "rev-parse", "--short", "HEAD").decode().strip()
+def build(repo, out, sources=None):
+    repo, out = Path(repo), Path(out)
+    sources = SOURCES if sources is None else sources
+    if git(repo, "status", "--porcelain").strip():
+        raise ValueError("Commit all changes before building ZIP; worktree is dirty")
+    head = git(repo, "rev-parse", "HEAD").decode().strip()
+    manifest = json.loads(git(repo, "show", f"{head}:evidence/manifest.json"))
+    project_keys = {"q14-infotheory": "q14", "q22-say-vs-do": "q22"}
+    if any(pin != manifest["projects"][project_keys[name]]["commit"] for name, (_, pin) in sources.items()):
+        raise ValueError("Source archive pins differ from the committed evidence manifest")
     excluded = []
     tmp = out.with_suffix(".tmp")
     with zipfile.ZipFile(tmp, "w") as zf:
-        counts = {"beyond-words": add_archive(zf, ROOT, "HEAD", "beyond-words/", excluded)}
-        for name, (repo, rev) in SOURCES.items():
-            counts[name] = add_source_tarball(zf, repo, rev, name, excluded)
+        counts = {"beyond-words": add_archive(zf, repo, head, "beyond-words/", excluded)}
+        for name, (source_repo, rev) in sources.items():
+            counts[name] = add_source_tarball(zf, source_repo, rev, name, excluded)
         zf.writestr("README.md", README.format(
-            head=head, q14=SOURCES["q14-infotheory"][1][:7], q22=SOURCES["q22-say-vs-do"][1][:7],
+            head=head, q14=sources["q14-infotheory"][1][:7], q22=sources["q22-say-vs-do"][1][:7],
             excluded="\n".join(sorted(set(excluded))) or "- none"))
+    receipt = verify_code_zip(tmp, repo, head, sources)
+    if git(repo, "rev-parse", "HEAD").decode().strip() != head or git(repo, "status", "--porcelain").strip():
+        raise ValueError("Release changed while building ZIP")
     os.replace(tmp, out)
-    size = out.stat().st_size
-    with zipfile.ZipFile(out) as zf:
-        assert zf.testzip() is None
-    print(f"{out}: {size / 1e6:.1f} MB, files {counts}, excluded {len(set(excluded))}")
-    if size > MAX_ZIP:
-        raise SystemExit("zip exceeds 25 MB")
+    print(f"{out}: {receipt['bytes'] / 1e6:.1f} MB, files {counts}, excluded {len(set(excluded))}")
+    return receipt
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=str(ROOT / "submission_code.zip"))
+    build(ROOT, Path(ap.parse_args().out))
 
 
 if __name__ == "__main__":
