@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 14:30 UTC, merge iteration 36 — freeze hold, HEAD bf33af6 verified)
+## Current state (2026-10-25 14:35 UTC, merge iteration 37 — freeze hold, HEAD 5164a05 verified)
 - DIRECTION `2cf7c7d` compliance items all done (iter33). Iter34 added the second independent critic CLAUDE.md requires: Codex gpt-6.1-sol read-only review of the compliance diff (reviews/codex_i34.md) → 0 P1, 3 P2 wording, all applied (abstract estimand, TE scope, §6 "small gains remain possible"). No number changed.
 - Full finalize.py PASS: 111/111 source checks, 144/144 bindings (abstract binding template updated to the new wording), 158 hashes; 26/26 + 9/9 + 3/3 tests. Abstract 234 words (150–250), form 117, 6 main pages / 20 total, PDF 1,153,269 bytes, 8 slides.
 - Sources: Q1.4 0593ed4 / Q2.2 ee4930c reviewed the ff5b616 bytes (SUBMISSION sha 4ff83a2b…) with 0 P1; iter34 changed 3 sentences in the abstract/§6 (Q1.4 TE scope, Q2.2 estimand wording) → sources may re-scope-read; pins unchanged 732f08c / 91ffb2d.
@@ -8,9 +8,11 @@
 - Anonymous GitHub access fails; Dennis must grant reader access or upload an archive of the final HEAD (not c1e7fdd).
 - Iter35: finalize.py --no-export PASS on f82acb0 (26/26); SUBMISSION_FORM current; sources' latest (Q1.4 8625743, Q2.2 1c42da4) predate f82acb0 and report 0 P1 → they may diff-check iter34 wording; no open asks.
 - Iter36: Q2.2 I160 (f73f49c) scope-read f82acb0 bytes → 0 P1; Q1.4 I151 0 P1. finalize --no-export PASS 26/26 on bf33af6.
+- Iter37: no new source commits since 14:18 (Q1.4 8625743, Q2.2 f73f49c, both 0 P1). finalize --no-export PASS 26/26 on 5164a05.
 - Next: freeze. 16:30 finalize freshness/count pass only; submission-ready 17:30; hard stop 18:00. Risks: synthetic/price-derived labels, exchangeability, narrow prompts/markets.
 
 ## Log
+- 2026-10-25 14:35 UTC merge iter37: freeze hold. Sources unchanged since iter36. finalize.py --no-export PASS 26/26 on 5164a05; the only diffs were usage counts (368→370) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:30 UTC merge iter36: freeze hold. Q2.2 I160 confirmed 0 P1 on the f82acb0 bytes (SUBMISSION sha 96d0ed7b…), Q1.4 8625743 0 P1. finalize.py --no-export PASS 26/26; it changed only the usage counts (368→369), which I reverted to keep the reviewed bytes stable (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:25 UTC merge iter35: all DIRECTION compliance items already done (iter33/34). Checked sources: Q1.4 I150/I151 and Q2.2 I158 report 0 P1 and no asks, but both read pre-f82acb0 bytes. Ran finalize.py --no-export on HEAD: PASS 26/26. The only tree change was the process-log snapshot JSON, which I reverted so the reviewed bytes stay stable (the 16:30 finalize refreshes it). No edits to SUBMISSION/REPORT/SLIDES, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:20 UTC merge iter34: verified committed SUBMISSION bytes = those both sources reviewed (0 P1). Ran Codex gpt-6.1-sol read-only review of the compliance diff (first attempt hung on stdin, rerun with </dev/null): 0 P1, 3 P2; checked each against §4/§5.2/App. E/F and applied. Abstract binding template updated (guard caught the reworded sentence as intended). Full finalize PASS, page 1 text checked. No experiments, no new numbers, no DIRECTION deviation.
