@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 14:58 UTC, merge iteration 40 — source reconciliation complete)
+## Current state (2026-10-25 15:05 UTC, merge iteration 41 — freeze hold; sources still e8cf411/5a012a0)
 - DIRECTION compliance and both manuscript critics resolved; reviewed manuscript/PDFs remain frozen (6 main/20 total report pages; 234-word abstract; 8 slides).
 - Full source reconciliation: Q1.4 e8cf411, Q2.2 5a012a0; both declare research final. All tracked changes since pins classified; no result/dataset/split/analysis changes to import.
 - 81/81 Q1.4 and 76/77 Q2.2 live bundle files match pins; sole drift = known Q2.2 REPORT review line. All 158 source Git-pin hashes match. Receipt: results/source_freeze_i40.json.
@@ -12,6 +12,7 @@
 - Handoff still needs Dennis to transfer artifacts or grant access. Risks: synthetic/price-derived labels, exchangeability, narrow prompts/markets. No experiment or scientific analysis in iteration 40.
 
 ## Log
+- 2026-10-25 15:05 UTC merge iter41: freeze hold. Sources unchanged since iter40 (Q1.4 e8cf411, Q2.2 5a012a0). finalize.py --no-export on 6101429: FINALIZE OK (8/8 commands, packaging test passes). Only diffs were usage counts (368→378) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:35 UTC merge iter37: freeze hold. Sources unchanged since iter36. finalize.py --no-export PASS 26/26 on 5164a05; the only diffs were usage counts (368→370) and check timestamps, which I reverted (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:30 UTC merge iter36: freeze hold. Q2.2 I160 confirmed 0 P1 on the f82acb0 bytes (SUBMISSION sha 96d0ed7b…), Q1.4 8625743 0 P1. finalize.py --no-export PASS 26/26; it changed only the usage counts (368→369), which I reverted to keep the reviewed bytes stable (the 16:30 finalize refreshes them). No edits, no model calls, no DIRECTION deviation.
 - 2026-10-25 14:25 UTC merge iter35: all DIRECTION compliance items already done (iter33/34). Checked sources: Q1.4 I150/I151 and Q2.2 I158 report 0 P1 and no asks, but both read pre-f82acb0 bytes. Ran finalize.py --no-export on HEAD: PASS 26/26. The only tree change was the process-log snapshot JSON, which I reverted so the reviewed bytes stay stable (the 16:30 finalize refreshes it). No edits to SUBMISSION/REPORT/SLIDES, no model calls, no DIRECTION deviation.
