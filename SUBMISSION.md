@@ -412,8 +412,8 @@ agents' rule files and an LLM-call helper with rate limiting and call logging. T
 scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
 were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
 beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
-possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 323 manager iterations completed (213 Opus, 110
-gpt-6.1-sol; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 336 manager iterations had completed by 2026-10-25 11:50 UTC (219 Opus, 117
+gpt-6.1-sol; the runners kept going after the evidence freeze; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
 A separate director loop
 (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,
 judges and auditors are the LLMs named in §3. The source reports and this merged report were reviewed
@@ -435,7 +435,7 @@ Fig. 5's per-round means are asserted equal to the saved source JSON.
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
 decimals are bound (222/260 in the main text, 55/61 in the slides). Each of the other 38 + 6 falls in a declared
 non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
-the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `uv run python tests/test_reproduction.py` passes 11 release checks, including
+the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `uv run python tests/test_reproduction.py` passes 12 release checks (one binds the LLM-usage counts to `results/process_log_summary.json`), including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
 `uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,

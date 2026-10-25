@@ -160,6 +160,16 @@ class ReproductionChecks(unittest.TestCase):
             self.assertEqual(sha(self.copy / "figures" / figure), expected)
 
 
+    def test_llm_usage_counts_match_process_log_summary(self):
+        # the LLM-usage statement prints runner-log counts; they must equal the committed snapshot
+        summary = json.loads((ROOT / "results/process_log_summary.json").read_text())
+        text = " ".join((ROOT / "SUBMISSION.md").read_text().split())
+        by = summary["source_repos_total_by_backend"]
+        expected = (f"{summary['source_repos_total']} manager iterations had completed by "
+                    f"{summary['source_repos_snapshot_utc']} ({by['opus']} Opus, {by['codex-sol']} gpt-6.1-sol;")
+        self.assertIn(expected, text)
+        self.assertEqual(summary["source_repos_total"], sum(by.values()))
+
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ReproductionChecks)
     result = unittest.TextTestRunner(verbosity=2).run(suite)

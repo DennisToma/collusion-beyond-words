@@ -6,7 +6,8 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
 
 - PDF: **[SUBMISSION.pdf](SUBMISSION.pdf)**; slides (8): **[SLIDES.pdf](SLIDES.pdf)** from [SLIDES.md](SLIDES.md).
 - Iteration 20 fresh-clone release check (GitHub `d1cc435` → /var/tmp, sibling paths disabled): 111/111 source checks, 139/139 bindings, 76 hashes; 0 unclassified decimals; all six figure scripts byte-identical; 11/11 reproduction + 9/9 export tests; PDF rebuild gives 17 pp / 8 slides with page text identical to the committed PDFs (only the CreationDate differs). README now lists the fig2/fig5 commands.
-- Iteration 16 added **§9 Conclusion** (no new numbers) and an **LLM usage statement**. The human author seeded plan, schema, rules and LLM helper. Autonomous agents did the market code, experiments, analysis and writing: 323 source-repo manager iterations, 213 Opus and 110 gpt-6.1-sol, from `scripts/process_log_summary.py` → `results/process_log_summary.json`, which reads machine-local runner logs. Codex review: 1 P1 (Conclusion overstated "without any agreement") and 3 P2 wording fixes, all applied ([record](reviews/codex_i16.md)).
+- Iteration 21 dated + test-bound the LLM-usage counts (refresh again at finalize).
+- Iteration 16 added **§9 Conclusion** (no new numbers) and an **LLM usage statement**. The human author seeded plan, schema, rules and LLM helper. Autonomous agents did the market code, experiments, analysis and writing: 336 source-repo manager iterations by 2026-10-25 11:50 UTC (219 Opus, 117 gpt-6.1-sol; refreshed iter21 — earlier 323 was an undated snapshot), from `scripts/process_log_summary.py` → `results/process_log_summary.json`, which reads machine-local runner logs. Codex review: 1 P1 (Conclusion overstated "without any agreement") and 3 P2 wording fixes, all applied ([record](reviews/codex_i16.md)).
 - Iteration 11 scientific scope corrections: [primary-literature/code audit](reviews/literature_i11.md)
   verifies the bibliography and corrects the SALT explanation: preceding messages predict separately
   submitted verdicts; the detected act does not occur in the auditor-visible chat. The report and slides
@@ -39,7 +40,7 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   / Q2.2 `91ffb2d`, with full commit IDs and SHA256 provenance. No sibling clones or model credentials
   are needed for the checks and the rendering of all six figures. This verifies saved evidence; full experimental
   regeneration still requires the source repos and their caches.
-- Release checks: `uv run python tests/test_reproduction.py` passes **11/11** in an independent copy with
+- Release checks: `uv run python tests/test_reproduction.py` passes **12/12** in an independent copy with
   nonexistent source paths. All six regenerated figures reproduce byte-identically; edited report/slide values, a
   missing binding, incorrect rounding or reduced precision, a corrupt bundle file, and a changed live source are
   rejected. Receipt: `results/reproduction_check.json`.

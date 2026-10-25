@@ -104,10 +104,10 @@
     "SLIDES.pdf": []
   },
   "sha256": {
-    "SUBMISSION.md": "c661d7deda25fc9b0ad24beb2fd9cde7d4bb1f5e85d22c1610db74e4fc381690",
+    "SUBMISSION.md": "a8d605b5621a5f8d00ee839086806b65443a8de616561118d607ad1db5f523b5",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e",
-    "SUBMISSION.pdf": "1c60ff3c4fb3dbfd815f4e762987f1217161edb345a44be0d2b9c2e91ccee5ca",
-    "SLIDES.pdf": "9a128c4098dae5c7a6bbea78b4e31e043709d3b4d3236c8675c1fc36809d381f",
+    "SUBMISSION.pdf": "a44a309047509e5e2aa1985829aa34b8176bec9dda6a7c0240c6324c8678905b",
+    "SLIDES.pdf": "faac7a656407333b188a62e43e3a64f04a757d5ab7b230eb8100125eaacc27e8",
     "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."

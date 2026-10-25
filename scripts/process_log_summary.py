@@ -8,11 +8,18 @@ Usage: uv run python scripts/process_log_summary.py
 """
 import json, re, sys
 from collections import Counter
+from datetime import datetime
 from pathlib import Path
 
 LOGS = Path.home() / "collusion" / "logs"
 REPOS = ["collusion-14-infotheory", "collusion-22-say-vs-do", "collusion-beyond-words"]
 OUT = Path(__file__).resolve().parents[1] / "results" / "process_log_summary.json"
+
+
+def parse_ts(t):
+    # runner logs use `date` output: 12-hour "... 07:04:32 PM UTC 2026" (Phase 2) or 24-hour (Phase 1)
+    fmt = "%a %b %d %I:%M:%S %p UTC %Y" if (" AM " in t or " PM " in t) else "%a %b %d %H:%M:%S UTC %Y"
+    return datetime.strptime(t, fmt)
 
 
 def summarise(path):
@@ -40,6 +47,14 @@ def main():
                 tot.update(s["by_backend"])
     out["source_repos_total_by_backend"] = dict(sorted(tot.items()))
     out["source_repos_total"] = sum(tot.values())
+    # The runners keep going after the sources freeze, so the counts are a snapshot:
+    # record the latest completed source-repo iteration they include.
+    out["source_repos_snapshot_utc"] = max(
+        (parse_ts(s["last_end"])
+         for r in REPOS[:2] for s in out["repos"][r].values() if s and s["last_end"]),
+        default=None)
+    if out["source_repos_snapshot_utc"]:
+        out["source_repos_snapshot_utc"] = out["source_repos_snapshot_utc"].strftime("%Y-%m-%d %H:%M UTC")
     OUT.write_text(json.dumps(out, indent=1) + "\n")
     print(json.dumps(out, indent=1))
 
