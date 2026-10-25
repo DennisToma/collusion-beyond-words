@@ -3,6 +3,12 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 43 source re-check: Q1.4 `372f375` / Q2.2 `1ac4621`.
+Complete diffs from the iteration-42 receipt's `e8cf411` / `5a012a0` change
+STATUS.md only (two lines per source). Both worktrees are clean; scientific
+inputs, manuscript scope reviews and evidence pins are unchanged.
+[Verification and commands](reviews/handoff_i43.md).
+
 Iteration 42 post-15:00 live reconciliation: Q1.4
 `e8cf411460358ab14ffdb4769ada846406fd9497` / Q2.2
 `5a012a0bba87dbfbd5bbbfcb16c810ab91483bc9`; all source-tree classifications,
