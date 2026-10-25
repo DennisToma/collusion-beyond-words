@@ -26,7 +26,8 @@ This repo merges two sprint projects and runs **no new experiments**:
 | `evidence/` | 66 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
 | `scripts/check_sources.py` | 57 saved-source assertions, 64 bindings that extract selected numbers from the report/slides, and 66 evidence-file hash checks (→ `results/source_check.json`) |
 | `tests/test_reproduction.py` | 9 checks: independent-copy reproduction, figure parity, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
-| `scripts/export_pdf.py` | builds both PDFs and checks every heading, table cell and slide title survived |
+| `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
+| `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
 | `reviews/` | adversarial claim reviews (codex gpt-6.1-sol, Opus) and a judge-style presentation review, all applied |
 | `EXPERIMENTS.tsv`, `STATUS.md` | ledger of merge passes and iteration log |
 
@@ -39,7 +40,15 @@ uv run python scripts/fig6_strong_framing.py     # byte-identical figures/fig6_*
 uv run python tests/test_reproduction.py        # standalone + bad-input checks, including both figure scripts
 uv run --group export playwright install chromium   # once
 uv run --group export python scripts/export_pdf.py  # SUBMISSION.pdf + SLIDES.pdf
+uv run --group export python tests/test_export.py   # deliberate export failure checks
 ```
+
+The export receipt is [results/export_check.json](results/export_check.json): all 485 report text
+fragments and 55 slide text fragments are present (the latter on the correct slide), all 10 embedded
+figures match the source pixels, and PDF links use public URLs. Slide body, table and code text is at
+least 14 pt; dense raster chart labels remain smaller and are best inspected in the report or PNGs.
+These checks establish text presence and the specified layout constraints, not scientific validity.
+`results/export_test.json` records the 9 export failure checks.
 
 The checker compares selected printed numeric claims with saved source values using half-up rounding;
 it fails if a bound context disappears. It does **not** check every number or certify the meaning of

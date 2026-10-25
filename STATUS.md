@@ -1,15 +1,17 @@
 # STATUS
 
-## Current state (2026-10-25 10:21 UTC, merge iteration 9)
-- Latest source HEADs: Q1.4 `732f08c` / Q2.2 `94018c8` (I133 confirms 0 open); evidence stays pinned at `732f08c` / `91ffb2d`, with identical science.
-- SUBMISSION v1.6 changes Reproducibility only; PDF 15 pp, slides 8. Scientific text, tables, slide source and figures unchanged.
-- Fixed verification gap: old 44 checks never read the report. Now 57 saved-source assertions + 64 actual report/slide numeric bindings + 66 file hashes pass.
-- Portable evidence: 66 exact blobs from pinned full commits, deterministic compressed storage; checks and Fig.4/6 no longer need sibling clones.
-- Release: 9/9 checks pass in an independent copy; Fig.4/6 byte-identical to previous HEAD; bad claims, rounding/precision, missing context and corrupt evidence rejected.
-- Independent codex review: one P2 precision bug fixed and rechecked; all 66 source hashes matched to git blobs; no open P1/P2.
-- Export checks pass: 19/19 headings, 378/378 cells, 8/8 slides. Snapshot rebuild byte-identical; all live scientific inputs match (Q2.2 REPORT has one newer review line).
-- Next: check new source HEADs/flags until 15:00 and apply P1s; 16:30 export pass + push; hard stop 18:00.
-- Risks: numeric bindings cover selected claims, not every number or qualitative scope; full experiment regeneration still needs source caches. No broad codex process kills.
+## Current state (2026-10-25 10:31 UTC, merge iteration 10)
+- Latest sources: Q1.4 `65d44bb` / Q2.2 `94018c8`, both 0 open flags; science unchanged, evidence pins remain `732f08c` / `91ffb2d`.
+- Headlines unchanged: markup rises in 9/9 main sets; grid pCMI 0.51 [0.43, 0.59]; text+action Δ −0.01 [−0.09, +0.06] on locked test.
+- SUBMISSION v1.7: PDF 15 pp, slides 8. Scientific numbers, slide Markdown, figures and evidence unchanged; Methods line-wrap fix prevents an accidental list.
+- Iter10 chunk: readable and portable PDF exports, plus actual body-text/figure checks. Busy slides now fit at ≥14 pt, including table/code text; raster chart labels can be smaller.
+- Export passes 485/485 report text fragments, 55/55 slide fragments on correct pages, 10/10 exact figure pixel matches, and public PDF link checks; receipt `results/export_check.json`.
+- 9/9 export failure checks pass (deleted/wrong-page text, bad figures/links, overflow, font floor); 9/9 standalone reproduction checks still pass with byte-identical Fig.4/6.
+- Saved-evidence checks still pass: 57 source assertions + 64 numeric bindings + 66 hashes; source/reproduction/export receipts match current files.
+- Visual pass: all 15 report pages and 8 slides checked as raster contact sheets; detailed slides 2/5/6 and appendix page inspected. No clipping seen.
+- Prior independent codex/Opus claim reviews remain applied; iter9 precision bug fixed and rechecked. No new experiments, auditor calls or scientific claims this iteration.
+- Next: monitor new source HEADs/flags until 15:00 and apply P1s; scheduled 16:30 export pass + push; hard stop 18:00.
+- Risks: numeric bindings are selective; text-presence checks do not certify qualitative scope or chart readability. Full experimental regeneration still requires source caches.
 
 ## Log
 - 2026-10-25 10:09 UTC merge iter8: sources unchanged (732f08c/91ffb2d). Fresh-clone reproduction in /var/tmp/repro_bw: 44/44, fig4/fig6 + source_check.json byte-identical. README rewritten; SUBMISSION Reproducibility notes the two regenerated figures + fresh-clone check; REPORT 42→44 count fix. PDFs rebuilt (checks pass). EXPERIMENTS M9 (iter7) + M10 added.
@@ -28,3 +30,5 @@
 - 2026-10-25 10:21 UTC merge iter9 (Codex fallback): chose standalone evidence + real document verification after finding check_sources.py only compared JSON to hard-coded expectations despite its documentation. Added 66 exact, SHA256-pinned source blobs (git show full commits; JSON/JSONL deterministic gzip), source resolver and reconstruction command. Expanded source assertions 44→57 and added 64 per-context numeric bindings for SUBMISSION/SLIDES with fixed per-slot half-up precision; portable Fig.4/6 loaders. Added 9 integration/mutation checks and receipts. Independent fresh-context gpt-6.1-sol high review found one P2: edited integer precision widened tolerance; fixed via declared digits, reviewer reproduced rejection, zero open P1/P2. Reviewer independently matched all 66 raw hashes to pinned source git blobs. Updated README, SOURCES, REPORT and SUBMISSION Reproducibility; scientific text/tables, SLIDES.md and figures unchanged. Snapshot rebuild byte-identical; live mode passes; standalone figures match previous HEAD byte-for-byte; export checks pass (19 headings/378 cells/8 slides; 15 pp). No experiments or auditor calls, only one implementation reviewer. No DIRECTION deviation.
 
 - 2026-10-25 10:23 UTC iter9 source resync: Q2.2 advanced to `94018c8` (I133); it confirms 131-1 applied, 0 open. Diff is REPORT one review line, STATUS and merge_flags only; science unchanged. Kept evidence pin `91ffb2d` rather than chasing review metadata. 65/66 live blobs match exactly; only REPORT metadata differs. Default snapshot check is stable; --live intentionally requires byte-identical pinned checkouts, now documented.
+
+- 2026-10-25 10:31 UTC merge iter10 (Codex fallback): synced Q1.4 `65d44bb` / Q2.2 `94018c8`; both frozen, 0 open merge flags. Chose export readability/completeness after finding the old auto-fit shrank slide 5 to 10.5 pt, checked only slide titles, and embedded machine-local file links in the PDF. Added a 14 pt floor for HTML text (including tables/code), adaptive figure height, padding-aware browser bounds, image-load validation, all-Markdown-text presence checks (485 report / 55 slide fragments, slides checked page by page), exact embedded-figure pixel checks (6 report + 4 deck), and public GitHub link rewriting. Missing figures now fail; temporary export paths are unique. Fixed Methods' accidental `+ public facts` Markdown list; only Reproducibility otherwise changed in SUBMISSION. Numeric token sequence unchanged, scientific text before Reproducibility whitespace-identical; SLIDES.md, figures and evidence unchanged. Added 9 focused failure tests and hash-bound export receipts. All export checks, 9/9 export tests, 57/57 source assertions, 64/64 document bindings, 66 hashes and 9/9 independent-copy reproduction tests pass; Fig.4/6 remain byte-identical. Inspected all 23 PDF pages via raster contact sheets and dense slides/appendix at detail. README/REPORT/SOURCES updated; no model calls or experiments, no DIRECTION deviation. Remaining chart-label readability is disclosed; source freeze and final 16:30 pass remain the next work.

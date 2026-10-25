@@ -1,0 +1,22 @@
+{
+  "command": "uv run --group export python tests/test_export.py",
+  "n_tests": 9,
+  "n_fail": 0,
+  "n_errors": 0,
+  "tests": [
+    "test_deleted_body_and_wrong_slide_are_detected",
+    "test_excess_content_is_rejected_at_font_floor",
+    "test_figure_height_yields_before_font_floor",
+    "test_font_floor_includes_tables_and_code",
+    "test_markdown_formatting_preserves_meaningful_text",
+    "test_missing_or_broken_images_are_rejected",
+    "test_missing_or_substituted_pdf_figure_is_rejected",
+    "test_padding_and_horizontal_overflow_are_detected",
+    "test_repo_links_become_portable_and_file_links_fail"
+  ],
+  "sha256": {
+    "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0",
+    "tests/test_export.py": "9037700fa155c00253a7055a36eac693e565bf5b7b7b3c690b654e1983cdacc2",
+    "SLIDES.md": "bda209b126b95516987dde775efac6b9e9adfa06a6d8a8c5b31c79dac04b1517"
+  }
+}

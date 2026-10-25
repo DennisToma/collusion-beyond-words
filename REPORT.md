@@ -6,8 +6,17 @@ Figures: `figures/fig1–fig6` (copies of source-repo figures; Fig. 4 regenerate
 
 - PDF: **[SUBMISSION.pdf](SUBMISSION.pdf)**; slides (8): **[SLIDES.pdf](SLIDES.pdf)** from [SLIDES.md](SLIDES.md).
 - Rebuild: `uv run --group export playwright install chromium` (once), then
-  `uv run --group export python scripts/export_pdf.py` (renders, then checks every heading, table cell and
-  slide title is present in the PDF text, and that no slide overflows).
+  `uv run --group export python scripts/export_pdf.py`. [Export receipt](results/export_check.json):
+  **485/485 report text fragments, 55/55 slide fragments on the correct pages, and 10/10 embedded
+  figures with exact source pixels**; legacy checks (19 headings, 378 cells, 8 titles) also pass.
+  Slide body/table/code text fits at **≥14 pt** (busy slides previously shrank below that floor); chart labels
+  remain raster text and can be smaller. Repository links now resolve to public GitHub URLs rather
+  than local `file://` paths. These checks verify text presence and layout constraints, not scientific scope.
+- Export failure checks: `uv run --group export python tests/test_export.py` passes **9/9**:
+  deleted prose, text on the wrong slide, missing/broken/substituted figures, local-file links,
+  overflow into page padding, horizontal overflow, and text below the font floor are rejected.
+  Receipt: `results/export_test.json`. Scientific numbers are unchanged; a Markdown
+  line-wrap fix: `+ public facts` no longer accidentally starts a list in Methods.
 - Saved-value/document check: `uv run python scripts/check_sources.py` passes **57/57 source assertions,
   64/64 document bindings, and 66 evidence-file hash checks**. The document bindings extract selected
   printed numbers from SUBMISSION.md and SLIDES.md and compare them directly with saved source values,

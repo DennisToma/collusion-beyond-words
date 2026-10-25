@@ -157,8 +157,8 @@ score against no-channel games of the same model and shock family. Level screens
 the per-round Nash price and *pair_level* (pair mean minus rivals). An independent reimplementation agreed
 on 422/424 run × statistic cells to < 1e-9 on the v1 datasets.
 
-**Auditors (Q2.2).** One zero-shot gpt-6.1-sol auditor, same task text, six views: `text` (public messages
-+ public facts), `action` (prices, costs, demand, profit), `action_stats` (+ computed pair-statistics
+**Auditors (Q2.2).** One zero-shot gpt-6.1-sol auditor, same task text, six views: `text` (public messages +
+public facts), `action` (prices, costs, demand, profit), `action_stats` (+ computed pair-statistics
 table), `combined` (text ∪ action), `combined_stats`, `structured`. Registered primary contrast:
 Δ_hybrid = AUROC(combined) − max(AUROC(text), AUROC(action)), on communication labels (positive = explicit agreement or information exchange; on the locked test all 50
 private runs are judged y = 1 — 48 explicit, 2 information exchange — so judge and channel labels coincide there).
@@ -394,7 +394,8 @@ numbers from this report and the slides, plus all bundle-file hashes. It does no
 or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
 independent-copy reproduction of both figures byte-identically and rejection of deliberately bad inputs.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
-`uv run --group export python scripts/export_pdf.py`.
+`uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,
+per-slide placement and figure pixels; repository links work in downloaded PDFs.
 
 ## References
 
