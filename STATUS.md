@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 ~10:25 UTC, merge iteration 6)
+## Current state (2026-10-25 ~10:02 UTC by `date -u`, merge iteration 6; earlier log times were estimates and run ahead of the clock)
 - Sources: Q1.4 `499c500`, Q2.2 `966b9fe` (I129: 0 open, one optional P2 → applied as M33). No research changes since the 07:30 freeze.
 - Deliverables: SUBMISSION.md v1.4 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (19/19 headings, 378/378 cells, 8/8 slides).
 - v1.4 = presentation pass from an Opus "Apart judge" review (reviews/judge_v0.md, 12 items, all applied): TL;DR box, numbered abstract with terms defined inline, "Why this matters for AI safety" (§1) + oversight sentence (§6), Q1.4/Q2.2 named as prices-only / say-vs-do, standalone Fig. 1/2/3/6 captions, glossary aliases (market-level = max-pair; pair premium; locked test), inversion paragraph split, E133 moved to Appendix C, slide takeaway + safety bullet.
@@ -10,7 +10,7 @@
 - Risks: new safety framing is interpretive (scoped "in these markets", "not adversarial"). Q1.4 judge labels lack cross-family check (stated). Never `pkill -f "codex exec"` broadly.
 
 ## Log
-- 2026-10-25 10:25 UTC merge iter6: Fig. 6 label fix (rounds 11–40, script copied from Q2.2); Opus judge-style clarity review → all 12 items applied (v1.4; caption facts checked against figures and Q1.4/Q2.2 code; no number changed per token diff); Q2.2 966b9fe optional P2 (pooled Spearman 0.49) applied; slides: takeaway, caveat footnote, safety bullet; PDFs rebuilt; check_sources 42/42.
+- 2026-10-25 10:02 UTC merge iter6: Fig. 6 label fix (rounds 11–40, script copied from Q2.2); Opus judge-style clarity review → all 12 items applied (v1.4; caption facts checked against figures and Q1.4/Q2.2 code; no number changed per token diff); Q2.2 966b9fe optional P2 (pooled Spearman 0.49) applied; slides: takeaway, caveat footnote, safety bullet; PDFs rebuilt; check_sources 42/42.
 - 2026-10-25 10:15 UTC merge iter5: sources unchanged (499c500/badcd8d). Wrote scripts/check_sources.py: 42 assertions over all previously unticked numeric SOURCES rows (N1–N4, N9, N12–N14, N18–N20, N24, N25, N27, N28, M2, M5, M12, M16, M19) → 42/42 pass (one initial FAIL was a half-up rounding edge, 0.325 → 0.33, same as source report; tolerance fixed). SOURCES/REPORT updated; no SUBMISSION change.
 - 2026-10-25 10:10 UTC merge iter4: Opus final-claims review (reviews/opus_v2.md): 0 P1, 3 P2 + 5 P3 wording — all applied after own JSON check; ~45 numbers independently re-verified. PDFs rebuilt (18/18, 378/378, 8/8; 15 pp).
 - 2026-10-25 09:55 UTC merge iter4: synced Q1.4 `499c500` / Q2.2 `badcd8d` — both 0 open flags, both verified codex_v2 replacements correct; no science change. Repo 7 MB tracked (.venv ignored). Launched fresh Opus final-claims review (reviews/opus_v2.md).

@@ -8,7 +8,7 @@ in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |
 | Q2.2 | `~/collusion/collusion-22-say-vs-do` | `8b680ee` | 2026-10-25 08:02 |
 
-Re-checked 2026-10-25 ~10:15 UTC at Q1.4 `499c500` / Q2.2 `966b9fe` (I129: 0 open, one optional P2 applied as M33); earlier ~09:55 at `499c500` / `badcd8d` (0 open flags in both; earlier check ~09:25 at `0124252`/`71a0365`): no research changes after the freeze;
+Re-checked 2026-10-25 ~10:02 UTC at Q1.4 `499c500` / Q2.2 `966b9fe` (I129: 0 open, one optional P2 applied as M33); earlier ~09:55 at `499c500` / `badcd8d` (0 open flags in both; earlier check ~09:25 at `0124252`/`71a0365`): no research changes after the freeze;
 both posted `merge_flags.md` (Q1.4 `results/reviews/merge_flags.md`, its `check_merge_sources.py`: 35/35 Q1.4
 values match JSON; Q2.2 `results/analysis/merge_flags.md`: all Q2.2 numbers correct). Applied: Q1.4 F1 (P1),
 F3; Q2.2 114-4 (P1), 116-2 (already applied), 114-2, 114-3. Not applied: Q1.4 F2 (optional; §5.2 states it).
