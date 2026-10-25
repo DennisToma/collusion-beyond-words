@@ -1,5 +1,5 @@
 {
-  "n_tests": 23,
+  "n_tests": 26,
   "n_fail": 0,
   "n_errors": 0,
   "tests": [
@@ -10,6 +10,9 @@
     "test_every_unbound_decimal_is_a_non_result",
     "test_figures_reproduce_without_source_repos",
     "test_finalize_rewrites_exactly_one_usage_sentence",
+    "test_gate_pcmi_parity_with_original_null_and_loader",
+    "test_gate_pcmi_rejects_malformed_trajectories_and_cache",
+    "test_gate_pcmi_replay_reproduces_without_source_repos",
     "test_gate_replay_parity_with_pinned_source_functions",
     "test_gate_replay_rejects_malformed_cache_and_cohort",
     "test_gate_replay_reproduces_without_source_repos",
@@ -27,9 +30,9 @@
     "test_standalone_sources_and_documents",
     "test_unbound_result_decimal_is_rejected"
   ],
-  "evidence_manifest_sha256": "e8276adac32d08c6fd535eafe98cb1127bb5c6441cdc0a788feff0531278597c",
+  "evidence_manifest_sha256": "9ff5d8be1c1fc80daeb81ba761026ef081be0c8e03532da497e985769b5ba6ea",
   "document_sha256": {
-    "SUBMISSION.md": "9f8093fda03f2bd22131f76c1869a81ce21bc9c87852ceeb61f1395990e179e6",
+    "SUBMISSION.md": "f8106b5de2aa65142acde03129ed38554aac755caf820310004edd031ba52814",
     "SLIDES.md": "e5743251c6c77a9434ac54878ac2e9b9d568bf2ee58d77a5fc89ebf1103bce7e"
   },
   "figure_sha256": {
@@ -47,7 +50,16 @@
   },
   "q14_replay_sha256": {
     "grid_q14.json": "651483c22f6110dd59504d71f62cae1b3f95c6d3605a6abc71516cc68c845ed3",
-    "gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90"
+    "gate_q14.json": "7abfd706bfeb145c46370ee7bc101ce1871eb03d7f44c091f53c62d510c91b90",
+    "gate_pcmi_q14.json": "92a1570b1a3e2336c336248b589fa9803c371588d9e4b2343ffb89f9b8dc018a"
+  },
+  "gate_pcmi_original_function_parity": {
+    "group_representatives": 10,
+    "null_draws_per_run": 200,
+    "calculator_fixtures": 6,
+    "finite_draw_and_tie_tolerance_mutations_rejected": true,
+    "full_historical_replay_runs": 500,
+    "source": "q14/detectors/infotheory.py:load_runs, score_run"
   },
   "gate_original_function_parity": {
     "games": 500,
@@ -79,9 +91,9 @@
   "standalone": {
     "n_checks": 111,
     "n_document_checks": 139,
-    "n_evidence_files": 157,
+    "n_evidence_files": 158,
     "n_fail": 0,
     "n_document_fail": 0
   },
-  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All six figures and three Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; all pair scores, cohort loading and full bootstraps match original functions. The scripted gate reaggregates all nine archived detector caches with original-function parity and boundary/tie/leave-one-out calculator checks; no null draws or markets are generated. Malformed completed trajectories and missing, duplicate and invalid audit/cache inputs are rejected."
+  "notes": "Independent copy, absent source paths; bad report/slide values, missing binding, rounding edge, corrupt snapshot and changed live source rejected. All six figures and three Q2.2 replay outputs regenerate byte-identically. C21b per-run fields match the pinned original analyse function in all eight floor/window settings. Locked-test run metrics/contrasts match pinned original functions on the real cohort and a tied calculator fixture; full B=2000 replay matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; all pair scores, cohort loading and full bootstraps match original functions. The scripted gate reaggregates all nine archived detector caches with original-function parity and boundary/tie/leave-one-out calculator checks. A separate pCMI replay reconstructs all historical shift draws, scores and p-values from frozen trajectories, with original full-score-function parity on ten group representatives and constant/short fixtures; no markets are generated. Malformed completed trajectories and missing, duplicate and invalid audit/cache inputs are rejected."
 }

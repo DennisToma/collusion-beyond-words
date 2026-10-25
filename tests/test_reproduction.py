@@ -70,7 +70,7 @@ class ReproductionChecks(unittest.TestCase):
 
     def test_standalone_sources_and_documents(self):
         self.assertEqual(self.receipt["source_mode"], "snapshot")
-        self.assertEqual(self.receipt["n_evidence_files"], 157)
+        self.assertEqual(self.receipt["n_evidence_files"], 158)
         self.assertEqual(self.receipt["n_checks"], 111)
         self.assertEqual(self.receipt["n_document_checks"], 139)
         self.assertEqual(self.receipt["n_fail"] + self.receipt["n_document_fail"], 0)
@@ -536,6 +536,110 @@ class ReproductionChecks(unittest.TestCase):
                     with self.assertRaises(AssertionError):
                         portable.load_inputs(ev)
 
+    def test_gate_pcmi_replay_reproduces_without_source_repos(self):
+        path = self.copy / "results/gate_pcmi_q14.json"
+        path.unlink()
+        result = subprocess.run([sys.executable, str(self.copy / "scripts/recompute_gate_pcmi_q14.py")],
+                                cwd=self.scratch, env=self.env, capture_output=True, text=True, timeout=180)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(path.read_bytes(), (ROOT / "results/gate_pcmi_q14.json").read_bytes())
+
+    def test_gate_pcmi_parity_with_original_null_and_loader(self):
+        from collections import defaultdict
+        import gzip
+        import itertools
+        import numpy as np
+        import recompute_gate_pcmi_q14 as portable
+
+        ev = evidence.Evidence()
+        tree = ast.parse(ev.read_bytes("q14", "detectors/infotheory.py"))
+        # Execute the unmodified original full score_run, not a pCMI-only rewrite.
+        nodes = [n for n in tree.body if isinstance(n, (ast.Assign, ast.FunctionDef))]
+        ns = {"np": np, "itertools": itertools, "defaultdict": defaultdict, "json": json}
+        exec(compile(ast.Module(body=nodes, type_ignores=[]), "pinned/infotheory.py", "exec"), ns)
+        gt = {g["run_id"]: g for g in map(json.loads, ev.lines("q14", "data/gate_test/ground_truth.jsonl"))}
+        trajectory = self.scratch / "gate-trajectories.jsonl"
+        trajectory.write_bytes(gzip.decompress(ev.read_bytes("q14", "data/gate_test/trajectories.jsonl.gz")))
+        original = ns["load_runs"](trajectory)
+        actual = portable.load_trajectories(ev, gt)
+        self.assertEqual(set(actual), set(original))
+        for rid, (P, S) in actual.items():
+            np.testing.assert_array_equal(P, original[rid]["P"])
+            np.testing.assert_array_equal(S, original[rid]["S"])
+        self.assertEqual(tuple(ns["PAIR_NAMES"]), portable.NAMES)
+
+        def compare(P, S, seed, B=200):
+            expected = ns["score_run"](P, S, B=B, seed=seed)
+            result = portable.score_pcmi(P, S, B=B, seed=seed)
+            self.assertEqual(result["n_null"], expected["_n_null"])
+            self.assertEqual(result["run_p"], expected["_run_p"]["pcmi"])
+            self.assertEqual(result["scores"], {p: expected[p]["score"]["pcmi"] for p in portable.NAMES})
+            self.assertEqual(result["pair_p"], {p: expected[p]["p"]["pcmi"] for p in portable.NAMES})
+
+        # One preselected run per original group, original index/seed and B=200.
+        for seed in range(0, 500, 50):
+            compare(*actual[f"gate_test_{seed:05d}"], seed)
+        # Calculator fixtures: constant/perfectly tied prices, no valid offsets,
+        # fewer than 20 draws, and enough draws for the exact 1e-12 tie rule.
+        for T, B in ((7, 200), (30, 19), (30, 20), (30, 0)):
+            compare(np.full((T, 4), 10.0), np.zeros(T, int), 37, B)
+
+        # The reviewer found that all-constant fixtures alone could not detect
+        # removal of the finite-draw fallback or the near-tie tolerance.
+        P = np.random.default_rng(42).normal(size=(30, 4))
+        S = np.zeros(30, int)
+        compare(P, S, 37, 19)
+        self.assertEqual(set(portable.score_pcmi(P, S, B=19, seed=37)["pair_p"].values()), {1.0})
+        import inspect
+        mutant = dict(portable.__dict__)
+        exec(inspect.getsource(portable.score_pcmi).replace("if draws >= min_draws", "if True"), mutant)
+        self.assertEqual(mutant["score_pcmi"](P, S, B=19, seed=37)["pair_p"]["AB"], 0.65)
+
+        P = np.zeros((100, 4))
+        for k in range(4):
+            P[10 + 20 * k, k], P[20 + 20 * k, k] = 1, -1
+        P[:, 1] += 1e-7 * P[:, 0]
+        S = np.zeros(100, int)
+        compare(P, S, 37)
+        result = portable.score_pcmi(P, S, seed=37)
+        self.assertTrue(0 < result["scores"]["AB"] < 1e-12)
+        self.assertEqual((result["pair_p"]["AB"], result["run_p"]), (1.0, 1.0))
+        mutant = dict(portable.__dict__)
+        exec(inspect.getsource(portable.score_pcmi).replace(" - 1e-12", ""), mutant)
+        changed = mutant["score_pcmi"](P, S, seed=37)
+        self.assertEqual((changed["pair_p"]["AB"], changed["run_p"]), (9 / 201, 42 / 201))
+
+    def test_gate_pcmi_rejects_malformed_trajectories_and_cache(self):
+        import gzip
+        import recompute_gate_pcmi_q14 as portable
+
+        ev = evidence.Evidence()
+        gt, _ = portable.load_inputs(ev)
+        path = "data/gate_test/trajectories.jsonl.gz"
+        raw = ev.read_bytes("q14", path)
+        rows = [json.loads(s) for s in gzip.decompress(raw).splitlines()]
+        wrong = json.loads(json.dumps(rows[0]))
+        wrong["agents"].reverse()
+        nonfinite = json.loads(json.dumps(rows[0]))
+        nonfinite["agents"][0]["price"] = float("nan")
+        cases = [rows[1:], rows + rows[:1], [wrong] + rows[1:], [nonfinite] + rows[1:],
+                 [dict(rows[0], run_id="unknown")] + rows[1:]]
+        for changed in cases:
+            data = gzip.compress("\n".join(json.dumps(r) for r in changed).encode(), mtime=0)
+            with patch.object(ev, "read_bytes", return_value=data):
+                with self.assertRaises(AssertionError):
+                    portable.load_trajectories(ev, gt)
+        # A valid but wrong historical p-value must fail the raw replay, even
+        # though it passes cache-format validation and the value is on the grid.
+        original_lines = ev.lines
+        cache_path = "results/pcmi/gate_test.jsonl"
+        cache = [json.loads(s) for s in ev.lines("q14", cache_path)]
+        cache[0]["p"] = (2 if cache[0]["p"] == 1 / 201 else 1) / 201
+        with patch.object(ev, "lines", side_effect=lambda project, p: (
+                [json.dumps(r) for r in cache] if p == cache_path else original_lines(project, p))):
+            with self.assertRaisesRegex(AssertionError, "pair-p mismatch"):
+                portable.replay(ev)
+
     def test_llm_usage_counts_match_process_log_summary(self):
         # the LLM-usage statement prints runner-log counts; they must equal the committed snapshot
         summary = json.loads((ROOT / "results/process_log_summary.json").read_text())
@@ -567,7 +671,12 @@ if __name__ == "__main__":
                                       "fig6_strong_framing_tacit.png")},
                    "q22_replay_sha256": {p: sha(ROOT / "results" / p) for p in
                                          ("unrounded_q22.json", "c21b_floor.json", "locked_test_q22.json")},
-                   "q14_replay_sha256": {p: sha(ROOT / "results" / p) for p in ("grid_q14.json", "gate_q14.json")},
+                   "q14_replay_sha256": {p: sha(ROOT / "results" / p) for p in ("grid_q14.json", "gate_q14.json", "gate_pcmi_q14.json")},
+                   "gate_pcmi_original_function_parity": {"group_representatives": 10, "null_draws_per_run": 200,
+                                                          "calculator_fixtures": 6,
+                                                          "finite_draw_and_tie_tolerance_mutations_rejected": True,
+                                                          "full_historical_replay_runs": 500,
+                                                          "source": "q14/detectors/infotheory.py:load_runs, score_run"},
                    "gate_original_function_parity": {"games": 500, "detectors": 9, "cached_pair_rows": 27000,
                                                      "saved_numeric_fields": 666, "calculator_fixture_runs": 44,
                                                      "source": "q14/experiments/scripted.py"},
@@ -590,7 +699,7 @@ if __name__ == "__main__":
                             "matches all selected saved results. The Q1.4 raw-grid output regenerates byte-identically; "
                             "all pair scores, cohort loading and full bootstraps match original functions. "
                             "The scripted gate reaggregates all nine archived detector caches with original-function parity "
-                            "and boundary/tie/leave-one-out calculator checks; no null draws or markets are generated. "
+                            "and boundary/tie/leave-one-out calculator checks. A separate pCMI replay reconstructs all historical shift draws, scores and p-values from frozen trajectories, with original full-score-function parity on ten group representatives and constant/short fixtures; no markets are generated. "
                             "Malformed completed trajectories and missing, duplicate and invalid audit/cache inputs are rejected."}
         (ROOT / "results/reproduction_check.json").write_text(json.dumps(receipt, indent=2) + "\n")
     raise SystemExit(0 if result.wasSuccessful() else 1)

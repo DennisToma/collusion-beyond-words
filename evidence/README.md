@@ -2,7 +2,7 @@
 
 This bundle makes the merged submission's saved-value checks, all six figures and the Q2.2 rounding,
 C21b sensitivity, historical locked-test and Q1.4 raw-grid/scripted-gate replays independent of the source checkouts. It contains
-157 exact git blobs from:
+158 exact git blobs from:
 
 - [Q1.4 @ 732f08c11a765cd8500f4ef3c29fb630b309d5b2](https://github.com/DennisToma/collusion-14-infotheory/tree/732f08c11a765cd8500f4ef3c29fb630b309d5b2)
 - [Q2.2 @ 91ffb2d4737a7537cdf9afe239a98e0d1061090b](https://github.com/DennisToma/collusion-22-say-vs-do/tree/91ffb2d4737a7537cdf9afe239a98e0d1061090b)
@@ -38,6 +38,18 @@ original-function parity on all data and a 44-run calculator fixture, and malfor
 rejection. This does not regenerate scores, trajectories or shift-null draws, validate ground
 truth, or conduct another locked-test evaluation.
 
+Iteration 30 adds the exact archived `data/gate_test/trajectories.jsonl.gz` blob
+(158 total; previous 157 entries unchanged; this already-compressed source blob is stored verbatim).
+`recompute_gate_pcmi_q14.py` reconstructs
+all 3000 pCMI pair scores, 3000 pair p-values and 500 max-statistic run p-values
+from these 50,000 trajectory rounds, using the original sorted-run seeds and B=200
+shift draws. Scores match exactly; all p-values match. Three added release checks
+cover standalone byte parity, the unmodified original full scorer on ten group
+representatives and constant/short-draw fixtures, and malformed trajectories/wrong
+cached p-values. This extends aggregation verification to pCMI's historical null
+calculation; other detector nulls, market generation and label correctness remain
+outside the replay. No settings, labels or held-out estimates are changed.
+
 Run from the repo root:
 
 ```bash
@@ -47,6 +59,7 @@ uv run python scripts/recompute_c21b_floor.py
 uv run python scripts/recompute_locked_test_q22.py
 uv run python scripts/recompute_grid_q14.py
 uv run python scripts/recompute_gate_q14.py
+uv run python scripts/recompute_gate_pcmi_q14.py
 uv run python tests/test_reproduction.py
 ```
 

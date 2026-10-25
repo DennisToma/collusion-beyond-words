@@ -427,7 +427,7 @@ Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.co
 [Q2.2](https://github.com/DennisToma/collusion-22-say-vs-do); commits in [SOURCES.md](SOURCES.md)); each has a
 reproduce section (Q1.4 REPORT §6; Q2.2 REPORT Appendix E, `verify_phase2.py`: 31/31 commands re-run
 from cache with 0 LLM calls; it excludes sealed evaluations, E113/E115 data and SALT raw data). A portable
-[evidence bundle](evidence/README.md) contains 157 exact files from the pinned source commits, with SHA256
+[evidence bundle](evidence/README.md) contains 158 exact files from the pinned source commits, with SHA256
 provenance. It supports checking saved results and rendering all six figures without sibling checkouts or model
 credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-rendered from the same source JSON/trajectories with larger text only;
 Fig. 5's per-round means are asserted equal to the saved source JSON.
@@ -435,7 +435,7 @@ Fig. 5's per-round means are asserted equal to the saved source JSON.
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
 decimals are bound (222/260 in the main text, 55/61 in the slides). Each of the other 38 + 6 falls in a declared
 non-result category (chance level, α, design parameter, threshold, section number, model version, one illustration);
-the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 23 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
+the script fails on any unbound decimal outside these. It does not cover integer counts or qualitative scope. Five claims (six numbers) differ by 0.01 from the source reports because the sources rounded a 3-dp saved value again (a tie, x.xx5); we recomputed the unrounded values with the sources' own code and data and print those: E65 +2.14 [1.29, 3.00] (sources +2.13 [1.28, 3.00]), grid market-level CI upper 0.80 (0.81), E113 executed-only upper −0.16 (−0.17), Qwen3.8-base no-channel Spearman −0.40 (−0.41) and the Fig. 6 action view 0.57 (0.58). No conclusion changes. `scripts/recompute_unrounded_q22.py` and `scripts/recompute_c21b_floor.py` now replay the Q2.2 corrections and C21b sensitivity from pinned inputs without sibling checkouts or model calls. `uv run python tests/test_reproduction.py` passes 26 release checks (two guard the LLM-usage counts in `results/process_log_summary.json`), including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs (including an unbound result decimal).
 All three Q2.2 replay outputs regenerate byte-identically; C21b's per-run fields match the pinned original
 source function across both floors and windows. `uv run python scripts/recompute_locked_test_q22.py`
@@ -456,6 +456,13 @@ summary values reproduce to floating-point precision; flag rates, Wilson interva
 localisation match exactly. Original-function parity and calculator fixtures check strict
 thresholds, near-ties and leave-one-out surrogate ranking. This verifies saved aggregation,
 without regenerating scores, trajectories or shift-null draws, or validating ground truth.
+`uv run python scripts/recompute_gate_pcmi_q14.py` separately reconstructs the gate's pCMI
+scores and historical shift-null draws from archived trajectories (original sorted-run seeds,
+200 draws per run). All 3000 pair scores match exactly, as do all pair p-values and 500
+max-statistic run p-values. Tests compare the unmodified original full scorer on ten group
+representatives plus constant/short-draw fixtures, and reject malformed trajectories and
+wrong cached p-values. Other detector nulls, market generation and label correctness remain
+outside this replay; no settings or held-out estimates change.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by
 `uv run --group export python scripts/export_pdf.py`. The export checks paragraph and table text,
 per-slide placement and figure pixels; repository links work in downloaded PDFs.
