@@ -3,6 +3,11 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 45 source re-check (2026-10-25 15:28 UTC): Q1.4 `77e8fc1` /
+Q2.2 `1ac4621`, both clean. Complete Q1.4 diff from `372f375` adds only
+STATUS I158/I159 lines; Q2.2 is unchanged. No new scope flag, scientific import
+or evidence repin; reviewed manuscript and production release hashes preserved.
+
 Iteration 44 source re-check: Q1.4 `372f375` / Q2.2 `1ac4621`, both clean;
 no source commit since iteration 43. The finalizer rehearsal changes usage
 metadata only in an external archive; no scientific import or repin.
