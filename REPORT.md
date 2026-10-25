@@ -25,7 +25,12 @@ manuscript and image files unchanged, including the primary Markdown and all six
 the original 111 source assertions and 144 bindings are identical. Primary PDF and slide content streams
 are unchanged; only extended-report pages 19–20 change (provenance/test counts and usage snapshot), and
 both were visually inspected. No empirical estimate or evidence pin changed. No experiment, new
-held-out evaluation, simulation or auditor call. Clean committed archive acceptance follows the commit;
+held-out evaluation, simulation or auditor call. Clean committed archive acceptance of `77ab10d` passes **11 commands / 57 tests**, preserves all
+**302 tracked files** and verifies **20 handoff checksums**. The **24,181,531-byte ZIP** includes
+301 merged and 550/1387 pinned source files, checked against Git. [Receipt](results/release_package_fallback_i7.json),
+[handoff and final-notes package commands](reviews/handoff_fallback_i7.md). The final package's own receipt
+records its exact notes-HEAD revision outside Git; root `submission_code.zip` is copied from it.
+Same existing author-VM environment; no new installation, transfer, submission or access change.
 Dennis still must upload the primary PDF, project image and final code ZIP. Earlier notes are historical.
 
 Fallback iteration 6 closes the primary-upload release gap. `finalize.py` now exports and checks the

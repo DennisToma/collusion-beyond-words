@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 17:31 UTC, fallback manager iteration 7)
+## Current state (2026-10-25 17:35 UTC, fallback manager iteration 7)
 - FINALIZE-only. Primary TEMPLATE_REPORT.pdf: 10 pages / 6 main, 246-word abstract; IMAGE.png 1600×900; slides 8.
 - Closed primary numeric-context gap: 65 section/table-scoped bindings check 135 slots directly against frozen evidence; exact occurrence and precision enforced.
 - Inventory covers 142 tokens in scientific main text and appendices A–B; 0 unclassified. Global 160 tokens / 26 CI triples still match extended report.
@@ -10,7 +10,8 @@
 - Preservation PASS: 176 scientific/manuscript/image files and original 111 assertions / 144 bindings unchanged. Primary/slide page streams identical; extended pages 19–20 only provenance/usage changes, visually checked.
 - Headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
 - Source handoffs: Q1.4 0708b80 / Q2.2 f15abfd accept prior merged bytes, 0 open P1; pins remain 732f08c / 91ffb2d. No sibling writes or experiments.
-- Next: commit/push, clean-HEAD package acceptance, record receipt, then package final notes HEAD; root submission_code.zip must match that final package.
+- Clean-HEAD 77ab10d acceptance PASS: 11 commands / 57 tests, 302 tracked files preserved, 20 checksums; ZIP 24,181,531 bytes. Receipt: results/release_package_fallback_i7.json.
+- Final notes handoff: /var/tmp/bw-fallback-i7-final (exact HEAD receipt external), copied to root submission_code.zip; commands in reviews/handoff_fallback_i7.md.
 - Risks: integer-only/qualitative claims still need review; deployer pipeline unevaluated. Dennis must upload primary PDF + image + ZIP; optional extended report/slides.
 
 ## Log
@@ -112,3 +113,5 @@
 - 2026-10-25 17:13 UTC fallback iteration 6 acceptance: pushed implementation 7c7be5e; clean-HEAD package succeeds (11 commands/53 tests; 295 exact tracked files; 20 sidecar checksums). Code ZIP 24,124,969 bytes; all 294 merged +550/1387 source files match Git and both source pins match evidence; 8 oversized/HTML files excluded. Copied immutable receipt to results/release_package_fallback_i6.json and wrote handoff procedure. Only notes/receipt/ledger change after the tested implementation; run final clean-HEAD package after this notes commit so the root ZIP includes these notes. No new analysis or model call.
 
 - 2026-10-25 17:31 UTC fallback iteration 7: chose the disclosed primary numeric-context gap over another freeze-hold rerun. Added 65 section/table-scoped bindings (135 numeric slots), nine assertions from existing frozen JSON, scientific-token coverage through ethics Appendix B and four release tests. Independent Codex read-only critic found 2 P2 (header swaps; omitted appendix), both fixed with regression probes; follow-up no remaining finding. Full finalizer passes 14 commands/57 tests;120/144+65/158;160 tokens+26 triples;142 contextual tokens,0 unclassified. All176 protected scientific/manuscript/image files, original111 checks/144 bindings and primary/slide PDF page streams preserved; extended pages19–20 change only reproducibility metadata and usage snapshot, visually inspected. README/SOURCES/REPORT current; preservation driver and receipt saved. No experiment, estimate change, held-out evaluation, auditor call or DIRECTION deviation; two implementation reviewer calls. Commit/push then clean-HEAD package follows.
+
+- 2026-10-25 17:35 UTC fallback iteration 7 acceptance: implementation77ab10d pushed. Clean-HEAD package /var/tmp/bw-fallback-i7-verified passes11 commands/57 tests, all302 tracked Git bytes/modes and20 checksums. ZIP24,181,531bytes,301 merged+550/1387 source members verified; frozen sourcepins match evidence. Saved receipt and handoff procedure; only notes/receipt/ledger change after tested commit. Commit/push these notes, then package their exact clean HEAD into /var/tmp/bw-fallback-i7-final and copy ZIP to root; final receipt remains external to avoid self-reference. No additional analysis or model call.
