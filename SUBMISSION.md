@@ -393,6 +393,32 @@ need validation against matched no-collusion references before a flag is read as
 4. Mixed-family markets and provenance data for the shared-model / shared-seed confound.
 5. End-to-end evaluation of the two-stage audit against legitimate partnerships and tacit markets.
 
+## 9. Conclusion
+
+Offering two LLM sellers a private channel left a trace that an auditor could see, but not the trace either
+project set out to find. In these markets the channel showed up as a higher price level. We detected no robust
+contemporaneous co-movement, and public messages gave a zero-shot auditor no resolved gain. The price level is also not specific: high prices arise without a private channel under prompt cues, a private
+notepad, or memory with profit framing, and level screens also flag legitimate cost advantages. A matched level screen is therefore a reasonable trigger for a costlier audit, but a flag
+alone does not show an agreement. The open test is whether instructed or red-teamed colluders can keep prices
+inside the matched reference while still coordinating.
+
+## LLM usage statement
+
+This project was run almost entirely by AI agents, and we disclose that as part of the method. The human author
+chose the two research questions and seeded each source repo with a plan, the shared trajectory schema, the
+agents' rule files and an LLM-call helper with rate limiting and call logging. They also wrote the Phase 2 gap lists and the agent runner
+scripts. Market code, experiments, analysis, figures and writing in both source repos and in this merged report
+were then done by autonomous agent iterations. Each iteration was a fresh non-interactive session with no memory
+beyond the repo files. Claude Opus 5.5 (via Claude Code) was the default manager. After short Claude exits (treated as
+possible rate limits or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both source repos, 323 manager iterations completed (213 Opus, 110
+gpt-6.1-sol; counts from the runner logs, `scripts/process_log_summary.py` → `results/process_log_summary.json`).
+A separate director loop
+(gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-prioritised the gap lists on a roughly two-hour schedule. The simulated sellers,
+judges and auditors are the LLMs named in §3. The source reports and this merged report were reviewed
+adversarially by both gpt-6.1-sol and Claude Opus (merged-report records in `reviews/`). Such review cannot rule
+out errors that all of these models share. For that reason, printed numbers are bound by script to saved source
+files wherever possible (Reproducibility).
+
 ## Reproducibility
 
 Code, data and per-claim JSON live in the source repos ([Q1.4](https://github.com/DennisToma/collusion-14-infotheory),
@@ -405,7 +431,7 @@ credentials; it does not regenerate the experiments. Figs. 1, 2, 3 and 5 are re-
 Fig. 5's per-round means are asserted equal to the saved source JSON.
 `scripts/check_sources.py` passes 101 saved-source assertions and 137 bindings that extract printed
 numbers from this report and the slides, plus all bundle-file hashes. `scripts/number_coverage.py` lists which
-decimals are bound (219/254 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
+decimals are bound (219/260 in the main text, 55/61 in the slides; most of the rest are chance levels, thresholds
 and model names). It does not certify unbound numbers or qualitative scope. `uv run python tests/test_reproduction.py` passes 9 release checks, including
 independent-copy reproduction of all six regenerated figures byte-identically and rejection of deliberately bad inputs.
 `SUBMISSION.pdf` and `SLIDES.pdf` are built by

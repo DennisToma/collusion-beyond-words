@@ -1,11 +1,11 @@
 {
   "command": "uv run --group export python scripts/export_pdf.py",
   "ok": true,
-  "submission_pages": 16,
+  "submission_pages": 17,
   "slides": 8,
-  "headings": 19,
+  "headings": 21,
   "table_cells": 378,
-  "submission_text_fragments": 487,
+  "submission_text_fragments": 491,
   "slide_text_fragments": [
     9,
     4,
@@ -104,10 +104,10 @@
     "SLIDES.pdf": []
   },
   "sha256": {
-    "SUBMISSION.md": "9b41224b5fb8a38a9be330490d7cb35d073962e4ac3ad3a2c47c142f7efebadf",
+    "SUBMISSION.md": "d2962e1bd7b3c8c7d28b8bb4bba703c69fe721d7132e09f6f12a305530c0b8ff",
     "SLIDES.md": "02d59787f68c00302fc5de3d0f9321d9cdff1864e1fcbfd63b7d3af4fc5cc5d2",
-    "SUBMISSION.pdf": "85884546d13f27829dc3feaafdfc052998c8bcec64aa136dcd98c26df2ba97c4",
-    "SLIDES.pdf": "b21848b4f3a072eb398855b9e7e11f7a04a26318cca093fafa5b355c44d10ac0",
+    "SUBMISSION.pdf": "49e8d2d9bee02199864084e27ff182560080cc48ff2528f106832532552edb47",
+    "SLIDES.pdf": "6b55fb1ae09e77626184ad604b29691a73b823601c2069d2e6fd75f870a1387f",
     "scripts/export_pdf.py": "526b44dda6c8661b81bc9cff86e07e141b72e1af5057fc5e92eb80a2b91603d0"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."

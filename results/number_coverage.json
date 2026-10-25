@@ -1,6 +1,6 @@
 {
  "SUBMISSION.md": {
-  "decimal_tokens": 254,
+  "decimal_tokens": 260,
   "bound": 219,
   "unbound": [
    {
@@ -142,6 +142,30 @@
    {
     "token": "6.1",
     "context": "ions - Ground truth. Agreement labels come from one judge family (gpt-6.1-sol, also the audit"
+   },
+   {
+    "token": "5.5",
+    "context": "interactive session with no memory beyond the repo files. Claude Opus 5.5 (via Claude Code) w"
+   },
+   {
+    "token": "6.1",
+    "context": " or crashes), or when configured to, the runner switched to codex gpt-6.1-sol. Across both so"
+   },
+   {
+    "token": "6.1",
+    "context": "oth source repos, 323 manager iterations completed (213 Opus, 110 gpt-6.1-sol; counts from th"
+   },
+   {
+    "token": "6.1",
+    "context": "py → results/process_log_summary.json). A separate director loop (gpt-6.1-sol, with Claude Op"
+   },
+   {
+    "token": "5.5",
+    "context": "ummary.json). A separate director loop (gpt-6.1-sol, with Claude Opus 5.5 as fallback) re-pri"
+   },
+   {
+    "token": "6.1",
+    "context": "eports and this merged report were reviewed adversarially by both gpt-6.1-sol and Claude Opus"
    }
   ]
  },

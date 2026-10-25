@@ -25,7 +25,8 @@ This repo merges two sprint projects and runs **no new experiments**:
 | `figures/` | Fig. 1–6; Fig. 1, 2 and 3 re-rendered from pinned Q1.4 JSON by `scripts/fig1_hard_negatives.py`, `scripts/fig2_level_vs_comovement.py`, `scripts/fig3_e70_grid.py`, Fig. 5 from pinned Q2.2 trajectories by `scripts/fig5_placebo_premium.py` (larger text only; same data and encodings), Fig. 4 and 6 by `scripts/fig4_say_vs_do.py`, `scripts/fig6_strong_framing.py` (label fixes) |
 | `evidence/` | 74 exact source files at pinned commits, compressed where applicable; full hashes and paths in `manifest.json` |
 | `scripts/check_sources.py` | 101 saved-source assertions, 137 bindings that extract printed numbers from the report/slides, and 74 evidence-file hash checks (→ `results/source_check.json`) |
-| `scripts/number_coverage.py` | lists every decimal in the report main text and slides and whether a binding checks it (→ `results/number_coverage.json`; 219/254 and 55/61) |
+| `scripts/number_coverage.py` | lists every decimal in the report main text and slides and whether a binding checks it (→ `results/number_coverage.json`; 219/260 and 55/61) |
+| `scripts/process_log_summary.py` | counts autonomous manager iterations per repo/backend from the machine-local runner logs for the LLM usage statement (→ `results/process_log_summary.json`; not regenerable without those logs) |
 | `tests/test_reproduction.py` | 9 checks: independent-copy reproduction, figure parity, and rejection of deliberately bad claims/evidence (→ `results/reproduction_check.json`) |
 | `scripts/export_pdf.py` | builds both PDFs; checks text fragments, per-slide placement, figure pixels and portable links; fits slide text at ≥14 pt |
 | `tests/test_export.py` | rejects missing prose, wrong-page text, missing/substituted figures, broken/local-file links and slide overflow; checks the font floor |
