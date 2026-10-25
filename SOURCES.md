@@ -3,6 +3,21 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 39 source re-check (2026-10-25 14:45 UTC): Q1.4
+`e67993aad5495e7d0f1ce1a2d954cee2229fd7e3` / Q2.2
+`e0e0772968e941eed794cb27c7232a6ce492c54e`. Changes since iteration 38
+are handoff/director metadata only; the sources retain the reviewed manuscript
+scope coverage and zero open P1. No scientific result or evidence pin changes.
+Merge `c3d2903` passes verified packaging: 111/144/158 checks, no unclassified
+decimals, 47 tests and 264 unchanged archive files. [Receipt](results/release_package_i39.json),
+[procedure](reviews/handoff_i39.md). Manuscript, slides, PDFs, figures, evidence,
+six scientific replay JSONs, usage snapshot and lockfile are identical to `2da601d`;
+the export-test receipt changes only its extended test-code hash. No new estimate.
+Handoff addendum (14:47 UTC): Q1.4 advanced to
+`aadba97ed3860dc7e969a4251ebcd9a0c2a086c7` (I154; STATUS/DIRECTION only),
+explicitly confirming no Q1.4 hunk at `c3d2903` and 81/81 pin hashes intact.
+Q2.2 remains at `e0e0772`; no new scientific input or scope flag.
+
 Iteration 38 source re-check (2026-10-25 14:27 UTC): Q1.4
 `8625743a306ff1b1e26d709c9c7d0a9b557e5d58` / Q2.2
 `f73f49ccc8644a92bab55caed3fdb43fa24e5d9e`; both report 0 open P1.

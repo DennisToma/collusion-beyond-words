@@ -12,9 +12,17 @@ Figures: `figures/fig1–fig6` (all six regenerate standalone from the pinned ev
   tests cover corruption/omissions, dirty or concurrent edits and failed checks;
   the finalizer now runs them. A direct committed-PDF check also compares text,
   slide placement, embedded figure pixels and links against the current sources.
-  This preserves the reviewed manuscript and all scientific artifacts.
-  Full-release acceptance is recorded after the committed
-  packager is exercised; no new experiment or scientific analysis.
+  Full acceptance of pushed commit `c3d2903` passes **8/8 commands and 47 tests**
+  (26 reproduction + 9 export + 3 compliance + 9 packaging); all **264 tracked
+  archive files** retain Git bytes/modes after checking. [Receipt](results/release_package_i39.json),
+  [procedure](reviews/handoff_i39.md), [critic/follow-up](reviews/codex_i39.md).
+  The critic's two P2s (stale embedded figures; inherited fixture Git variables)
+  are fixed and regression-tested; follow-up has no actionable P1/P2. The manager
+  ran the full suites; the read-only critic used nonmutating probes.
+  Reviewed manuscript, science, figures, PDFs and usage snapshot are unchanged.
+  Existing environment/browser on the same VM; no new install, PDF rebuild,
+  access grant, transfer, experiment or scientific analysis. Package the notes
+  commit and any later finalizer edits from clean HEAD for the actual handoff.
 - Iteration 38 verifies the **post-compliance release `2add728`** from an extracted
   archive without `.git`, with nonexistent sibling-root overrides and no model
   environment variables passed. [Receipt](results/reviewer_archive_i38.json),

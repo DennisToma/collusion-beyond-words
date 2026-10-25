@@ -32,5 +32,19 @@ The regression deliberately sets foreign GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE, r
 fixture init/config/reset/commit and checks the foreign HEAD, index, config and worktree
 remain unchanged. All nine packaging and nine export tests pass after the fixes.
 No source evidence, manuscript, scientific result, figure, PDF or usage snapshot changed.
-A follow-up read-only review and full committed-package acceptance are recorded below
-after completion.
+Full committed-package acceptance passes at `c3d2903`: 8/8 commands, 26 reproduction +
+9 export + 3 compliance + 9 packaging tests, all 264 tracked files unchanged after
+verification. See [receipt](../results/release_package_i39.json) and
+[procedure](handoff_i39.md). The critic did not independently rerun those suites.
+
+
+## Follow-up review (verbatim)
+
+Both original P2 findings are fixed. No remaining actionable P1/P2 findings in the current changes.
+
+- [Committed-export checker](/home/factory/collusion/collusion-beyond-words/scripts/check_committed_export.py:19) passes against current artifacts and runs from packaging and finalization. In-memory probes rejected changed source-image pixels with unchanged PDFs, missing text, wrong slide count and misplaced slide text.
+- [Fixture Git helper](/home/factory/collusion/collusion-beyond-words/tests/test_packaging.py:43) uses the production environment allowlist. Read-only probes confirmed both helpers resolve the local checkout under foreign Git variables. The new regression checks foreign HEAD, index, config and worktree preservation.
+
+No misleading acceptance claim or unsafe-write regression found. Receipt hashes match current files; committed-release acceptance remains explicitly pending.
+
+Verification limits: no edits, models, browser rebuilds, write-dependent suites or full packaging run. The export check and mutation probes ran with a write-blocking audit hook. The manager’s 26+9+3+9 acceptance was not independently rerun.

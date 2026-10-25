@@ -95,6 +95,12 @@ with absent sibling-root overrides and no model environment variables passed; it
 not a new install or access check. Sharing the archive or granting repository access
 is a separate handoff step; this command does not change repository visibility.
 
+Iteration 39 acceptance at `c3d2903` passes all eight commands and 47 tests
+(26 reproduction + 9 export + 3 compliance + 9 packaging); all 264 archived files
+retain their Git bytes/modes after checking. [Receipt](results/release_package_i39.json),
+[procedure](reviews/handoff_i39.md), [review and fixes](reviews/codex_i39.md).
+That receipt predates its own notes; package clean HEAD for the actual handoff.
+
 ```bash
 uv run python scripts/check_sources.py          # 111 source checks, 144 document bindings, 158 evidence hashes
 uv run python scripts/number_coverage.py        # which printed decimals are machine-checked
