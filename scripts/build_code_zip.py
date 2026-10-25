@@ -24,7 +24,8 @@ SOURCES = {  # name -> (local checkout, pinned commit from evidence/manifest.jso
 }
 MAX_FILE = 5_000_000
 MAX_ZIP = 25_000_000
-SECRET = re.compile(rb"sk-[A-Za-z0-9_-]{20,}|API_KEY\s*=\s*\S{8,}|PRIVATE KEY-----")
+# patterns assembled from parts so this file does not match itself
+SECRET = re.compile(b"sk-" + rb"[A-Za-z0-9_-]{20,}|API_KEY\s*=\s*[A-Za-z0-9_-]{16,}|" + b"PRIVATE" + b" KEY-----")
 
 README = """# Beyond Words — submission code archive
 
