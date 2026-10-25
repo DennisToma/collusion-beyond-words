@@ -172,18 +172,13 @@
   "unbound_unclassified": 0
  },
  "SLIDES.md": {
-  "decimal_tokens": 61,
+  "decimal_tokens": 60,
   "bound": 55,
   "unbound": [
    {
     "token": "0.5",
     "category": "chance level 0.5",
-    "context": "d gain, so a price flag is an audit trigger, not proof. Terms. AUROC: 0.5 = chance, 1 = perfe"
-   },
-   {
-    "token": "0.5",
-    "category": "chance level 0.5",
-    "context": " audit trigger, not proof. Terms. AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup:"
+    "context": "rkets. Text works when the collusive act is verbal (SALT-NLP). AUROC: 0.5 = chance, 1 = perfe"
    },
    {
     "token": "0.5",

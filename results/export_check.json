@@ -7,7 +7,7 @@
   "table_cells": 378,
   "submission_text_fragments": 504,
   "slide_text_fragments": [
-    9,
+    3,
     4,
     3,
     15,
@@ -18,9 +18,9 @@
   ],
   "slide_layout": [
     {
-      "font_pt": 15,
+      "font_pt": 14,
       "min_text_font_pt": 14.000024999999999,
-      "image_max_height_mm": 100,
+      "image_max_height_mm": 90,
       "overflow": false
     },
     {
@@ -69,7 +69,7 @@
   "minimum_slide_font_pt": 14,
   "figure_counts": {
     "SUBMISSION.pdf": 6,
-    "SLIDES.pdf": 4
+    "SLIDES.pdf": 5
   },
   "pdf_links": {
     "SUBMISSION.pdf": [
@@ -112,9 +112,9 @@
   },
   "sha256": {
     "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
-    "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b",
-    "SUBMISSION.pdf": "b4fd492fb336928b9b294bf13130196179bda96cdd12c74f029c9292f8cf19f9",
-    "SLIDES.pdf": "415d34a945bf1c3cdc3b6ab91ba4848bbe9bd6259168f23887456f9a79ff8f74",
+    "SLIDES.md": "2353b8b8a617237b0cbb7d4983fc58f727f332da8d9ed63435aa3d872dcdf524",
+    "SUBMISSION.pdf": "435c443e0bb83e1761fd68716f4a538be88e2f35194bf43e7467887dc04b205f",
+    "SLIDES.pdf": "fd2761f72f29c02d38ab119e43ab5f62e0665f053c69bdb4fbb3ae19ad28531a",
     "scripts/export_pdf.py": "d9ca4fb261706b2d86031a9ba7eec8f4c50a4385220ccd48e584244bddb4dbfb"
   },
   "scope": "Text presence, per-slide placement, browser content bounds, embedded figure pixels and link schemes; not scientific validity or a guarantee of chart-label readability."

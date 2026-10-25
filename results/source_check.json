@@ -1559,7 +1559,7 @@
  "n_document_fail": 0,
  "document_sha256": {
   "SUBMISSION.md": "96d0ed7b816d3b6217fcd5a006214515b9fd0f74dfba7229148a99b180b9327b",
-  "SLIDES.md": "4a66dd9b5b0b3066676b4fd123f40cbf3916f1da4adba52b3b281e66778c086b"
+  "SLIDES.md": "2353b8b8a617237b0cbb7d4983fc58f727f332da8d9ed63435aa3d872dcdf524"
  },
  "document_checks": [
   {

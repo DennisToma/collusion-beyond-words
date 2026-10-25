@@ -1,19 +1,10 @@
-# Beyond Words: Detecting AI-Agent Collusion Through Information Theory and Behavioral Evidence
+# A private channel between LLM sellers shows up as a price level — not in co-movement or public words
 
-**Dennis Toma — Independent** — Apart Research AI Collusion Sprint, 23–25 October 2026
+**Dennis Toma — Independent** — with Apart Research · AI Collusion Research Sprint, 23–25 October 2026
 
-Merged submission of two sprint projects:
-- **Q1.4** — information-theoretic, prices-only detection (does collusion leave a *dependence* fingerprint?)
-- **Q2.2** — say vs. do: does an LLM auditor gain from reading *public messages* on top of prices?
+![Figure 1](figures/fig0_headline.png)
 
-Shared setup: four LLM sellers in repeated logit-demand pricing markets; one pair is *offered* a private chat
-channel (never told to collude). Can an auditor tell which markets had the channel?
-
-**Takeaway:** the channel shows up as *higher prices*; we find no robust contemporaneous co-movement, and public messages give a zero-shot auditor no resolved gain, so a price flag is an audit trigger, not proof.
-
-**Terms.** AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup: price above the competitive (Nash) price. pCMI: how much a pair's prices co-move after removing public state and lagged prices. TE: lagged dependence. Executed: a privately agreed price the pair then actually kept.
-
-Every number traces to a JSON file and commit in `SOURCES.md`.
+(a) Real games: with a private channel the pair prices above its rivals; without one, no gap. (b) A price-level screen separates channel from no-channel games; co-movement (pCMI) and a text-reading LLM auditor stay near chance in pricing markets. Text works when the collusive act is verbal (SALT-NLP). AUROC: 0.5 = chance, 1 = perfect. Sellers were never told to collude; every number traces to `SOURCES.md`.
 
 ---
 
