@@ -9,6 +9,8 @@ Merged submission of two sprint projects:
 Shared setup: four LLM sellers in repeated logit-demand pricing markets; one pair is *offered* a private chat
 channel (never told to collude). Can an auditor tell which markets had the channel?
 
+**Takeaway:** the channel shows up as *higher prices*; we detect no co-movement, and public messages give a zero-shot auditor no resolved gain, so a price flag is an audit trigger, not proof.
+
 **Terms.** AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup: price above the competitive (Nash) price. pCMI: how much a pair's prices co-move after removing public state and lagged prices. TE: lagged dependence. Executed: a privately agreed price the pair then actually kept.
 
 Every number traces to a JSON file and commit in `SOURCES.md`.
@@ -51,9 +53,11 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ![Say vs do](figures/fig4_say_vs_do_summary.png)
 
-- Combined − better single view: −0.01 [−0.09, +0.06] (locked test, n = 95; four disclosed exposures, so not fully blind; plotted premium statistic chosen post hoc); −0.07 [−0.17, +0.02] (fresh replications, pooled post hoc).
+- Combined − better single view: −0.01 [−0.09, +0.06] (locked test, n = 95); −0.07 [−0.17, +0.02] (fresh replications, pooled post hoc).
 - Qwen3.8 text view is **inverted** (0.15–0.21, CI below 0.5); in the base arm, channel sellers invite rivals publicly *less* (0.40 vs 0.88, post hoc).
 - Text did work on external SALT-NLP negotiations, where the detected act happens in the chat (0.87 [0.83, 0.91]) — a different construct.
+
+*Locked test had four disclosed exposures (not fully blind); the plotted premium statistic was chosen post hoc.*
 
 ---
 
@@ -63,7 +67,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 - Unread notepad: ≈ ⅔ of the channel's pair-premium effect vs no channel, rounds 2–12 (0.65 [0.34, 1.32]).
 - Offered-but-undelivered channel (figure): no resolved difference from delivered (+0.03 [−0.54, +0.49]; not equivalence).
-- Memory + profit framing: 19/20 luna markets *without* a channel ≥ Nash + 2 (rounds 11–40).
+- Memory + profit framing: 19/20 gpt-6-luna markets *without* a channel ≥ Nash + 2 (rounds 11–40).
 - Wording alone moves no-channel markup −0.19 → +2.56; channel effect resolved in 2/5 wordings.
 - At an assumed 1% prevalence no tested flag reaches point precision 0.25 (max 0.20 [0.07, 0.54]; set mainly by α = 0.05).
 
@@ -71,6 +75,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ## 6. Implications
 
+- **AI oversight:** two natural monitors (dependence tests on actions, an LLM reading public text) did not recover the side channel better than a crude price statistic here; the text monitor could be misled. Sellers were not adversarial.
 - Channel assignment (including its prompt cue) shows up mainly as **how high** prices are; we detect no **contemporaneous co-movement**, and a zero-shot auditor gains nothing resolved from **public messages** (small gains not excluded).
 - Detectability by any price statistic is a property of the **(seller model × prompt)** pair (post-hoc synthesis).
 - Price screens need **model- and prompt-matched** references; a two-stage audit (level screen, then private logs / dependence / provenance) is a proposal we did not evaluate.

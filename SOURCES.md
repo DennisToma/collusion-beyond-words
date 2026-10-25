@@ -8,7 +8,7 @@ in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |
 | Q2.2 | `~/collusion/collusion-22-say-vs-do` | `8b680ee` | 2026-10-25 08:02 |
 
-Re-checked 2026-10-25 ~09:55 UTC at Q1.4 `499c500` / Q2.2 `badcd8d` (0 open flags in both; earlier check ~09:25 at `0124252`/`71a0365`): no research changes after the freeze;
+Re-checked 2026-10-25 ~10:15 UTC at Q1.4 `499c500` / Q2.2 `966b9fe` (I129: 0 open, one optional P2 applied as M33); earlier ~09:55 at `499c500` / `badcd8d` (0 open flags in both; earlier check ~09:25 at `0124252`/`71a0365`): no research changes after the freeze;
 both posted `merge_flags.md` (Q1.4 `results/reviews/merge_flags.md`, its `check_merge_sources.py`: 35/35 Q1.4
 values match JSON; Q2.2 `results/analysis/merge_flags.md`: all Q2.2 numbers correct). Applied: Q1.4 F1 (P1),
 F3; Q2.2 114-4 (P1), 116-2 (already applied), 114-2, 114-3. Not applied: Q1.4 F2 (optional; §5.2 states it).
@@ -72,6 +72,7 @@ the merge manager: rows marked ✔ below were read directly from the JSON at the
 | M30 | gpt-6.1-sol seller arm text AUROC 0.17 [0.01, 0.41], 0/7 private agreements (post hoc) | Q2.2 | `analysis/p2_family3way.json : llm_p2sol.views.text.auroc_private_vs_none` | P2.6 | ✔ (iter3, JSON) |
 | M31 | luna E113 executed combined−action posting cells +0.19 [+0.06, +0.33], silent +0.12 [−0.08, +0.32] (post hoc) | Q2.2 | `analysis/e113_secondary.json : stratified.executed_vs_A.luna_{posting,silent}_combined_minus_action_posthoc` | P2.16 | ✔ (iter3, JSON) |
 | M32 | Fig. 6 tacit-high window = rounds 11–40 (source figure label said "2nd half") | Q2.2 | `p2_strong_eval.py : --late 11 (frozen, line 145)`; data `data/llm_p2strongF/trajectories.jsonl` + `analysis/p2_strong_classes_llm_p2strongF.json` | P2.7 | ✔ (iter6, code) |
+| M33 | Qwen3.8-base text score vs invite rate Spearman pooled 0.49 [0.17, 0.71] (n = 30); within no-channel −0.41 [−0.83, +0.18] (n = 15) | Q2.2 | `analysis/e132_inversion.json : sets."Qwen3.8 base".spearman_text_vs_invite_rate_{pooled,within_no_channel}` | Q2.2 merge_flags I129 (optional P2) | ✔ (iter6, JSON) |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |
 
 `✔ check_sources` = machine-checked by `uv run python scripts/check_sources.py` (42/42 assertions pass at

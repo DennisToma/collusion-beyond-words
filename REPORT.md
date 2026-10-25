@@ -10,5 +10,6 @@ Figures: `figures/fig1–fig6` (copies of source-repo figures; Fig. 4 regenerate
   slide title is present in the PDF text, and that no slide overflows).
 - Number check: `uv run python scripts/check_sources.py` re-reads 42 SUBMISSION.md values (every SOURCES.md
   numeric row that was not yet ticked, plus a sample of ticked ones) from the source repos' JSON and asserts each
-  matches to within half a unit of its last printed digit (42/42 pass at Q1.4 `499c500` / Q2.2 `badcd8d`;
+  matches to within half a unit of its last printed digit (42/42 pass at Q1.4 `499c500` / Q2.2 `966b9fe`;
   output `results/source_check.json`).
+- Reviews (`reviews/`): codex v0–v2 and Opus v0–v2 adversarial claim reviews, plus a judge-style presentation review (`judge_v0.md`, applied in SUBMISSION v1.4).
