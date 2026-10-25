@@ -3,6 +3,13 @@
 Source repos (read-only). Both declared a research freeze at 2026-10-25 07:30 UTC; later edits are logged
 in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 
+Iteration 49 source re-check (2026-10-25 15:50 UTC): Q1.4
+`13e8b09485dc8656a0e26010401f92e8f26f7667` / Q2.2
+`07d986e8099d1db2c95fb267daa19162eff214ea` remain clean and unchanged since
+iteration 48. Read-only assertions pass for 179 protected release hashes,
+five export hashes, the saved i44 log checksum and unchanged DIRECTION.
+No scientific import or repin; production finalization remains due 16:30 UTC.
+
 Iteration 48 source re-check (2026-10-25 15:49 UTC): Q1.4
 `13e8b09485dc8656a0e26010401f92e8f26f7667` unchanged; Q2.2
 `07d986e8099d1db2c95fb267daa19162eff214ea` adds one STATUS line since
