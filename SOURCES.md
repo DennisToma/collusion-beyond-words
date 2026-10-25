@@ -8,7 +8,7 @@ in each REPORT.md under "### Changes after 08:00 (for the merge manager)".
 | Q1.4 | `~/collusion/collusion-14-infotheory` | `0e06c03` | 2026-10-25 08:02 |
 | Q2.2 | `~/collusion/collusion-22-say-vs-do` | `8b680ee` | 2026-10-25 08:02 |
 
-Re-checked 2026-10-25 ~09:00 UTC at Q1.4 `933de7a` / Q2.2 `22e71e9`: no research changes after the freeze;
+Re-checked 2026-10-25 ~09:25 UTC at Q1.4 `0124252` / Q2.2 `71a0365`: no research changes after the freeze;
 both posted `merge_flags.md` (Q1.4 `results/reviews/merge_flags.md`, its `check_merge_sources.py`: 35/35 Q1.4
 values match JSON; Q2.2 `results/analysis/merge_flags.md`: all Q2.2 numbers correct). Applied: Q1.4 F1 (P1),
 F3; Q2.2 114-4 (P1), 116-2 (already applied), 114-2, 114-3. Not applied: Q1.4 F2 (optional; §5.2 states it).
@@ -69,6 +69,8 @@ the merge manager: rows marked ✔ below were read directly from the JSON at the
 | N27 | E72 non-executed set n = 52 (38 judged agreement, 14 none); executed n = 44 | Q1.4 | `eval/e72_te_diag.json : c_execution.not_executed` | P2.14 | (codex review) |
 | N28 | executed-definition range 13–78/149, pooled pCMI 0.343–0.531 | Q1.4 | `eval/executed_sensitivity.json : n_executed_range, pooled_pcmi_range` | E71 | (codex review) |
 | N29 | prevalence max precision@0.01 0.20 [0.07, 0.54] | Q1.4 | `eval/prevalence.json : [5]` | P2.1 | (codex review) |
+| M30 | gpt-6.1-sol seller arm text AUROC 0.17 [0.01, 0.41], 0/7 private agreements (post hoc) | Q2.2 | `analysis/p2_family3way.json : llm_p2sol.views.text.auroc_private_vs_none` | P2.6 | ✔ (iter3, JSON) |
+| M31 | luna E113 executed combined−action posting cells +0.19 [+0.06, +0.33], silent +0.12 [−0.08, +0.32] (post hoc) | Q2.2 | `analysis/e113_secondary.json : stratified.executed_vs_A.luna_{posting,silent}_combined_minus_action_posthoc` | P2.16 | ✔ (iter3, JSON) |
 | J1 | joint statement (verbatim in both reports) | both | REPORT.md of each | — | |
 
 Rows without ✔ are copied from the source REPORT.md merge blocks (frozen 07:30) and are to be checked

@@ -61,10 +61,11 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ![Placebo](figures/fig5_placebo_premium.png)
 
-- Unread private *notes-to-self* notepad: ≈ two thirds of the channel's effect on the designated-pair premium over rounds 2–12 (ratio 0.65 [0.34, 1.32]). In a separate placebo run (figure), offered-but-never-delivered channels carry the same premium from round 1 (placebo − private +0.03 [−0.54, +0.49]).
+- Unread private notepad: ≈ two thirds of the channel's premium, rounds 2–12 (ratio 0.65 [0.34, 1.32]).
+- Placebo run (figure): offered-but-never-delivered channels carry the same premium (placebo − private +0.03 [−0.54, +0.49]).
 - Memory + profit framing: 19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40).
 - Prompt wording alone moves no-channel markup from −0.19 to +2.56; channel effect resolved in only 2/5 wordings.
-- At a hypothetical 1% prevalence, no frozen price flag reaches point precision 0.25 (max 0.20; largely set by α = 0.05).
+- At an assumed 1% prevalence, no frozen price flag reaches precision 0.25 (max 0.20; largely set by α = 0.05).
 
 ---
 
@@ -72,7 +73,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 - Channel assignment (including its prompt cue) shows up mainly as **how high** prices are; we detect no **contemporaneous co-movement**, and a zero-shot auditor gains nothing resolved from **public messages** (small gains not excluded).
 - Detectability by any price statistic is a property of the **(seller model × prompt)** pair (post-hoc synthesis).
-- Practical reading: a cheap level screen against a **model- and prompt-matched** reference as a first-stage *audit trigger*; expensive audits (private logs, dependence statistics, provenance) only on flagged pairs. Not evaluated end to end.
+- Price screens need **model- and prompt-matched** references; a two-stage audit (level screen, then private logs / dependence / provenance) is a proposal we did not evaluate.
 
 ---
 

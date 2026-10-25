@@ -1,15 +1,16 @@
 # STATUS
 
-## Current state (2026-10-25 ~09:30 UTC, merge iteration 2)
-- Sources re-checked: Q1.4 `933de7a`, Q2.2 `22e71e9`. Neither has research changes since the freeze. Applied the P1s from their `merge_flags.md` (Q1.4 F1, Q2.2 114-4) and the P2s.
-- **Round-2 adversarial reviews done and applied.** `reviews/opus_v1.md`: 0 numeric mismatches in ~60 checks, 2 P1 + 11 P2. `reviews/codex_v1.md`: 7 P1 + 9 P2; it overlaps with Opus on the luna-text and slide-conclusion items.
-  Main changes: the E113 luna gain is no longer credited to text (silent cells +0.12). Q2.2 labels are *communication* labels (48 explicit + 2 info-exchange). Tacit-high window = rounds 11–40. The evasion claim is removed. The positive control is scoped. The glossary sits under the abstract and defines "executed". The sol seller arm is also inverted.
-- Deliverables: SUBMISSION.md v1.2 + **SUBMISSION.pdf** (15 pp incl. appendix) and **SLIDES.md/SLIDES.pdf** (8 slides). Both are built by `scripts/export_pdf.py`, which runs checks (18/18 headings, 378/378 table cells, 8/8 slides, no overflow).
-- Next: (1) re-check source `merge_flags.md` and "Changes after 08:00" each iteration until 15:00; (2) cheap final-claims codex review of the v1.2 diff before 16:30; (3) slide 6 auto-shrinks to 10.5pt, so trim its text; (4) finalize from 16:30.
-- Risks: abstract still ~300 words. Fig. 4's axis label is corrected only in the caption. Q1.4 judge labels have no cross-family check (stated in the paper).
-- Caution: other projects' codex managers run on this VM, so never `pkill -f "codex exec"` broadly.
+## Current state (2026-10-25 ~09:45 UTC, merge iteration 3)
+- Sources: Q1.4 `0124252` (0 open flags), Q2.2 `71a0365` (3 P1 wording flags → all applied this iteration: 121-2 slide-6 recommendation, 123-1 E113 "nowhere helped", 123-2 sol inversion now marked post hoc / "need not"). No research changes since freeze.
+- Fig. 4 regenerated (`scripts/fig4_say_vs_do.py`, same Q2.2 JSON) with a correct x-axis label; caption updated. Slide 5 trimmed (all slides ≥ 11pt now).
+- SOURCES: +M30 (sol 0.17 [0.01, 0.41]) and M31 (luna posting/silent), both checked against JSON.
+- Deliverables: SUBMISSION.md v1.2 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (18/18 headings, 378/378 cells, 8/8 slides).
+- In flight: codex gpt-6.1-sol review of the v1.2 diff → `reviews/codex_v2.md` (apply next iteration if it finished).
+- Next: (1) apply codex_v2; (2) re-check source flags until 15:00; (3) finalize 16:30 (one export pass), hard stop 18:00.
+- Risks: abstract ~300 words (bullets; acceptable). Q1.4 judge labels lack cross-family check (stated). Never `pkill -f "codex exec"` broadly.
 
 ## Log
+- 2026-10-25 09:45 UTC merge iter3: synced sources (Q1.4 0124252, Q2.2 71a0365); applied Q2.2 P1 flags 121-2, 123-1, 123-2; regenerated Fig. 4 with fixed axis label; trimmed slide 5; SOURCES M30/M31; rebuilt PDFs; launched codex_v2 review of v1.2 diff.
 - 2026-10-25 08:05 UTC merge iter1: read PLAN/DIRECTION + both source REPORTs/STATUS; wrote SOURCES.md, SUBMISSION.md v0, REPORT.md pointer, figures fig1–6; spot-checked E70/E74/E44 mde JSON and Q2.2 claims table; launched codex + Opus adversarial reviews.
 - 2026-10-25 08:45 UTC merge iter1: applied Opus review (P1: TE-only-above-chance false, board not in every Q1.4 arm, 'prices at chance' = LLM view not markup, Claude n 5+5, E133 framing; P2: level = assignment+cue, luna E113 gain +0.16 reported, inversion resolved only Qwen3.8, definitions box, label-check caveats, wording 2/5) and codex review (SALT construct, E72 n=52 composition, E133e comparator uses agreed price, soften 'nothing', prevalence scope, placebo not equivalence). SOURCES +13 rows.
 - 2026-10-25 09:00 UTC merge iter2: applied source merge flags (Q1.4 F1/F3, Q2.2 114-4/114-3); added scripts/export_pdf.py (adapted from Q1.4), SLIDES.md, SUBMISSION.pdf, SLIDES.pdf; fixed appendix C12 table row; launched round-2 codex + Opus reviews.
