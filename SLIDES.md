@@ -9,6 +9,8 @@ Merged submission of two sprint projects:
 Shared setup: four LLM sellers in repeated logit-demand pricing markets; one pair is *offered* a private chat
 channel (never told to collude). Can an auditor tell which markets had the channel?
 
+**Terms.** AUROC: 0.5 = chance, 1 = perfect, < 0.5 = inverted. Markup: price above the competitive (Nash) price. pCMI: how much a pair's prices co-move after removing public state and lagged prices. TE: lagged dependence. Executed: a privately agreed price the pair then actually kept.
+
 Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ---
@@ -36,11 +38,11 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 | evidence | markup (level) | pCMI (co-movement) |
 |---|---|---|
-| E70 grid, 192 games, 7 factors | 0.74 [0.66, 0.81] | 0.51 [0.43, 0.59] |
-| E44 long games, T = 60 (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] |
-| executed agreements only (48/149) | pair-level 0.87 [0.80, 0.94] | 0.42 [0.33, 0.53] |
+| 16-cell factorial grid (192 games, 7 design factors) | 0.74 [0.66, 0.81] | 0.51 [0.43, 0.59] |
+| 60-round long games (pre-registered) | 0.94 [0.86, 1.00] | 0.34 [0.18, 0.52] |
+| executed channel games vs controls (48 of 149) | pair-level 0.87 [0.80, 0.94] | 0.42 [0.33, 0.53] |
 
-- Rank and discrete estimators: also at chance. At T = 60, pCMI would catch a planted shared ±1 move at q = 0.1 (0.79 [0.70, 0.88]); at T = 20 small co-movement is not excluded.
+- Rank and discrete estimators also show no resolved separation (sign-CMI has little power here). For one planted strategy — a shared ±1 price move in 10% of rounds — pCMI reaches 0.79 [0.70, 0.88] in 60-round games; not a general sensitivity bound, and in 20-round games small co-movement is not excluded.
 - Lagged TE weakly above chance in the grid (0.62 [0.54, 0.70]) but below level, and fires on shared policies.
 
 ---
@@ -49,9 +51,9 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ![Say vs do](figures/fig4_say_vs_do_summary.png)
 
-- Combined − better single view: −0.01 [−0.09, +0.06] (locked test, n = 95); −0.07 [−0.17, +0.02] (fresh replications, pooled post hoc).
-- Qwen3.8 text view is **inverted** (0.15–0.21, CI below 0.5): channel sellers invite rivals publicly *less*.
-- Text works where the act *is* the talk (SALT-NLP negotiations, 0.87 [0.83, 0.91]) — a different construct.
+- Combined − better single view: −0.01 [−0.09, +0.06] (locked test, n = 95; four disclosed exposures, so not fully blind; plotted premium statistic chosen post hoc); −0.07 [−0.17, +0.02] (fresh replications, pooled post hoc).
+- Qwen3.8 text view is **inverted** (0.15–0.21, CI below 0.5); in the base arm, channel sellers invite rivals publicly *less* (0.40 vs 0.88, post hoc).
+- Text did work on external SALT-NLP negotiations, where the detected act happens in the chat (0.87 [0.83, 0.91]) — a different construct.
 
 ---
 
@@ -59,16 +61,16 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ![Placebo](figures/fig5_placebo_premium.png)
 
-- Unread private *notes-to-self* notepad: ≈ two thirds of the channel premium (ratio 0.65 [0.34, 1.32]); the premium is there from round 1, before any message is delivered.
-- Memory + profit framing: 19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2.
+- Unread private *notes-to-self* notepad: ≈ two thirds of the channel's effect on the designated-pair premium over rounds 2–12 (ratio 0.65 [0.34, 1.32]). In a separate placebo run (figure), offered-but-never-delivered channels carry the same premium from round 1 (placebo − private +0.03 [−0.54, +0.49]).
+- Memory + profit framing: 19/20 gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40).
 - Prompt wording alone moves no-channel markup from −0.19 to +2.56; channel effect resolved in only 2/5 wordings.
-- At 1% prevalence no frozen price flag reaches point precision 0.25.
+- At a hypothetical 1% prevalence, no frozen price flag reaches point precision 0.25 (max 0.20; largely set by α = 0.05).
 
 ---
 
 ## 6. Implications
 
-- Channel assignment (including its prompt cue) is visible as **how high** prices are — not **how they move together**, and not in **what is said publicly**.
+- Channel assignment (including its prompt cue) shows up mainly as **how high** prices are; we detect no **contemporaneous co-movement**, and a zero-shot auditor gains nothing resolved from **public messages** (small gains not excluded).
 - Detectability by any price statistic is a property of the **(seller model × prompt)** pair (post-hoc synthesis).
 - Practical reading: a cheap level screen against a **model- and prompt-matched** reference as a first-stage *audit trigger*; expensive audits (private logs, dependence statistics, provenance) only on flagged pairs. Not evaluated end to end.
 
@@ -76,7 +78,7 @@ Every number traces to a JSON file and commit in `SOURCES.md`.
 
 ## 7. Limitations and next steps
 
-**Limitations:** one judge family for labels (gpt-6.1-sol); small samples (10–21 games per arm), uncorrected per-set CIs; narrow four-seller markets; no evasion test (monitor-aware sellers stopped agreeing rather than hiding); placebo leaves delivery unresolved.
+**Limitations:** one judge family for labels (gpt-6.1-sol); small samples (10–21 games per arm in most sets; 5 + 5 Claude; 6 + 6 per grid cell), uncorrected per-set CIs; narrow four-seller markets; no evasion test (monitor-aware sellers stopped agreeing rather than hiding); placebo leaves delivery unresolved.
 
 **Next:**
 1. Instructed / red-teamed colluders (coded public signals, gradual drift).
