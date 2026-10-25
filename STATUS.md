@@ -1,15 +1,14 @@
 # STATUS
 
-## Current state (2026-10-25 ~09:45 UTC, merge iteration 3)
-- Sources: Q1.4 `0124252` (0 open flags), Q2.2 `71a0365` (3 P1 wording flags → all applied this iteration: 121-2 slide-6 recommendation, 123-1 E113 "nowhere helped", 123-2 sol inversion now marked post hoc / "need not"). No research changes since freeze.
-- Fig. 4 regenerated (`scripts/fig4_say_vs_do.py`, same Q2.2 JSON) with a correct x-axis label; caption updated. Slide 5 trimmed (all slides ≥ 11pt now).
-- SOURCES: +M30 (sol 0.17 [0.01, 0.41]) and M31 (luna posting/silent), both checked against JSON.
-- Deliverables: SUBMISSION.md v1.2 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (18/18 headings, 378/378 cells, 8/8 slides).
-- codex_v2 review of the v1.2 diff (`reviews/codex_v2.md`): all changed numbers match JSON; 3 P1 + 3 P2 wording items, all applied (abstract now notes the base-Qwen3.6 pCMI exception; placebo is described as "not equivalence"; prevalence CI restored, and its max is scoped to scripted rows, LLM ≤ 0.19).
-- Next: (1) re-check source flags until 15:00; (2) optional Opus final-claims pass on v1.3; (3) finalize 16:30 (one export pass), hard stop 18:00.
+## Current state (2026-10-25 ~10:10 UTC, merge iteration 4)
+- Sources: Q1.4 `499c500`, Q2.2 `badcd8d` — both 0 open flags; no research changes since the 07:30 freeze.
+- Deliverables: SUBMISSION.md v1.3 + SUBMISSION.pdf (15 pp) + SLIDES.pdf (8); export checks pass (18/18 headings, 378/378 cells, 8/8 slides).
+- Reviews done: codex v0/v1/v2 + Opus v0/v1/v2. Opus v2 (final claims, fresh): 0 P1; 3 P2 + 5 P3 wording applied (Qwen3.6 inversion in abstract, C − A defined, logbook control explained, mechanism hedged, TE recall 8–22%, SALT 62% scoped).
+- Next: (1) re-check source flags each iteration until 15:00 (only apply P1s); (2) finalize 16:30 = one export pass + push; hard stop 18:00. No further content changes planned unless a source posts a P1.
 - Risks: abstract ~300 words (bullets; acceptable). Q1.4 judge labels lack cross-family check (stated). Never `pkill -f "codex exec"` broadly.
 
 ## Log
+- 2026-10-25 10:10 UTC merge iter4: Opus final-claims review (reviews/opus_v2.md): 0 P1, 3 P2 + 5 P3 wording — all applied after own JSON check; ~45 numbers independently re-verified. PDFs rebuilt (18/18, 378/378, 8/8; 15 pp).
 - 2026-10-25 09:55 UTC merge iter4: synced Q1.4 `499c500` / Q2.2 `badcd8d` — both 0 open flags, both verified codex_v2 replacements correct; no science change. Repo 7 MB tracked (.venv ignored). Launched fresh Opus final-claims review (reviews/opus_v2.md).
 - 2026-10-25 09:45 UTC merge iter3: synced sources (Q1.4 0124252, Q2.2 71a0365); applied Q2.2 P1 flags 121-2, 123-1, 123-2; regenerated Fig. 4 with fixed axis label; trimmed slide 5; SOURCES M30/M31; rebuilt PDFs; launched codex_v2 review of v1.2 diff.
 - 2026-10-25 10:00 UTC merge iter3: applied codex_v2 (3 P1, 3 P2); scoped prevalence max (scripted rows; LLM ≤ 0.19, own JSON check); re-trimmed slide 5; PDFs rebuilt (checks pass).

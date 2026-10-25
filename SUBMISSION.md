@@ -16,13 +16,13 @@ both. In short:
   all 9 of Q1.4's main sets (7 seller models; per-set CIs, uncorrected), and a simple max-pair markup screen
   had a higher point-estimate AUROC than a conditional-dependence detector in all 9 (0.75–0.99 vs 0.34–0.72; paired difference 95% CI > 0 in 8/9).
 - **We find no robust contemporaneous co-movement.** (One base-Qwen3.6 set separates, 0.71 [0.51, 0.88], uncorrected; not replicated in the grid.) The dependence detector (pCMI), which flags and localises every
-  pair in the scripted shared-signal positive control, is at chance in a 192-game seven-factor grid (0.51 [0.43, 0.59]), in
+  pair in the scripted shared-signal positive control, is at chance (all three CIs include 0.5) in a 192-game seven-factor grid (0.51 [0.43, 0.59]), in
   pre-registered 60-round games (0.34 [0.18, 0.52]) and on agreements whose prices were kept ("executed", 48/149; 0.42 [0.33, 0.53]).
   Lagged dependence (transfer entropy) is weakly above chance in the grid but below level (§5.2).
 - **A zero-shot LLM auditor shows no resolved gain from public messages.** Adding them to prices changes AUROC by
   −0.01 [−0.09, +0.06] (locked test, n = 95) and −0.07 [−0.17, +0.02] (fresh replications, post hoc
-  pooling). In Qwen families that invite rivals publicly, the text view is *inverted* (AUROC 0.15–0.21,
-  CI below 0.5). (Text did work on an external negotiation dataset where the detected act happens in the chat; §5.3.)
+  pooling). In both Qwen families, whose sellers invite rivals publicly, the text view is *inverted* (Qwen3.8 arms 0.15–0.21; Qwen3.6 grid cells 0.32 [0.24, 0.42];
+  CIs below 0.5). (Text did work on an external negotiation dataset where the detected act happens in the chat; §5.3.)
 - **Neither signal is specific to collusion.** An unread private pricing notepad produces about two thirds
   of the channel's premium over rounds 2–12 (point ratio 0.65, CI [0.34, 1.32]); with memory and profit framing, 19/20
   gpt-6-luna markets *without* a channel price ≥ Nash + 2 (rounds 11–40); level screens also flag legitimate cost asymmetry.
@@ -34,8 +34,8 @@ seller model and prompt — not evidence of an agreement.
 half; the positive class (usually channel assignment) is stated per analysis (0.5 = chance; < 0.5 = inverted). **Level / max-pair markup**: the highest pair's mean price above the per-round Nash
 price. **pCMI**: max-pair Gaussian conditional mutual information of prices given public state and all
 sellers' lagged prices. **TE**: transfer entropy (lagged dependence). **Executed**: the judge found a private agreement *and* the pair's prices then followed it (Q1.4 rule, §3).
-**Nash + 2**: a price at least 2 above the competitive (Nash) price. **C − A**: channel minus no-channel
-arm. **E*nn* / P2.*n***: experiment / section IDs in the source repos (SOURCES.md).
+**Nash + 2**: a price at least 2 above the competitive (Nash) price. **C − A**: difference in mean all-seller markup over Nash, channel minus no-channel
+arm (Q1.4; Q2.2 contrasts use the designated-pair premium). **E*nn* / P2.*n***: experiment / section IDs in the source repos (SOURCES.md).
 
 ## 1. Introduction
 
@@ -150,7 +150,7 @@ shift null and, for the held-out *shared policy + common shock* hard negative, 4
 same-model surrogate null. Two failure modes are structural: two copies of one policy sharing a random
 seed are flagged by every contemporaneous detector (44–100%) — from price data they *are* a private shared
 signal — and lagged TE flags legitimate public leader–follower pricing in 100% of runs and shared policies
-in 90–98%, while finding the contemporaneous colluder in only 22%. Level screens fail elsewhere: unequal
+in 90–98%, while flagging the scripted colluder groups in only 8–22%. Level screens fail elsewhere: unequal
 private costs are false-flagged in 30/30 scripted markets (pCMI 4/30; locked seed 2003).
 
 ### 5.2 With LLM sellers, the channel shows up as a price level; no co-movement is detected (Q1.4)
@@ -224,8 +224,7 @@ pooling post hoc); gains above +0.06 / +0.02 are excluded at 95%.
 auditor, not that words are uninformative. Among the families in Table 2, the inversion is resolved only for the two Qwen3.8 arms (post hoc, not interpreted in the Q2.2 report: a gpt-6.1-sol seller arm
 with 0/7 private agreements also scores 0.17 [0.01, 0.41], 7 + 7 markets, so inversion need not involve an agreement). There,
 channel sellers, who can coordinate in private, invite rivals publicly *less* (invite rate 0.40 vs 0.88 in
-controls, Qwen3.8 base; post hoc); for deepseek and Claude invite rates do not differ and the mechanism is
-not established.
+controls, Qwen3.8 base; post hoc); consistent with, not shown to cause, the inversion (within the Qwen3.8-base no-channel arm, text score vs invite rate: Spearman −0.41 [−0.83, +0.18]); for deepseek and Claude invite rates do not differ.
 
 *Cross-application to Q1.4's grid (E113, 192 games).* In the 8 Qwen cells the LLM auditor reading prices is
 at chance (0.52 [0.41, 0.64]) — although Q1.4's markup statistic on the same games is not (0.76) — text is
@@ -233,12 +232,11 @@ inverted (0.32 [0.24, 0.42]), and adding text lowers AUROC (combined − action 
 [−0.44, −0.17] on games executed under Q1.4's rule). In the luna cells combined − action is
 +0.07 [−0.02, +0.17] overall and +0.16 [+0.05, +0.28] on executed games (registered secondary), but a
 similar +0.12 [−0.08, +0.32] appears in the 3 luna cells with no public posts (post hoc), so the luna gain
-cannot be credited to text. In these markets public text resolvedly hurt the auditor (Qwen); no gain could be
-credited to text (the luna executed-game gain also appears in cells without public posts).
+cannot be credited to text. In these markets public text resolvedly hurt the auditor (Qwen); no gain could be credited to text.
 
 *External case (different construct).* In SALT-NLP bilateral negotiations, "executed" means a mutual ACCEPT
 that violates a verification rule — an act inside the conversation, not a pricing deal. There a text auditor
-reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed), even though 62% of executed episodes carry no
+reaches 0.87 [0.83, 0.91] (240 sampled episodes, 120 executed), even though, in the full dataset (5169 executed episodes), 62% of executed episodes carry no
 explicit agreement (P(said | executed) = 0.385). It shows that text can work when the act is in the talk; it
 does not show that this is the only such condition.
 
@@ -292,8 +290,7 @@ and that it leaves a semantic one in words — and converged: in these markets, 
 mainly as **how high** prices are, not in detected **contemporaneous co-movement** (lagged TE is weakly above chance), and a zero-shot auditor shows no
 resolved gain from **what is said publicly** (small gains are not excluded). This is good news for cheap screening (a markup screen is simple and
 interpretable) and bad news for attribution: a high level has many innocent causes (wording, model, memory,
-legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (Q2.2's logbook control
-suggests merely singling out a pair is insufficient, subject to instruction-length and batch-timing confounds).
+legitimate cost advantages, market-wide tacit pricing), and private pricing deliberation can raise levels without delivered messages (in Q2.2's logbook control — the same notepad, but entries must be invented weather — the pair premium is +0.22 [+0.05, +0.40] vs +1.04 for the pricing notepad, so being singled out alone produces little; caveats: longer instruction, later batch).
 
 Both projects state jointly that **detectability of LLM collusion by any price statistic is a property of
 the (seller model × prompt) pair**: relative screens (pair vs rivals) survive a shared model but lose power
