@@ -10,6 +10,7 @@
 - Risks: abstract ~300 words (bullets; acceptable). Q1.4 judge labels lack cross-family check (stated). Never `pkill -f "codex exec"` broadly.
 
 ## Log
+- 2026-10-25 09:55 UTC merge iter4: synced Q1.4 `499c500` / Q2.2 `badcd8d` — both 0 open flags, both verified codex_v2 replacements correct; no science change. Repo 7 MB tracked (.venv ignored). Launched fresh Opus final-claims review (reviews/opus_v2.md).
 - 2026-10-25 09:45 UTC merge iter3: synced sources (Q1.4 0124252, Q2.2 71a0365); applied Q2.2 P1 flags 121-2, 123-1, 123-2; regenerated Fig. 4 with fixed axis label; trimmed slide 5; SOURCES M30/M31; rebuilt PDFs; launched codex_v2 review of v1.2 diff.
 - 2026-10-25 10:00 UTC merge iter3: applied codex_v2 (3 P1, 3 P2); scoped prevalence max (scripted rows; LLM ≤ 0.19, own JSON check); re-trimmed slide 5; PDFs rebuilt (checks pass).
 - 2026-10-25 08:05 UTC merge iter1: read PLAN/DIRECTION + both source REPORTs/STATUS; wrote SOURCES.md, SUBMISSION.md v0, REPORT.md pointer, figures fig1–6; spot-checked E70/E74/E44 mde JSON and Q2.2 claims table; launched codex + Opus adversarial reviews.
