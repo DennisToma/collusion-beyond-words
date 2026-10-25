@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 17:08 UTC, fallback manager iteration 6)
+## Current state (2026-10-25 17:13 UTC, fallback manager iteration 6)
 - FINALIZE-only. Primary: TEMPLATE_REPORT.pdf (10 pp, 6 main; 246-word abstract), IMAGE.png (1600×900); SLIDES.pdf (8).
 - Closed source-manager P1s: abliteration null concerns the channel-related premium, not absolute prices; Discussion/slide 1 preserve no-resolved-text-gain and Qwen inversion. No empirical estimate changed.
 - Fixed primary-upload release gap: finalizer exports/checks TEMPLATE_REPORT; handoff stages primary PDF, image, code ZIP, form and optional supplements.
@@ -10,7 +10,8 @@
 - Independent Codex high review: no remaining findings (reviews/codex_fallback_i6.md). Page 1 visually checked; all scientific JSON/evidence/PNG bytes unchanged.
 - Headlines unchanged: 9/9 markup up (one prompt family; 2/5 wordings); grid pCMI 0.51 [0.43,0.59]; locked Δ −0.01 [−0.09,+0.06].
 - Source handoffs read at Q1.4 48662dc / Q2.2 05e588a; evidence pins stay 732f08c / 91ffb2d. No sibling writes, experiments or auditor calls.
-- Next: commit reviewed finalizer outputs, verify clean-HEAD handoff/code ZIP, update packaging receipt and push.
+- Clean-HEAD handoff 7c7be5e: 11 commands/53 tests pass, 295 tracked files preserved, 20 checksums pass; ZIP 24,124,969 bytes (294 merged +550/1387 source files).
+- Handoff: reviews/handoff_fallback_i6.md; final notes package goes to /var/tmp/bw-fallback-i6-final, copied to root submission_code.zip. Dennis uploads primary PDF + image + ZIP; optional slides/extended report.
 - Risk: template numeric check is token/CI membership rather than context-specific binding; deployer pipeline remains unevaluated. Dennis must upload artifacts.
 
 ## Log
@@ -108,3 +109,5 @@
 - 2026-10-25 15:50 UTC merge iter49 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and ledger. Both source HEADs remain exactly 13e8b09485dc8656a0e26010401f92e8f26f7667 / 07d986e8099d1db2c95fb267daa19162eff214ea with clean worktrees; no new scientific input or request. Read-only Python assertions pass for all 179 protected hashes, five export hashes, the saved i44 log checksum, unchanged DIRECTION and reviewed SUBMISSION sha 96d0ed7b…. Updated current manager/provenance notes and ledger only. Ended the bounded check early because the recorded next action is production finalization at 16:30, already rehearsed successfully; a 45–60 minute work chunk now would repeat completed verification or churn reviewed artifacts. No suites, export, installation, model call, analysis or usage refresh; no DIRECTION deviation. Next remains production finalize, inspect usage-only changes, commit/push, package exact clean HEAD and verify SHA256SUMS; ready 17:30, hard stop 18:00. Reader transfer/access remains pending.
 
 - 2026-10-25 17:08 UTC fallback iteration 6: selected primary-upload release integrity over another freeze-hold rerun. Found finalizer/packager still excluded new primary report and image. Added byte-bound primary acceptance, exporter/finalizer integration, correct handoff uploads, Git/pin-verified code ZIP and targeted failure tests. Source sync also found outstanding P1 wording flags ignored by prior hold notes; verified pinned E61/E69/C23 and applied source I179 patch (premium vs absolute-price null; text-added gain vs Qwen inversion). Full finalize: 14 commands, 53 tests, all pass; 147/4/6main/10total; scientific outputs unchanged. Codex high read-only review found no remaining issue after Git-env and snapshot-race fixes. No DIRECTION deviation or new experiment. Packaging/commit follows.
+
+- 2026-10-25 17:13 UTC fallback iteration 6 acceptance: pushed implementation 7c7be5e; clean-HEAD package succeeds (11 commands/53 tests; 295 exact tracked files; 20 sidecar checksums). Code ZIP 24,124,969 bytes; all 294 merged +550/1387 source files match Git and both source pins match evidence; 8 oversized/HTML files excluded. Copied immutable receipt to results/release_package_fallback_i6.json and wrote handoff procedure. Only notes/receipt/ledger change after the tested implementation; run final clean-HEAD package after this notes commit so the root ZIP includes these notes. No new analysis or model call.
