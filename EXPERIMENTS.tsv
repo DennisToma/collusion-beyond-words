@@ -1,0 +1,2 @@
+time_utc	id	hypothesis	change	dataset/split	metric (with 95% CI)	decision(keep/discard/inconclusive)	commit
+2026-10-25T08:45	M1	(merge repo: no new experiments)	SUBMISSION v0 from frozen sources	Q1.4 0e06c03 / Q2.2 8b680ee	n/a	keep	-
